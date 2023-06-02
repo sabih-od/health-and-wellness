@@ -1,0 +1,741 @@
+@media only screen and (max-width: 1920px) and (min-width: 1500px) {
+	.container {
+		max-width: 1315px;
+	}
+}
+
+@media only screen and (max-width: 1700px) {
+	.orderBox {
+		padding: 22px 20px;
+	}
+	.topBar {
+		padding: 1rem 2rem;
+	}
+	
+	.orderBox:before {
+		height: 100%;
+		width: 169px;
+	}
+	.deliveryList ul li .logo img {
+		width: 150px;
+	}
+	.deliveryList ul li:nth-child(3) {
+		width: 40%;
+	}
+	.sideNAvigation .navbar-nav .nav-item .nav-link{
+		font-size: 1.125rem;
+	}
+	.sideNAvigation .navbar-nav .nav-item .nav-link {
+		padding: 12px 10px;
+	}
+	.sideNAvigation .navbar-nav li.nav-item.dropdown .dropdown-menu li a {
+		padding: 10px 30px;
+	}
+	.sideNAvigation figure img {
+		width: 70%;
+	}
+	.editprof .recentTable.editProfile label {
+		text-align: left;
+		font-size: 1rem;
+	}
+
+}
+
+@media only screen and (max-width: 1445px) {
+	.all-products .recentTable.productBrdr tbody tr td {
+		padding: 0.75rem 8px;
+		font-size: 0.813rem;
+	}
+	.all-products .recentTable.productBrdr .thead-dark tr th{
+		font-size: 0.813rem;
+		vertical-align: middle;
+	}
+
+	.recentTable .thead-dark tr th {
+		vertical-align: middle;
+	}
+	.acountInfo .vendorEmail ul li span{
+		text-align: right;
+	}
+	.acountInfo .vendorEmail ul li{
+		justify-content: space-between;
+	}
+	
+	.recentTable.memberAces .themeBtn {
+		font-size: 1.125rem;
+	}
+
+}
+
+@media only screen and (max-width: 1366px) {
+	html {
+		font-size: 15px;
+	}
+	.orderBox:before {
+		width: 117px;
+	}
+	.orderBox h2{
+		font-size: 1rem;
+	}
+	.orderBox div + div {
+		width: 92px;
+	}
+	.orderBox {
+		padding: 22px 0 22px 13px;
+	}
+	.orderBox div + div i {
+		font-size: 2rem;
+	}
+	.feturUpload .themeBtn{
+		width: 186px;
+	}
+	.orderDetail{
+		padding: 2rem;
+	}
+}	
+
+@media (max-width: 1199.98px) {
+	html {
+		font-size: 14px;
+	}
+	.orderBox:before {
+		width: 90px;
+	}
+	.orderBox div + div {
+		width: 82px;
+	}
+	.orderBox {
+		padding: 22px 0 39px 13px;
+		margin-bottom: 1rem;
+	}
+	.orderBox h2{
+		font-size: 1.125rem;
+	}
+	.deliveryList ul li .logo img{
+		width: 100px;
+	}
+	.dashboard{
+		padding: 2rem 1rem;
+	}
+	.recentTable tbody tr td {
+		padding: 10px 0px;
+		font-size: 0.813rem;
+	}
+
+	
+	.feturUpload .themeBtn {
+		width: 162px;
+		gap: 3px;
+		padding: 0 0;
+	}
+	
+	.table-responsive-lg {
+		display: block;
+		overflow: scroll;
+	}
+	
+	.ind-tab .table-responsive-lg,
+	.all-order .table-responsive-lg,
+	.memberAces .table-responsive-lg {
+		display: table;
+	}
+
+	.paymentInfo ul li{
+		font-size: 1.25rem;
+	}
+
+	.acountInfo h2{
+		font-size: 1.5rem;
+	}
+	
+	.invoicRes .orderDetail {
+		padding: 1rem;
+	}
+}
+@media (max-width: 991.98px) {
+	.topBar {
+		padding: 0.5rem 0;
+	}
+	html {
+		font-size: 13px;
+	}
+	header i.fas.fa-bars {
+		color: #000;
+		font-size: 24px;
+	}
+	nav.navbar.navbar-expand-lg {
+		justify-content: space-between;
+	}
+	.search input.form-control,
+	.editForm input {
+		height: 48px;
+	}
+	.deliveryList ul li:nth-child(3) {
+		    width: 85%;
+
+	}
+	.acountInfo .vendorEmail,
+	.acountInfo .waletBox div{
+		padding: 1rem;
+	}
+
+	.navbar-nav {
+		align-items: start;
+		margin-top: 21px;
+		gap: 1rem;
+	}
+	.an-navbar {
+		padding: 0.5rem 0;
+		background: #e9e9e9;
+	}
+
+	a.navbar-brand img {
+		width: 50%;
+		display: block;
+	}
+	a.logo{
+		display: none;
+	}
+	.navbar-nav .nav-item .nav-link,
+	.alldrop button{
+		color: #000;
+	}
+	.deliveryList ul li:nth-child(4), .deliveryList ul li:nth-child(5), .deliveryList ul li:nth-child(6) {
+		display: none;
+	}
+	.heloContent a{
+		margin: 0;
+	}
+	.heloMain{
+		align-items: flex-start;
+		gap: 1rem;
+		flex-flow: column;
+	}
+	.heloContent a.heloSign {
+		font-size: 1.125rem;
+		color: rgba(0, 0, 0, 0.5);
+		font-weight: 500;
+	}
+	.search .search {
+		font-size: 1rem;
+	}
+	.navbar-nav li {
+		border-bottom: 1px solid #2e2e2e30;
+		width: 100%;
+		padding-bottom: 3px;
+	}
+
+
+	.recentTable tbody tr td {
+		font-size: 1rem;
+	}
+	.sideNAvigation .collapse:not(.show) {
+		display: block;
+	}
+	.sideNAvigation .navbar-nav{
+		margin-top: 0;
+		padding: 0;
+	}
+	.navbar-nav li:nth-child(8), .navbar-nav li:nth-child(9) {
+		display: block;
+	}
+
+	.cart a span {
+		color: #000;
+	}
+
+
+	.orderBox {
+		padding: 10px 0 10px 13px;
+	}
+	.deliveryList ul {
+		gap: 5px;
+		justify-content: center;
+	}
+	.recentTable .thead-dark tr th {
+		padding: 0.75rem;
+		vertical-align: middle;
+	}
+	.sideNAvigation .navbar-nav .nav-item .nav-link{
+		font-size: 1rem;
+	}
+	.showOne{
+		display: block;
+		margin: 0 auto;
+		padding: 0;
+	}
+	.showOne div {
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+	 .showOne div form input {
+		width: 100%;
+	}
+	.orderContent h2{
+		font-size: 2.125rem;
+	}
+	
+	.recentTable.curntBaner ul{
+		flex-wrap: wrap;
+
+	}
+	.recentTable.curntBaner ul li:first-child{
+		margin-bottom: 1rem;
+	}
+	.recentTable.addProdct h2{
+		text-align: left;
+	}
+	.all-products .recentTable.productBrdr tbody tr td,
+	.all-products .recentTable.productBrdr .thead-dark tr th{
+		font-size: 1rem;
+	}
+	.orderDetail{
+		padding: 1rem;
+	}
+	.orderdtlOne,
+	.paymentInfo {
+		display: revert;
+	}
+	.orderdtlOne div:first-child,
+	.paymentInfo div:first-child {
+		margin-bottom: 1rem;
+	}
+
+	.orderdtlOne ul li + li br {
+		display: none;
+	}
+
+
+	.editprof .changeProfile{
+		flex-wrap: wrap;
+		margin-top: 0.5rem;
+	}
+	.changeProfile div .themeBtn{
+		padding: 0.66em 0.8em;
+	}
+	.changeProfile div .themeBtn.verfy{
+		margin: 0.5rem 0;
+	}
+	.showingNavigation span{
+		font-size: 1.125rem;
+		margin-bottom: 0.5rem;
+		
+	}
+	.recentTable.addProdct .showOne{
+		margin: 0 0rem 1.5rem;
+	}
+	.feturUpload .themeBtn {
+		width: 122px;
+		font-size: 9px;
+	}
+	.recentTable.featurethc .themeBtn{
+		font-size: 10px;
+	}
+	.ind-tab.recent .table-responsive-lg{
+		display: block;
+	}
+	.recentTable.memberAces .themeBtn {
+		font-size: 1rem;
+		padding: 11px 0px;
+	}
+	.bnnerRes .radioList ul {
+		flex-flow: wrap;
+		gap: 15px;
+	}
+	.pendingOrder figure {
+		width: 200px;
+		height: 200px;
+	}
+	.invoiceFoter ul {
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		justify-content: center;
+		padding: 0.5rem 0;
+		gap: 1rem;
+	}
+	.invoiceDtl {
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.reviewBox{
+		margin: 1rem 0;
+		flex-wrap: wrap;
+		justify-content: center;
+		text-align: center;
+		
+	}
+	.reviewContent div{
+		justify-content: center;
+	}
+	.reviewContent div a {
+		padding-left: 11px;
+	}
+}
+@media (max-width: 767.98px) {
+	html {
+		font-size: 12px;
+	}
+	.custmrContent p{
+		font-size: 1rem;
+	}
+	.editRes.recentTable.editProfile label{
+		text-align: left;
+	}
+	.editRes .changeProfile {
+		flex-flow: wrap;
+	}
+	.custmrContent img {
+		width: 60%;
+	}
+	.recentTable{
+		margin-top: 0rem;
+		padding: 1rem;
+	}
+	.sideNAvigation{
+		margin-bottom: 1rem;
+	}
+	.sideNAvigation .navbar-nav {
+		padding: 0;
+	}
+	a.footerLogo{
+		margin-bottom: 1rem;
+		display: block;
+	}
+	footer {
+		text-align: center;
+		padding: 1rem 0;
+	}
+	a.footerLogo img {
+		width: 35%;
+	}
+	.calFoter ul li {
+		justify-content: center;
+		margin-top: 1.5rem;
+	}
+	.copyRight {
+		margin-top: 1rem;
+	}
+	.copyRight a {
+		margin: 0.5rem auto 0;
+	}
+	.orderBox {
+		padding: 30px 13px;
+	}
+
+	.orderBox h2{
+		font-size: 1.375rem;	
+	}
+	.orderBox:before {
+		width: 120px;
+	}
+	.orderBox div + div {
+		width: 62px;
+	}
+	
+	.orderContent ul li a{
+		font-size: 1.25rem;
+		justify-content: center;
+	}
+	.orderContent ul{
+		margin: 0 0 1rem;
+		
+	}
+
+	.addProdct .thcBox figure{
+		width: 100px;
+		height: 100px;
+	}
+
+	.recentTable.addProdct h2{
+		font-size: 1.5rem;
+		
+	}
+
+
+
+	.showingNavigation {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.orderContent.listNon{
+		margin-bottom: 1rem;
+
+	}
+
+	.changeProfile div figure{
+		width: 80px;
+		height: 80px;
+	}
+	.changeProfile div {
+		gap: 2px;
+	}
+
+
+	.orderdtlOne ul li + li{
+		margin: 0.5rem 0 0;
+		font-size: 1.125rem;
+	}
+	.paymentInfo ul li strong{
+		font-size: 1.25rem;
+	}
+
+	.invoiceFoter ul li {
+		padding: 5px 10px;
+	}
+	.orderDetail{
+		padding: 1rem;
+	}
+	.paymentInfo ul .total {
+		margin-top: 1rem;
+		padding: 1.5rem 1rem;
+	}
+	.orderdtlOne ul li span{
+		text-align: right;
+	}
+	.orderdtlOne{
+		margin: 0 0 1rem;
+	}
+
+	.paymentInfo .pymntList li + li{
+		margin: 1rem 0 0;
+	}
+	.recentTable.memberAces .themeBtn{
+		border-radius: 0;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		margin: 0;
+	}
+	.recentTable.memberAces .showOne,
+	.recentTable.addProdct .showOne {
+		margin: 0 0.6rem 1.5rem;
+	}
+	.recentTable.memberAces tbody tr td input,
+	.chkOne input{
+		width: 18px;
+		height: 18px;
+	}
+	.paymentInfo ul .total span{
+		font-size: 1.25rem;
+	}
+	.editForm{
+		margin-top: 0.5rem;
+	}
+	.changeProfile div .themeBtn{
+		padding: 0.66em 1.8em;
+	}
+
+	.acountInfo .waletBox .themeBtn{
+		margin-left: 1rem;
+	}
+	.acountInfo{
+		padding: 1rem 0;
+	}
+	.acountInfo .waletBox h3{
+		margin: 0 0 5px;
+		font-size: 1.25rem;
+	}
+	.acountInfo .waletBox h4{
+		font-size: 1.125rem;
+	}
+	.acountInfo h2{
+		padding: 0rem 2rem 0.5rem
+	}
+
+	.feturUpload .themeBtn{
+		width: 162px;
+		font-size: 0.875rem;
+	}
+	.feturTag span{
+		height: 100%;
+	}
+	.ind-tab.recent .table-responsive-lg{
+		display: table;
+	}
+	.editRes.recentTable.editProfile label{
+		text-align: left;
+	}
+}
+@media (max-width: 575.98px) {
+	.custmrContent img{
+		display: none;
+	}
+	.customerList ul{
+		display: unset;
+	}
+	.customerList ul:before,
+	.custmrContent figure:before{
+		content: unset;
+	}
+	.customerList ul li:nth-child(2) .custmrContent span, .customerList ul li:nth-child(4) .custmrContent span,
+	.custmrContent span{
+		margin: 1rem auto 1rem;
+	}
+	.customerList ul li:nth-child(2) .custmrContent, .customerList ul li:nth-child(4) .custmrContent {
+		margin-top: 0;
+		flex-direction: column;
+	}
+	.customerSec {
+		padding: 1rem 0;
+	}
+	.productForm label{
+		font-size: 1rem;
+	}
+	.chkOne input {
+		width: 15px;
+		height: 15px;
+	}
+	.addnew  .feturUpload,
+	.feturUpload,
+	.addnew  .feturUpload textarea,
+	.nontch .feturUpload textarea  {
+		height: 100px;
+	}
+	img.img-fluid.phnImg{
+		display: none;
+	}
+	.productForm textarea,
+	.editForm textarea{
+		height: 150px;
+	}
+
+	.productForm .form-control{
+		height: 50px;
+	}
+
+	.all-order .recentTable tbody tr td {
+		font-size: 1rem;
+		padding: 6px 11px;
+	}
+
+	.showingNavigation {
+		gap: 0px;
+		justify-content:center
+
+	}
+	.all-products .showingNavigation {
+		justify-content: space-between;
+	}
+	.all-order .table-responsive-lg{
+		display:block;
+	}	
+	.all-products .recentTable.productBrdr tbody tr td{
+		font-size: 1rem;
+	}
+	.recentTable.curntBaner ul{
+		margin-top: 1rem;
+
+	}
+
+	.invoiceDtl h2{
+		font-size: 2rem;
+	}	
+	.invoiceDtl img{
+		width: 20%;
+	}
+	.invoiceDtl{
+		padding: 1.5rem;
+		justify-content: center;
+	}
+	.orderdtlOne ul li strong{
+		font-size: 1.125rem;
+	}
+
+	.paymentInfo{
+		padding-top: 0;
+	}
+	.pendingOrder{
+		padding: 1rem;
+	}
+	.pendingOrder figure div{
+		font-size: 2.75rem;
+	}
+	.pendingOrder figure{
+		width: 150px;
+		height: 150px;
+	}
+	.invoiceFoter ul {
+		justify-content: center;
+	}
+	.orderdtlOne ul li,
+	.paymentInfo ul li{
+		font-size: 1rem;
+	}
+
+}
+@media (max-width: 480.98px) {
+	.deliveryList ul {
+		gap: 0px;
+		justify-content: center;
+	}
+	.deliveryList ul li span {
+		margin-left: 0;
+	}
+	a.navbar-brand img {
+		width: 35%;
+	}
+	.deliveryList ul li:nth-child(3){
+		width: 100%;
+	}
+	.deliveryList ul,
+	.deliveryList ul li span{
+		display: block;
+	}
+	.deliveryList ul li:nth-child(2){
+		text-align: center;
+	}
+	.recentTable .thead-dark tr th {
+		font-size: 11px;
+		padding: 1.5rem 5px;
+	}
+	.orderContent h2{
+		font-size: 1.25rem;
+	}
+	.orderContent ul li a{
+		font-size: 1rem;
+		
+	}
+	.showingNavigation .pagination a {
+		padding: 0.5rem 10px;
+	}
+	.all-products .showingNavigation {
+		gap: 10px;
+		justify-content: center;
+	}
+	.flemember .orderContent.listNon {
+		flex-wrap: wrap;
+		
+		
+	}
+	.editprof .changeProfile{
+		justify-content: center;
+	}
+	
+	.acountInfo.buyerProfile .vendorEmail ul li label{
+		width: auto;
+	}
+
+}
+
+@media (max-width: 414.98px) {
+
+	.radioList ul {
+		flex-wrap: wrap;
+		gap: 20px;
+
+	}
+
+	.memberAces .table-responsive-lg{
+		display: block;
+	}
+	.membr1.memberAces .table-responsive-lg{
+		display: table;
+	}
+	.flemember .orderContent.listNon {
+		width: 90%;
+		
+	}
+
+	
+}
