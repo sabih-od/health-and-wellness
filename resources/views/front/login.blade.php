@@ -19,6 +19,13 @@
                 <div class="col-lg-7">
                     <div class="whitebg">
                         <h2><span>Welcome back!</span>Sign in to your account</h2>
+
+                        @if (session()->has('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
+
                         <form action="{{ route('login') }}" class="formStyle form-row" method="POST">
                             @csrf
                             <div class="input-group">
@@ -42,7 +49,8 @@
                             </div>
                             <div class="input-group justify-content-sm-between align-items-sm-center">
                                 <button class="themeBtn rounded" href="#">Sign In</button>
-                                <a href="forgot-password.php" class="forgetPass">Forgot my password</a>
+{{--                                <a href="forgot-password.php" class="forgetPass">Forgot my password</a>--}}
+                                <a href="{{ route('forget.password.get') }}" class="forgetPass">Forgot my password</a>
                             </div>
                         </form>
                         <div class="or"><span>or</span></div>
