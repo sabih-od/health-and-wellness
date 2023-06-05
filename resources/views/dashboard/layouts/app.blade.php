@@ -62,7 +62,11 @@
                                                             data-toggle="dropdown" aria-expanded="false">
                                                         <img src="{{asset('dashboard/images/user.png')}}" alt="">
                                                         <div>
-                                                            <h6 class="mb-0">John Smith</h6>
+                                                            @php
+                                                                $user = \Illuminate\Support\Facades\Auth::user();
+                                                                $name = $user->first_name . ' ' . $user->last_name;
+                                                            @endphp
+                                                            <h6 class="mb-0">{{$name}}</h6>
                                                             <span class="">Health</span>
                                                         </div>
                                                     </button>
@@ -157,7 +161,11 @@
 
                                     </ul>
                                     <div class="logout mt-auto">
-                                        <a class="nav-link" href="#">
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                            <?php echo csrf_field(); ?>
+                                        </form>
+                                        <a class="nav-link" href="#" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                             <figure><img src="{{asset('dashboard/images/icons/logout.png')}}" class="img-fluid" alt="img"></figure>
                                             Log Out
                                         </a>

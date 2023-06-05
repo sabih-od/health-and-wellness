@@ -17,7 +17,7 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() == true && Auth::user()->role_id == 2 && Auth::user()->is_active == 1) {
+        if (Auth::check() == true && Auth::user()->role_id == 2) {
             return $next($request);
         }
         Auth::logout();
