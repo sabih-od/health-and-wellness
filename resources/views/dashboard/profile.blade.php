@@ -29,7 +29,7 @@
                         <h2>User Profile</h2>
                     </div>
                     <div>
-                        <a href="edit-profile.php" class="themeBtn">Edit Profile</a>
+                        <a href="{{route('user.editProfile')}}" class="themeBtn">Edit Profile</a>
                     </div>
                 </div>
             </div>
@@ -37,16 +37,20 @@
                 <div class="acountInfo buyerProfile">
                     <h2>Account Information <img src="images/user.png" class="img-fluid"
                                                  alt="img"></h2>
+
+                    @php
+                        $user = \Illuminate\Support\Facades\Auth::user();
+                    @endphp
                     <div class="vendorEmail">
                         <ul>
-                            <li><label>Name:</label><span>John Smith</span></li>
-                            <li><label>Email:</label><span>johnsmith@gmail.com</span></li>
-                            <li><label>Phone:</label><span>+123 456 7890</span></li>
-                            <li><label>City:</label><span>Los Alamitos</span></li>
-                            <li><label>Zip:</label><span>12345</span></li>
-                            <li><label>Fax:</label><span>+123 456 7890</span></li>
-                            <li><label>Address:</label><span>123 East Nobel Court</span></li>
-                            <li><label>Bio:</label><span>Lorem Ipsum is simply dummy text</span></li>
+                            <li><label>Name:</label><span>{{$user->first_name . ' ' . $user->last_name}}</span></li>
+                            <li><label>Email:</label><span>{{$user->email}}</span></li>
+                            <li><label>Phone:</label><span>{{$user->phone}}</span></li>
+                            <li><label>City:</label><span>{{$user->city}}</span></li>
+                            <li><label>Zip:</label>{{$user->zip}}</li>
+                            <li><label>Fax:</label><span>{{$user->fax}}</span></li>
+                            <li><label>Address:</label><span>{{$user->address}}</span></li>
+                            <li><label>Bio:</label><span>{{$user->bio}}</span></li>
                         </ul>
                     </div>
                 </div>
