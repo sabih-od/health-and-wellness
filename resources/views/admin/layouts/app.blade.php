@@ -143,114 +143,114 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{route('customer')}}"
-                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Customers/Users
-                            </p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('customer')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fas fa-users"></i>--}}
+{{--                            <p>--}}
+{{--                                Customers/Users--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item">
-                        <a href="{{route('business_listing')}}"
-                           class="nav-link {{ request()->IS('admin/business_listing') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-angle-double-right"></i>
-                            <p>Business Directories</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('business_listing')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/business_listing') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                            <p>Business Directories</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item has-treeview {{ request()->IS('admin/forum-category') || request()->IS('admin/forum-topic') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fas fa-angle-double-right"></i>
-                            <p>
-                                Forums
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview"
-                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">
-                            <li class="nav-item">
-                                <a href="{{route('forum-category')}}"
-                                   class="nav-link {{ request()->IS('admin/forum-category') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-angle-double-right"></i>
-                                    <p>
-                                        Forum Categories
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('forum-topic')}}"
-                                   class="nav-link {{ request()->IS('admin/forum-topic') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-angle-double-right"></i>
-                                    <p>
-                                        Forum Topics
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+{{--                    <li class="nav-item has-treeview {{ request()->IS('admin/forum-category') || request()->IS('admin/forum-topic') ? 'menu-is-opening menu-open' : '' }}">--}}
+{{--                        <a href="#" class="nav-link ">--}}
+{{--                            <i class="nav-icon fas fa-angle-double-right"></i>--}}
+{{--                            <p>--}}
+{{--                                Forums--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview"--}}
+{{--                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('forum-category')}}"--}}
+{{--                                   class="nav-link {{ request()->IS('admin/forum-category') ? 'active' : '' }}">--}}
+{{--                                    <i class="nav-icon fas fa-angle-double-right"></i>--}}
+{{--                                    <p>--}}
+{{--                                        Forum Categories--}}
+{{--                                    </p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('forum-topic')}}"--}}
+{{--                                   class="nav-link {{ request()->IS('admin/forum-topic') ? 'active' : '' }}">--}}
+{{--                                    <i class="nav-icon fas fa-angle-double-right"></i>--}}
+{{--                                    <p>--}}
+{{--                                        Forum Topics--}}
+{{--                                    </p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
 
 {{--                    //CMS--}}
 
-                    <li class="nav-item">
-                        <a href="{{route('admin.cms.index')}}"
-                           class="nav-link {{ request()->IS('admin/cms') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-angle-double-right"></i>
-                            <p>CMS</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('admin.cms.index')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/cms') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                            <p>CMS</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item">
-                        <a href="{{route('site-event')}}"
-                           class="nav-link {{ request()->IS('admin/site-event') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-angle-double-right"></i>
-                            <p>Site Events</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('site-event')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/site-event') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                            <p>Site Events</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
 
-                    <li class="nav-item">
-                        <a href="{{route('category')}}"
-                           class="nav-link {{ request()->IS('admin/category') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-angle-double-right"></i>
-                            <p>Category</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('category')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/category') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                            <p>Category</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item has-treeview {{ request()->IS('admin/product') || request()->IS('admin/product_category') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fas fa-angle-double-right"></i>
-                            <p>
-                                Marketplace
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview"
-                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">
-                            <li class="nav-item">
-                                <a href="{{route('product')}}"
-                                   class="nav-link {{ request()->IS('admin/product') ? 'active' : '' }}">
-                                    <i class="nav-icon fa fa-angle-double-right"></i>
-                                    <p>Product</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('product_category')}}"
-                                   class="nav-link {{ request()->IS('admin/product_category') ? 'active' : '' }}">
-                                    <i class="nav-icon fa fa-angle-double-right"></i>
-                                    <p>Product Category</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+{{--                    <li class="nav-item has-treeview {{ request()->IS('admin/product') || request()->IS('admin/product_category') ? 'menu-is-opening menu-open' : '' }}">--}}
+{{--                        <a href="#" class="nav-link ">--}}
+{{--                            <i class="nav-icon fas fa-angle-double-right"></i>--}}
+{{--                            <p>--}}
+{{--                                Marketplace--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview"--}}
+{{--                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('product')}}"--}}
+{{--                                   class="nav-link {{ request()->IS('admin/product') ? 'active' : '' }}">--}}
+{{--                                    <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                                    <p>Product</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('product_category')}}"--}}
+{{--                                   class="nav-link {{ request()->IS('admin/product_category') ? 'active' : '' }}">--}}
+{{--                                    <i class="nav-icon fa fa-angle-double-right"></i>--}}
+{{--                                    <p>Product Category</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-item">
-                        <a href="{{url('admin/memoriam')}}"
-                           class="nav-link {{ request()->IS('admin/memoriam') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-comments"></i>
-                            <p>Memoriam</p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{url('admin/memoriam')}}"--}}
+{{--                           class="nav-link {{ request()->IS('admin/memoriam') ? 'active' : '' }}">--}}
+{{--                            <i class="nav-icon fa fa-comments"></i>--}}
+{{--                            <p>Memoriam</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item">
                         <a href="{{url('admin/changePassword')}}"
