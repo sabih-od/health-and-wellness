@@ -109,12 +109,11 @@
                     <div class="col-md-4">
                         <h4>Contact Us</h4>
                         <ul class="contactLinks">
-                            <li><a href="tel:1234567890"><img src="{{asset('images/call.webp')}}" class="img-fluid" alt="">(123) 456 7890</a>
+                            <li><a href="tel:1234567890"><img src="{{asset('images/call.webp')}}" class="img-fluid" alt="">{{$setting->phone_no_1 ?? ''}}</a>
                             </li>
                             <li><a href="mailto:info@youremailhere.com"><img src="{{asset('images/email.webp')}}" class="img-fluid"
-                                                                             alt="">info@youremailhere.com</a></li>
-                            <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-fluid" alt="">123 W. 7th St. Suite 456 San <br>
-                                    Pedro, CA 7890</a></li>
+                                                                             alt="">{{$setting->email ?? ''}}</a></li>
+                            <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-fluid" alt="">{{$setting->address ?? ''}}</a></li>
                         </ul>
                     </div>
                 </div>
