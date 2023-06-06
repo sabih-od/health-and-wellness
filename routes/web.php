@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -112,6 +113,9 @@ Route::get('/front-login', function () {
 Route::prefix('/user')->middleware('user')->group(function () {
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+
+    Route::match(['get', 'post'], '/edit-profile', [UserController::class, 'editProfile'])->name('user.editProfile');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');

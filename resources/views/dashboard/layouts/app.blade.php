@@ -46,7 +46,7 @@
                                     <li>
                                         <div class="heloMain">
                                             <div class="user">
-                                                <a href="login.php"><i class="fas fa-user"></i></a>
+                                                <a href="{{route('user.profile')}}"><i class="fas fa-user"></i></a>
                                             </div>
                                             <div class="heloContent">
                                                 <div class="dropdown">
@@ -71,7 +71,7 @@
                                                         </div>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Edit Profile</a>
+                                                        <a class="dropdown-item" href="{{route('user.editProfile')}}">Edit Profile</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,11 +258,12 @@
         <script src="{{asset('dashboard/js/aos.js')}}"></script>
         <script src="{{asset('dashboard/js/evo-calendar.js')}}"></script>
         <script src="{{asset('dashboard/js/custom.min.js')}}"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
-                integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
                 integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
 
         @if(session()->has('success'))
             <script type="text/javascript">  toastr.success('{{ session('success')}}');</script>
