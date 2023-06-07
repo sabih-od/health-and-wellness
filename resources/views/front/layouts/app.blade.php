@@ -51,15 +51,11 @@
                             <li class="nav-item customDropdown">
                                 <a class="nav-link" href="{{route('front.services')}}">Services</a>
                                 <ul class="menu">
-                                    <li>
-                                        <a href="{{route('front.health')}}">Health</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('front.health')}}">Education</a>
-                                    </li>
-                                    <li>
-                                        <a href="wellness.php">Wellness</a>
-                                    </li>
+                                    @foreach($services as $service)
+                                        <li>
+                                            <a href="{{route('front.serviceDetail', $service->id)}}">{{$service->name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="nav-item">

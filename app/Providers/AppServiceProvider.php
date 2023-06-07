@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Service;
 use App\Models\Settings;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $setting = Settings::find(1);
             $view->with('setting', $setting);
+        });
+
+        view()->composer('*', function ($view) {
+            $services = Service::all();
+            $view->with('services', $services);
         });
 
     }

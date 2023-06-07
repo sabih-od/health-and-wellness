@@ -133,6 +133,15 @@
                         </a>
                     </li>
 
+
+                    <li class="nav-item">
+                        <a href="{{route('service')}}"
+                           class="nav-link {{ request()->IS('admin/service') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-angle-double-right"></i>
+                            <p>Services</p>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="{{route('settings')}}"
                            class="nav-link {{ request()->IS('admin/settings') ? 'active' : '' }}">

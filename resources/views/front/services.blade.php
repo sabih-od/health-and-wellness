@@ -21,57 +21,34 @@
 
     <section class="serviceInner aboutInner">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
-                    <figure>
-                        <img src="{{asset('images/service7.webp')}}" class="img-fluid" alt="">
-                    </figure>
-                </div>
-                <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
-                    <div class="servicesContents">
-                        <h3 class="subHeading">Wellness</h3>
-                        <p>
-                            Work with a Spiritual Guide for wholeness
-                        </p>
-                        <h4>1 hr - Video Chat</h4>
-                        <a href="" class="themeBtn themeBtn2">BOok Now</a>
+            @foreach($services as $key => $service)
+                <div class="row align-items-center">
+                    @if ($key % 2 == 0)
+                        <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
+                            <figure>
+                                <img src="{{$service->getImageUrl()}}" class="img-fluid" alt="">
+                            </figure>
+                        </div>
+                    @endif
+                    <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
+                        <div class="servicesContents">
+                            <h3 class="subHeading">{{$service->name}}</h3>
+                            <p>
+                                {{$service->description}}
+                            </p>
+                            <h4>{{$service->pricing_detail}}</h4>
+                            <a href="" class="themeBtn themeBtn2">BOok Now</a>
+                        </div>
                     </div>
+                    @if ($key % 2 != 0)
+                        <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
+                            <figure>
+                                <img src="{{$service->getImageUrl()}}" class="img-fluid" alt="">
+                            </figure>
+                        </div>
+                    @endif
                 </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
-                    <div class="servicesContents">
-                        <h3 class="subHeading">Education</h3>
-                        <p>
-                            State-certified Medication Administration program
-                        </p>
-                        <h4>45 min - Phone or video chat</h4>
-                        <a href="" class="themeBtn themeBtn2">BOok Now</a>
-                    </div>
-                </div>
-                <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
-                    <figure>
-                        <img src="{{asset('images/service8.webp')}}" class="img-fluid" alt="">
-                    </figure>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
-                    <figure>
-                        <img src="{{asset('images/service9.webp')}}" class="img-fluid" alt="">
-                    </figure>
-                </div>
-                <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
-                    <div class="servicesContents">
-                        <h3 class="subHeading">Health</h3>
-                        <p>
-                            Work with a registered nurse as your personal health coach for your medical concerns
-                        </p>
-                        <h4>16 hr - $400 - Virtual</h4>
-                        <a href="" class="themeBtn themeBtn2">BOok Now</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
