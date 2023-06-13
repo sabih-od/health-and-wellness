@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function editProfile (Request $request)
+
+    public function editProfile(Request $request)
     {
         if ($request->method() == 'POST') {
             $this->validate($request, [
@@ -22,11 +23,9 @@ class UserController extends Controller
                 'phone' => 'required',
                 'city' => 'required',
                 'zip' => 'required',
-                'fax' => 'required',
                 'address' => 'required',
                 'bio' => 'required',
             ]);
-
             $user = User::find(Auth::id());
             $req = $request->all();
 
@@ -42,6 +41,24 @@ class UserController extends Controller
 //                $user->clearMediaCollection('user_profile_pictures');
 //                $user->addMediaFromRequest('profile_picture')->toMediaCollection('user_profile_pictures');
 
+//dd($request->all());
+
+            if ($request->hasFile('user_profile_pictures')) {
+                $mediaId = $user->getMedia('user_profile_pictures');
+                if (count($mediaId) != 0) {
+
+                    $media = $user->getMedia('user_profile_pictures')->find($mediaId[0]->id);
+                    if ($media) {
+                        $media->delete();
+                        $user->addMediaFromRequest('user_profile_pictures')->toMediaCollection('user_profile_pictures');
+                    }
+
+                } else {
+                    $user->addMediaFromRequest('user_profile_pictures')->toMediaCollection('user_profile_pictures');
+
+                }
+            }
+
             $user->update($req);
 
             return redirect()->route('user.profile')->with('success', 'Profile Updated.');
@@ -49,8 +66,36 @@ class UserController extends Controller
             return view('dashboard.edit-profile');
         }
     }
-    public function profile (Request $request)
+
+    public function profile(Request $request)
     {
         return view('dashboard.profile');
+    }
+
+
+    public function editPassword()
+    {
+        return view('dashboard.edit-password');
+    }
+
+
+    public function sessions()
+    {
+        return view('dashboard.all-sessions');
+    }
+
+    public function bookSession()
+    {
+        return view('dashboard.book-session');
+    }
+
+    public function booking()
+    {
+        return view('dashboard.booking');
+    }
+
+    public function notifications()
+    {
+        return view('dashboard.notification');
     }
 }

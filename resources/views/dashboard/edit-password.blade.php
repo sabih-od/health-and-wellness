@@ -33,21 +33,35 @@
                             </div>
                         </div>
                     </div> -->
-                    <form class="editForm">
+                    <form action="{{ route('userEditPassword') }}" method="POST" class="editForm">
+                        @csrf
                         <div class="row align-items-start">
                             <div class="col-md-2">
                                 <label>Current Password*</label>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" placeholder="*********">
+                                <input type="password" placeholder="*********" name="current_password"
+                                       class="form-control @error('current_password') is-invalid @enderror">
+                                @error('current_password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
                         </div>
                         <div class="row align-items-start">
                             <div class="col-md-2">
                                 <label>Change Password*</label>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" placeholder="*********">
+                                <input type="password" placeholder="*********" name="password"
+                                       class="form-control @error('password') is-invalid @enderror">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row align-items-start">
@@ -55,7 +69,13 @@
                                 <label>Repeat Password*</label>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" placeholder="*********">
+                                <input type="password" placeholder="*********" name="password_confirmation"
+                                       class="form-control @error('password_confirmation') is-invalid @enderror">
+                                @error('password_confirmation')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -63,7 +83,7 @@
                             <div class="col-md-2">
                             </div>
                             <div class="col-md-10">
-                                <button class="themeBtn">Save Password</button>
+                                <button class="themeBtn" type="submit">Save Password</button>
                             </div>
                         </div>
                     </form>

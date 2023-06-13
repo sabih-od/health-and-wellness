@@ -239,130 +239,131 @@
             <div class="row">
                 <div class="col-md-12" data-aos="fade-up" data-aos-duration="2000">
                     <div id="accordion">
+                        @foreach($data['faqs'] as $faq)
                         <div class="card">
                             <div id="headingOne">
                                 <h5 class="mb-0 ">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">How can I start working with
-                                        you?
+                                            aria-expanded="false" aria-controls="collapseOne">{{ $faq->question ?? '' }}
                                         <i class="fas fa-sort-up"></i>
                                     </button>
                                 </h5>
                             </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                  data-parent="#accordion">
                                 <div class="card-body">
-                                    <p>To start your journey with us please schedule an introductory consultation
-                                        session under the Our service section.</p>
+                                    <p>{{ $faq->answer ?? '' }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="card ">
-                            <div id="headingTwo ">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Do you offer group consultations or workshops?
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                 data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>To start your journey with us please schedule an introductory consultation
-                                        session under the Our service section.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card ">
-                            <div id="headingTwo ">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse"
-                                            data-target="#collapsethree" aria-expanded="false"
-                                            aria-controls="collapsethree">
-                                        What should I prepare for my initial consultation?
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapsethree" class="collapse" aria-labelledby="headingthree"
-                                 data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>To start your journey with us please schedule an introductory consultation
-                                        session under the Our service section.</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+{{--                        <div class="card ">--}}
+{{--                            <div id="headingTwo ">--}}
+{{--                                <h5 class="mb-0">--}}
+{{--                                    <button class="btn btn-link collapsed" data-toggle="collapse"--}}
+{{--                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
+{{--                                        Do you offer group consultations or workshops?--}}
+{{--                                        <i class="fas fa-plus"></i>--}}
+{{--                                    </button>--}}
+{{--                                </h5>--}}
+{{--                            </div>--}}
+{{--                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"--}}
+{{--                                 data-parent="#accordion">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <p>To start your journey with us please schedule an introductory consultation--}}
+{{--                                        session under the Our service section.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="card ">--}}
+{{--                            <div id="headingTwo ">--}}
+{{--                                <h5 class="mb-0">--}}
+{{--                                    <button class="btn btn-link collapsed" data-toggle="collapse"--}}
+{{--                                            data-target="#collapsethree" aria-expanded="false"--}}
+{{--                                            aria-controls="collapsethree">--}}
+{{--                                        What should I prepare for my initial consultation?--}}
+{{--                                        <i class="fas fa-plus"></i>--}}
+{{--                                    </button>--}}
+{{--                                </h5>--}}
+{{--                            </div>--}}
+{{--                            <div id="collapsethree" class="collapse" aria-labelledby="headingthree"--}}
+{{--                                 data-parent="#accordion">--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <p>To start your journey with us please schedule an introductory consultation--}}
+{{--                                        session under the Our service section.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+{{--    @dd($data);--}}
     <section class="testimonials">
         <div class="container">
             <h2 class="secHeading text-center mb-5">Our Testimonials</h2>
             <div class="swiper mySwiper2">
                 <div class="swiper-wrapper">
+                    @foreach($data['testimonials'] as $testimonial)
                     <div class="swiper-slide">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="testi-wrp">
                                     <img src="{{asset('images/quote.webp')}}" class="img-fluid" alt="">
-                                    <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor
-                                        incididunt ut labore et dolore maecenas aliqua Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis "</p>
+                                    <p>" {{ $testimonial->description ?? '' }} "</p>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="testi-wrp">
-                                    <img src="{{asset('images/quote.webp')}}" class="img-fluid" alt="">
-                                    <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor
-                                        incididunt ut labore et dolore maecenas aliqua Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis "</p>
-                                </div>
-                            </div>
-                        </div>
+                    @endforeach
+{{--                    <div class="swiper-slide">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="testi-wrp">--}}
+{{--                                    <img src="{{asset('images/quote.webp')}}" class="img-fluid" alt="">--}}
+{{--                                    <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor--}}
+{{--                                        incididunt ut labore et dolore maecenas aliqua Quis ipsum eiusmod tempor--}}
+{{--                                        incididunt ut labore et accumsan lacus vel facilisis Quis ipsum eiusmod tempor--}}
+{{--                                        incididunt ut labore et accumsan lacus vel facilisis "</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="testi-wrp">
-                                    <img src="{{asset('images/quote.webp')}}" class="img-fluid" alt="">
-                                    <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor
-                                        incididunt ut labore et dolore maecenas aliqua Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis Quis ipsum eiusmod tempor
-                                        incididunt ut labore et accumsan lacus vel facilisis "</p>
-                                </div>
-                            </div>
-                        </div>
+{{--                    </div>--}}
+{{--                    <div class="swiper-slide">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="testi-wrp">--}}
+{{--                                    <img src="{{asset('images/quote.webp')}}" class="img-fluid" alt="">--}}
+{{--                                    <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor--}}
+{{--                                        incididunt ut labore et dolore maecenas aliqua Quis ipsum eiusmod tempor--}}
+{{--                                        incididunt ut labore et accumsan lacus vel facilisis Quis ipsum eiusmod tempor--}}
+{{--                                        incididunt ut labore et accumsan lacus vel facilisis "</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </div>
+{{--                    </div>--}}
                 </div>
             </div>
             <div thumbsSlider="" class="swiper mySwiper1">
                 <div class="swiper-wrapper">
+                    @foreach($data['testimonials'] as $testimonial)
                     <div class="swiper-slide">
-                        <img src="{{asset('images/user1.webp')}}" class="img-fluid"/>
-                        <h3>Jane Smith<span>Cleint</span></h3>
+                        <img src="{{ $testimonial->get_testimonial_picture() }}" class="img-fluid"/>
+                        <h3>{{ $testimonial->name ?? '' }}<span>{{ $testimonial->job_title ?? '' }}</span></h3>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('images/user2.webp')}}" class="img-fluid"/>
-                        <h3>Jane Smith<span>Cleint</span></h3>
-                    </div>
-                    <div class="swiper-slide ">
-                        <img src="{{asset('images/user3.webp')}}" class="img-fluid"/>
-                        <h3>Jane Smith<span>Cleint</span></h3>
-                    </div>
+                    @endforeach
+{{--                    <div class="swiper-slide">--}}
+{{--                        <img src="{{asset('images/user2.webp')}}" class="img-fluid"/>--}}
+{{--                        <h3>Jane Smith<span>Cleint</span></h3>--}}
+{{--                    </div>--}}
+{{--                    <div class="swiper-slide ">--}}
+{{--                        <img src="{{asset('images/user3.webp')}}" class="img-fluid"/>--}}
+{{--                        <h3>Jane Smith<span>Cleint</span></h3>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>

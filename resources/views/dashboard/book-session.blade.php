@@ -55,7 +55,7 @@
                             <h1>Book Sessions</h1>
                         </div>
                         <div>
-                            <a href="booking.php" class="themeBtn">Book Appointment</a>
+                            <a href="{{ route('user.booking') }}" class="themeBtn">Book Appointment</a>
                         </div>
                     </div>
                     <div class="row">

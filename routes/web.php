@@ -34,6 +34,8 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
 //    Route::get('/service-view/{id}', 'ServiceController@show')->name('service-view');
     Route::delete('service/destroy/{id}', 'ServiceController@destroy');
 
+
+
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');
 //    Route::match(['get', 'post'], '/add-category', 'CategoryController@addCategory')->name('admin.add-category');
@@ -108,6 +110,23 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     route::get('/changePassword', [SettingController::class, 'changePassword']);
     route::post('/updateAdminPassword', [SettingController::class, 'updateAdminPassword']);
 
+    //CMS
+    route::get('/Faq', [\App\Http\Controllers\Admin\CmsController::class, 'Faq'])->name('faq');
+    Route::get('/all-faqs', 'CmsController@index')->name('faqs.datatables');
+    Route::get('/create-faq', 'CmsController@createFaq')->name('admin.create-faq');
+    Route::post('/add-faq', 'CmsController@addFaq')->name('admin.add.faq');
+    Route::get('/edit-faq/{id}', 'CmsController@editFaq')->name('edit.faq');
+    Route::post('/admin-edit-faq/{id}', 'CmsController@adminEditFaq')->name('admin.edit.faq');
+    Route::post('/admin-delete-faq/{id}', 'CmsController@adminDeleteFaq')->name('admin.delete.faq');
+
+    route::get('/testimonials', [\App\Http\Controllers\Admin\CmsController::class, 'testimonials'])->name('testimonials');
+    Route::get('/all-testimonials', 'CmsController@testimonialsDatatables')->name('testimonials.datatables');
+    Route::get('/create-testimonials', 'CmsController@createTestimonial')->name('admin.create-testimonials');
+    Route::post('/add-testimonials', 'CmsController@addTestimonials')->name('admin.add.testimonials');
+    Route::get('/edit-testimonial/{id}', 'CmsController@editTestimonial')->name('edit.testimonial');
+    Route::post('/admin-edit-testimonial/{id}', 'CmsController@adminEditTestimonial')->name('admin.edit.testimonial');
+    Route::post('/admin-delete-testimonial/{id}', 'CmsController@adminDeleteTestimonial')->name('admin.delete.testimonial');
+
 //    //CMS
 //    Route::get('/cms', 'CmsController@index')->name('admin.cms.index');
 //    Route::get('/cms/edit/{id}', 'CmsController@editSection')->name('admin.cms.edit');
@@ -121,9 +140,18 @@ Route::get('/front-login', function () {
 Route::prefix('/user')->middleware('user')->group(function () {
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/notifications', [UserController::class, 'notifications'])->name('user.notifications');
 
     Route::match(['get', 'post'], '/edit-profile', [UserController::class, 'editProfile'])->name('user.editProfile');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
+    Route::get('/edit/password', [UserController::class, 'editPassword'])->name('user.editPassword');
+
+    Route::get('/sessions', [UserController::class, 'sessions'])->name('user.sessions');
+    Route::get('/book/sessions', [UserController::class, 'bookSession'])->name('user.bookSession');
+    Route::get('/booking', [UserController::class, 'booking'])->name('user.booking');
+
+    Route::post('/edit-password', [ForgotPasswordController::class, 'editUserPassword'])->name('userEditPassword');
 
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');
@@ -242,9 +270,12 @@ Route::get('/wellness', function () {
     return view('front.wellness');
 })->name('front.wellness');
 
-Route::get('/faq', function () {
-    return view('front.faq');
-})->name('front.faq');
+//Route::get('/faq', function () {
+//    return view('front.faq');
+//})->name('front.faq');
+
+Route::get('/faq', [FrontController::class, 'frontFaqs'])->name('front.faq');
+
 
 Route::get('/gift-card', function () {
     return view('front.gift-card');

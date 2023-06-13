@@ -253,13 +253,21 @@
 {{--                        </ul>--}}
 {{--                    </li>--}}
 
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{url('admin/memoriam')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/memoriam') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-comments"></i>--}}
-{{--                            <p>Memoriam</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item">
+                        <a href="{{ route('faq') }}"
+                           class="nav-link {{ request()->IS('admin/addFaq') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-comments"></i>
+                            <p>Add Faq's</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('testimonials') }}"
+                           class="nav-link {{ request()->IS('admin/testimonials') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-comments"></i>
+                            <p>Add Testimonial's</p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{url('admin/changePassword')}}"
