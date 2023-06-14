@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6">
                 <div class="acountInfo buyerProfile">
-                    <h2>Account Information <img src="images/user.png" class="img-fluid"
+                    <h2>Account Information <img src="{{$user = \Illuminate\Support\Facades\Auth::user()->get_profile_picture()}}" class="img-fluid"
                                                  alt="img"></h2>
 
                     @php
@@ -48,7 +48,7 @@
                             <li><label>Phone:</label><span>{{$user->phone}}</span></li>
                             <li><label>City:</label><span>{{$user->city}}</span></li>
                             <li><label>Zip:</label>{{$user->zip}}</li>
-                            <li><label>Fax:</label><span>{{$user->fax}}</span></li>
+{{--                            <li><label>Fax:</label><span>{{$user->fax}}</span></li>--}}
                             <li><label>Address:</label><span>{{$user->address}}</span></li>
                             <li><label>Bio:</label><span>{{$user->bio}}</span></li>
                         </ul>

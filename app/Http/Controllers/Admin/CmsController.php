@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CmsPage;
 use App\Models\CmsPageSection;
+use App\Models\Faqs;
+use App\Models\Service;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -15,16 +19,19 @@ class CmsController extends Controller
     {
         try {
             if (request()->ajax()) {
-                return datatables()->of(CmsPage::get())
+                return datatables()->of(Faqs::get())
                     ->addIndexColumn()
-                    ->addColumn('page', function ($data) {
-                        return $data->page_title;
+                    ->addColumn('image', function ($data) {
+                        return $data->get_faq_picture();
                     })
-                    ->addColumn('slug', function ($data) {
-                        return $data->url_key;
-                    })
+//                    ->addColumn('slug', function ($data) {
+//                        return $data->url_key;
+//                    })
                     ->addColumn('action', function ($data) {
-                        return '<a title="edit" href="' . route('admin.cms.edit', $data->id) . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>';
+                        return '<div>
+                                <a title="edit" href="' . route('edit.faq', $data->id) . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </div>';
                     })->make(true);
             }
         } catch (\Exception $ex) {
@@ -113,4 +120,231 @@ class CmsController extends Controller
         }
         return $request;
     }
+
+
+    public function Faq()
+    {
+        return view('admin.cms.faqs.faqs');
+    }
+
+    public function createFaq()
+    {
+        return view('admin.cms.faqs.create-faq');
+
+    }
+
+    public function addFaq(Request $request)
+    {
+
+        $input = $request->validate([
+            'question' => 'required',
+            'answer' => 'required',
+//            'image' => 'required',
+        ]);
+
+        $faq = new Faqs();
+
+        $input['user_id'] = Auth::id();
+
+        if ($request->hasFile('image')) {
+            $mediaId = $faq->getMedia('faq_image');
+            if (count($mediaId) != 0) {
+
+                $media = $faq->getMedia('faq_image')->find($mediaId[0]->id);
+                if ($media) {
+                    $media->delete();
+                    $faq->addMediaFromRequest('image')->toMediaCollection('faq_image');
+                }
+
+            } else {
+                $faq->addMediaFromRequest('image')->toMediaCollection('faq_image');
+
+            }
+        }
+
+        $faq->fill($input)->save();
+
+        return redirect()->route('faq')->with('success', 'Faq Created Successfully');
+    }
+
+    public function editFaq($id)
+    {
+
+        $content = Faqs::where('id', $id)->first();
+
+        return view('admin.cms.faqs.edit-faq', compact('content'));
+
+    }
+
+    public function adminEditFaq(Request $request, $id)
+    {
+        $content = Faqs::where('id', $id)->first();
+
+        $input = $request->all();
+
+        if (!$content) {
+            redirect()->back()->with('error', 'Faq not found');
+        } else {
+
+            if ($request->hasFile('image')) {
+                $mediaId = $content->getMedia('faq_image');
+                if (count($mediaId) != 0) {
+
+                    $media = $content->getMedia('faq_image')->find($mediaId[0]->id);
+                    if ($media) {
+                        $media->delete();
+                        $content->addMediaFromRequest('image')->toMediaCollection('faq_image');
+                    }
+
+                } else {
+                    $content->addMediaFromRequest('image')->toMediaCollection('faq_image');
+
+                }
+            }
+
+            $content->update($input);
+
+            return redirect()->route('faq')->with('success', 'Faq Edit Successfully');
+
+        }
+
+    }
+
+    public function adminDeleteFaq($id)
+    {
+        $content=Faqs::find($id);
+        $content->delete();
+        echo 1;
+    }
+
+
+
+    public function testimonials()
+    {
+        return view('admin.cms.testimonials.list');
+    }
+
+    public function testimonialsDatatables()
+    {
+        try {
+            if (request()->ajax()) {
+                return datatables()->of(Testimonial::get())
+                    ->addIndexColumn()
+                    ->addColumn('image', function ($data) {
+                        return $data->get_testimonial_picture();
+                    })
+//                    ->addColumn('slug', function ($data) {
+//                        return $data->url_key;
+//                    })
+                    ->addColumn('action', function ($data) {
+                        return '<div>
+                                <a title="edit" href="' . route('edit.testimonial', $data->id) . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                &nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </div>';
+                    })->make(true);
+            }
+        } catch (\Exception $ex) {
+            return redirect('/')->with('error', $ex->getMessage());
+        }
+        return view('admin.cms.index');
+    }
+
+    public function editTestimonial($id)
+    {
+
+        $content = Testimonial::where('id', $id)->first();
+
+        return view('admin.cms.testimonials.edit', compact('content'));
+
+    }
+
+    public function createTestimonial()
+    {
+        return view('admin.cms.testimonials.create');
+
+    }
+
+
+    public function addTestimonials(Request $request)
+    {
+
+        $input = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'job_title' => 'required',
+//            'image' => 'required',
+        ]);
+
+        $faq = new Testimonial();
+
+        $input['user_id'] = Auth::id();
+
+        if ($request->hasFile('image')) {
+            $mediaId = $faq->getMedia('testimonial_image');
+            if (count($mediaId) != 0) {
+
+                $media = $faq->getMedia('testimonial_image')->find($mediaId[0]->id);
+                if ($media) {
+                    $media->delete();
+                    $faq->addMediaFromRequest('image')->toMediaCollection('testimonial_image');
+                }
+
+            } else {
+                $faq->addMediaFromRequest('image')->toMediaCollection('testimonial_image');
+
+            }
+        }
+
+        $faq->fill($input)->save();
+
+        return redirect()->route('testimonials')->with('success', 'Testimonial Created Successfully');
+    }
+
+    public function adminEditTestimonial(Request $request, $id)
+    {
+        $content = Testimonial::where('id', $id)->first();
+
+        $input = $request->all();
+
+        if (!$content) {
+            redirect()->back()->with('error', 'Testimonial not found');
+        } else {
+
+            if ($request->hasFile('image')) {
+                $mediaId = $content->getMedia('testimonial_image');
+                if (count($mediaId) != 0) {
+
+                    $media = $content->getMedia('testimonial_image')->find($mediaId[0]->id);
+                    if ($media) {
+                        $media->delete();
+                        $content->addMediaFromRequest('image')->toMediaCollection('testimonial_image');
+                    }
+
+                } else {
+                    $content->addMediaFromRequest('image')->toMediaCollection('testimonial_image');
+
+                }
+            }
+
+            $content->update($input);
+
+            return redirect()->route('testimonials')->with('success', 'Testimonial Edit Successfully');
+
+        }
+
+    }
+
+    public function adminDeleteTestimonial($id)
+    {
+        $content=Testimonial::find($id);
+        $content->delete();
+        echo 1;
+    }
+
+
+
+
+
+
+
 }

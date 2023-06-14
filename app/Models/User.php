@@ -54,7 +54,7 @@ class User extends Authenticatable implements HasMedia
     public function get_profile_picture()
     {
         $image_check =  $this->getMedia('user_profile_pictures')->first();
-        return $image_check ? $image_check->getUrl() : asset("front/images/user-circle.png");
+        return $image_check ? $image_check->getUrl() : asset("dashboard/images/user.png");
     }
 
     public function getMultiSelectPresentableData($column) {

@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -92,4 +93,28 @@ class ForgotPasswordController extends Controller
 
         return redirect()->route('front.login')->with('success', 'Your password has been changed!');
     }
+
+    public function editUserPassword(Request $request)
+    {
+//dd($request->all());
+        $input = $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (Hash::check($input['current_password'], $user->password)) {
+
+            $user->update(['password' => Hash::make($input['password'])]);
+
+            return back()->with('success' , 'Your password has been edited!');
+
+        } else {
+          return back()->with('error' , 'Current password is not valid');
+        }
+
+
+    }
+
 }

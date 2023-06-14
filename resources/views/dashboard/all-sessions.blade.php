@@ -15,7 +15,7 @@
                         <h2>All Sessions</h2>
                     </div>
                     <div>
-                        <a href="booking.php" class="themeBtn">Book Appointment</a>
+                        <a href="{{ route('user.booking') }}" class="themeBtn">Book Appointment</a>
                     </div>
                 </div>
             </div>

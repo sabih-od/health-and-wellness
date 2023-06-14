@@ -34,7 +34,7 @@
                             <div class="deliveryList">
                                 <ul>
                                     <li>
-                                        <a href="index.php" class="logo"><img src="{{asset('dashboard/images/logo1.png')}}" class="img-fluid"
+                                        <a href="{{ route('user.dashboard') }}" class="logo"><img src="{{asset('dashboard/images/logo1.png')}}" class="img-fluid"
                                                                               alt="img"></a>
                                     </li>
                                     <li>
@@ -45,12 +45,12 @@
                                     </li>
                                     <li>
                                         <div class="heloMain">
-                                            <div class="user">
-                                                <a href="{{route('user.profile')}}"><i class="fas fa-user"></i></a>
-                                            </div>
+{{--                                            <div class="user">--}}
+{{--                                                <a href="{{route('user.profile')}}"><i class="fas fa-user"></i></a>--}}
+{{--                                            </div>--}}
                                             <div class="heloContent">
                                                 <div class="dropdown">
-                                                    <a href="notification.php" class="btn usernotify">
+                                                    <a href="{{ route('user.notifications') }}" class="btn usernotify">
                                                         <i class="fas fa-bell"></i>
                                                         <span class="notifycount">3</span>
                                                     </a>
@@ -60,7 +60,7 @@
                                                 <div class="dropdown">
                                                     <button class="btn userprofile dropdown-toggle" type="button"
                                                             data-toggle="dropdown" aria-expanded="false">
-                                                        <img src="{{asset('dashboard/images/user.png')}}" alt="">
+                                                        <img src="{{\Illuminate\Support\Facades\Auth::user()->get_profile_picture()}}" alt="">
                                                         <div>
                                                             @php
                                                                 $user = \Illuminate\Support\Facades\Auth::user();
@@ -102,7 +102,7 @@
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
                                             <a class="nav-link <?= ($activePage == 'index') ? 'active' : ''; ?>"
-                                               href="index.php">
+                                               href="{{ route('user.dashboard') }}">
                                                 <figure><img src="{{asset('dashboard/images/icons/home.png')}}" class="img-fluid" alt="img">
                                                 </figure>
                                                 Home <span class="sr-only">(current)</span>
@@ -110,7 +110,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link <?= ($activePage == 'all-sessions') ? 'active' : ''; ?>"
-                                               href="all-sessions.php">
+                                               href="{{ route('user.sessions') }}">
                                                 <figure><img src="{{asset('dashboard/images/icons/sessions.png')}}" class="img-fluid" alt="img">
                                                 </figure>
                                                 All Sessions
@@ -118,7 +118,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link <?= ($activePage == 'book-session') ? 'active' : ''; ?>"
-                                               href="book-session.php">
+                                               href="{{ route('user.bookSession') }}">
                                                 <figure><img src="{{asset('dashboard/images/icons/booking.png')}}" class="img-fluid" alt="img">
                                                 </figure>
                                                 Book Sessions
@@ -134,7 +134,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <li class="nav-item">
                                                     <a class="nav-link <?= ($activePage == 'profile') ? 'active' : ''; ?>"
-                                                       href="profile.php">
+                                                       href="{{ route('user.profile') }}">
                                                         <figure><img src="{{asset('dashboard/images/invoice.png')}}" class="img-fluid" alt="img">
                                                         </figure>
                                                         Profile
@@ -142,7 +142,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link <?= ($activePage == 'edit-profile') ? 'active' : ''; ?>"
-                                                       href="edit-profile.php">
+                                                       href="{{ route('user.editProfile') }}">
                                                         <figure><img src="{{asset('dashboard/images/invoice.png')}}" class="img-fluid" alt="img">
                                                         </figure>
                                                         Edit Profile
@@ -150,7 +150,7 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link <?= ($activePage == 'edit-password') ? 'active' : ''; ?>"
-                                                       href="edit-password.php">
+                                                       href="{{ route('user.editPassword') }}">
                                                         <figure><img src="{{asset('dashboard/images/invoice.png')}}" class="img-fluid" alt="img">
                                                         </figure>
                                                         Edit Password
