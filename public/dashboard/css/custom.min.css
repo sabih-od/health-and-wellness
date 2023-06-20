@@ -825,7 +825,6 @@ footer {
 }
 
 
-
 .recentTable h2 {
     font-size: 1.5625rem;
     font-weight: 600;
@@ -892,8 +891,6 @@ footer {
     border-top-right-radius: 10px;
     border-right: 1px solid #E6E6E6;
 }
-
-
 
 
 .showOne {
@@ -2147,4 +2144,8 @@ section.accountAccesSec p {
 
 .selected {
     background-color: blue;
+}
+
+.recentTable tbody tr td:nth-child(2) {
+    text-align: left;
 }

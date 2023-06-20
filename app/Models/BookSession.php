@@ -19,6 +19,9 @@ class BookSession extends Model
         'service_id',
         'session_id',
         'detail',
+        'status',
+        'payment_status',
+        'txnid'
     ];
 
     public function user()

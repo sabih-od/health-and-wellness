@@ -167,7 +167,7 @@ class SessionController extends Controller
 
     public function getSessionsByService(Request $request)
     {
-        $sessions = Sessions::select('name')->where('service_id', $request->serviceId)->where('status', 1)->get();
+        $sessions = Sessions::where('service_id', $request->serviceId)->where('status', 1)->get();
         return response()->json($sessions);
     }
 
@@ -183,6 +183,8 @@ class SessionController extends Controller
 
         return response()->json($sessions);
     }
+
+
 
 
 }

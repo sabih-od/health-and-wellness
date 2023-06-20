@@ -163,9 +163,13 @@ Route::prefix('/user')->middleware('user')->group(function () {
 
     Route::get('/sessions', [UserController::class, 'sessions'])->name('user.sessions');
     Route::get('/book/sessions', [UserController::class, 'bookSession'])->name('user.bookSession');
-    Route::get('/booking', [UserController::class, 'booking'])->name('user.booking');
+    Route::get('/booking', [UserController::class, 'booking'])->name('user.booking')->withoutMiddleware('user');
+
     Route::post('/book/sessions', [UserController::class, 'sessionBooking'])->name('user.sessionBooking');
+    Route::get('stripe-redirect/{session_booked_id}/{status}', [UserController::class, 'stripeRedirect'])->name('stripe.redirect');
+
     Route::get('booking/get-sessions-by-service/', [SessionController::class,'getSessionsByService'])->name('getSessionsByService');
+
 
     Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
 

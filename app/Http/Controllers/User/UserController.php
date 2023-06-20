@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookSession;
 use App\Models\Cities;
 use App\Models\Service;
 use App\Models\Sessions;
@@ -10,6 +11,7 @@ use App\Models\States;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -96,7 +98,7 @@ class UserController extends Controller
     {
         $data['sessions'] = Sessions::all();
         $data['services'] = Service::all();
-        return view('dashboard.booking' , compact('data'));
+        return view('dashboard.booking', compact('data'));
     }
 
     public function notifications()
@@ -105,9 +107,112 @@ class UserController extends Controller
     }
 
 
-    public function sessionBooking(Request $request){
+    public function sessionBooking(Request $request)
+    {
 
-        return view('dashboard.payment');
+        DB::beginTransaction();
+
+        $input = $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'detail' => 'required',
+            'address' => 'required',
+            'service_id' => 'required',
+            'session_id' => 'required',
+        ]);
+
+        $check_user_have_session = BookSession::where('user_id' , Auth::id())->where('status' , 'pending')->first();
+
+        if($check_user_have_session)
+        {
+            return redirect()->back()->with('error' , "Already Book Session");
+        }
+
+//        $session_checks = Session::where('session_date', )
+//            ->whereHas('bookSession', function ($q) {
+//                return $q->where('user_id', Auth::id());
+//            })->get();
+//        count($session_checks);
+        $data = new BookSession();
+
+        $input['user_id'] = Auth::id();
+        $input['status'] = "pending";
+        $input['payment_status'] = "pending";
+
+        $data->fill($input)->save();
+
+        $session = Sessions::where('id', $input['session_id'])->first();
+
+        $service = Service::where('id', $input['service_id'])->first();
+
+        $lineItems = [];
+
+
+        $lineItems[] = [
+            'quantity' => "1",
+            'price_data' => [
+                'currency' => 'usd',
+                'unit_amount' => $session->fees * 100,
+                'product_data' => [
+                    'name' => $session->name,
+                    'description' => $session->date . " / " . $session->session_time,
+                ],
+            ],
+        ];
+
+        $stripeSecret = env('STRIPE_SECRET');
+
+
+        \Stripe\Stripe::setApiKey($stripeSecret);
+        $checkoutSession = \Stripe\Checkout\Session::create([
+            'line_items' => [$lineItems],
+            'mode' => 'payment',
+            'success_url' => route('stripe.redirect', ['session_booked_id' => $data->id, 'status' => 'success']),
+            'cancel_url' => route('stripe.redirect', ['session_booked_id' => $data->id, 'status' => 'cancel']),
+        ]);
+
+        $transactionId = $checkoutSession->payment_intent;
+
+        $data->txnid = $transactionId;
+        $data->save();
+
+        DB::commit();
+
+        return redirect($checkoutSession->url);
+
+    }
+
+    public function stripeRedirect($session_booked_id, $status)
+    {
+        $getBookSession = BookSession::where('id', $session_booked_id)->first();
+
+        $session = Sessions::where('id', $getBookSession->session_id)->first();
+
+        if ($status == "success") {
+
+//            $getBookSession->status = "completed";
+            $getBookSession->payment_status = "completed";
+
+            $getBookSession->save();
+
+//            $transaction = new Transactions([
+//                'user_id' => Auth::id(),
+//                'session_id' => $session->id,
+//                'txn_id' => $session->id,
+//                'amount' => $session->fees,
+//                'method' => "stripe"
+//            ]);
+//            $transaction->save();
+
+            return redirect()->route('user.sessions')->with('success', 'Session Booked Successfully');
+        }
+
+        if ($status == "cancel") {
+            return redirect()->route('user.bookSession')->with('error', 'Payment process has been cancelled');
+        }
+
+
     }
 
 }
