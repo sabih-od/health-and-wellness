@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
+        "nesbot/carbon": "^2.67",
         "spatie/laravel-medialibrary": "^10.9",
         "yajra/laravel-datatables": "^9.0"
     },

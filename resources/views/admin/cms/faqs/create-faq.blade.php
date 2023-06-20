@@ -90,7 +90,7 @@
 
                                 <div class="card-footer text-center">
                                     <button type="submit" class="btn btn-primary btn-md">Submit</button>
-                                    <a href="{{route('service')}}" class="btn btn-warning btn-md">Cancel</a>
+                                    <a href="{{route('faq')}}" class="btn btn-warning btn-md">Cancel</a>
                                 </div>
                             </form>
                         </div>

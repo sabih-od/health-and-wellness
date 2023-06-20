@@ -24,7 +24,7 @@
                 <div class="col-sm-6 offset-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Customer Detail</li>
+                        <li class="breadcrumb-item active">User Detail</li>
                     </ol>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Customer Detail</h3>
+                            <h3 class="card-title">User Detail</h3>
 {{--                            @if(course_is_joinable($content->id))--}}
 {{--                                <button class="btn btn-success" style="float: right;">Start streaming</button>--}}
 {{--                            @endif--}}
@@ -66,8 +66,8 @@
                                     </tr>
 
                                     <tr>
-                                        <th>Username</th>
-                                        <td>{{$content->username??''}}</td>
+                                        <th>Role</th>
+                                        <td>{{$content->role_id== 2 ?  "User" : "Admin"}}</td>
                                     </tr>
 
                                     <tr>
@@ -85,45 +85,41 @@
                                         <td>{{$content->address??''}}</td>
                                     </tr>
 
-                                    <tr>
-                                        <th>State</th>
-                                        <td>{{$content->state->name??''}}</td>
-                                    </tr>
+{{--                                    <tr>--}}
+{{--                                        <th>State</th>--}}
+{{--                                        <td>{{$content->state ??''}}</td>--}}
+{{--                                    </tr>--}}
 
                                     <tr>
                                         <th>City</th>
-                                        <td>{{$content->city->name??''}}</td>
+                                        <td>{{$content->city ??''}}</td>
                                     </tr>
 
                                     <tr>
                                         <th>Zipcode</th>
-                                        <td>{{$content->zipcode??''}}</td>
+                                        <td>{{$content->zip??''}}</td>
                                     </tr>
 
-                                    <tr>
-                                        <th>Is Advertising Business?</th>
-                                        <td>{{$content->is_advertising_business == 1 ? 'Yes' : 'No'}}</td>
-                                    </tr>
 
                                     <tr>
-                                        <th>Affiliation</th>
-                                        <td>{{$content->getMultiSelectPresentableData('affiliation')??''}}</td>
+                                        <th>Bio</th>
+                                        <td>{{$content->bio ?? ''}}</td>
                                     </tr>
 
-                                    <tr>
-                                        <th>Affiliation Dropdown</th>
-                                        <td>{{$content->affiliation_dropdown??''}}</td>
-                                    </tr>
+{{--                                    <tr>--}}
+{{--                                        <th>Affiliation Dropdown</th>--}}
+{{--                                        <td>{{$content->affiliation_dropdown??''}}</td>--}}
+{{--                                    </tr>--}}
 
-                                    <tr>
-                                        <th>Department Associated With</th>
-                                        <td>{{$content->department_associated_with??''}}</td>
-                                    </tr>
+{{--                                    <tr>--}}
+{{--                                        <th>Department Associated With</th>--}}
+{{--                                        <td>{{$content->department_associated_with??''}}</td>--}}
+{{--                                    </tr>--}}
 
-                                    <tr>
-                                        <th>Name of Hero Member</th>
-                                        <td>{{$content->name_of_hero_member??''}}</td>
-                                    </tr>
+{{--                                    <tr>--}}
+{{--                                        <th>Name of Hero Member</th>--}}
+{{--                                        <td>{{$content->name_of_hero_member??''}}</td>--}}
+{{--                                    </tr>--}}
                                 </thead>
                                 <tbody>
 

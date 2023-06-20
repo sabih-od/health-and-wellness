@@ -436,7 +436,7 @@ a.themeBtn.themeBtn1 {
 }
 
 
-/* 
+/*
 .customerSec {
     background: #262262;
     padding-top: 0;
@@ -540,7 +540,7 @@ a.themeBtn.themeBtn1 {
 } */
 
 
-/* 
+/*
 footer {
     padding-top: 5rem;
 }
@@ -779,7 +779,7 @@ footer {
     transition: all 0.5s ease;
 } */
 
-.orderBox div+div {
+.orderBox div + div {
     width: 150px;
     height: 150px;
     display: flex;
@@ -790,7 +790,7 @@ footer {
     transition: 0.5s;
 }
 
-.orderBox div+div i {
+.orderBox div + div i {
     font-size: 3rem;
     color: var(--theme-color);
 }
@@ -799,11 +799,11 @@ footer {
     background: var(--theme-color);
 }
 
-.orderBox:hover div+div {
+.orderBox:hover div + div {
     background: #1EAA68;
 }
 
-.orderBox:hover div+div i {
+.orderBox:hover div + div i {
     color: var(--white);
 }
 
@@ -823,6 +823,8 @@ footer {
     border-radius: 10px;
     padding: 2.4rem 1.4rem;
 }
+
+
 
 .recentTable h2 {
     font-size: 1.5625rem;
@@ -854,6 +856,7 @@ footer {
     border-top-right-radius: 10px;
 }
 
+
 .recentTable tbody tr {
     border: 1px solid #e6e6e6;
     border-radius: 10px;
@@ -870,10 +873,12 @@ footer {
     /* border: 0; */
 }
 
+
 .recentTable tbody tr td {
     border: 1px solid #E6E6E6;
     border-left: 0;
     border-right: 0;
+
 }
 
 .recentTable tbody tr td:first-child {
@@ -887,6 +892,9 @@ footer {
     border-top-right-radius: 10px;
     border-right: 1px solid #E6E6E6;
 }
+
+
+
 
 .showOne {
     display: flex;
@@ -1040,7 +1048,7 @@ footer {
     gap: 5rem;
 }
 
-.orderdtlOne ul li+li {
+.orderdtlOne ul li + li {
     margin: 2.2rem 0 0;
 }
 
@@ -1087,7 +1095,7 @@ footer {
     justify-content: space-between;
 }
 
-.paymentInfo .pymntList li+li {
+.paymentInfo .pymntList li + li {
     margin: 2rem 0 0;
 }
 
@@ -1313,7 +1321,7 @@ img.img-fluid.phnImg {
     margin: 0;
 }
 
-.d-flex .themeBtn+.themeBtn {
+.d-flex .themeBtn + .themeBtn {
     background: var(--primary-color);
 }
 
@@ -1479,7 +1487,7 @@ img.img-fluid.phnImg {
     font-weight: 400;
 }
 
-.acountInfo .vendorEmail ul li+li {
+.acountInfo .vendorEmail ul li + li {
     margin: 0.7rem 0 0;
 }
 
@@ -1630,7 +1638,7 @@ img.img-fluid.phnImg {
     margin: 0 0 0;
 }
 
-.editForm .row+.row {
+.editForm .row + .row {
     margin-top: 2rem;
 }
 
@@ -1864,7 +1872,7 @@ a.navbar-brand img,
     object-fit: cover;
 }
 
-.book .orderBox div+div {
+.book .orderBox div + div {
     background-color: transparent;
 }
 
@@ -1876,32 +1884,43 @@ a.navbar-brand img,
     padding: 4rem;
 }
 
-.searchScedule h2 {
+.event-list .wellnesstag figure {
+    flex: 0 1 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-list .wellnesstag + .wellnesstag {
+    margin-top: 2rem;
+}
+
+.event-list h2 {
     font-size: 1.125rem !important;
     color: var(--primary-color);
     font-family: 'Roboto', sans-serif;
 }
 
-.searchScedule h4 {
+.event-list h4 {
     font-size: 2.375rem !important;
     color: var(--brown);
 }
 
-.searchScedule>ul {
-    max-height: 320px;
+.event-list {
+    height: 350px !important;
     overflow-y: auto;
 }
 
-.searchScedule>ul li {
+.event-list .wellnesstag {
     display: flex;
     gap: 15px;
     align-items: center;
     position: relative;
-    padding-left: 2rem;
     border-color: #828282;
+    padding-left: 1.5rem;
 }
 
-.searchScedule>ul li::before {
+.event-list .wellnesstag::before {
     position: absolute;
     top: 50%;
     left: 0;
@@ -1911,24 +1930,19 @@ a.navbar-brand img,
     font-size: 1.125rem;
 }
 
-.searchScedule>ul li>ul>li {
-    border-color: #828282;
+.event-list .wellnesstag img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background: #fff;
 }
 
-.searchScedule>ul li>ul>li:first-child {
-    border: 0;
-}
-
-.searchScedule ul li span {
+.event-list .wellnesstag span {
     color: var(--theme-color);
 }
 
-.searchScedule .healthtag::before {
-    content: 'Health';
-}
-
-.searchScedule .wellnesstag::before {
-    content: 'Wellness';
+.event-list .wellnesstag::before {
+    content: attr(data-name);
 }
 
 .formStyle label {
@@ -1938,11 +1952,11 @@ a.navbar-brand img,
     color: black;
 }
 
-.checkbox input[type='checkbox']+label:last-child {
+.checkbox input[type='checkbox'] + label:last-child {
     margin-bottom: 0;
 }
 
-.checkbox input[type='checkbox']+label {
+.checkbox input[type='checkbox'] + label {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -1954,7 +1968,7 @@ a.navbar-brand img,
     -ms-user-select: none;
 }
 
-.checkbox input[type='checkbox']+label:before {
+.checkbox input[type='checkbox'] + label:before {
     content: '';
     display: block;
     width: 20px;
@@ -1989,7 +2003,7 @@ a.navbar-brand img,
     margin-bottom: 20px;
 }
 
-.checkbox input[type='checkbox']:checked+label:before {
+.checkbox input[type='checkbox']:checked + label:before {
     width: 10px;
     top: -5px;
     left: 5px;
@@ -2125,4 +2139,12 @@ section.accountAccesSec p {
 .topBar .user a {
     font-size: 26px;
     color: var(--theme-color);
+}
+
+.selected-date {
+    background-color: black !important;
+}
+
+.selected {
+    background-color: blue;
 }

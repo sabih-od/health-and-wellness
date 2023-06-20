@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\User\DashboardController;
@@ -33,6 +34,17 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::match(['get', 'post'], '/service-edit/{id}', 'ServiceController@edit')->name('admin.edit-service');
 //    Route::get('/service-view/{id}', 'ServiceController@show')->name('service-view');
     Route::delete('service/destroy/{id}', 'ServiceController@destroy');
+
+
+    //Session
+    Route::get('session', 'SessionController@index')->name('session');
+    Route::match(['get', 'post'], '/add-session', 'SessionController@addSessions')->name('admin.add-session');
+    Route::match(['get', 'post'], '/session-edit/{id}', 'SessionController@edit')->name('admin.edit-session');
+    Route::delete('session/destroy/{id}', 'SessionController@destroy');
+    Route::post('session/deactivate-status/{id}', 'SessionController@deactivateStatus');
+    Route::post('session/activate-status/{id}', 'SessionController@activateStatus');
+
+
 
 
 
@@ -84,12 +96,12 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
 //    Route::delete('forum-topic/destroy/{id}', 'ForumTopicController@destroy');
 //
 //    //customer
-//    Route::get('customer', 'CustomerController@index')->name('customer');
+    Route::get('customer', 'CustomerController@index')->name('customer');
 ////    Route::match(['get', 'post'], '/add-customer', 'CustomerController@addCustomer')->name('admin.add-customer');
 //    Route::match(['get', 'post'], '/customer-edit/{id}', 'CustomerController@edit')->name('admin.edit-customer');
-//    Route::post('/customer/activate/{id}', 'CustomerController@activate')->name('customer-activate');
-//    Route::get('/customer-view/{id}', 'CustomerController@show')->name('customer-view');
-//    Route::delete('customer/destroy/{id}', 'CustomerController@destroy');
+    Route::post('/customer/activate/{id}', 'CustomerController@activate')->name('customer-activate');
+    Route::get('/customer-view/{id}', 'CustomerController@show')->name('customer-view');
+    Route::delete('customer/destroy/{id}', 'CustomerController@destroy');
 //
 //    //site-event
 //    Route::get('site-event', 'SiteEventController@index')->name('site-event');
@@ -140,18 +152,25 @@ Route::get('/front-login', function () {
 Route::prefix('/user')->middleware('user')->group(function () {
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/notifications', [UserController::class, 'notifications'])->name('user.notifications');
 
     Route::match(['get', 'post'], '/edit-profile', [UserController::class, 'editProfile'])->name('user.editProfile');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
     Route::get('/edit/password', [UserController::class, 'editPassword'])->name('user.editPassword');
+    Route::post('/edit-password', [ForgotPasswordController::class, 'editUserPassword'])->name('userEditPassword');
 
     Route::get('/sessions', [UserController::class, 'sessions'])->name('user.sessions');
     Route::get('/book/sessions', [UserController::class, 'bookSession'])->name('user.bookSession');
     Route::get('/booking', [UserController::class, 'booking'])->name('user.booking');
+    Route::post('/book/sessions', [UserController::class, 'sessionBooking'])->name('user.sessionBooking');
+    Route::get('booking/get-sessions-by-service/', [SessionController::class,'getSessionsByService'])->name('getSessionsByService');
 
-    Route::post('/edit-password', [ForgotPasswordController::class, 'editUserPassword'])->name('userEditPassword');
+    Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
+
+    Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
+
 
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');
@@ -270,9 +289,9 @@ Route::get('/wellness', function () {
     return view('front.wellness');
 })->name('front.wellness');
 
-//Route::get('/faq', function () {
-//    return view('front.faq');
-//})->name('front.faq');
+Route::get('/payment-checkout', function () {
+    return view('dashboard.payment');
+})->name('dashboard.payment');
 
 Route::get('/faq', [FrontController::class, 'frontFaqs'])->name('front.faq');
 
