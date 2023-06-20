@@ -172,10 +172,14 @@
 @section('script')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="path/to/evo-calendar.js"></script>
+{{--    <script src="path/to/evo-calendar.js"></script>--}}
+    <script src="{{ asset('dashboard/js/evo-calendar.js') }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
     <script>
+
+        $("#evoCalendar").evoCalendar();
 
 
         $('body').on('click', '.day', function () {
