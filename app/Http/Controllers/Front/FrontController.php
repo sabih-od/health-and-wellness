@@ -13,7 +13,7 @@ class FrontController extends Controller
     public function home(Request $request)
     {
         $data['testimonials'] = Testimonial::latest()->limit(3)->get();
-        $data['faqs'] = Faqs::latest()->limit(3)->get();
+        $data['faqs'] = Faqs::latest()->get();
         return view('front.index' , compact('data'));
     }
 

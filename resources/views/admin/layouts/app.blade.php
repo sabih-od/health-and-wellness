@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="{{URL::asset('admin/dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{URL::asset('admin/plugins/toastr/toastr.min.css')}}">
+
+    {{--    EVO CALENDER CSS--}}
+    <link rel="stylesheet" href="{{asset('dashboard/css/evo-calendar.css')}}"/>
+    <link rel="stylesheet" href="{{asset('dashboard/css/evo-calendar.midnight-blue.css')}}"/>
+    <link rel="stylesheet" href="{{asset('dashboard/css/custom.min.css')}}"/>
+
     @yield('page_css')
     <link rel="stylesheet" href="{{URL::asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
@@ -36,6 +42,11 @@
 <!-- Datatables -->
     <link href="{{ asset('admin/datatables/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+{{--    <link rel="stylesheet" href="path/to/evo-calendar.css">--}}
+
+
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <style>
@@ -143,6 +154,14 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{route('session')}}"
+                           class="nav-link {{ request()->IS('admin/session') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-angle-double-right"></i>
+                            <p>Sessions</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{route('settings')}}"
                            class="nav-link {{ request()->IS('admin/settings') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cog"></i>
@@ -152,15 +171,15 @@
                         </a>
                     </li>
 
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('customer')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fas fa-users"></i>--}}
-{{--                            <p>--}}
-{{--                                Customers/Users--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item">
+                        <a href="{{route('customer')}}"
+                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Users
+                            </p>
+                        </a>
+                    </li>
 
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{route('business_listing')}}"--}}
@@ -314,6 +333,7 @@
 </div>
 <!-- ./wrapper -->
 
+
 <!-- jQuery -->
 <script src="{{URL::asset('admin/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -354,6 +374,9 @@
 <script src="{{URL:: asset('admin/plugins/toastr/toastr.min.js')}}"></script>
 
 
+{{--Full calandar CDN--}}
+<script src="{{ asset('dashboard/js/evo-calendar.js') }}"></script>
+
 @if(session()->has('success'))
     <script type="text/javascript">  toastr.success('{{ session('success')}}');</script>
 @endif
@@ -363,6 +386,7 @@
 <script>
 
 </script>
+
 
 {{-- datatables script --}}
 <script src="{{asset('admin/datatables/datatables.net/js/jquery.dataTables.min.js')}}"></script>

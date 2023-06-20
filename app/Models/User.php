@@ -31,6 +31,7 @@ class User extends Authenticatable implements HasMedia
         'fax',
         'address',
         'bio',
+        'is_active',
     ];
 
     /**

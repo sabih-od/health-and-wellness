@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cities;
+use App\Models\Service;
+use App\Models\Sessions;
 use App\Models\States;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -86,16 +88,26 @@ class UserController extends Controller
 
     public function bookSession()
     {
+
         return view('dashboard.book-session');
     }
 
     public function booking()
     {
-        return view('dashboard.booking');
+        $data['sessions'] = Sessions::all();
+        $data['services'] = Service::all();
+        return view('dashboard.booking' , compact('data'));
     }
 
     public function notifications()
     {
         return view('dashboard.notification');
     }
+
+
+    public function sessionBooking(Request $request){
+
+        return view('dashboard.payment');
+    }
+
 }

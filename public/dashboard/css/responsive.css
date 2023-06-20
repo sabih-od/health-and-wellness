@@ -11,7 +11,7 @@
 	.topBar {
 		padding: 1rem 2rem;
 	}
-	
+
 	.orderBox:before {
 		height: 100%;
 		width: 169px;
@@ -60,7 +60,7 @@
 	.acountInfo .vendorEmail ul li{
 		justify-content: space-between;
 	}
-	
+
 	.recentTable.memberAces .themeBtn {
 		font-size: 1.125rem;
 	}
@@ -92,7 +92,7 @@
 	.orderDetail{
 		padding: 2rem;
 	}
-}	
+}
 
 @media (max-width: 1199.98px) {
 	html {
@@ -122,18 +122,18 @@
 		font-size: 0.813rem;
 	}
 
-	
+
 	.feturUpload .themeBtn {
 		width: 162px;
 		gap: 3px;
 		padding: 0 0;
 	}
-	
+
 	.table-responsive-lg {
 		display: block;
 		overflow: scroll;
 	}
-	
+
 	.ind-tab .table-responsive-lg,
 	.all-order .table-responsive-lg,
 	.memberAces .table-responsive-lg {
@@ -147,7 +147,7 @@
 	.acountInfo h2{
 		font-size: 1.5rem;
 	}
-	
+
 	.invoicRes .orderDetail {
 		padding: 1rem;
 	}
@@ -274,7 +274,7 @@
 	.orderContent h2{
 		font-size: 2.125rem;
 	}
-	
+
 	.recentTable.curntBaner ul{
 		flex-wrap: wrap;
 
@@ -319,7 +319,7 @@
 	.showingNavigation span{
 		font-size: 1.125rem;
 		margin-bottom: 0.5rem;
-		
+
 	}
 	.recentTable.addProdct .showOne{
 		margin: 0 0rem 1.5rem;
@@ -363,7 +363,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		text-align: center;
-		
+
 	}
 	.reviewContent div{
 		justify-content: center;
@@ -392,6 +392,9 @@
 		margin-top: 0rem;
 		padding: 1rem;
 	}
+
+
+
 	.sideNAvigation{
 		margin-bottom: 1rem;
 	}
@@ -424,7 +427,7 @@
 	}
 
 	.orderBox h2{
-		font-size: 1.375rem;	
+		font-size: 1.375rem;
 	}
 	.orderBox:before {
 		width: 120px;
@@ -432,14 +435,14 @@
 	.orderBox div + div {
 		width: 62px;
 	}
-	
+
 	.orderContent ul li a{
 		font-size: 1.25rem;
 		justify-content: center;
 	}
 	.orderContent ul{
 		margin: 0 0 1rem;
-		
+
 	}
 
 	.addProdct .thcBox figure{
@@ -449,7 +452,7 @@
 
 	.recentTable.addProdct h2{
 		font-size: 1.5rem;
-		
+
 	}
 
 
@@ -619,7 +622,7 @@
 	}
 	.all-order .table-responsive-lg{
 		display:block;
-	}	
+	}
 	.all-products .recentTable.productBrdr tbody tr td{
 		font-size: 1rem;
 	}
@@ -630,7 +633,7 @@
 
 	.invoiceDtl h2{
 		font-size: 2rem;
-	}	
+	}
 	.invoiceDtl img{
 		width: 20%;
 	}
@@ -694,7 +697,7 @@
 	}
 	.orderContent ul li a{
 		font-size: 1rem;
-		
+
 	}
 	.showingNavigation .pagination a {
 		padding: 0.5rem 10px;
@@ -705,13 +708,13 @@
 	}
 	.flemember .orderContent.listNon {
 		flex-wrap: wrap;
-		
-		
+
+
 	}
 	.editprof .changeProfile{
 		justify-content: center;
 	}
-	
+
 	.acountInfo.buyerProfile .vendorEmail ul li label{
 		width: auto;
 	}
@@ -734,8 +737,8 @@
 	}
 	.flemember .orderContent.listNon {
 		width: 90%;
-		
+
 	}
 
-	
+
 }
