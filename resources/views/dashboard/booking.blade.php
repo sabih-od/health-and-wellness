@@ -17,7 +17,8 @@
             </div>
             <div class="col-md-12">
                 <div class="recentTable editProfile">
-                    <form class="editForm" action=" {{route('user.sessionBooking')}} " method="POST" enctype="multipart/form-data">
+                    <form class="editForm" action=" {{route('user.sessionBooking')}} " method="POST"
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -26,7 +27,13 @@
                                         <label>Your Name*</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" name="name" placeholder="john Smith">
+                                        <input type="text" name="name" placeholder="john Smith"
+                                               class="form-control @error('name') is-invalid @enderror">
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +43,13 @@
                                         <label>Email *</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" name="email" placeholder="johnsmith@gmial.com">
+                                        <input type="text" name="email" placeholder="johnsmith@gmial.com"
+                                               class="form-control @error('email') is-invalid @enderror">
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +61,13 @@
                                         <label>Phone *</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" name="phone_number" placeholder="+123 456 7890">
+                                        <input type="text" name="phone_number" placeholder="+123 456 7890"
+                                               class="form-control @error('phone_number') is-invalid @enderror">
+                                        @error('phone_number')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +77,14 @@
                                         <label>Address*</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" placeholder="Space Needle 000 Broad St, Seattles">
+                                        <input type="text" placeholder="Space Needle 000 Broad St, Seattles"
+                                               name="address"
+                                               class="form-control @error('address') is-invalid @enderror">
+                                        @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +96,14 @@
                                         <label>Service *</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <select id="serviceSelect" name="service_id" onchange="renderSession(event)">
+                                        <select id="serviceSelect" name="service_id" onchange="renderSession(event)"
+                                                class="form-control @error('service_id') is-invalid @enderror">
+                                            @error('service_id')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+
                                             <option selected hidden>Select Serivce</option>
                                             @foreach($data['services'] as $service)
                                                 <option value="{{ $service->id }}"> {{ $service->name }}</option>
@@ -85,7 +118,14 @@
                                         <label>Session *</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <select id="sessionSelect" name="session_id">
+                                        <select id="sessionSelect" name="session_id"
+                                                class="form-control @error('session_id') is-invalid @enderror">
+                                            
+                                            @error('session_id')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
                                             <option selected hidden>Select Session</option>
 
                                         </select>
@@ -94,39 +134,21 @@
                             </div>
                         </div>
 
-                        {{--                        <div class="row">--}}
-                        {{--                            <div class="col-md-6">--}}
-                        {{--                                <div class="row align-items-start">--}}
-                        {{--                                    <div class="col-md-3">--}}
-                        {{--                                        <label>Date *</label>--}}
-                        {{--                                    </div>--}}
-                        {{--                                    <div class="col-md-8">--}}
-                        {{--                                        <input type="date">--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="col-md-6">--}}
-                        {{--                                <div class="row align-items-start">--}}
-                        {{--                                    <div class="col-md-3">--}}
-                        {{--                                        <label>Time *</label>--}}
-                        {{--                                    </div>--}}
-                        {{--                                    <div class="col-md-8">--}}
-                        {{--                                        <input type="time">--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
-
                         <div class="row align-items-start">
                             <div class="col-md-1">
                                 <label>Details *</label>
                             </div>
                             <div class="col-md-10 mx-auto">
-                                <textarea placeholder="Lorem Ipsum is simply dummy text" name="detail"></textarea>
-{{--                                <button onclick="window.location.href='payment.php'" class="themeBtn"--}}
-{{--                                        type="button">continue--}}
-{{--                                </button>--}}
+                                <textarea placeholder="Lorem Ipsum is simply dummy text" name="detail"
+                                          class="form-control @error('detail') is-invalid @enderror"></textarea>
+                                @error('detail')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                {{--                                <button onclick="window.location.href='payment.php'" class="themeBtn"--}}
+                                {{--                                        type="button">continue--}}
+                                {{--                                </button>--}}
 
                                 <button class="themeBtn" type="submit">Continue</button>
 
@@ -173,10 +195,10 @@
                     if (response.length > 0) {
                         for (var i = 0; i < response.length; i++) {
                             var session = response[i];
+                            console.log("selec session", session);
                             $('#sessionSelect').append('<option value="' + session.id + '">' + session.name + '</option>');
                         }
-                    }
-                    else {
+                    } else {
                         $('#sessionSelect').append('<option value="">' + "Session not available" + '</option>');
                     }
 
