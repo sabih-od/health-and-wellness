@@ -63,7 +63,7 @@
                     <div class="deliveryList">
                         <ul>
                             <li>
-                                <a href="{{ route('user.dashboard') }}" class="logo"><img
+                                <a href="{{ route('front.home') }}" class="logo"><img
                                         src="{{asset('dashboard/images/logo1.png')}}" class="img-fluid"
                                         alt="img"></a>
                             </li>
@@ -309,8 +309,8 @@
 <script src="{{URL::asset('admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
 
-{{-- datatables script --}}
-
+{{-- PUSHER script --}}
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{asset('dashboard/js/all.min.js')}}"></script>

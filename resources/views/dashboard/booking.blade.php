@@ -118,9 +118,9 @@
                                         <label>Session *</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <select id="sessionSelect" name="session_id"
+                                        <select id="sessionSelect" name="session_id" onchange="renderSessionTimmings(event)"
                                                 class="form-control @error('session_id') is-invalid @enderror">
-                                            
+
                                             @error('session_id')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,6 +133,33 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="row align-items-start">
+                                    <div class="col-md-3">
+                                        <label>Session Timings *</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select id="sessionTimingSelect" name="session_timing_id"
+                                                class="form-control @error('session_timing_id') is-invalid @enderror">
+
+                                            @error('session_timing_id')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                            <option selected hidden>Select Session</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
 
                         <div class="row align-items-start">
                             <div class="col-md-1">
@@ -167,6 +194,49 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+    <script>
+        function renderSessionTimmings(event) {
+            var sessionId = event.target.value; // Get the selected service ID
+            console.log("sessionId" , sessionId)
+            // Make an AJAX request to fetch the sessions based on the selected service ID
+            // Assuming you have a route in your Laravel application to handle this request
+
+            // Example using jQuery AJAX
+            $.ajax({
+                url: "{{ route('getSessionsTimingBySession') }}",
+                type: 'GET',
+                data: {
+                    sessionId: sessionId
+                },
+                success: function (response) {
+                    console.log("Response time:", response);
+                    // Clear previous options
+                    $('#sessionTimingSelect').empty();
+
+                    // Add a default option
+                    $('#sessionTimingSelect').append('<option selected hidden>Select Session</option>');
+
+                    // Loop through the sessions and add them as options
+                    if (response.length > 0) {
+                        for (var i = 0; i < response.length; i++) {
+                            var sessionTiming = response[i];
+                            console.log("select Session Time", sessionTiming);
+                            $('#sessionTimingSelect').append('<option value="' + sessionTiming.id + '">' + sessionTiming.session_time + '</option>');
+                        }
+                    } else {
+                        $('#sessionTimingSelect').append('<option value="">' + "Session not available" + '</option>');
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", status, error);
+                    alert('Error');
+                }
+            });
+
+        }
+    </script>
 
     <script>
 
@@ -210,6 +280,7 @@
             });
 
         }
+
 
     </script>
 

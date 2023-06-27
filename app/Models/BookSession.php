@@ -16,8 +16,8 @@ class BookSession extends Model
         'email',
         'address',
         'phone_number',
-        'service_id',
         'session_id',
+        'session_timing_id',
         'detail',
         'status',
         'payment_status',
@@ -31,11 +31,16 @@ class BookSession extends Model
 
     public function session()
     {
-        return $this->belongsTo('App\Models\Session');
+        return $this->belongsTo('App\Models\Sessions');
     }
 
-    public function service()
+    public function sessionTiming()
     {
-        return $this->belongsTo('App\Models\Service');
+        return $this->belongsTo('App\Models\SessionTiming');
     }
+
+//    public function service()
+//    {
+//        return $this->belongsTo('App\Models\Service');
+//    }
 }

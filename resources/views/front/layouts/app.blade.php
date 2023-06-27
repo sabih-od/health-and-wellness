@@ -109,7 +109,7 @@
                     <li><a href="{{route('front.services')}}">Services</a></li>
                     <li><a href="{{route('front.gift-card')}}">Gift Card</a></li>
                     <li><a href="{{route('front.membership')}}">Membership Rewards</a></li>
-                    <li><a href="{{route('front.membership')}}">Contact Us</a></li>
+                    <li><a href="{{route('front.contact')}}">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

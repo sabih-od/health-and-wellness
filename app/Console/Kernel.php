@@ -23,32 +23,27 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             try {
-                $pendingSessions = Sessions::whereHas('bookSession', function ($q) {
-                    $q->where('status', '=', 'pending');
-                })->get();
-
+                $pendingSessions = BookSession::where('status', '=', 'pending')->with('sessionTiming', 'session')->get();
                 if (count($pendingSessions) == 0) {
                     return;
                 } else {
                     foreach ($pendingSessions as $session) {
+                        $sessionEndTime = substr($session->sessionTiming->session_time, 8, 10);
 
-                        $sessionEndTime = substr($session->session_time, 8, 10);
-
-                        $sessionDateTime = Carbon::parse($session->date . $sessionEndTime);
+                        $sessionDateTime = Carbon::parse($session->session->date . $sessionEndTime);
 
                         $currentDateTime = Carbon::now();
 
                         if ($currentDateTime > $sessionDateTime) {
 
-                            $bookSession = BookSession::where('session_id', $session->id)->first();
-                            $bookSession->status = "completed";
-                            $bookSession->save();
+                            $session->status = "completed";
+                            $session->save();
 
                         }
                     }
                 }
 
-            } catch (\Exception $exception){
+            } catch (\Exception $exception) {
                 Log::error('Scheduler error:' . $exception->getMessage());
             }
         })->everyMinute();

@@ -43,7 +43,15 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::delete('session/destroy/{id}', 'SessionController@destroy');
     Route::post('session/deactivate-status/{id}', 'SessionController@deactivateStatus');
     Route::post('session/activate-status/{id}', 'SessionController@activateStatus');
+    Route::post('session/view', 'SessionController@sessionView')->name('sessionView');
 
+    Route::get('delete-session-timing', 'SessionController@deleteSessionTiming')->name('deleteSessionTiming');
+    Route::get('update-session-timing', 'SessionController@updateSessionTime')->name('updateSessionTime');
+
+    Route::get( '/booked-session', 'SessionController@bookedSession')->name('book-sessions');
+    Route::get( '/booked-sessions', 'SessionController@bookedSessionDatatables')->name('book-sessions-datatables');
+    Route::delete('booked-session/destroy/{id}', 'SessionController@bookSessionDestroy');
+    Route::get( '/view-booked-sessions/{id}', 'SessionController@viewBookedSession')->name('viewBookedSession');
 
 
 
@@ -101,6 +109,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
 //    Route::match(['get', 'post'], '/customer-edit/{id}', 'CustomerController@edit')->name('admin.edit-customer');
     Route::post('/customer/activate/{id}', 'CustomerController@activate')->name('customer-activate');
     Route::get('/customer-view/{id}', 'CustomerController@show')->name('customer-view');
+    Route::get('/session-view/{id}', 'SessionController@sessionView')->name('session-view');
     Route::delete('customer/destroy/{id}', 'CustomerController@destroy');
 //
 //    //site-event
@@ -135,7 +144,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::get('/all-testimonials', 'CmsController@testimonialsDatatables')->name('testimonials.datatables');
     Route::get('/create-testimonials', 'CmsController@createTestimonial')->name('admin.create-testimonials');
     Route::post('/add-testimonials', 'CmsController@addTestimonials')->name('admin.add.testimonials');
-    Route::get('/edit-testimonial/{id}', 'CmsController@editTestimonial')->name('edit.testimonial');
+    Route::get('/edisessiont-testimonial/{id}', 'CmsController@editTestimonial')->name('edit.testimonial');
     Route::post('/admin-edit-testimonial/{id}', 'CmsController@adminEditTestimonial')->name('admin.edit.testimonial');
     Route::post('/admin-delete-testimonial/{id}', 'CmsController@adminDeleteTestimonial')->name('admin.delete.testimonial');
 
@@ -169,11 +178,15 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::get('stripe-redirect/{session_booked_id}/{status}', [UserController::class, 'stripeRedirect'])->name('stripe.redirect');
 
     Route::get('booking/get-sessions-by-service/', [SessionController::class,'getSessionsByService'])->name('getSessionsByService');
+    Route::get('booking/get-sessions-timing-by-session/', [SessionController::class,'getSessionsTimingBySession'])->name('getSessionsTimingBySession');
 
 
     Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
 
     Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
+
+
+    Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact-via-mail')->withoutMiddleware('user');
 
 
 //    //category
@@ -263,11 +276,12 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/stream', [App\Http\Controllers\HomeController::class, 'sessionStream'])->name('sessionStream');
 
 //FRONT ROUTES-------------------------------------------------------------------------------------------------------------------------------------------------
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
 Route::get('/services', [FrontController::class, 'services'])->name('front.services');
-Route::get('/service-detail/{id}', [FrontController::class, 'serviceDetail'])->name('front.serviceDetail');
+Route::get('/user/service-detail/{id}', [FrontController::class, 'serviceDetail'])->name('front.serviceDetail');
 
 Route::get('/signup', function () {
     return view('front.signup');

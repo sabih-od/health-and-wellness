@@ -44,6 +44,21 @@ class Sessions extends Model implements HasMedia
         return $this->hasMany(BookSession::class , 'session_id' , 'id');
     }
 
+    public function sessionTimings()
+    {
+        return $this->hasMany(SessionTiming::class , 'session_id' , 'id');
+    }
+
+    public function sessionBookedTimings()
+    {
+        return $this->hasMany(SessionTiming::class , 'session_id' , 'id')->where('is_booked', 1);
+    }
+
+    public function sessionNotBookedTimings()
+    {
+        return $this->hasMany(SessionTiming::class , 'session_id' , 'id')->where('is_booked', 0);
+    }
+
     public function service()
     {
         return $this->belongsTo('App\Models\Service' , 'service_id' , 'id');

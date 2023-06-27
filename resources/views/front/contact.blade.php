@@ -71,35 +71,36 @@
                         <h2 class="secHeading">Contact Us</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s.</p>
-                        <form class="contctForm">
+                        <form action="{{ route('contact-via-mail') }}" method="POST" class="contctForm">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter your name">
+                                        <input type="text" name="name" class="form-control" placeholder="Enter your name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" class="form-control" placeholder="Enter your email">
+                                        <input type="text" name="email" class="form-control" placeholder="Enter your email">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Subject</label>
-                                        <input type="text" class="form-control" placeholder="Type the subject">
+                                        <input type="text" name="subject" class="form-control" placeholder="Type the subject">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Message</label>
-                                        <textarea rows="6" class="form-control"
+                                        <textarea rows="6" name="message" class="form-control"
                                                   placeholder="Type your message here"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="themeBtn themeBtn2">Submit Now</button>
+                                    <button class="themeBtn themeBtn2" type="submit">Submit Now</button>
                                 </div>
                             </div>
                         </form>
