@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookSession;
 use App\Models\Faqs;
 use App\Models\Service;
+use App\Models\Sessions;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -25,8 +27,8 @@ class FrontController extends Controller
 
     public function serviceDetail(Request $request, $id)
     {
-        $service = Service::find($id);
-        return view('front.service-detail', compact('service'));
+        $session = BookSession::where('id' , $id)->with('session' , 'session.service', 'sessionTiming')->first();
+        return view('front.service-detail', compact('session'));
     }
 
     public function frontFaqs()

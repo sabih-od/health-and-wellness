@@ -7,15 +7,20 @@ use App\Models\BookSession;
 use App\Models\Cities;
 use App\Models\Service;
 use App\Models\Sessions;
+use App\Models\SessionTiming;
+use App\Models\Settings;
 use App\Models\States;
 use App\Models\User;
+use App\Traits\PHPCustomMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Events\NewNotification;
 
 class UserController extends Controller
 {
+    use PHPCustomMail;
 
     public function editProfile(Request $request)
     {
@@ -103,6 +108,7 @@ class UserController extends Controller
 
     public function notifications()
     {
+        event(new NewNotification('Entered'));
         return view('dashboard.notification');
     }
 
@@ -118,15 +124,16 @@ class UserController extends Controller
             'phone_number' => 'required',
             'detail' => 'required',
             'address' => 'required',
-            'service_id' => 'required',
             'session_id' => 'required',
+            'session_timing_id' => 'required',
         ]);
+
 
         $check_user_have_session = BookSession::where('user_id' , Auth::id())->where('status' , 'pending')->first();
 
         if($check_user_have_session)
         {
-            return redirect()->back()->with('error' , "Already Book Session");
+            return redirect()->back()->with('error' , "Already Booked Session");
         }
 
 //        $session_checks = Session::where('session_date', )
@@ -143,9 +150,8 @@ class UserController extends Controller
         $data->fill($input)->save();
 
         $session = Sessions::where('id', $input['session_id'])->first();
-
-        $service = Service::where('id', $input['service_id'])->first();
-
+        $sessionTime = SessionTiming::where('id', $input['session_timing_id'])->first();
+//        $service = Service::where('id', $request->service_id)->first();
         $lineItems = [];
 
 
@@ -156,7 +162,7 @@ class UserController extends Controller
                 'unit_amount' => $session->fees * 100,
                 'product_data' => [
                     'name' => $session->name,
-                    'description' => $session->date . " / " . $session->session_time,
+                    'description' => $session->date . " / " . $sessionTime->session_time,
                 ],
             ],
         ];
@@ -189,12 +195,16 @@ class UserController extends Controller
 
         $session = Sessions::where('id', $getBookSession->session_id)->first();
 
+        $sessionTiming = SessionTiming::where('id' , $getBookSession->session_timing_id)->first();
+
         if ($status == "success") {
 
 //            $getBookSession->status = "completed";
             $getBookSession->payment_status = "completed";
-
             $getBookSession->save();
+
+            $sessionTiming->is_booked = 1;
+            $sessionTiming->save();
 
 //            $transaction = new Transactions([
 //                'user_id' => Auth::id(),
@@ -215,4 +225,28 @@ class UserController extends Controller
 
     }
 
+    public function contactViaMail(Request $request)
+    {
+        $data = $request->all();
+
+        $adminEmail = Settings::latest()->first();
+
+        $to = $adminEmail->email;
+        $from = $data['email'];
+        $subject = $data['subject'];
+        $message = "Message Sender : " . $data['name'] . "</br>";
+        $message .= "Message : " . $data['message'] . "</br>";
+
+        $this->customMail($from, $to, $subject, $message);
+
+        $to = $data['email'];
+        $from = "noreplay@health-and-wellness.com";
+        $subject = "Mail Submitted";
+        $message = "Your mail successfully submitted";
+
+        $this->customMail($from, $to, $subject, $message);
+
+
+        return redirect()->back()->with('success' , "Mail Sanded Successfully");
+    }
 }

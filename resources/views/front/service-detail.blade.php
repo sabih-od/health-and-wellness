@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="secHeading">{{$service->name}}</h2>
+                        <h2 class="secHeading">{{$session->session->name ?? ''}}</h2>
                     </div>
                 </div>
             </div>
@@ -24,17 +24,29 @@
             <div class="row align-items-center">
                 <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                     <div class="servicesContents">
-                        <h3 class="subHeading">{{$service->name}}</h3>
-                        <h4>{{$service->pricing_detail}}</h4>
+                        <h3 class="subHeading">Service : {{$session->session->service->name ?? ''}}</h3>
+                        <p>Service Description : {{$session->session->service->description ?? ''}}</p>
+                        <h4>Session Date : {{$session->session->date ?? ''}}</h4>
+
                         <p>
-                            {{$service->description}}
+                            Booked By : {{$session->name ?? ''}}
                         </p>
-                        <a href="" class="themeBtn themeBtn2">BOok Now</a>
+
+                        <p>
+                            Booked User Email : {{$session->email ?? ''}}
+                        </p>
+
+                        <p>
+                            Session Fees : {{$session->session->fees ?? ''}}
+                        </p>
+                        <p>
+                            Session Time : {{$session->sessionTiming->session_time ?? ''}}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                     <figure>
-                        <img src="{{$service->getImageUrl()}}" class="img-fluid" alt="">
+                        <img src="{{$session->session->get_session_picture()}}" class="img-fluid" alt="">
                     </figure>
                 </div>
             </div>

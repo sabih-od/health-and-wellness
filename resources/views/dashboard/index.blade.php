@@ -305,7 +305,7 @@
                             return `<img src="` + data + `" height="80"/>`;
                         }
                     },
-                    {data: 'name', name: 'name'},
+                    {data: 'session_name', name: 'session_name'},
 
                     {data: 'date', name: 'date'},
                     {data: 'session_time', name: 'session_time'},

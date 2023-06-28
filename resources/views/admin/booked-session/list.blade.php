@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Services')
+@section('title', 'Customers')
 @section('page_css')
     <style>
         .addBtn{
@@ -13,18 +13,17 @@
 
 @endsection
 @section('section')
-
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sessions</h1>
+                        <h1>Customers</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Session</li>
+                            <li class="breadcrumb-item active">Customer</li>
                         </ol>
                     </div>
                 </div>
@@ -38,9 +37,9 @@
                         <!-- /.card -->
 
                         <div class="card">
-                            <div class="card-header">
-                                <a class="btn btn-primary pull-right addBtn" href="{{route('admin.add-session')}}">Add Session</a>
-                            </div>
+{{--                            <div class="card-header">--}}
+{{--                                <a class="btn btn-primary pull-right addBtn" href="{{route('admin.add-customer')}}">Add Customer</a>--}}
+{{--                            </div>--}}
                             <div class="col-md-12">
 
                             </div>
@@ -50,14 +49,12 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>#</th>
-                                        <th>Image</th>
-                                        <th>Session</th>
-                                        <th>Service</th>
-                                        <th>Fees</th>
+                                        <th>Booked By</th>
+                                        <th>Session Name</th>
+                                        <th>Service Name</th>
                                         <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Status</th>
-
+                                        <th>Session Time</th>
+                                        <th>Payment Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -94,6 +91,24 @@
                 </div>
             </div>
         </div>
+        <div id="activateModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header"  style="background-color: #343a40;
+            color: #fff;">
+                        <h2 class="modal-title">Confirmation</h2>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 align="center" style="margin: 0;">Are you sure?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="ok_activate" name="ok_activate" class="btn btn-danger">Activate</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('script')
@@ -122,85 +137,22 @@
                 serverSide: true,
                 pageLength: 10,
                 ajax: {
-                    url: `{{route(request()->segment(2))}}`,
+                    url: `{{route('book-sessions-datatables')}}`,
                 },
                 columns: [
                     {data: 'id', name: 'id'},
-                    {
-                        data: 'image',
-                        name: 'image',
-                        render: function( data, type, full, meta ) {
-                            return `<img src="`+data+`" height="80"/>`;
-                        }
-                    },
+                    {data: 'booked_by', name: 'booked_by'},
                     {data: 'session_name', name: 'session_name'},
-                    {data: 'service', name: 'service'},
-                    {data: 'fees', name: 'fees'},
+                    {data: 'service_name', name: 'service_name'},
                     {data: 'date', name: 'date'},
                     {data: 'session_time', name: 'session_time'},
-                    {data: 'status', name: 'status'},
+                    {data: 'payment_status', name: 'payment_status'},
 
                     {data: 'action', name: 'action', orderable: false}
                 ],
 
                 "order": [[ 0, "desc" ]]
 
-            });
-
-            var session_id;
-            $(document,this).on('click','.activate',function(){
-                session_id = $(this).attr('id');
-                console.log("session_id" , session_id)
-                $.ajax({
-                    type:"post",
-                    url:`{{url('admin/'.request()->segment(2).'/deactivate-status/')}}/${session_id}`,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    // beforeSend: function(){
-                    //     $('#ok_delete').text('Deleting...');
-                    //     $('#ok_delete').attr("disabled",true);
-                    // },
-                    success: function (data) {
-                        DataTable.ajax.reload();
-                        // $('#ok_delete').text('Delete');
-                        // $('#ok_delete').attr("disabled",false);
-                        // $('#confirmModal').modal('hide');
-                        // //   js_success(data);
-                        // if(data==0) {
-                        //     toastr.error('Exception Here ! Delete Firstly Child Service');
-                        // }else{
-                        //     toastr.success('Record Delete Successfully');
-                        // }
-                    }
-                })
-            });
-            $(document,this).on('click','.deactivate',function(){
-                session_id = $(this).attr('id');
-                console.log("session_id" , session_id)
-                $.ajax({
-                    type:"post",
-                    url:`{{url('admin/'.request()->segment(2).'/activate-status/')}}/${session_id}`,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    // beforeSend: function(){
-                    //     $('#ok_delete').text('Deleting...');
-                    //     $('#ok_delete').attr("disabled",true);
-                    // },
-                    success: function (data) {
-                        DataTable.ajax.reload();
-                        // $('#ok_delete').text('Delete');
-                        // $('#ok_delete').attr("disabled",false);
-                        // $('#confirmModal').modal('hide');
-                        // //   js_success(data);
-                        // if(data==0) {
-                        //     toastr.error('Exception Here ! Delete Firstly Child Service');
-                        // }else{
-                        //     toastr.success('Record Delete Successfully');
-                        // }
-                    }
-                })
             });
             var delete_id;
             $(document,this).on('click','.delete',function(){
@@ -225,13 +177,59 @@
                         $('#confirmModal').modal('hide');
                      //   js_success(data);
                         if(data==0) {
-                            toastr.error('Exception Here ! Delete Firstly Child Service');
+                            toastr.error('Exception Here ! Delete Firstly Child Category');
                         }else{
                             toastr.success('Record Delete Successfully');
                         }
                     }
                 })
             });
+
+            {{--var activate_id;--}}
+            {{--var action = '';--}}
+            {{--var verb = '';--}}
+            {{--var color = '';--}}
+            {{--//on activate/unactivate click--}}
+            {{--$(document,this).on('click','.activate',function(){--}}
+            {{--    activate_id = $(this).attr('id');--}}
+
+            {{--    //activate button text compute--}}
+            {{--    var activate_bool = $(this).data('activate');--}}
+            {{--    action = activate_bool == 0 ? 'Activate' : 'Inactivate';--}}
+            {{--    verb = activate_bool == 0 ? 'Activating' : 'Inactivating';--}}
+            {{--    color = activate_bool == 0 ? 'limegreen' : 'red';--}}
+            {{--    $('#ok_activate').text(action);--}}
+            {{--    $('#ok_activate').css('background-color', color);--}}
+            {{--    $('#ok_activate').css('border', color);--}}
+
+            {{--    $('#activateModal').modal('show');--}}
+            {{--});--}}
+            {{--//on activate/inactivate confirmation--}}
+            {{--$(document).on('click','#ok_activate',function(){--}}
+            {{--    $.ajax({--}}
+            {{--        type:"post",--}}
+            {{--        url:`{{url('admin/'.request()->segment(2).'/activate/')}}/${activate_id}`,--}}
+            {{--        headers: {--}}
+            {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--        },--}}
+            {{--        beforeSend: function(){--}}
+            {{--            $('#ok_activate').text(verb + '...');--}}
+            {{--            $('#ok_activate').attr("disabled",true);--}}
+            {{--        },--}}
+            {{--        success: function (data) {--}}
+            {{--            DataTable.ajax.reload();--}}
+            {{--            $('#ok_activate').text(action);--}}
+            {{--            $('#ok_activate').attr("disabled",false);--}}
+            {{--            $('#activateModal').modal('hide');--}}
+            {{--            //   js_success(data);--}}
+            {{--            if(data==0) {--}}
+            {{--                toastr.error('Exception Here ! Activate');--}}
+            {{--            }else{--}}
+            {{--                toastr.success('Record '+action+'d Successfully');--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--});--}}
         })
     </script>
 

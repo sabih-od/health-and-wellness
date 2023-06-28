@@ -103,4 +103,20 @@
 @endsection
 
 @section('script')
+
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('9bc664b0ccbe734af34c', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            console.log('Notification',JSON.stringify(data));
+        });
+    </script>
+
 @endsection

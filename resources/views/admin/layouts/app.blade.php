@@ -162,6 +162,26 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{route('customer')}}"
+                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Users
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('book-sessions')}}"
+                           class="nav-link {{ request()->IS('admin/booked-session') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Booked Sessions
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{route('settings')}}"
                            class="nav-link {{ request()->IS('admin/settings') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cog"></i>
@@ -171,15 +191,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{route('customer')}}"
-                           class="nav-link {{ request()->IS('admin/customer') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Users
-                            </p>
-                        </a>
-                    </li>
+
 
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{route('business_listing')}}"--}}

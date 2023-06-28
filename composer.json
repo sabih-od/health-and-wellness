@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "nesbot/carbon": "^2.67",
+        "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-medialibrary": "^10.9",
         "stripe/stripe-php": "^10.15",
         "yajra/laravel-datatables": "^9.0"
