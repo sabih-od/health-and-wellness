@@ -31,6 +31,12 @@ class FrontController extends Controller
         return view('front.service-detail', compact('session'));
     }
 
+    public function frontServiceDetail(Request $request, $id)
+    {
+        $service = Service::where('id' , $id)->first();
+        return view('front.front-service-detail', compact('service'));
+    }
+
     public function frontFaqs()
     {
         $faqs = Faqs::all();

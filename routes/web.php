@@ -181,6 +181,8 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::get('booking/get-sessions-timing-by-session/', [SessionController::class,'getSessionsTimingBySession'])->name('getSessionsTimingBySession');
 
 
+
+
     Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
 
     Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
@@ -188,6 +190,8 @@ Route::prefix('/user')->middleware('user')->group(function () {
 
     Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact-via-mail')->withoutMiddleware('user');
 
+
+    Route::get('send/notification', [UserController::class,'sendNotification'])->name('sendNotification');
 
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');
@@ -282,6 +286,8 @@ Route::get('/stream', [App\Http\Controllers\HomeController::class, 'sessionStrea
 Route::get('/', [FrontController::class, 'home'])->name('front.home');
 Route::get('/services', [FrontController::class, 'services'])->name('front.services');
 Route::get('/user/service-detail/{id}', [FrontController::class, 'serviceDetail'])->name('front.serviceDetail');
+
+Route::get('/user/service/detail/{id}', [FrontController::class, 'frontServiceDetail'])->name('serviceDetail');
 
 Route::get('/signup', function () {
     return view('front.signup');

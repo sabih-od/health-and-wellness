@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="{{asset('dashboard/css/evo-calendar.midnight-blue.css')}}"/>
     <link rel="stylesheet" href="{{asset('dashboard/css/custom.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('dashboard/css/responsive.css')}}"/>
-
+    <link href="https://cdn.jsdelivr.net/npm/laravel-echo@^1.11.0/dist/echo.min.js"/>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     {{--    Evo Calender Css--}}
 
     <title>@yield('title')
@@ -25,14 +27,14 @@
 
     <!-- Datatables -->
     <link href="{{ asset('admin/datatables/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-{{--    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">--}}
-{{--    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>--}}
+    {{--    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">--}}
+    {{--    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>--}}
 
 
     {{--    <link rel="stylesheet" href="path/to/evo-calendar.css">--}}
 
 
-{{--    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>--}}
+    {{--    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>--}}
 
     <style>
         table.dataTable thead th, table.dataTable thead td {
@@ -73,6 +75,10 @@
                                     <button class="btn btnsearch"><i class="far fa-search"></i></button>
                                 </div>
                             </li>
+{{--                            <li>--}}
+{{--                                <a href="{{ route('sendNotification') }}" action="GET" type="submit"--}}
+{{--                                   class="btn btn-danger">Send Noti</a>--}}
+{{--                            </li>--}}
                             <li>
                                 <div class="heloMain">
                                     {{--                                            <div class="user">--}}
@@ -81,8 +87,9 @@
                                     <div class="heloContent">
                                         <div class="dropdown">
                                             <a href="{{ route('user.notifications') }}" class="btn usernotify">
-                                                <i class="fas fa-bell"></i>
-                                                <span class="notifycount">3</span>
+{{--                                                <i class="fas fa-bell"></i>--}}
+                                                <i class="bi bi-bell"></i>
+                                                <span class="notifycount">{{ \App\Models\Notifciation::all()->count() ?? 0}}</span>
                                             </a>
                                         </div>
                                     </div>
@@ -99,7 +106,7 @@
                                                         $name = $user->first_name . ' ' . $user->last_name;
                                                     @endphp
                                                     <h6 class="mb-0">{{$name}}</h6>
-{{--                                                    <span class="">Health</span>--}}
+                                                    {{--                                                    <span class="">Health</span>--}}
                                                 </div>
                                             </button>
                                             <div class="dropdown-menu">
@@ -311,6 +318,8 @@
 
 {{-- PUSHER script --}}
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@^1.11.0/dist/echo.min.js"></script>
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{asset('dashboard/js/all.min.js')}}"></script>
@@ -335,10 +344,57 @@
 
 @yield('script')
 
-<script>
-    $(document).ready(function () {
-        // alert('ready');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/4.3.1/pusher.min.js"
+        integrity="sha512-U+B7jlq2PVRuVjN5g2qaYYfd6SXsRvhE0WRD3gId2sA935gZmVpmIJJLv4vawmUfXYSeuNf1oI07ZdPSeCn6aw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="module">
+    console.log("Pusher Config")
+    import Echo from 'https://cdn.jsdelivr.net/npm/laravel-echo@^1.11/dist/echo.min.js'
+
+    window.Pusher = Pusher;
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: '9bc664b0ccbe734af34c',
+        cluster: 'ap2',
+        encrypted: true,
     });
+</script>
+
+
+<script>
+
+    setTimeout(function () {
+
+        var auth_id = "{{Auth::id()}}";
+
+        console.log("WOrking" , auth_id);
+        window.Echo.private('notifications.' + auth_id)
+            .listen('notification-event', (e) => {
+                // Handle the received notification data
+                console.log("DONE", e)
+            });
+
+    }, 5000);
+
+
+
+    {{--// Assign the configuration values to JavaScript variables--}}
+    {{--var pusherKey = "{{ config('broadcasting.connections.pusher.key') }}";--}}
+    {{--var pusherCluster = "{{ config('broadcasting.connections.pusher.options.cluster') }}";--}}
+
+    {{--// Enable pusher logging - don't include this in production--}}
+    {{--Pusher.logToConsole = true;--}}
+
+    {{--var pusher = new Pusher(pusherKey, {--}}
+    {{--    cluster: pusherCluster--}}
+    {{--});--}}
+
+    {{--var channel = pusher.subscribe('private-user.' + auth_id);--}}
+    {{--channel.bind('App\\Events\\NewNotification', function (data) {--}}
+    {{--    console.log('Notificationss');--}}
+    {{--    alert(JSON.stringify(data));--}}
+    {{--});--}}
+
 </script>
 
 

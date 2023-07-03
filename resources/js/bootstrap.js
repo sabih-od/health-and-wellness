@@ -18,6 +18,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 // import Echo from 'laravel-echo';
+// window.Pusher = require('pusher-js');
+//
+// var pusherKey = "{{ config('broadcasting.connections.pusher.key') }}";
+// var pusherCluster = "{{ config('broadcasting.connections.pusher.options.cluster') }}";
+//
+// console.log("opop" , pusherKey , pusherCluster);
+//
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: pusherKey,
+//     cluster: pusherCluster,
+//     encrypted: true,
+//     // Add additional configuration options as needed
+// });
+
+
+// import Echo from 'laravel-echo';
 
 // import Pusher from 'pusher-js';
 // window.Pusher = Pusher;

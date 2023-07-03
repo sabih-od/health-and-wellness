@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notifciation;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -90,6 +91,23 @@ class ForgotPasswordController extends Controller
             ->update(['password' => Hash::make($request->password)]);
 
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
+
+        $authUser = Auth::user();
+        event(new \App\Events\NotificationEvent($authUser->id, "Your password has been changed!"));
+
+        $noti = new Notifciation([
+            'notify_id' => $authUser->id,
+            'notification' => "Your password has been changed!",
+        ]);
+        $noti->save();
+
+        $to = $authUser->email;
+        $from = "noreplay@health-and-wellness.com";
+        $subject = "Mail Submitted";
+        $message = "Your password has been changed!";
+
+        $this->customMail($from, $to, $subject, $message);
+
 
         return redirect()->route('front.login')->with('success', 'Your password has been changed!');
     }

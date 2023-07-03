@@ -57,7 +57,7 @@
                         <ul class="menu">
                             @foreach($services as $service)
                                 <li>
-                                    <a href="{{route('front.serviceDetail', $service->id)}}">{{$service->name}}</a>
+                                    <a href="{{route('serviceDetail', $service->id)}}">{{$service->name}}</a>
                                 </li>
                             @endforeach
                         </ul>

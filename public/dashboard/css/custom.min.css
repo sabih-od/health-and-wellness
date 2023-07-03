@@ -357,7 +357,7 @@ a.themeBtn.themeBtn1 {
 }
 
 .usernotify i {
-    font-size: 32px;
+    font-size: 28px;
     color: var(--theme-color);
 }
 
@@ -372,7 +372,7 @@ a.themeBtn.themeBtn1 {
     color: var(--white);
     border-radius: 50%;
     position: absolute;
-    top: -4px;
+    top: -1px;
     right: 3px;
 }
 

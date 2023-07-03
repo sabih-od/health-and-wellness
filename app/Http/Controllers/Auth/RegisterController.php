@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notifciation;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Traits\PHPCustomMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    use PHPCustomMail;
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -90,10 +94,29 @@ class RegisterController extends Controller
             return $response;
         }
 
+
+
         if(Auth::user()->role_id == 1) {
             return redirect()->route('dashboard');
         }
         if(Auth::user()->role_id == 2) {
+
+            $authUser = Auth::user();
+            event(new \App\Events\NotificationEvent($authUser->id, "Registration Successful"));
+
+            $noti = new Notifciation([
+                'notify_id' => $authUser->id,
+                'notification' => "Registration Successful",
+            ]);
+            $noti->save();
+
+            $to = $authUser->email;
+            $from = "noreplay@health-and-wellness.com";
+            $subject = "Mail Submitted";
+            $message = "Registration Successful";
+
+            $this->customMail($from, $to, $subject, $message);
+
             return redirect()->route('user.dashboard');
         }
 

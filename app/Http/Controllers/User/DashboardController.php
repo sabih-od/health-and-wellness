@@ -5,12 +5,16 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BookSession;
 use App\Models\Sessions;
+use App\Traits\PHPCustomMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+
+    use PHPCustomMail;
+
     public function index(Request $request)
     {
         $authUser = Auth::id();
