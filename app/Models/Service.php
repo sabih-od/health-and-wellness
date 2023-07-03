@@ -21,4 +21,11 @@ class Service extends Model implements HasMedia
     {
         return $this->getMedia('service_images')->first() ? $this->getMedia('service_images')->first()->getUrl() : asset('images/service.webp');
     }
+
+    public function get_service_picture()
+    {
+        $image_check =  $this->getMedia('service_images')->first();
+        return $image_check ? $image_check->getUrl() : asset("images/service.webp");
+    }
+
 }

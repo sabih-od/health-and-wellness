@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BookSession;
 use App\Models\Cities;
+use App\Models\Notifciation;
 use App\Models\Service;
 use App\Models\Sessions;
 use App\Models\SessionTiming;
@@ -106,10 +107,23 @@ class UserController extends Controller
         return view('dashboard.booking', compact('data'));
     }
 
+    public function sendNotification()
+    {
+//        $currentTimestamp = gmdate('Y-m-d\TH:i:s\Z');
+        $authUser = Auth::id();
+        event(new \App\Events\NotificationEvent($authUser, "NOTIFICATION SEND"));
+
+        $noti = new Notifciation([
+            'notify_id' => $authUser,
+            'notification' => "NOTIFICATION SEND",
+        ]);
+        $noti->save();
+    }
+
     public function notifications()
     {
-        event(new NewNotification('Entered'));
-        return view('dashboard.notification');
+        $notifications = Notifciation::where('notify_id', Auth::id())->get();
+        return view('dashboard.notification', compact('notifications'));
     }
 
 
@@ -129,11 +143,10 @@ class UserController extends Controller
         ]);
 
 
-        $check_user_have_session = BookSession::where('user_id' , Auth::id())->where('status' , 'pending')->first();
+        $check_user_have_session = BookSession::where('user_id', Auth::id())->where('status', 'pending')->first();
 
-        if($check_user_have_session)
-        {
-            return redirect()->back()->with('error' , "Already Booked Session");
+        if ($check_user_have_session) {
+            return redirect()->back()->with('error', "Already Booked Session");
         }
 
 //        $session_checks = Session::where('session_date', )
@@ -195,7 +208,7 @@ class UserController extends Controller
 
         $session = Sessions::where('id', $getBookSession->session_id)->first();
 
-        $sessionTiming = SessionTiming::where('id' , $getBookSession->session_timing_id)->first();
+        $sessionTiming = SessionTiming::where('id', $getBookSession->session_timing_id)->first();
 
         if ($status == "success") {
 
@@ -206,14 +219,22 @@ class UserController extends Controller
             $sessionTiming->is_booked = 1;
             $sessionTiming->save();
 
-//            $transaction = new Transactions([
-//                'user_id' => Auth::id(),
-//                'session_id' => $session->id,
-//                'txn_id' => $session->id,
-//                'amount' => $session->fees,
-//                'method' => "stripe"
-//            ]);
-//            $transaction->save();
+            $authUser = Auth::user();
+            event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
+
+            $noti = new Notifciation([
+                'notify_id' => $authUser->id,
+                'notification' => "Session book successfully",
+            ]);
+            $noti->save();
+
+            $to = $authUser->email;
+            $from = "noreplay@health-and-wellness.com";
+            $subject = "Mail Submitted";
+            $message = "Session book successfully";
+
+            $this->customMail($from, $to, $subject, $message);
+
 
             return redirect()->route('user.sessions')->with('success', 'Session Booked Successfully');
         }
@@ -247,6 +268,6 @@ class UserController extends Controller
         $this->customMail($from, $to, $subject, $message);
 
 
-        return redirect()->back()->with('success' , "Mail Sanded Successfully");
+        return redirect()->back()->with('success', "Mail Sanded Successfully");
     }
 }
