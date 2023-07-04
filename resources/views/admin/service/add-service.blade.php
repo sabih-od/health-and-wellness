@@ -30,7 +30,9 @@
                             <div class="card-header">
                                 <h3 class="card-title">Service</h3>
                             </div>
-                            <form class="service-form" method="post" action="{{!empty($content->id)?url('admin/service-edit/'.$content->id):route('admin.add-service')}}" enctype="multipart/form-data">
+                            <form class="service-form" method="post"
+                                  action="{{!empty($content->id)?url('admin/service-edit/'.$content->id):route('admin.add-service')}}"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     @if(Session::has('msg'))
@@ -38,38 +40,59 @@
                                     @endif
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{$content->name?? old('name')}}" placeholder="Service" required>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                               name="name" id="name" value="{{$content->name?? old('name')}}"
+                                               placeholder="Service" required>
                                         @error('name')
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">Image</label>
-                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" required>
-                                        @error('image')
+
+                                        <div class="form-group">
+                                            <label for="name">Service Image</label>
+
+                                            <div class="img-upload full-width-img">
+                                                <div id="image-preview" class="img-preview">
+                                                    <img id="preview-image" src="{{ $content->get_service_picture() ? $content->get_service_picture() :  asset('images/user1.webp') }}"
+                                                         width="150" alt="Image Preview">
+                                                </div>
+                                                <input type="file" name="image" class="img-upload" id="image-upload">
+                                            </div>
+
+
+                                            @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @enderror
-                                    </div>
+                                            @enderror
+                                        </div>
+
                                     <div class="form-group">
                                         <label for="name">Pricing Detail</label>
-                                        <input type="text" class="form-control @error('pricing_detail') is-invalid @enderror" name="pricing_detail" id="name" value="{{$content->pricing_detail?? old('pricing_detail')}}" placeholder="Service" required>
+                                        <input type="text"
+                                               class="form-control @error('pricing_detail') is-invalid @enderror"
+                                               name="pricing_detail" id="name"
+                                               value="{{$content->pricing_detail?? old('pricing_detail')}}"
+                                               placeholder="Service" required>
                                         @error('pricing_detail')
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Description</label>
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="" cols="30" rows="10" required>
-                                            {{$content->description?? old('description')}}
-                                        </textarea>
+                                        {{--                                        <textarea class=" form-control @error('description') is-invalid @enderror" name="description" id="" cols="30" rows="10" required>--}}
+                                        {{--                                            {{$content->description?? old('description')}}--}}
+                                        {{--                                        </textarea>--}}
+                                        <textarea id="editor" class="@error('description') is-invalid @enderror"
+                                                  name="description" required>  {{$content->description?? old('description')}}
+</textarea>
+
                                         @error('description')
-                                            <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -92,8 +115,38 @@
 @endsection
 
 @section('script')
+
     <script>
-        $(document).ready(function(){
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                var image = document.getElementById('preview-image');
+                image.src = reader.result;
+            };
+
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                // If there is no file selected, you can set a default image URL here
+                var defaultImageUrl = "{{asset('dashboard/images/user.png')}}";
+                var image = document.getElementById('preview-image');
+                image.src = defaultImageUrl;
+            }
+        }
+
+        var imageUpload = document.getElementById('image-upload');
+        imageUpload.addEventListener('change', previewImage);
+    </script>
+
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+    </script>
+
+    <script>
+        $(document).ready(function () {
 
         });
     </script>
