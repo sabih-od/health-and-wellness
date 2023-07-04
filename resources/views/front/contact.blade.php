@@ -77,26 +77,26 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter your name">
+                                        <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Enter your email">
+                                        <input type="text" name="email" class="form-control" placeholder="Enter your email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Subject</label>
-                                        <input type="text" name="subject" class="form-control" placeholder="Type the subject">
+                                        <input type="text" name="subject" class="form-control" placeholder="Type the subject" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Message</label>
                                         <textarea rows="6" name="message" class="form-control"
-                                                  placeholder="Type your message here"></textarea>
+                                                  placeholder="Type your message here" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

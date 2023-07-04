@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
+
     public function index()
     {
         try {
@@ -16,6 +19,21 @@ class ServiceController extends Controller
                     ->addIndexColumn()
                     ->addColumn('image', function($data) {
                         return $data->get_service_picture();
+                    })
+                    ->addColumn('description', function($data) {
+                        $htmlString = $data->description;
+
+                        // Create a new instance of the HtmlString class with the HTML string
+                        $html = new HtmlString($htmlString);
+
+                        // Extract the link and text
+                        $link = Str::of($html->toHtml())->between('<a href="', '">');
+                        $text = Str::of($html->toHtml())->between('">', '</a>');
+
+                        // Combine the link and text
+                        $formattedString = $text . ': ' . $link;
+
+                        return $formattedString;
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="edit" href="service-edit/' . $data->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
@@ -39,7 +57,7 @@ class ServiceController extends Controller
             $service = Service::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
-                'pricing_detail' => $request->input('pricing_detail'),
+                'pricing_detail' => $request->input('pricing_detail') ,
             ]);
 
             if($request->has('image')) {

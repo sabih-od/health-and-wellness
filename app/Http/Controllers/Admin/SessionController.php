@@ -56,9 +56,9 @@ class SessionController extends Controller
                         $joinCallButton = '';
                         if ($givenDateTime <= $currentDateTime && $givenDateSecondTime >= $currentDateTime) {
                             $joinCallButton = '<button title="Join Call" type="button" name="join_call" id="' . $data->id . '" class="joincall btn btn-success btn-sm">Join Call</button>&nbsp;';
-                            return $joinCallButton . '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                            return $joinCallButton . '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                         }
-                        return '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                        return '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
 
                     })->rawColumns(['action', 'status'])->make(true);
             }
@@ -167,21 +167,25 @@ class SessionController extends Controller
             $service->service_id = $request->input('service_id');
             $service->date = $request->input('session_date');
 
-            if (count($request->session_start_time_cloned) > 0) {
+          if(isset($request->session_start_time_cloned) && isset($request->session_end_time_cloned)){
 
-                for ($i = 0; $i < count($request->session_start_time_cloned); $i++) {
-                    $sessionTimings = SessionTiming::create([
-                        'session_id' => $service->id,
-                        'session_time' => $request->session_start_time_cloned[$i] . " - " . $request->session_end_time_cloned[$i],
-                        'is_booked' => 0,
-                    ]);
+              if (count($request->session_start_time_cloned) > 0) {
 
-                    $sessionTimings->save();
+                  for ($i = 0; $i < count($request->session_start_time_cloned); $i++) {
+                      $sessionTimings = SessionTiming::create([
+                          'session_id' => $service->id,
+                          'session_time' => $request->session_start_time_cloned[$i] . " - " . $request->session_end_time_cloned[$i],
+                          'is_booked' => 0,
+                      ]);
 
-                }
+                      $sessionTimings->save();
+
+                  }
 
 
-            }
+              }
+
+          }
 
 //            $service->session_time = $request->input('session_start_time') . " - " . $request->input('session_end_time');
 
@@ -217,7 +221,7 @@ class SessionController extends Controller
 
     final public function destroy(int $id)
     {
-        $content = Sessions::find($id);
+        $content = SessionTiming::find($id);
         $content->delete();
         echo 1;
     }

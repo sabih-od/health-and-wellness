@@ -27,6 +27,7 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{URL::asset('admin/plugins/toastr/toastr.min.css')}}">
 
+
     {{--    EVO CALENDER CSS--}}
     <link rel="stylesheet" href="{{asset('dashboard/css/evo-calendar.css')}}"/>
     <link rel="stylesheet" href="{{asset('dashboard/css/evo-calendar.midnight-blue.css')}}"/>

@@ -267,7 +267,6 @@ class UserController extends Controller
 
         $this->customMail($from, $to, $subject, $message);
 
-
-        return redirect()->back()->with('success', "Mail Sanded Successfully");
+        return redirect()->route('front.contact')->with('success', 'Query has been submitted');
     }
 }

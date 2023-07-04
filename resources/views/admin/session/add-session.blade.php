@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', (isset($content->id) ?  'Edit' : 'Add').' Service')
+@section('title', (isset($content->id) ?  'Edit' : 'Add').' Session')
 @section('section')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -216,7 +216,7 @@
 
                                         <div class="img-upload full-width-img">
                                             <div id="image-preview" class="img-preview">
-                                                <img id="preview-image" src="{{ asset('images/user1.webp') }}"
+                                                <img id="preview-image" src="{{ $content->get_session_picture() ? $content->get_session_picture() :  asset('images/user1.webp') }}"
                                                      width="150" alt="Image Preview">
                                             </div>
                                             <input type="file" name="image" class="img-upload" id="image-upload">
@@ -369,44 +369,50 @@
 
         // Get references to the button and the container div
         const duplicateEditButton = document.getElementById('duplicateEditButton');
-        const containerDiv1 = document.getElementById('originalDiv');
-        const label1 = document.querySelector('label[for="name"]');
 
-        // Function to duplicate the original div
-        function duplicateDiv() {
+        if(duplicateEditButton != null){
 
+            const containerDiv1 = document.getElementById('originalDiv');
+            const label1 = document.querySelector('label[for="name"]');
 
-            // Clone the original div
-            const originalDiv = document.getElementById('containerDiv');
-            const clonedDiv = originalDiv.cloneNode(true);
+            // Function to duplicate the original div
+            function duplicateDiv() {
 
 
-            clonedDiv.classList.remove(clonedDiv.classList[0]);
+                // Clone the original div
+                const originalDiv = document.getElementById('containerDiv');
+                const clonedDiv = originalDiv.cloneNode(true);
 
-            const clonedStartTimeInput = clonedDiv.querySelector('input[name="session_start_time[]"]');
-            const clonedEndTimeInput = clonedDiv.querySelector('input[name="session_end_time[]"]');
-            clonedStartTimeInput.value = '';
-            clonedEndTimeInput.value = '';
 
-            clonedStartTimeInput.setAttribute('name', 'session_start_time_cloned[]');
-            clonedEndTimeInput.setAttribute('name', 'session_end_time_cloned[]');
+                clonedDiv.classList.remove(clonedDiv.classList[0]);
 
-            // Add event listener to the remove button
-            // const removeButton = clonedDiv.querySelector('.removeButton');
-            // removeButton.addEventListener('click', removeDiv);
+                const clonedStartTimeInput = clonedDiv.querySelector('input[name="session_start_time[]"]');
+                const clonedEndTimeInput = clonedDiv.querySelector('input[name="session_end_time[]"]');
+                clonedStartTimeInput.value = '';
+                clonedEndTimeInput.value = '';
 
-            // Append the cloned div to the container
-            containerDiv1.appendChild(clonedDiv);
+                clonedStartTimeInput.setAttribute('name', 'session_start_time_cloned[]');
+                clonedEndTimeInput.setAttribute('name', 'session_end_time_cloned[]');
+
+                // Add event listener to the remove button
+                // const removeButton = clonedDiv.querySelector('.removeButton');
+                // removeButton.addEventListener('click', removeDiv);
+
+                // Append the cloned div to the container
+                containerDiv1.appendChild(clonedDiv);
+            }
+
+            // Function to remove the cloned div
+            // function removeDiv(event) {
+            //     const divToRemove = event.target.parentNode.parentNode.parentNode;
+            //     divToRemove.remove();
+            // }
+
+            // Add event listener to the button
+            duplicateEditButton.addEventListener('click', duplicateDiv);
+
         }
 
-        // Function to remove the cloned div
-        // function removeDiv(event) {
-        //     const divToRemove = event.target.parentNode.parentNode.parentNode;
-        //     divToRemove.remove();
-        // }
-
-        // Add event listener to the button
-        duplicateEditButton.addEventListener('click', duplicateDiv);
     </script>
 
     <script>
