@@ -163,6 +163,8 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/notifications', [UserController::class, 'notifications'])->name('user.notifications');
+    Route::get('/get-notifications', [UserController::class, 'authNotifications'])->name('authNotifications');
+    Route::get('/dismiss-notifications', [UserController::class, 'dismissNotifications'])->name('dismiss.notifications');
 
     Route::match(['get', 'post'], '/edit-profile', [UserController::class, 'editProfile'])->name('user.editProfile');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');

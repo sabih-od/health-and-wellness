@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notifciation;
+use App\Models\Notification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Traits\PHPCustomMail;
@@ -104,7 +104,7 @@ class RegisterController extends Controller
             $authUser = Auth::user();
             event(new \App\Events\NotificationEvent($authUser->id, "Registration Successful"));
 
-            $noti = new Notifciation([
+            $noti = new Notification([
                 'notify_id' => $authUser->id,
                 'notification' => "Registration Successful",
             ]);

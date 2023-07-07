@@ -89,7 +89,7 @@
                                             <a href="{{ route('user.notifications') }}" class="btn usernotify">
 {{--                                                <i class="fas fa-bell"></i>--}}
                                                 <i class="bi bi-bell"></i>
-                                                <span class="notifycount">{{ \App\Models\Notifciation::all()->count() ?? 0}}</span>
+                                                <span class="notifycount" id="notificationCount"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -360,6 +360,36 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        console.log("sssn");
+        // AJAX request
+        $.ajax({
+            url: 'get-notifications', // Replace with your API endpoint
+            type: 'GET', // or 'POST', 'PUT', etc. depending on your API
+
+            success: function(data) {
+                // Handle the API response
+                console.log("notifications" , data);
+
+                $('#notificationCount').text(data.data.length);
+
+                if (data.length === 0) {
+                    $('#notificationCount').hide();
+                } else {
+                    $('#notificationCount').show();
+                }
+
+                // You can perform any further actions with the response here
+            },
+
+            error: function(error) {
+                // Handle any errors that occurred during the AJAX request
+                console.error('Error:', error);
+            }
+        });
+    });
+</script>
 
 <script>
 
