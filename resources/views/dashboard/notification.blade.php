@@ -137,4 +137,30 @@
 
 @section('script')
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("In");
+            // AJAX request
+            $.ajax({
+                url: 'dismiss-notifications', // Replace with your API endpoint
+                type: 'GET', // or 'POST', 'PUT', etc. depending on your API
+
+                success: function(data) {
+                    // Handle the API response
+                    console.log(data);
+                    // You can perform any further actions with the response here
+                },
+
+                error: function(error) {
+                    // Handle any errors that occurred during the AJAX request
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+
+
+
 @endsection

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notifciation;
+use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -95,7 +95,7 @@ class ForgotPasswordController extends Controller
         $authUser = Auth::user();
         event(new \App\Events\NotificationEvent($authUser->id, "Your password has been changed!"));
 
-        $noti = new Notifciation([
+        $noti = new Notification([
             'notify_id' => $authUser->id,
             'notification' => "Your password has been changed!",
         ]);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notifciation;
+use App\Models\Notification;
 use App\Providers\RouteServiceProvider;
 use App\Traits\PHPCustomMail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -57,7 +57,7 @@ class LoginController extends Controller
 
                 event(new \App\Events\NotificationEvent($user->id, "Login successful"));
 
-                $noti = new Notifciation([
+                $noti = new Notification([
                     'notify_id' => $user->id,
                     'notification' => "Login successful",
                 ]);

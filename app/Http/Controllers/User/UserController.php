@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\BookSession;
 use App\Models\Cities;
-use App\Models\Notifciation;
+use App\Models\Notification;
 use App\Models\Service;
 use App\Models\Sessions;
 use App\Models\SessionTiming;
@@ -113,7 +113,7 @@ class UserController extends Controller
         $authUser = Auth::id();
         event(new \App\Events\NotificationEvent($authUser, "NOTIFICATION SEND"));
 
-        $noti = new Notifciation([
+        $noti = new Notification([
             'notify_id' => $authUser,
             'notification' => "NOTIFICATION SEND",
         ]);
@@ -122,8 +122,28 @@ class UserController extends Controller
 
     public function notifications()
     {
-        $notifications = Notifciation::where('notify_id', Auth::id())->get();
+        $notifications = Notification::where('notify_id', Auth::id())->get();
         return view('dashboard.notification', compact('notifications'));
+    }
+
+    public function authNotifications()
+    {
+        $notifications = Notification::where('notify_id', Auth::id())->where('is_read' , 0)->get();
+
+        if(count($notifications) == 0){
+
+            return response()->json([
+                "status" => 200,
+                "Message" =>"Notifications Not Found",
+                "data" => []
+            ]);
+        }
+
+        return response()->json([
+            "status" => 200,
+            "Message" =>"Notifications retrived",
+            "data" => $notifications
+        ]);
     }
 
 
@@ -222,7 +242,7 @@ class UserController extends Controller
             $authUser = Auth::user();
             event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
 
-            $noti = new Notifciation([
+            $noti = new Notification([
                 'notify_id' => $authUser->id,
                 'notification' => "Session book successfully",
             ]);
@@ -269,4 +289,18 @@ class UserController extends Controller
 
         return redirect()->route('front.contact')->with('success', 'Query has been submitted');
     }
+
+    public function dismissNotifications(Request $request)
+    {
+
+        $authUser = Auth::id();
+
+        $dismissAuthNoti = Notification::where('notify_id', $authUser)->update(['is_read' => 1]);
+
+        return response()->json([
+            "status" => 200,
+            "message" => "Notifications dismiss"
+        ]);
+    }
+
 }

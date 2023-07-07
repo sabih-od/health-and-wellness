@@ -3,7 +3,7 @@
 namespace App\Console;
 
 use App\Models\BookSession;
-use App\Models\Notifciation;
+use App\Models\Notification;
 use App\Models\Sessions;
 use App\Traits\PHPCustomMail;
 use Carbon\Carbon;
@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
                             $authUser = Auth::user();
                             event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
 
-                            $noti = new Notifciation([
+                            $noti = new Notification([
                                 'notify_id' => $authUser->id,
                                 'notification' => "Session book successfully",
                             ]);
