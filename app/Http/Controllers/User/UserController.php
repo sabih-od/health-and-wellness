@@ -77,6 +77,12 @@ class UserController extends Controller
         }
     }
 
+    public function getUserProfilePicture (Request $request)
+    {
+        $user = User::find($request->user_id);
+        return $user->get_profile_picture();
+    }
+
     public function profile(Request $request)
     {
         return view('dashboard.profile');
