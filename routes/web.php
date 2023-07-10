@@ -195,6 +195,7 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::get('send/notification', [UserController::class,'sendNotification'])->name('sendNotification');
 
     route::get('/stream/{session_id}', [SC::class, 'stream'])->name('user.stream');
+    route::get('/raise-hand/{batch_id}', [SC::class, 'raiseHand'])->name('user.raise_hand');
 
 
 //    //category

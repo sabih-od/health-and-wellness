@@ -69,7 +69,7 @@
 
 @section('script')
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/peer-app.js')}}"></script>
 
     {{--additional js--}}
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -313,26 +313,26 @@
                 })
 
             //on raise hand click
-            {{--$('#btn_raise_hand').on('click', function() {--}}
-            {{--    var url = "{{route('customer.raise_hand', 'temp')}}";--}}
-            {{--    let _this = $(this);--}}
-            {{--    _this.prop('disabled', true);--}}
-            {{--    url = url.replace('temp', session_id);--}}
-            {{--    $.ajax({--}}
-            {{--        url: url,--}}
-            {{--        type: 'GET',--}}
-            {{--        success: function (res) {--}}
-            {{--            console.log(res);--}}
-            {{--            setTimeout(function() {--}}
-            {{--                _this.prop('disabled', true);--}}
-            {{--            }, 1000 * 60);--}}
-            {{--        },--}}
-            {{--        error: function () {--}}
+            $('#btn_raise_hand').on('click', function() {
+                var url = "{{route('raise_hand', 'temp')}}";
+                let _this = $(this);
+                _this.prop('disabled', true);
+                url = url.replace('temp', session_id);
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (res) {
+                        console.log(res);
+                        setTimeout(function() {
+                            _this.prop('disabled', true);
+                        }, 1000 * 60);
+                    },
+                    error: function () {
 
-            {{--        }--}}
-            {{--    })--}}
+                    }
+                })
 
-            {{--});--}}
+            });
 
         });
     </script>
