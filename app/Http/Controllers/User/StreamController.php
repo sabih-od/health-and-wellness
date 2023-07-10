@@ -22,9 +22,9 @@ class StreamController extends Controller
         return view('dashboard.stream.peer', compact('session'));
     }
 
-    public function raiseHand(Request $request, $batch_id)
+    public function raiseHand(Request $request, $session_id)
     {
-        return event(new ViewerRaisedHand(Auth::user(), $batch_id));
+        return event(new ViewerRaisedHand(Auth::user(), $session_id));
     }
 
     public function getUserProfilePicture (Request $request)

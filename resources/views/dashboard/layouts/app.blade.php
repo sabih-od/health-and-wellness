@@ -395,7 +395,7 @@
 
     setTimeout(function () {
 
-        var auth_id = "{{Auth::id()}}";
+        var auth_id = "{{\Illuminate\Support\Facades\Auth::id()}}";
 
         console.log("WOrking" , auth_id);
         window.Echo.private('notifications.' + auth_id)
