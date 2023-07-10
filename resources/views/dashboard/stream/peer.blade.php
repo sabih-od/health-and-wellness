@@ -314,7 +314,7 @@
 
             //on raise hand click
             $('#btn_raise_hand').on('click', function() {
-                var url = "{{route('raise_hand', 'temp')}}";
+                var url = "{{route('user.raise_hand', 'temp')}}";
                 let _this = $(this);
                 _this.prop('disabled', true);
                 url = url.replace('temp', session_id);
