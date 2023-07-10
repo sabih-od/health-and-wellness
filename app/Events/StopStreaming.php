@@ -20,11 +20,11 @@ class StopStreaming implements ShouldBroadcast
      * @return void
      */
 
-    public $batch_id;
+    public $session_id;
 
-    public function __construct($batch_id)
+    public function __construct($session_id)
     {
-        $this->batch_id = $batch_id;
+        $this->session_id = $session_id;
     }
 
     /**
@@ -34,6 +34,6 @@ class StopStreaming implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('streaming-channel.' . $this->batch_id);
+        return new PresenceChannel('streaming-channel.' . $this->session_id);
     }
 }
