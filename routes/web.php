@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\StreamController;
+use App\Http\Controllers\User\StreamController as SC;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,8 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::delete('booked-session/destroy/{id}', 'SessionController@bookSessionDestroy');
     Route::get( '/view-booked-sessions/{id}', 'SessionController@viewBookedSession')->name('viewBookedSession');
 
+    route::get('/admin-stream/{session_id}', [StreamController::class, 'stream'])->name('admin.stream');
+    route::post('/stream/stop/{session}', [StreamController::class, 'stop'])->name('admin.stopStream');
 
 
 
@@ -169,6 +173,8 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::match(['get', 'post'], '/edit-profile', [UserController::class, 'editProfile'])->name('user.editProfile');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
+    Route::get('/user-profile', [UserController::class, 'getUserProfilePicture'])->name('getUserProfilePicture');
+
     Route::get('/edit/password', [UserController::class, 'editPassword'])->name('user.editPassword');
     Route::post('/edit-password', [ForgotPasswordController::class, 'editUserPassword'])->name('userEditPassword');
 
@@ -181,19 +187,15 @@ Route::prefix('/user')->middleware('user')->group(function () {
 
     Route::get('booking/get-sessions-by-service/', [SessionController::class,'getSessionsByService'])->name('getSessionsByService');
     Route::get('booking/get-sessions-timing-by-session/', [SessionController::class,'getSessionsTimingBySession'])->name('getSessionsTimingBySession');
-
-
-
-
     Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
 
     Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
 
-
     Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact-via-mail')->withoutMiddleware('user');
-
-
     Route::get('send/notification', [UserController::class,'sendNotification'])->name('sendNotification');
+
+    route::get('/stream/{session_id}', [SC::class, 'stream'])->name('user.stream');
+
 
 //    //category
 //    Route::get('category', 'CategoryController@index')->name('category');
