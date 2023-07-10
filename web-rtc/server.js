@@ -4,8 +4,8 @@
 // for ssl
 const fs = require('fs');
 var path = require('path');
-const privateKey  = fs.readFileSync(path.join(__dirname, 'ssl/key.txt'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, 'ssl/crt.txt'), 'utf8');
+const privateKey  = fs.readFileSync(path.join(__dirname, 'key.txt'), 'utf8');
+const certificate = fs.readFileSync(path.join(__dirname, 'cert.txt'), 'utf8');
 // const privateKey  = fs.readFileSync('f:/laragon/etc/ssl/laragon.key', 'utf8');
 // const certificate = fs.readFileSync('f:/laragon/etc/ssl/laragon.crt', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
