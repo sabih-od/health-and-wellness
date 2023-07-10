@@ -4,7 +4,7 @@
 @section('description', '')
 @section('keywords', '')
 
-@section('content')
+@section('page_css')
 
     {{--additional css--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,13 +19,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}" />
-{{--@endsection--}}
+@endsection
 
 
-{{--@section('content')--}}
+@section('content')
 
     <style>
-        header, footer {
+        header, footer , .sideNAvigation {
             display: none;
         }
     </style>

@@ -16,12 +16,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
-{{--@endsection--}}
-{{--@section('section')--}}
+@endsection
+@section('section')
 
 
     <style>
-        header, footer {
+        header, footer , .main-sidebar {
             display: none;
         }
     </style>
