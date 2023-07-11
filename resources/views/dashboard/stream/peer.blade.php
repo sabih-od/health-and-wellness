@@ -25,7 +25,7 @@
 @section('content')
 
     <style>
-        header, footer , sideNAvigationUpper {
+        header, footer , sideNAvigation {
             display: none;
         }
     </style>
