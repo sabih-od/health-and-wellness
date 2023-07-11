@@ -134,7 +134,7 @@
 <section class="dashboard">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
-            <div class="col-lg-2 col-md-3">
+            <div class="col-lg-2 col-md-3 sideNAvigationUpper">
                 <div class="sideNAvigation">
                     <nav class="navbar navbar-expand-lg p-0">
 

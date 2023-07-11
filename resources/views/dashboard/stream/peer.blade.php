@@ -25,7 +25,7 @@
 @section('content')
 
     <style>
-        header, footer {
+        header, footer , sideNAvigationUpper {
             display: none;
         }
     </style>
@@ -291,6 +291,7 @@
                     broadcaster_stream = stream;
                     peerInit(auth_id).then((newPeer) => {
                         console.log("auth_id" , auth_id)
+                        console.log("newPeer" , newPeer)
                         peer = newPeer;
                         peer.on("call", (call) => {
                             console.log("onCall", call.peer)
