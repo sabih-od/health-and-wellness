@@ -118,6 +118,8 @@ const customerInitPresenceChannel = ({echo, channel_id}) => {
 }
 
 const callingToViewer = (user_id) => {
+    console.log("in callingToViewer script to start call" , user_id)
+
     if (peer && broadcaster_stream) {
         peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
         let call = peer_calls['peer-course-user-' + user_id]

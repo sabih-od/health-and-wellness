@@ -177,6 +177,7 @@
         }
 
         const callingToViewer = (user_id) => {
+            console.log("in callingToViewer blade to start call" , user_id)
             if (peer && broadcaster_stream) {
                 peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
                 let call = peer_calls['peer-course-user-' + user_id]
