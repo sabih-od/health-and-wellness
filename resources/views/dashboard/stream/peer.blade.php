@@ -173,10 +173,12 @@
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             if (!echo || !channel_id) return
 
-            console.log(`streaming-channel.${channel_id}`)
+            console.log(`streaming-channel2.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
+
+            console.log("channel created by customerInitPresenceChannel" , channel)
 
 
             return channel
