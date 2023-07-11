@@ -25,7 +25,7 @@
 @section('content')
 
     <style>
-        header, footer , .sideNAvigation {
+        header, footer {
             display: none;
         }
     </style>
@@ -69,12 +69,12 @@
 
 @section('script')
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-    <script src="{{asset('js/peer-app.js')}}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
 
     {{--additional js--}}
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{--    <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
+    {{--    <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
         let peer_calls = {};
@@ -102,7 +102,7 @@
                 });
                 //when peer is opened
                 peer.on('open', function (id) {
-                    console.log("test id", id)
+                    console.log("test id in blade", id)
                     is_peer_open = true;
                     resolve(peer);
                     // alert('Peer connected. My peer ID is: ' + id);
@@ -111,7 +111,7 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-            console.log("In broadcasterInitPresenceChannel" , echo , auth_id , channel_id)
+            console.log("in brodas" , echo, auth_id, channel_id)
             if (!echo || !auth_id || !channel_id) return
 
 
@@ -119,7 +119,6 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            console.log("channel created" , channel)
             channel.here((users) => {
                 console.log("all users", users, is_peer_open)
                 if (auth_id) {
@@ -174,12 +173,10 @@
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             if (!echo || !channel_id) return
 
-            console.log(`streaming-channel2.${channel_id}`)
+            console.log(`streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-
-            console.log("channel created by customerInitPresenceChannel" , channel)
 
 
             return channel
@@ -246,7 +243,6 @@
 
         const showMyVideo = (stream) => {
             const broadcaster = document.getElementById('broadcaster')
-            console.log("In showVideo fun" , broadcaster)
             if (broadcaster) {
                 broadcaster.srcObject = stream
                 broadcaster.muted = true
@@ -258,9 +254,8 @@
         }
 
         const showBroadcasterVideo = (stream) => {
+            console.log("in showBroadcasterVideo blade")
             const broadcaster = document.getElementById('broadcaster')
-            console.log("In broadcaste fun" , broadcaster)
-
             if (broadcaster) {
                 broadcaster.srcObject = stream
                 broadcaster.addEventListener("loadedmetadata", () => {
@@ -273,7 +268,7 @@
         const getUserProfilePicture = (user_id) => {
             return $.ajax({
                 type:'POST',
-                url:'{{route("getUserProfilePicture")}}',
+                url:'{{route("customer.getUserProfilePicture")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     user_id: user_id
@@ -285,9 +280,7 @@
         }
     </script>
     <script>
-        {{--let auth_id = `{{ \Illuminate\Support\Facades\Auth::id() }}`;--}}
-        var auth_id = "{{\Illuminate\Support\Facades\Auth::id()}}";
-
+        let auth_id = `{{ \Illuminate\Support\Facades\Auth::id() }}`;
         let session_id = `{{ $session->id }}`;
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
@@ -297,6 +290,7 @@
                 .then(stream => {
                     broadcaster_stream = stream;
                     peerInit(auth_id).then((newPeer) => {
+                        console.log("auth_id" , auth_id)
                         peer = newPeer;
                         peer.on("call", (call) => {
                             console.log("onCall", call.peer)
@@ -323,7 +317,7 @@
 
             //on raise hand click
             $('#btn_raise_hand').on('click', function() {
-                var url = "{{route('user.raise_hand', 'temp')}}";
+                var url = "{{route('customer.raise_hand', 'temp')}}";
                 let _this = $(this);
                 _this.prop('disabled', true);
                 url = url.replace('temp', session_id);
