@@ -189,6 +189,7 @@ const showMyVideo = (stream) => {
 }
 
 const showBroadcasterVideo = (stream) => {
+    console.log("In script showBroadcasterVideo")
     const broadcaster = document.getElementById('broadcaster')
     if (broadcaster) {
         broadcaster.srcObject = stream
