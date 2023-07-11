@@ -268,7 +268,7 @@
         const getUserProfilePicture = (user_id) => {
             return $.ajax({
                 type:'POST',
-                url:'{{route("customer.getUserProfilePicture")}}',
+                url:'{{route("getUserProfilePicture")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     user_id: user_id
