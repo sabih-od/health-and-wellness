@@ -111,6 +111,7 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+            console.log("In broadcasterInitPresenceChannel" , echo , auth_id , channel_id)
             if (!echo || !auth_id || !channel_id) return
 
 
