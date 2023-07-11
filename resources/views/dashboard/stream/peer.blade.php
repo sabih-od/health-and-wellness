@@ -118,6 +118,7 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
+            console.log("channel created" , channel)
             channel.here((users) => {
                 console.log("all users", users, is_peer_open)
                 if (auth_id) {
