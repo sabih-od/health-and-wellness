@@ -240,7 +240,7 @@
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo admin blade to start call" , user_id)
+            console.log("in showMyVideo admin blade to start call" , stream)
 
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
@@ -254,7 +254,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo admin blade to start call" , user_id)
+            console.log("in showBroadcasterVideo admin blade to start call" , stream)
 
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {

@@ -184,7 +184,7 @@
         }
 
         const callingToViewer = (user_id) => {
-            console.log("in callingToViewer user" , echo , channel_id)
+            console.log("in callingToViewer user" , user_id)
 
             if (peer && broadcaster_stream) {
                 peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
@@ -245,7 +245,7 @@
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo user" , echo , channel_id)
+            console.log("in showMyVideo user" , stream)
 
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
@@ -259,7 +259,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo user")
+            console.log("in showBroadcasterVideo user" , stream)
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
