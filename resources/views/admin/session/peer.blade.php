@@ -105,7 +105,7 @@
             if (!echo || !auth_id || !channel_id) return
 
 
-            console.log(`streaming-channel.${channel_id}`)
+            console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
@@ -296,7 +296,7 @@
                     peerInit(auth_id).then((newPeer) => {
                         console.log("newPeer in admin" , newPeer)
                         peer = newPeer;
-
+                        console.log("Echo" , window.Echo);
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
                     });
 
