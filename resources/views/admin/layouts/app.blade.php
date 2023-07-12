@@ -354,7 +354,13 @@
 <!-- ./wrapper -->
 
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+{{--@vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
+
+
+
+<script src="{{asset('../resources/js/app.js')}}"></script>
+
+<script src="{{asset('../resources/sass/app.scss')}}"></script>
 
 
 <!-- jQuery -->
