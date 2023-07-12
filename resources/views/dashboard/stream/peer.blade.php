@@ -299,6 +299,7 @@
                         console.log("auth_id" , auth_id)
                         console.log("newPeer" , newPeer)
                         peer = newPeer;
+                        console.log("is stream" , stream);
                         peer.on("call", (call) => {
                             console.log("onCall", call.peer)
                             call.answer(stream);
