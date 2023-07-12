@@ -104,6 +104,7 @@
 
             if (!echo || !auth_id || !channel_id) return
 
+            console.log("Pass Condition");
 
             console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
