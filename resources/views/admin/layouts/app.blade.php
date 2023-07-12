@@ -353,6 +353,9 @@
 </div>
 <!-- ./wrapper -->
 
+<script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 
 <!-- jQuery -->
 <script src="{{URL::asset('admin/plugins/jquery/jquery.min.js')}}"></script>

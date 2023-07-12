@@ -7,7 +7,11 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+import Echo from 'laravel-echo';
+import Pusher from "pusher-js";
+
 window.axios = axios;
+window.Pusher = Pusher
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -17,14 +21,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo';
-window.Pusher = require('pusher-js');
-//
+
 var pusherKey = "{{ config('broadcasting.connections.pusher.key') }}";
 var pusherCluster = "{{ config('broadcasting.connections.pusher.options.cluster') }}";
-//
+
 // console.log("opop" , pusherKey , pusherCluster);
-//
+
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: pusherKey,
