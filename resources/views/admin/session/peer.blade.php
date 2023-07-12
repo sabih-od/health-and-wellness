@@ -91,7 +91,7 @@
                 });
                 //when peer is opened
                 peer.on('open', function (id) {
-                    console.log("test id", id)
+                    console.log("test id admin", id)
                     is_peer_open = true;
                     resolve(peer);
                     // alert('Peer connected. My peer ID is: ' + id);
@@ -100,6 +100,8 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+            console.log("in blade admin broadcasterInitPresenceChannel", echo, auth_id, channel_id)
+
             if (!echo || !auth_id || !channel_id) return
 
 
@@ -237,6 +239,8 @@
         }
 
         const showMyVideo = (stream) => {
+            console.log("in showMyVideo admin blade to start call" , user_id)
+
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
@@ -249,6 +253,8 @@
         }
 
         const showBroadcasterVideo = (stream) => {
+            console.log("in showBroadcasterVideo admin blade to start call" , user_id)
+
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
@@ -287,6 +293,7 @@
                     broadcaster_stream_original = stream;
                     showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
+                        console.log("newPeer in admin" , newPeer)
                         peer = newPeer;
 
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});

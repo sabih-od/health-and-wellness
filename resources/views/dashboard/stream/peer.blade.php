@@ -111,7 +111,7 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-            console.log("in brodas" , echo, auth_id, channel_id)
+            console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
             if (!echo || !auth_id || !channel_id) return
 
 
@@ -171,6 +171,7 @@
         }
 
         const customerInitPresenceChannel = ({echo, channel_id}) => {
+            console.log("in customerInitPresenceChannel user" , echo , channel_id)
             if (!echo || !channel_id) return
 
             console.log(`streaming-channel.${channel_id}`)
@@ -183,6 +184,8 @@
         }
 
         const callingToViewer = (user_id) => {
+            console.log("in callingToViewer user" , echo , channel_id)
+
             if (peer && broadcaster_stream) {
                 peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
                 let call = peer_calls['peer-course-user-' + user_id]
@@ -242,6 +245,8 @@
         }
 
         const showMyVideo = (stream) => {
+            console.log("in showMyVideo user" , echo , channel_id)
+
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
@@ -254,7 +259,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo blade")
+            console.log("in showBroadcasterVideo user")
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream

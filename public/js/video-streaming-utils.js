@@ -24,7 +24,7 @@ const peerInit = (auth_id) => {
         });
         //when peer is opened
         peer.on('open', function (id) {
-            console.log("test id", id)
+            console.log("test id script", id)
             is_peer_open = true;
             resolve(peer);
             // alert('Peer connected. My peer ID is: ' + id);
@@ -33,6 +33,7 @@ const peerInit = (auth_id) => {
 }
 
 const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+    console.log("in script broadcasterInitPresenceChannel", echo, auth_id, channel_id)
     if (!echo || !auth_id || !channel_id) return
 
 
@@ -179,6 +180,8 @@ const userMediaPermission = () => {
 }
 
 const showMyVideo = (stream) => {
+    console.log("in showMyVideo blade to start call" , user_id)
+
     const broadcaster = document.getElementById('broadcaster')
     if (broadcaster) {
         broadcaster.srcObject = stream
