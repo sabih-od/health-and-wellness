@@ -110,9 +110,9 @@
 
             console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
-                console.log("IN channle")
                 `presence-streaming-channel.${channel_id}`
             );
+            console.log("channle Created");
             channel.here((users) => {
                 console.log("all users", users)
                 if (auth_id) {
