@@ -233,7 +233,7 @@
 
             return new Promise((resolve, reject) => {
                 navigator.mediaDevices
-                    .getUserMedia({video: true, audio: true})
+                    .getUserMedia({video: false, audio: false})
                     .then(stream => {
                         resolve(stream);
                     })
@@ -293,6 +293,7 @@
 
             userMediaPermission()
                 .then(stream => {
+                    console.log("In User")
                     broadcaster_stream = stream;
                     peerInit(auth_id).then((newPeer) => {
                         console.log("auth_id" , auth_id)
