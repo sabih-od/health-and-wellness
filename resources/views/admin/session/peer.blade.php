@@ -64,7 +64,7 @@
 
 @section('script')
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-{{--    <script src="{{asset('js/app.js')}}"></script>--}}
+    <script src="{{asset('js/app.js')}}"></script>
 
 {{--    additional js--}}
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"

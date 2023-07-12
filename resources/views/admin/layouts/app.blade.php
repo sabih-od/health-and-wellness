@@ -50,6 +50,11 @@
 
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
+    <!-- Laravel Echo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.4/echo.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.0.3/pusher.min.js"></script>
+
+
     <style>
         table.dataTable thead th, table.dataTable thead td {
             border-bottom: 0px;
