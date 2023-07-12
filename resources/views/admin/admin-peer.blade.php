@@ -110,10 +110,11 @@
 
             console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
-                `streaming-channel.${channel_id}`
+                console.log("IN channle")
+                `presence-streaming-channel.${channel_id}`
             );
             channel.here((users) => {
-                console.log("all users", users, is_peer_open)
+                console.log("all users", users)
                 if (auth_id) {
                     const viewers = _.filter(users, (user) => {
                         return user.id != auth_id
