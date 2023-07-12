@@ -59,7 +59,6 @@
             </div>
         </div>
     </section>
-
 @endsection
 
 @section('script')
@@ -82,7 +81,8 @@
         let broadcaster_stream_original = null;
         let is_peer_open = false;
         let viewer_streams = [];
-
+        let session_book_user = {{$booked_session_user}};
+        console.log("session_book_user" , session_book_user)
         const peerInit = (auth_id) => {
 
             return new Promise(resolve => {
@@ -113,7 +113,23 @@
                 `streaming-channel.${channel_id}`
             );
             console.log("channel Created", channel);
-            callingToViewer(10);
+
+
+
+            callingToViewer(session_book_user.id);
+            let img_req = getUserProfilePicture(session_book_user.id);
+            $('.lobby_viewers_wrapper')
+                .append(`<div id="viewer-id-${session_book_user.id}">
+                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+                                        <div class="text-center" style="width: 100%;">
+                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + session_book_user.id + `" hidden></i>
+                                            <br />
+                                            <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
+                                            <h4 style="color:white;">` + session_book_user.name + `</h4>
+                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + session_book_user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
+                                        </div>
+                                    </div>
+                                </div>`);
 
             // channel.here((users) => {
             //     console.log("all users", users)
