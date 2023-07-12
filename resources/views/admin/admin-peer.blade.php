@@ -1,13 +1,10 @@
-@extends('dashboard.layouts.app')
-
-@section('title', 'Dashboard')
-@section('description', '')
-@section('keywords', '')
-
+@extends('admin.layouts.app')
+@section('title', 'Services')
 @section('page_css')
-
     {{--additional css--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
         id="favicon"
@@ -16,16 +13,15 @@
         type="image/x-icon"
     />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
 @endsection
+@section('section')
 
-
-@section('content')
 
     <style>
-        header, footer , sideNAvigation {
+        header, footer , .main-sidebar {
             display: none;
         }
     </style>
@@ -39,14 +35,15 @@
                             <h3></h3>
                         </div>
                         <div class="videoControllers" style="z-index: 1;">
-                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>
+                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-undo"></i></a>
+                            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                                @csrf
+                                <button type="submit">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                            </form>
                         </div>
                         <figure class="videoThumbMain">
-                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
-                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
-                                    Class Ended
-                                </h1>
-                            </div>
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher">
                                 <video autoplay id="broadcaster"></video>
@@ -56,9 +53,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="video-thumbs lobby_viewers_wrapper">
-                        <main class="container py-4">
-                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>
-                        </main>
+
                     </div>
                 </div>
             </div>
@@ -71,10 +66,15 @@
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
     <script src="{{asset('js/app.js')}}"></script>
 
-    {{--additional js--}}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{--    <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
+    {{--    additional js--}}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    {{--        <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
         let peer_calls = {};
@@ -85,15 +85,6 @@
 
         const peerInit = (auth_id) => {
 
-            //Anytime another peer attempts to connect to your peer ID, you'll receive a connection event.
-            /*peer.on('connection', function(conn) {
-                conn.on('data', function(data){
-                    // Will print 'hi!'
-                    console.log(data);
-                    alert('user joined');
-                });
-            });*/
-
             return new Promise(resolve => {
                 const peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
@@ -102,7 +93,7 @@
                 });
                 //when peer is opened
                 peer.on('open', function (id) {
-                    console.log("test id in blade", id)
+                    console.log("test id admin", id)
                     is_peer_open = true;
                     resolve(peer);
                     // alert('Peer connected. My peer ID is: ' + id);
@@ -111,11 +102,13 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-            console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
+            console.log("in blade admin broadcasterInitPresenceChannel", echo, auth_id, channel_id)
+
             if (!echo || !auth_id || !channel_id) return
 
+            console.log("Pass Condition");
 
-            console.log(`streaming-channel.${channel_id}`)
+            console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
@@ -126,6 +119,7 @@
                         return user.id != auth_id
                     })
                     _.each(viewers, (user) => {
+                        console.log("user deata" , user)
                         callingToViewer(user.id);
                         let img_req = getUserProfilePicture(user.id);
                         $('.lobby_viewers_wrapper')
@@ -134,7 +128,7 @@
                                         <div class="text-center" style="width: 100%;">
                                             <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
                                             <br />
-                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
+                                            <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
                                             <h4 style="color:white;">` + user.name + `</h4>
                                             <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
                                         </div>
@@ -154,7 +148,7 @@
                                         <div class="text-center" style="width: 100%;">
                                             <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
                                             <br />
-                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
+                                            <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
                                             <h4 style="color:white;">` + user.name + `</h4>
                                             <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
                                         </div>
@@ -167,25 +161,29 @@
                 $(`#viewer-id-${user.id}`).remove()
             });
 
+            channel.listen('.viewer.raised.hand', (e) => {
+                toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
+                $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
+                $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
+            })
+
             return channel;
         }
 
-        const customerInitPresenceChannel = ({echo, channel_id}) => {
-            console.log("in customerInitPresenceChannel user" , echo , channel_id)
-            if (!echo || !channel_id) return
-
-            console.log(`streaming-channel.${channel_id}`)
-            const channel = echo.join(
-                `streaming-channel.${channel_id}`
-            );
-
-
-            return channel
-        }
+        // const customerInitPresenceChannel = ({echo, channel_id}) => {
+        //     if (!echo || !channel_id) return
+        //
+        //     console.log(`streaming-channel.${channel_id}`)
+        //     const channel = echo.join(
+        //         `streaming-channel.${channel_id}`
+        //     );
+        //
+        //
+        //     return channel
+        // }
 
         const callingToViewer = (user_id) => {
-            console.log("in callingToViewer user" , user_id)
-
+            console.log("in callingToViewer blade to start call" , user_id)
             if (peer && broadcaster_stream) {
                 peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
                 let call = peer_calls['peer-course-user-' + user_id]
@@ -233,7 +231,7 @@
 
             return new Promise((resolve, reject) => {
                 navigator.mediaDevices
-                    .getUserMedia({video: false, audio: true})
+                    .getUserMedia({video: true, audio: true})
                     .then(stream => {
                         resolve(stream);
                     })
@@ -245,7 +243,7 @@
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo user" , stream)
+            console.log("in showMyVideo admin blade to start call" , stream)
 
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
@@ -258,64 +256,51 @@
             }
         }
 
-        const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo user" , stream)
-            const broadcaster = document.getElementById('broadcaster')
-            if (broadcaster) {
-                broadcaster.srcObject = stream
-                broadcaster.addEventListener("loadedmetadata", () => {
-                    // broadcaster.value.controls = true
-                    broadcaster.play();
-                })
-            }
-        }
+        // const showBroadcasterVideo = (stream) => {
+        //     console.log("in showBroadcasterVideo admin blade to start call" , stream)
+        //
+        //     const broadcaster = document.getElementById('broadcaster')
+        //     if (broadcaster) {
+        //         broadcaster.srcObject = stream
+        //         broadcaster.addEventListener("loadedmetadata", () => {
+        //             // broadcaster.value.controls = true
+        //             broadcaster.play();
+        //         })
+        //     }
+        // }
 
         const getUserProfilePicture = (user_id) => {
             return $.ajax({
-                type:'POST',
-                url:'{{route("getUserProfilePicture")}}',
+                type: 'POST',
+                url: '{{route("getUserProfilePicture")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     user_id: user_id
                 },
-                // success:function(data) {
-                //     return data;
-                // }
+
             });
         }
     </script>
+
+
     <script>
-        let auth_id = `{{ \Illuminate\Support\Facades\Auth::id() }}`;
-        let session_id = `{{ $session->id }}`;
+        let auth_id = "2";
+        let session_id = "4";
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
-        $(document).ready(function() {
+        $(document).ready(function () {
+            //establish session_id, session_id, token
 
             userMediaPermission()
                 .then(stream => {
-                    console.log("In User")
                     broadcaster_stream = stream;
+                    broadcaster_stream_original = stream;
+                    showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
-                        console.log("auth_id" , auth_id)
-                        console.log("newPeer" , newPeer)
+                        console.log("newPeer in admin" , newPeer)
                         peer = newPeer;
-                        console.log("is stream" , stream);
-                        peer.on("call", (call) => {
-                            console.log("onCall", call.peer)
-                            call.answer(stream);
-                            // // const video = document.createElement("audio");
-                            call.on("stream", (broadcaster_stream) => {
-                                console.log("in watcher broadcaster_stream", broadcaster_stream)
-                                showBroadcasterVideo(broadcaster_stream)
-                                // addVideoStream(video, userVideoStream, call.peer);
-                            });
-                        });
-                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        channel.listen('StopStreaming', () => {
-                            $('.class_ended_wrapper').css('z-index', 1);
-                            $('.class_ended_wrapper').prop('hidden', false);
-                            // window.close();
-                        });
+                        console.log("Echo" , window.Echo);
+                        broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
                     });
 
                 })
@@ -323,28 +308,67 @@
                     alert('Error! ' + err.message)
                 })
 
-            //on raise hand click
-            $('#btn_raise_hand').on('click', function() {
-                var url = "{{route('user.raise_hand', 'temp')}}";
-                let _this = $(this);
-                _this.prop('disabled', true);
-                url = url.replace('temp', session_id);
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function (res) {
-                        console.log(res);
-                        setTimeout(function() {
-                            _this.prop('disabled', true);
-                        }, 1000 * 60);
-                    },
-                    error: function () {
+            //on allow screen click
+            $('body').on('click', '.btn_allow_user_screen', function () {
+                //prep data
+                var customer_id = $(this).data('user');
 
+                //hide all buttons
+                $('.btn_allow_user_screen').each(function () {
+                    $(this).prop('hidden', true);
+                });
+                $('#btn_revert_stream').prop('hidden', false);
+                $('#btn_revert_stream').data('user', customer_id);
+
+                const viewer_stream_c = viewer_streams['peer-batch-user-' + customer_id]
+                const [videoTrack] = viewer_stream_c.getVideoTracks();
+                const [audioTrack] = viewer_stream_c.getAudioTracks();
+                showMyVideo(viewer_stream_c)
+                // const broadcaster_stream_c = broadcaster_stream
+
+                console.log("calls", peer_calls, videoTrack, audioTrack)
+
+                for (let key in peer_calls) {
+                    if (videoTrack) {
+                        const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
+                        sender_video.replaceTrack(videoTrack);
                     }
-                })
+                    if (audioTrack) {
+                        const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
+                        sender_audio.replaceTrack(audioTrack);
+                    }
+                }
 
+            });
+
+            //on revert stream click
+            $('body').on('click', '#btn_revert_stream', function () {
+                //prep data
+                var customer_id = $(this).data('user');
+
+                //hide button
+                $(this).prop('hidden', true);
+
+                const [videoTrack] = broadcaster_stream.getVideoTracks();
+                const [audioTrack] = broadcaster_stream.getAudioTracks();
+                // const broadcaster_stream_c = broadcaster_stream
+                showMyVideo(broadcaster_stream)
+
+                console.log("calls", peer_calls, videoTrack, audioTrack)
+
+                for (let key in peer_calls) {
+                    if (videoTrack) {
+                        const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
+                        sender_video.replaceTrack(videoTrack);
+                    }
+                    if (audioTrack) {
+                        const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
+                        sender_audio.replaceTrack(audioTrack);
+                    }
+                }
             });
 
         });
     </script>
+
 @endsection
