@@ -17,21 +17,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
+import Echo from 'laravel-echo';
+window.Pusher = require('pusher-js');
 //
-// var pusherKey = "{{ config('broadcasting.connections.pusher.key') }}";
-// var pusherCluster = "{{ config('broadcasting.connections.pusher.options.cluster') }}";
+var pusherKey = "{{ config('broadcasting.connections.pusher.key') }}";
+var pusherCluster = "{{ config('broadcasting.connections.pusher.options.cluster') }}";
 //
 // console.log("opop" , pusherKey , pusherCluster);
 //
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: pusherKey,
-//     cluster: pusherCluster,
-//     encrypted: true,
-//     // Add additional configuration options as needed
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: pusherKey,
+    cluster: pusherCluster,
+    // encrypted: true,
+    forceTLS: true
+
+    // Add additional configuration options as needed
+});
 
 
 // import Echo from 'laravel-echo';
