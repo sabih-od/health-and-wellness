@@ -233,7 +233,7 @@
 
             return new Promise((resolve, reject) => {
                 navigator.mediaDevices
-                    .getUserMedia({video: false, audio: false})
+                    .getUserMedia({video: false, audio: true})
                     .then(stream => {
                         resolve(stream);
                     })
