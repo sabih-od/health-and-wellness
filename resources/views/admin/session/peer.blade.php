@@ -116,6 +116,7 @@
                         return user.id != auth_id
                     })
                     _.each(viewers, (user) => {
+                        console.log("user deata" , user)
                         callingToViewer(user.id);
                         let img_req = getUserProfilePicture(user.id);
                         $('.lobby_viewers_wrapper')
