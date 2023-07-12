@@ -19,7 +19,7 @@ class StreamController extends Controller
         $session = Sessions::find($session_id);
 
         event(new UserJoined(Auth::user(), $session_id));
-        return view('dashboard.stream.peer', compact('session'));
+        return view('dashboard.user-peer', compact('session'));
     }
 
     public function raiseHand(Request $request, $session_id)

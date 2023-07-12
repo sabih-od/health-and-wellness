@@ -21,7 +21,7 @@ class StreamController extends Controller
         $session->is_streaming = true;
         $session->save();
 
-        return view('admin.session.peer', compact('session'));
+        return view('admin.admin-peer', compact('session'));
     }
 
 //    public function allowUserScreen(Request $request, $batch_id, $customer_id) {
