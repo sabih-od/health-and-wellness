@@ -55,7 +55,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::delete('booked-session/destroy/{id}', 'SessionController@bookSessionDestroy');
     Route::get( '/view-booked-sessions/{id}', 'SessionController@viewBookedSession')->name('viewBookedSession');
 
-    route::get('/admin-stream/{session_id}{booked_timing_id}', [StreamController::class, 'stream'])->name('admin.stream');
+    route::get('/admin-stream/{session_id}/{booked_timing_id}', [StreamController::class, 'stream'])->name('admin.stream');
     route::post('/stream/stop/{session}', [StreamController::class, 'stop'])->name('admin.stopStream');
 
 
