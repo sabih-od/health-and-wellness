@@ -48,6 +48,8 @@ const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
                 return user.id != auth_id
             })
             _.each(viewers, (user) => {
+                console.log("user deata" , user)
+
                 callingToViewer(user.id);
                 $('.lobby_viewers_wrapper')
                     .append(`<div id="viewer-id-${user.id}">
