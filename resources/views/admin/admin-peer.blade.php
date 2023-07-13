@@ -92,80 +92,28 @@
         let broadcaster_stream_original = null;
         let is_peer_open = false;
         let viewer_streams = [];
-        let session_book_user = '{{$booked_session_user->id}}';
 
         const peerInit = (auth_id) => {
-
             return new Promise(resolve => {
                 const peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
                     host: "/",
                     port: "3008",
                 });
-                //when peer is opened
+
                 peer.on('open', function (id) {
-                    console.log("session_book_user" , session_book_user);
                     console.log("test id admin", id)
                     is_peer_open = true;
                     resolve(peer);
-                    // alert('Peer connected. My peer ID is: ' + id);
                 });
             });
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-            console.log("in blade admin broadcasterInitPresenceChannel", echo, auth_id, channel_id)
+            if (!echo || !auth_id || !channel_id) return;
 
-            if (!echo || !auth_id || !channel_id) return
+            const channel = echo.join(`admin-streaming-channel.${channel_id}`);
 
-            console.log("Pass Condition");
-
-            console.log(`admin-streaming-channel.${channel_id}`)
-            const channel = echo.join(
-                `admin-streaming-channel.${channel_id}`
-            );
-            console.log("channel Created", channel);
-
-            console.log("session_book_user.id" , session_book_user , session_book_user.id)
-
-            callingToViewer(session_book_user);
-            // let img_req = getUserProfilePicture(session_book_user);
-            // $('.lobby_viewers_wrapper')
-            //     .append(`<div id="viewer-id-${session_book_user}">
-            //                         <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-            //                             <div class="text-center" style="width: 100%;">
-            //                                 <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + session_book_user + `" hidden></i>
-            //                                 <br />
-            //                                 <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
-            //                                 </div>
-            //                         </div>
-            //                     </div>`);
-
-            // channel.here((users) => {
-            //     console.log("all users", users)
-            //     if (auth_id) {
-            //         const viewers = _.filter(users, (user) => {
-            //             return user.id != auth_id
-            //         })
-            //         _.each(viewers, (user) => {
-            //             console.log("user deata" , user)
-            //             callingToViewer(user.id);
-            //             let img_req = getUserProfilePicture(user.id);
-            //             $('.lobby_viewers_wrapper')
-            //                 .append(`<div id="viewer-id-${user.id}">
-            //                         <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-            //                             <div class="text-center" style="width: 100%;">
-            //                                 <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-            //                                 <br />
-            //                                 <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
-            //                                 <h4 style="color:white;">` + user.name + `</h4>
-            //                                 <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-            //                             </div>
-            //                         </div>
-            //                     </div>`);
-            //         })
-            //     }
-            // });
             channel.joining((user) => {
                 console.log('User Joined', user);
                 callingToViewer(user.id);
@@ -173,86 +121,73 @@
                 let img_req = getUserProfilePicture(user.id);
                 $('.lobby_viewers_wrapper')
                     .append(`<div id="viewer-id-${user.id}">
-                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-                                        <div class="text-center" style="width: 100%;">
-                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-                                            <br />
-                                            <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
-                                            <h4 style="color:white;">` + user.name + `</h4>
-                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-                                        </div>
-                                    </div>
-                                </div>`);
+          <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+            <div class="text-center" style="width: 100%;">
+              <i class="fa fa-hand-paper-o text-warning" id="raised_hand_${user.id}" hidden></i>
+              <br />
+              <img src="${img_req.responseText}" style="background-color: white; max-width: 100px; max-height: 100px;">
+              <h4 style="color:white;">${user.name}</h4>
+              <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_${user.id}" data-user="${user.id}" hidden>Allow screen share</button>
+            </div>
+          </div>
+        </div>`);
             });
+
             channel.leaving((user) => {
                 console.log('User Left', user);
-                // console.log(user.name, "Left");
-                $(`#viewer-id-${user.id}`).remove()
+                $(`#viewer-id-${user.id}`).remove();
             });
 
             channel.listen('.viewer.raised.hand', (e) => {
                 toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
-                $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
-                $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
-            })
+                $(`#raised_hand_${e.data.customer.id}`).prop('hidden', false);
+                $(`#btn_allow_user_screen_${e.data.customer.id}`).prop('hidden', false);
+            });
 
             return channel;
         }
 
         const customerInitPresenceChannel = ({echo, channel_id}) => {
-            if (!echo || !channel_id) return
+            if (!echo || !channel_id) return;
 
-            console.log(`customerInitPresenceChannel admin-streaming-channel.${channel_id}`)
-            const channel = echo.join(
-                `admin-streaming-channel.${channel_id}`
-            );
-
-
-            return channel
+            const channel = echo.join(`admin-streaming-channel.${channel_id}`);
+            return channel;
         }
 
         const callingToViewer = (user_id) => {
-            console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
-                peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-                let call = peer_calls['peer-course-user-' + user_id]
+                peer_calls[user_id] = peer.call(user_id, broadcaster_stream);
+                let call = peer_calls[user_id];
                 call.on('stream', (viewer_stream) => {
-                    console.log("in watcher viewer stream", viewer_stream)
-                    viewer_streams['peer-course-user-' + user_id] = viewer_stream
-                })
-                console.log('call senders', peer_calls)
+                    console.log("in watcher viewer stream", viewer_stream);
+                    viewer_streams[user_id] = viewer_stream;
+                });
+                console.log('call senders', peer_calls);
             }
         }
 
         const userMediaPermission = () => {
-            // Older browsers might not implement mediaDevices at all, so we set an empty object first
             if (navigator.mediaDevices === undefined) {
                 navigator.mediaDevices = {};
             }
 
-            // Some browsers partially implement media devices. We can't just assign an object
-            // with getUserMedia as it would overwrite existing properties.
-            // Here, we will just add the getUserMedia property if it's missing.
             if (navigator.mediaDevices.getUserMedia === undefined) {
                 navigator.mediaDevices.getUserMedia = function (constraints) {
-                    // First get ahold of the legacy getUserMedia, if present
                     const getUserMedia =
                         navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-                    // Some browsers just don't implement it - return a rejected promise with an error
-                    // to keep a consistent interface
                     if (!getUserMedia) {
                         return Promise.reject(
                             new Error("getUserMedia is not implemented in this browser")
                         );
                     }
 
-                    // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
                     return new Promise((resolve, reject) => {
                         getUserMedia.call(navigator, constraints, resolve, reject);
                     });
                 };
             }
+
             navigator.mediaDevices.getUserMedia =
                 navigator.mediaDevices.getUserMedia ||
                 navigator.webkitGetUserMedia ||
@@ -260,41 +195,34 @@
 
             return new Promise((resolve, reject) => {
                 navigator.mediaDevices
-                    .getUserMedia({video: true, audio: true})
+                    .getUserMedia({ video: true, audio: true })
                     .then(stream => {
                         resolve(stream);
                     })
                     .catch(err => {
                         reject(err);
-                        //   throw new Error(`Unable to fetch stream ${err}`);
                     });
             });
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo admin blade to start call", stream)
-
-            const myCast = document.getElementById('myCast')
+            const myCast = document.getElementById('myCast');
             if (myCast) {
-                myCast.srcObject = stream
-                myCast.muted = true
+                myCast.srcObject = stream;
+                myCast.muted = true;
                 myCast.addEventListener("loadedmetadata", () => {
-                    // myCast.value.controls = true
                     myCast.play();
-                })
+                });
             }
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo admin blade to start call" , stream)
-
-            const broadcaster = document.getElementById('broadcaster')
+            const broadcaster = document.getElementById('broadcaster');
             if (broadcaster) {
-                broadcaster.srcObject = stream
+                broadcaster.srcObject = stream;
                 broadcaster.addEventListener("loadedmetadata", () => {
-                    // broadcaster.value.controls = true
                     broadcaster.play();
-                })
+                });
             }
         }
 
@@ -305,11 +233,11 @@
                 data: {
                     _token: '{{csrf_token()}}',
                     user_id: user_id
-                },
-
+                }
             });
         }
     </script>
+
 
 
     <script>
