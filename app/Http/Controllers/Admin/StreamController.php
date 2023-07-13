@@ -24,7 +24,7 @@ class StreamController extends Controller
         $session->save();
 
         $booked_session_user = User::where('id' , $booked_session->user_id)->first();
-        return view('admin.admin-peer', compact('session' ));
+        return view('admin.admin-peer', compact('session' , 'booked_session_user'));
     }
 
 //    public function allowUserScreen(Request $request, $batch_id, $customer_id) {
