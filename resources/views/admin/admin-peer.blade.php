@@ -47,7 +47,7 @@
                         <figure class="videoThumbMain">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher">
-                                <video autoplay id="broadcaster"></video>
+                                <video autoplay id="myCast"></video>
                             </div>
                         </figure>
                     </div>
@@ -264,13 +264,13 @@
         const showMyVideo = (stream) => {
             console.log("in showMyVideo admin blade to start call", stream)
 
-            const broadcaster = document.getElementById('broadcaster')
-            if (broadcaster) {
-                broadcaster.srcObject = stream
-                broadcaster.muted = true
-                broadcaster.addEventListener("loadedmetadata", () => {
-                    // broadcaster.value.controls = true
-                    broadcaster.play();
+            const myCast = document.getElementById('myCast')
+            if (myCast) {
+                myCast.srcObject = stream
+                myCast.muted = true
+                myCast.addEventListener("loadedmetadata", () => {
+                    // myCast.value.controls = true
+                    myCast.play();
                 })
             }
         }
