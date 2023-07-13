@@ -25,7 +25,7 @@
 @section('content')
 
     <style>
-        header, footer , sideNAvigation {
+        header, footer , .sideNAvigation {
             display: none;
         }
     </style>
@@ -33,6 +33,7 @@
     <section class="chattingSec">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="videoBox" style="width: 100%">
                         <div class="headingCont">
@@ -54,13 +55,15 @@
                         </figure>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="video-thumbs lobby_viewers_wrapper">
-                        <main class="container py-4">
-                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>
-                        </main>
-                    </div>
-                </div>
+                <div class="col-md-1"></div>
+
+                {{--                <div class="col-md-2">--}}
+{{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
+{{--                        <main class="container py-4">--}}
+{{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
+{{--                        </main>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>

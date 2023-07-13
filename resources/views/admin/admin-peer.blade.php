@@ -29,7 +29,8 @@
     <section class="chattingSec">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
                     <div class="videoBox" style="width: 100%">
                         <div class="headingCont">
                             <h3></h3>
@@ -39,7 +40,7 @@
                             <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                                 @csrf
                                 <button type="submit">
-                                    <i class="fas fa-phone"></i>
+                                    <i class="fas fa-phone">End Call</i>
                                 </button>
                             </form>
                         </div>
