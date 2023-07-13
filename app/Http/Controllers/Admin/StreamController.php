@@ -8,6 +8,7 @@ use App\Events\StopStreaming;
 use App\Events\ViewerToggleBack;
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
+use App\Models\BookSession;
 use App\Models\Course;
 use App\Models\Sessions;
 use App\Models\User;
@@ -15,13 +16,16 @@ use Illuminate\Http\Request;
 
 class StreamController extends Controller
 {
-    public function stream(Request $request, $session_id)
+    public function stream(Request $request, $session_id , $booked_timing_id)
     {
         $session = Sessions::find($session_id);
         $session->is_streaming = true;
         $session->save();
 
-        return view('admin.admin-peer', compact('session'));
+        $booked_session = BookSession::where('session_timing_id',$booked_timing_id)->first();
+
+        $booked_session_user = User::where('id' , $booked_session->user_id)->first();
+        return view('admin.admin-peer', compact('session' , 'booked_session_user'));
     }
 
 //    public function allowUserScreen(Request $request, $batch_id, $customer_id) {
