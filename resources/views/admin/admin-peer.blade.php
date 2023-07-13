@@ -45,7 +45,7 @@
                             </div>
                         </figure>
 
-                        <figure class="videoThumbMain" style="margin-top: 10% !important;">
+                        <figure class="videoThumbMain" style="margin-top: 42% !important;">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher" style="border:2px solid red;">
                                 <video autoplay id="broadcaster"></video>
@@ -202,7 +202,7 @@
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             if (!echo || !channel_id) return
 
-            console.log(`streaming-channel.${channel_id}`)
+            console.log(`customerInitPresenceChannel streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );

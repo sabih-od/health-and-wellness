@@ -140,65 +140,67 @@
             });
         }
 
-        // const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-        //     console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
-        //     if (!echo || !auth_id || !channel_id) return
-        //
-        //
-        //     console.log(`streaming-channel.${channel_id}`)
-        //     const channel = echo.join(
-        //         `streaming-channel.${channel_id}`
-        //     );
-        //     channel.here((users) => {
-        //         console.log("all users", users, is_peer_open)
-        //         if (auth_id) {
-        //             const viewers = _.filter(users, (user) => {
-        //                 return user.id != auth_id
-        //             })
-        //             _.each(viewers, (user) => {
-        //                 callingToViewer(user.id);
-        //                 let img_req = getUserProfilePicture(user.id);
-        //                 $('.lobby_viewers_wrapper')
-        //                     .append(`<div id="viewer-id-${user.id}">
-        //                             <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-        //                                 <div class="text-center" style="width: 100%;">
-        //                                     <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-        //                                     <br />
-        //                                     <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
-        //                                     <h4 style="color:white;">` + user.name + `</h4>
-        //                                     <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-        //                                 </div>
-        //                             </div>
-        //                         </div>`);
-        //             })
-        //         }
-        //     });
-        //     channel.joining((user) => {
-        //         console.log('User Joined', user);
-        //         callingToViewer(user.id);
-        //         toastr.info(user.name + ' has joined the session.');
-        //         let img_req = getUserProfilePicture(user.id);
-        //         $('.lobby_viewers_wrapper')
-        //             .append(`<div id="viewer-id-${user.id}">
-        //                             <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-        //                                 <div class="text-center" style="width: 100%;">
-        //                                     <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-        //                                     <br />
-        //                                     <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
-        //                                     <h4 style="color:white;">` + user.name + `</h4>
-        //                                     <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-        //                                 </div>
-        //                             </div>
-        //                         </div>`);
-        //     });
-        //     channel.leaving((user) => {
-        //         console.log('User Left', user);
-        //         // console.log(user.name, "Left");
-        //         $(`#viewer-id-${user.id}`).remove()
-        //     });
-        //
-        //     return channel;
-        // }
+        const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+            console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
+            if (!echo || !auth_id || !channel_id) return
+
+
+            console.log(`streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
+            callingToViewer(2);
+
+            // channel.here((users) => {
+            //     console.log("all users", users, is_peer_open)
+            //     if (auth_id) {
+            //         const viewers = _.filter(users, (user) => {
+            //             return user.id != auth_id
+            //         })
+            //         _.each(viewers, (user) => {
+            //             callingToViewer(user.id);
+            //             let img_req = getUserProfilePicture(user.id);
+            //             $('.lobby_viewers_wrapper')
+            //                 .append(`<div id="viewer-id-${user.id}">
+            //                         <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+            //                             <div class="text-center" style="width: 100%;">
+            //                                 <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
+            //                                 <br />
+            //                                 <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
+            //                                 <h4 style="color:white;">` + user.name + `</h4>
+            //                                 <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
+            //                             </div>
+            //                         </div>
+            //                     </div>`);
+            //         })
+            //     }
+            // });
+            channel.joining((user) => {
+                console.log('User Joined', user);
+                callingToViewer(user.id);
+                toastr.info(user.name + ' has joined the session.');
+                let img_req = getUserProfilePicture(user.id);
+                $('.lobby_viewers_wrapper')
+                    .append(`<div id="viewer-id-${user.id}">
+                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+                                        <div class="text-center" style="width: 100%;">
+                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
+                                            <br />
+                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
+                                            <h4 style="color:white;">` + user.name + `</h4>
+                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
+                                        </div>
+                                    </div>
+                                </div>`);
+            });
+            channel.leaving((user) => {
+                console.log('User Left', user);
+                // console.log(user.name, "Left");
+                $(`#viewer-id-${user.id}`).remove()
+            });
+
+            return channel;
+        }
 
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             console.log("in customerInitPresenceChannel user", echo, channel_id)
@@ -330,6 +332,10 @@
                         console.log("auth_id", auth_id)
                         console.log("newPeer", newPeer)
                         peer = newPeer;
+
+                        broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
+
+
                         console.log("is stream", stream);
                         peer.on("call", (call) => {
                             console.log("onCall", call.peer)
