@@ -53,6 +53,18 @@
                                 <video autoplay id="broadcaster"></video>
                             </div>
                         </figure>
+
+                        <figure class="videoThumbMain">
+                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
+                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
+                                    Class Ended
+                                </h1>
+                            </div>
+                            <div id="subscriber" class="subscriber"></div>
+                            <div id="publisher" class="publisher">
+                                <video autoplay id="myCast"></video>
+                            </div>
+                        </figure>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
@@ -250,13 +262,13 @@
         const showMyVideo = (stream) => {
             console.log("in showMyVideo user" , stream)
 
-            const broadcaster = document.getElementById('broadcaster')
-            if (broadcaster) {
-                broadcaster.srcObject = stream
-                broadcaster.muted = true
-                broadcaster.addEventListener("loadedmetadata", () => {
-                    // broadcaster.value.controls = true
-                    broadcaster.play();
+            const myCast = document.getElementById('myCast')
+            if (myCast) {
+                myCast.srcObject = stream
+                myCast.muted = true
+                myCast.addEventListener("loadedmetadata", () => {
+                    // myCast.value.controls = true
+                    myCast.play();
                 })
             }
         }
