@@ -115,7 +115,7 @@
             );
             console.log("channel Created", channel);
 
-
+            console.log("session_book_user.id" , session_book_user , session_book_user.id)
 
             callingToViewer(session_book_user.id);
             let img_req = getUserProfilePicture(session_book_user.id);
