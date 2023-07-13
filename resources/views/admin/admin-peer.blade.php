@@ -118,17 +118,17 @@
             console.log("session_book_user.id" , session_book_user , session_book_user.id)
 
             callingToViewer(session_book_user);
-            let img_req = getUserProfilePicture(session_book_user);
-            $('.lobby_viewers_wrapper')
-                .append(`<div id="viewer-id-${session_book_user}">
-                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-                                        <div class="text-center" style="width: 100%;">
-                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + session_book_user + `" hidden></i>
-                                            <br />
-                                            <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
-                                            </div>
-                                    </div>
-                                </div>`);
+            // let img_req = getUserProfilePicture(session_book_user);
+            // $('.lobby_viewers_wrapper')
+            //     .append(`<div id="viewer-id-${session_book_user}">
+            //                         <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+            //                             <div class="text-center" style="width: 100%;">
+            //                                 <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + session_book_user + `" hidden></i>
+            //                                 <br />
+            //                                 <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
+            //                                 </div>
+            //                         </div>
+            //                     </div>`);
 
             // channel.here((users) => {
             //     console.log("all users", users)
