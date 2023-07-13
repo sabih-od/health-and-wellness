@@ -285,8 +285,8 @@
         }
     </script>
     <script>
-        let auth_id = "10";
-        let session_id = "4";
+        let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
+        let session_id = '{{ $session->id }}';
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
         $(document).ready(function() {
