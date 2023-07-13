@@ -16,13 +16,12 @@ use Illuminate\Http\Request;
 
 class StreamController extends Controller
 {
-    public function stream(Request $request, $session_id , $booked_timing_id)
+    public function stream(Request $request, $session_timing_id)
     {
-        $session = Sessions::find($session_id);
+        $booked_session = BookSession::where('session_timing_id',$session_timing_id)->first();
+        $session = Sessions::where('id' , $booked_session->session_id)->first();
         $session->is_streaming = true;
         $session->save();
-
-        $booked_session = BookSession::where('session_timing_id',$booked_timing_id)->first();
 
         $booked_session_user = User::where('id' , $booked_session->user_id)->first();
         return view('admin.admin-peer', compact('session' , 'booked_session_user'));
