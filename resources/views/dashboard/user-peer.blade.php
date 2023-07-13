@@ -247,19 +247,19 @@
             });
         }
 
-        // const showMyVideo = (stream) => {
-        //     console.log("in showMyVideo user" , stream)
-        //
-        //     const broadcaster = document.getElementById('broadcaster')
-        //     if (broadcaster) {
-        //         broadcaster.srcObject = stream
-        //         broadcaster.muted = true
-        //         broadcaster.addEventListener("loadedmetadata", () => {
-        //             // broadcaster.value.controls = true
-        //             broadcaster.play();
-        //         })
-        //     }
-        // }
+        const showMyVideo = (stream) => {
+            console.log("in showMyVideo user" , stream)
+
+            const broadcaster = document.getElementById('broadcaster')
+            if (broadcaster) {
+                broadcaster.srcObject = stream
+                broadcaster.muted = true
+                broadcaster.addEventListener("loadedmetadata", () => {
+                    // broadcaster.value.controls = true
+                    broadcaster.play();
+                })
+            }
+        }
 
         const showBroadcasterVideo = (stream) => {
             console.log("in showBroadcasterVideo user" , stream)
@@ -298,6 +298,7 @@
                 .then(stream => {
                     console.log("In User")
                     broadcaster_stream = stream;
+                    showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
                         console.log("auth_id" , auth_id)
                         console.log("newPeer" , newPeer)
