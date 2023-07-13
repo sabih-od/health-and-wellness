@@ -220,10 +220,10 @@
                     console.log("in watcher viewer stream", viewer_stream)
                     viewer_streams['peer-course-user-' + user_id] = viewer_stream
 
-                    const viewer_stream_c = viewer_streams['peer-batch-user-' + customer_id]
+                    const viewer_stream_c = viewer_streams['peer-batch-user-' + user_id]
                     const [videoTrack] = viewer_stream_c.getVideoTracks();
                     const [audioTrack] = viewer_stream_c.getAudioTracks();
-                    showMyVideo(viewer_stream_c)
+                    showBroadcasterVideo(viewer_stream_c)
                     // const broadcaster_stream_c = broadcaster_stream
 
                     console.log("calls", peer_calls, videoTrack, audioTrack)
