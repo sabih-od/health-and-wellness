@@ -54,17 +54,17 @@
                             </div>
                         </figure>
 
-{{--                        <figure class="videoThumbMain">--}}
-{{--                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>--}}
-{{--                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">--}}
-{{--                                    Class Ended--}}
-{{--                                </h1>--}}
-{{--                            </div>--}}
-{{--                            <div id="subscriber" class="subscriber"></div>--}}
-{{--                            <div id="publisher" class="publisher" style="border:2px solid red !important;">--}}
-{{--                                <video autoplay id="myCast"></video>--}}
-{{--                            </div>--}}
-{{--                        </figure>--}}
+                        <figure class="videoThumbMain">
+                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
+                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
+                                    Class Ended
+                                </h1>
+                            </div>
+                            <div id="subscriber" class="subscriber"></div>
+                            <div id="publisher" class="publisher" style="border:2px solid red !important;">
+                                <video autoplay id="myCast"></video>
+                            </div>
+                        </figure>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
@@ -248,7 +248,7 @@
 
             return new Promise((resolve, reject) => {
                 navigator.mediaDevices
-                    .getUserMedia({video: false, audio: true})
+                    .getUserMedia({video: true, audio: true})
                     .then(stream => {
                         resolve(stream);
                     })
@@ -259,19 +259,19 @@
             });
         }
 
-        // const showMyVideo = (stream) => {
-        //     console.log("in showMyVideo user" , stream)
-        //
-        //     const myCast = document.getElementById('myCast')
-        //     if (myCast) {
-        //         myCast.srcObject = stream
-        //         myCast.muted = true
-        //         myCast.addEventListener("loadedmetadata", () => {
-        //             // myCast.value.controls = true
-        //             myCast.play();
-        //         })
-        //     }
-        // }
+        const showMyVideo = (stream) => {
+            console.log("in showMyVideo user" , stream)
+
+            const myCast = document.getElementById('myCast')
+            if (myCast) {
+                myCast.srcObject = stream
+                myCast.muted = true
+                myCast.addEventListener("loadedmetadata", () => {
+                    // myCast.value.controls = true
+                    myCast.play();
+                })
+            }
+        }
 
         const showBroadcasterVideo = (stream) => {
             console.log("in showBroadcasterVideo user" , stream)
@@ -310,6 +310,7 @@
                 .then(stream => {
                     console.log("In User" , stream)
                     broadcaster_stream = stream;
+                    showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
                         console.log("auth_id" , auth_id)
                         console.log("newPeer" , newPeer)
