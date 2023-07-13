@@ -7,7 +7,9 @@
 @section('page_css')
 
     {{--additional css--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
         id="favicon"
@@ -16,16 +18,16 @@
         type="image/x-icon"
     />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
 @endsection
 
 
 @section('content')
 
     <style>
-        header, footer , .sideNAvigation {
+        header, footer, .sideNAvigation {
             display: none;
         }
     </style>
@@ -36,15 +38,17 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="videoBox" style="width: 100%">
-                        <div class="headingCont">
-                            <h3></h3>
-                        </div>
-                        <div class="videoControllers" style="z-index: 1;">
-                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>
-                        </div>
+                        {{--                        <div class="headingCont">--}}
+                        {{--                            <h3></h3>--}}
+                        {{--                        </div>--}}
+                        {{--                        <div class="videoControllers" style="z-index: 1;">--}}
+                        {{--                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>--}}
+                        {{--                        </div>--}}
                         <figure class="videoThumbMain">
-                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
-                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
+                            <div class="class_ended_wrapper"
+                                 style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
+                                <h1 class="text-center"
+                                    style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
                                     Class Ended
                                 </h1>
                             </div>
@@ -55,8 +59,10 @@
                         </figure>
 
                         <figure class="videoThumbMain">
-                            <div class="class_ended_wrapper" style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
-                                <h1 class="text-center" style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
+                            <div class="class_ended_wrapper"
+                                 style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
+                                <h1 class="text-center"
+                                    style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
                                     Class Ended
                                 </h1>
                             </div>
@@ -65,17 +71,23 @@
                                 <video autoplay id="myCast"></video>
                             </div>
                         </figure>
+                        <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-phone">End Call</i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
 
                 {{--                <div class="col-md-2">--}}
-{{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
-{{--                        <main class="container py-4">--}}
-{{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
-{{--                        </main>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                {{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
+                {{--                        <main class="container py-4">--}}
+                {{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
+                {{--                        </main>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </section>
@@ -87,8 +99,11 @@
     <script src="{{asset('js/app.js')}}"></script>
 
     {{--additional js--}}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{--    <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
@@ -186,7 +201,7 @@
         // }
 
         const customerInitPresenceChannel = ({echo, channel_id}) => {
-            console.log("in customerInitPresenceChannel user" , echo , channel_id)
+            console.log("in customerInitPresenceChannel user", echo, channel_id)
             if (!echo || !channel_id) return
 
             console.log(`streaming-channel.${channel_id}`)
@@ -260,7 +275,7 @@
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo user" , stream)
+            console.log("in showMyVideo user", stream)
 
             const myCast = document.getElementById('myCast')
             if (myCast) {
@@ -274,7 +289,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo user" , stream)
+            console.log("in showBroadcasterVideo user", stream)
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
@@ -287,8 +302,8 @@
 
         const getUserProfilePicture = (user_id) => {
             return $.ajax({
-                type:'POST',
-                url:'{{route("getUserProfilePicture")}}',
+                type: 'POST',
+                url: '{{route("getUserProfilePicture")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     user_id: user_id
@@ -304,18 +319,18 @@
         let session_id = '{{ $session->id }}';
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             userMediaPermission()
                 .then(stream => {
-                    console.log("In User" , stream)
+                    console.log("In User", stream)
                     broadcaster_stream = stream;
                     showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
-                        console.log("auth_id" , auth_id)
-                        console.log("newPeer" , newPeer)
+                        console.log("auth_id", auth_id)
+                        console.log("newPeer", newPeer)
                         peer = newPeer;
-                        console.log("is stream" , stream);
+                        console.log("is stream", stream);
                         peer.on("call", (call) => {
                             console.log("onCall", call.peer)
                             call.answer(stream);
@@ -340,7 +355,7 @@
                 })
 
             //on raise hand click
-            $('#btn_raise_hand').on('click', function() {
+            $('#btn_raise_hand').on('click', function () {
                 var url = "{{route('user.raise_hand', 'temp')}}";
                 let _this = $(this);
                 _this.prop('disabled', true);
@@ -350,7 +365,7 @@
                     type: 'GET',
                     success: function (res) {
                         console.log(res);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             _this.prop('disabled', true);
                         }, 1000 * 60);
                     },

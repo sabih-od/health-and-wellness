@@ -32,25 +32,32 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="videoBox" style="width: 100%">
-                        <div class="headingCont">
-                            <h3></h3>
-                        </div>
+{{--                        <div class="headingCont">--}}
+{{--                            <h3></h3>--}}
+{{--                        </div>--}}
                         <div class="videoControllers" style="z-index: 1;">
                             <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-undo"></i></a>
-                            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                                @csrf
-                                <button type="submit">
-                                    <i class="fas fa-phone">End Call</i>
-                                </button>
-                            </form>
                         </div>
                         <figure class="videoThumbMain">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher">
+                                <video autoplay id="myCast"></video>
+                            </div>
+                        </figure>
+
+                        <figure class="videoThumbMain">
+                            <div id="subscriber" class="subscriber"></div>
+                            <div id="publisher" class="publisher" style="border:2px solid red;">
                                 <video autoplay id="broadcaster"></video>
                             </div>
                         </figure>
                     </div>
+                    <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-phone">End Call</i>
+                        </button>
+                    </form>
                 </div>
                 <div class="col-md-2">
                     <div class="video-thumbs lobby_viewers_wrapper">
@@ -264,29 +271,29 @@
         const showMyVideo = (stream) => {
             console.log("in showMyVideo admin blade to start call", stream)
 
+            const myCast = document.getElementById('myCast')
+            if (myCast) {
+                myCast.srcObject = stream
+                myCast.muted = true
+                myCast.addEventListener("loadedmetadata", () => {
+                    // myCast.value.controls = true
+                    myCast.play();
+                })
+            }
+        }
+
+        const showBroadcasterVideo = (stream) => {
+            console.log("in showBroadcasterVideo admin blade to start call" , stream)
+
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
-                broadcaster.muted = true
                 broadcaster.addEventListener("loadedmetadata", () => {
                     // broadcaster.value.controls = true
                     broadcaster.play();
                 })
             }
         }
-
-        // const showBroadcasterVideo = (stream) => {
-        //     console.log("in showBroadcasterVideo admin blade to start call" , stream)
-        //
-        //     const broadcaster = document.getElementById('broadcaster')
-        //     if (broadcaster) {
-        //         broadcaster.srcObject = stream
-        //         broadcaster.addEventListener("loadedmetadata", () => {
-        //             // broadcaster.value.controls = true
-        //             broadcaster.play();
-        //         })
-        //     }
-        // }
 
         const getUserProfilePicture = (user_id) => {
             return $.ajax({
@@ -319,7 +326,27 @@
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
                         console.log("Echo", window.Echo);
+
+                        // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
+
+                        console.log("is stream" , stream);
+                        peer.on("call", (call) => {
+                            console.log("onCall", call.peer)
+                            call.answer(stream);
+                            // // const video = document.createElement("audio");
+                            call.on("stream", (broadcaster_stream) => {
+                                console.log("in watcher broadcaster_stream", broadcaster_stream)
+                                showBroadcasterVideo(broadcaster_stream)
+                                // addVideoStream(video, userVideoStream, call.peer);
+                            });
+                        });
+                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        channel.listen('StopStreaming', () => {
+                            $('.class_ended_wrapper').css('z-index', 1);
+                            $('.class_ended_wrapper').prop('hidden', false);
+                            // window.close();
+                        });
                     });
 
                 })
