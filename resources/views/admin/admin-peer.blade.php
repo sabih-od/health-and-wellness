@@ -40,30 +40,33 @@
                         </div>
                         <figure class="videoThumbMain">
                             <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher">
+                            <div id="publisher" class="publisher" style="border:2px solid blue;">
                                 <video autoplay id="myCast"></video>
                             </div>
                         </figure>
 
-                        <figure class="videoThumbMain">
+                        <figure class="videoThumbMain" style="margin-top: 10% !important;">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher" style="border:2px solid red;">
                                 <video autoplay id="broadcaster"></video>
                             </div>
                         </figure>
                     </div>
-                    <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-phone">End Call</i>
-                        </button>
-                    </form>
+
                 </div>
                 <div class="col-md-2">
                     <div class="video-thumbs lobby_viewers_wrapper">
 
                     </div>
                 </div>
+            </div>
+            <div class="row" class="d-flex justify-content-center">
+                <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger align-items-center">
+                        <i class="fas fa-phone">End Call</i>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
@@ -196,17 +199,17 @@
             return channel;
         }
 
-        // const customerInitPresenceChannel = ({echo, channel_id}) => {
-        //     if (!echo || !channel_id) return
-        //
-        //     console.log(`streaming-channel.${channel_id}`)
-        //     const channel = echo.join(
-        //         `streaming-channel.${channel_id}`
-        //     );
-        //
-        //
-        //     return channel
-        // }
+        const customerInitPresenceChannel = ({echo, channel_id}) => {
+            if (!echo || !channel_id) return
+
+            console.log(`streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
+
+
+            return channel
+        }
 
         const callingToViewer = (user_id) => {
             console.log("in callingToViewer blade to start call", user_id)
@@ -354,65 +357,65 @@
                     alert('Error! ' + err.message)
                 })
 
-            //on allow screen click
-            $('body').on('click', '.btn_allow_user_screen', function () {
-                //prep data
-                var customer_id = $(this).data('user');
-
-                //hide all buttons
-                $('.btn_allow_user_screen').each(function () {
-                    $(this).prop('hidden', true);
-                });
-                $('#btn_revert_stream').prop('hidden', false);
-                $('#btn_revert_stream').data('user', customer_id);
-
-                const viewer_stream_c = viewer_streams['peer-batch-user-' + customer_id]
-                const [videoTrack] = viewer_stream_c.getVideoTracks();
-                const [audioTrack] = viewer_stream_c.getAudioTracks();
-                showMyVideo(viewer_stream_c)
-                // const broadcaster_stream_c = broadcaster_stream
-
-                console.log("calls", peer_calls, videoTrack, audioTrack)
-
-                for (let key in peer_calls) {
-                    if (videoTrack) {
-                        const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
-                        sender_video.replaceTrack(videoTrack);
-                    }
-                    if (audioTrack) {
-                        const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
-                        sender_audio.replaceTrack(audioTrack);
-                    }
-                }
-
-            });
-
-            //on revert stream click
-            $('body').on('click', '#btn_revert_stream', function () {
-                //prep data
-                var customer_id = $(this).data('user');
-
-                //hide button
-                $(this).prop('hidden', true);
-
-                const [videoTrack] = broadcaster_stream.getVideoTracks();
-                const [audioTrack] = broadcaster_stream.getAudioTracks();
-                // const broadcaster_stream_c = broadcaster_stream
-                showMyVideo(broadcaster_stream)
-
-                console.log("calls", peer_calls, videoTrack, audioTrack)
-
-                for (let key in peer_calls) {
-                    if (videoTrack) {
-                        const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
-                        sender_video.replaceTrack(videoTrack);
-                    }
-                    if (audioTrack) {
-                        const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
-                        sender_audio.replaceTrack(audioTrack);
-                    }
-                }
-            });
+            // on allow screen click
+            // $('body').on('click', '.btn_allow_user_screen', function () {
+            //     //prep data
+            //     var customer_id = $(this).data('user');
+            //
+            //     //hide all buttons
+            //     $('.btn_allow_user_screen').each(function () {
+            //         $(this).prop('hidden', true);
+            //     });
+            //     $('#btn_revert_stream').prop('hidden', false);
+            //     $('#btn_revert_stream').data('user', customer_id);
+            //
+            //     const viewer_stream_c = viewer_streams['peer-batch-user-' + customer_id]
+            //     const [videoTrack] = viewer_stream_c.getVideoTracks();
+            //     const [audioTrack] = viewer_stream_c.getAudioTracks();
+            //     showMyVideo(viewer_stream_c)
+            //     // const broadcaster_stream_c = broadcaster_stream
+            //
+            //     console.log("calls", peer_calls, videoTrack, audioTrack)
+            //
+            //     for (let key in peer_calls) {
+            //         if (videoTrack) {
+            //             const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
+            //             sender_video.replaceTrack(videoTrack);
+            //         }
+            //         if (audioTrack) {
+            //             const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
+            //             sender_audio.replaceTrack(audioTrack);
+            //         }
+            //     }
+            //
+            // });
+            //
+            // //on revert stream click
+            // $('body').on('click', '#btn_revert_stream', function () {
+            //     //prep data
+            //     var customer_id = $(this).data('user');
+            //
+            //     //hide button
+            //     $(this).prop('hidden', true);
+            //
+            //     const [videoTrack] = broadcaster_stream.getVideoTracks();
+            //     const [audioTrack] = broadcaster_stream.getAudioTracks();
+            //     // const broadcaster_stream_c = broadcaster_stream
+            //     showMyVideo(broadcaster_stream)
+            //
+            //     console.log("calls", peer_calls, videoTrack, audioTrack)
+            //
+            //     for (let key in peer_calls) {
+            //         if (videoTrack) {
+            //             const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
+            //             sender_video.replaceTrack(videoTrack);
+            //         }
+            //         if (audioTrack) {
+            //             const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
+            //             sender_audio.replaceTrack(audioTrack);
+            //         }
+            //     }
+            // });
 
         });
     </script>
