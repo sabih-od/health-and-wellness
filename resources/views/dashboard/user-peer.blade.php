@@ -61,7 +61,7 @@
                                 </h1>
                             </div>
                             <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher">
+                            <div id="publisher" class="publisher" style="border:2px solid red !important;">
                                 <video autoplay id="myCast"></video>
                             </div>
                         </figure>
