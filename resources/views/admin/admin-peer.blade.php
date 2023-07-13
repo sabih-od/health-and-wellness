@@ -122,7 +122,7 @@
 
             console.log(`admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
-                `streaming-channel.${channel_id}`
+                `admin-streaming-channel.${channel_id}`
             );
             console.log("channel Created", channel);
 
@@ -202,9 +202,9 @@
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             if (!echo || !channel_id) return
 
-            console.log(`customerInitPresenceChannel streaming-channel.${channel_id}`)
+            console.log(`customerInitPresenceChannel admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
-                `streaming-channel.${channel_id}`
+                `admin-streaming-channel.${channel_id}`
             );
 
 
@@ -219,26 +219,6 @@
                 call.on('stream', (viewer_stream) => {
                     console.log("in watcher viewer stream", viewer_stream)
                     viewer_streams['peer-course-user-' + user_id] = viewer_stream
-
-                    const viewer_stream_c = viewer_streams['peer-batch-user-' + user_id]
-                    const [videoTrack] = viewer_stream_c.getVideoTracks();
-                    const [audioTrack] = viewer_stream_c.getAudioTracks();
-                    showBroadcasterVideo(viewer_stream_c)
-                    // const broadcaster_stream_c = broadcaster_stream
-
-                    console.log("calls", peer_calls, videoTrack, audioTrack)
-
-                    for (let key in peer_calls) {
-                        if (videoTrack) {
-                            const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
-                            sender_video.replaceTrack(videoTrack);
-                        }
-                        if (audioTrack) {
-                            const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
-                            sender_audio.replaceTrack(audioTrack);
-                        }
-                    }
-
                 })
                 console.log('call senders', peer_calls)
             }
@@ -354,23 +334,22 @@
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
                         console.log("is stream" , stream);
-
-                        // peer.on("call", (call) => {
-                        //     console.log("onCall", call.peer)
-                        //     call.answer(stream);
-                        //     // // const video = document.createElement("audio");
-                        //     call.on("stream", (broadcaster_stream) => {
-                        //         console.log("in watcher broadcaster_stream", broadcaster_stream)
-                        //         showBroadcasterVideo(broadcaster_stream)
-                        //         // addVideoStream(video, userVideoStream, call.peer);
-                        //     });
-                        // });
-                        // let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        // channel.listen('StopStreaming', () => {
-                        //     $('.class_ended_wrapper').css('z-index', 1);
-                        //     $('.class_ended_wrapper').prop('hidden', false);
-                        //     // window.close();
-                        // });
+                        peer.on("call", (call) => {
+                            console.log("onCall", call.peer)
+                            call.answer(stream);
+                            // // const video = document.createElement("audio");
+                            call.on("stream", (broadcaster_stream) => {
+                                console.log("in watcher broadcaster_stream", broadcaster_stream)
+                                showBroadcasterVideo(broadcaster_stream)
+                                // addVideoStream(video, userVideoStream, call.peer);
+                            });
+                        });
+                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        channel.listen('StopStreaming', () => {
+                            $('.class_ended_wrapper').css('z-index', 1);
+                            $('.class_ended_wrapper').prop('hidden', false);
+                            // window.close();
+                        });
                     });
 
                 })
