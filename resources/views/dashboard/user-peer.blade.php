@@ -308,9 +308,8 @@
 
             userMediaPermission()
                 .then(stream => {
-                    console.log("In User")
+                    console.log("In User" , stream)
                     broadcaster_stream = stream;
-                    showMyVideo(stream)
                     peerInit(auth_id).then((newPeer) => {
                         console.log("auth_id" , auth_id)
                         console.log("newPeer" , newPeer)
@@ -333,6 +332,7 @@
                             // window.close();
                         });
                     });
+                    showMyVideo(stream)
 
                 })
                 .catch(err => {
