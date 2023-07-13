@@ -330,23 +330,23 @@
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-                        console.log("is stream" , stream);
-                        peer.on("call", (call) => {
-                            console.log("onCall", call.peer)
-                            call.answer(stream);
-                            // // const video = document.createElement("audio");
-                            call.on("stream", (broadcaster_stream) => {
-                                console.log("in watcher broadcaster_stream", broadcaster_stream)
-                                showBroadcasterVideo(broadcaster_stream)
-                                // addVideoStream(video, userVideoStream, call.peer);
-                            });
-                        });
-                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        channel.listen('StopStreaming', () => {
-                            $('.class_ended_wrapper').css('z-index', 1);
-                            $('.class_ended_wrapper').prop('hidden', false);
-                            // window.close();
-                        });
+                        // console.log("is stream" , stream);
+                        // peer.on("call", (call) => {
+                        //     console.log("onCall", call.peer)
+                        //     call.answer(stream);
+                        //     // // const video = document.createElement("audio");
+                        //     call.on("stream", (broadcaster_stream) => {
+                        //         console.log("in watcher broadcaster_stream", broadcaster_stream)
+                        //         showBroadcasterVideo(broadcaster_stream)
+                        //         // addVideoStream(video, userVideoStream, call.peer);
+                        //     });
+                        // });
+                        // let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        // channel.listen('StopStreaming', () => {
+                        //     $('.class_ended_wrapper').css('z-index', 1);
+                        //     $('.class_ended_wrapper').prop('hidden', false);
+                        //     // window.close();
+                        // });
                     });
 
                 })
