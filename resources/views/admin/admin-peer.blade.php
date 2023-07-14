@@ -16,37 +16,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
-    <style>
-
-.wrapper{
-    height:100vh;
-    min-height: 600px;
-}
-        .smallVideo{
-            position: fixed;
-            bottom: 0;
-            right: 0;
-        }
-        .largeVideo{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-        }
-        .largeVideo video{
-            width:100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-        }
-
-        .endbtn{
-            position: fixed;
-            bottom: 0;
-        left: 0;
-        }
-    </style>
+{{--    <style>--}}
+{{--        .publisher{--}}
+{{--            /*width: 100%;*/--}}
+{{--            border:2px solid green--}}
+{{--        }--}}
+{{--.wrapper{--}}
+{{--    height:100vh;--}}
+{{--    min--}}
+{{--}--}}
+{{--    </style>--}}
 @endsection
 @section('section')
 
@@ -60,8 +39,8 @@
     <section class="chattingSec">
         <div class="container-fluid">
             <div class="row">
-{{--                <div class="col-md-2"></div>--}}
-                <div class="col-md-12">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
                     <div class="videoBox" style="width: 100%">
 {{--                        <div class="headingCont">--}}
 {{--                            <h3></h3>--}}
@@ -69,18 +48,17 @@
                         <div class="videoControllers" style="z-index: 1;">
                             <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-undo"></i></a>
                         </div>
-
-
-                        <figure class="videoThumbMain largeVideo" >
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher" >
-                                <video autoplay id="broadcaster"></video>
-                            </div>
-                        </figure>
-                        <figure class="videoThumbMain smallVideo">
+                        <figure class="videoThumbMain">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher" style="border:2px solid blue;">
                                 <video autoplay id="myCast"></video>
+                            </div>
+                        </figure>
+
+                        <figure class="videoThumbMain" >
+                            <div id="subscriber" class="subscriber"></div>
+                            <div id="publisher" class="publisher" >
+                                <video autoplay id="broadcaster"></video>
                             </div>
                         </figure>
                     </div>
@@ -95,7 +73,7 @@
             <div class="row" class="d-flex justify-content-center">
                 <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger align-items-center endbtn">
+                    <button type="submit" class="btn btn-danger align-items-center">
                         <i class="fas fa-phone">End Call</i>
                     </button>
                 </form>
