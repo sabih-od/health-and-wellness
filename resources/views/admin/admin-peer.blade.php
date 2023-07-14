@@ -37,7 +37,7 @@
     </style>
 
 {{--    <section class="chattingSec">--}}
-        <div class="container">
+        <div class="container mt-5" style="height:100vh !important;">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -52,16 +52,14 @@
                         </div>
                     </div>
 
-                   <div class="col-md-2">
-                       <div class="row" class="d-flex justify-content-center">
+                       <div class="row ml-5" class="d-flex justify-content-center">
                            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                                @csrf
                                <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
-                                   <i class="fas fa-phone">End Call</i>
+                                   <i class="fas fa-phone ml-2">End Call</i>
                                </button>
                            </form>
                        </div>
-                   </div>
                 </div>
             </div>
             <div class="row">
