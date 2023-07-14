@@ -16,6 +16,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
+    <style>
+
+.wrapper{
+    height:100vh;
+    min-height: 600px;
+}
+        .smallVideo{
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+        .largeVideo{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        .largeVideo video{
+            width:100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        .endbtn{
+            position: fixed;
+            bottom: 0;
+        left: 0;
+        }
+    </style>
 @endsection
 @section('section')
 
@@ -29,8 +60,8 @@
     <section class="chattingSec">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+{{--                <div class="col-md-2"></div>--}}
+                <div class="col-md-12">
                     <div class="videoBox" style="width: 100%">
 {{--                        <div class="headingCont">--}}
 {{--                            <h3></h3>--}}
@@ -38,17 +69,18 @@
                         <div class="videoControllers" style="z-index: 1;">
                             <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-undo"></i></a>
                         </div>
-                        <figure class="videoThumbMain">
+
+
+                        <figure class="videoThumbMain largeVideo" >
+                            <div id="subscriber" class="subscriber"></div>
+                            <div id="publisher" class="publisher" >
+                                <video autoplay id="broadcaster"></video>
+                            </div>
+                        </figure>
+                        <figure class="videoThumbMain smallVideo">
                             <div id="subscriber" class="subscriber"></div>
                             <div id="publisher" class="publisher" style="border:2px solid blue;">
                                 <video autoplay id="myCast"></video>
-                            </div>
-                        </figure>
-
-                        <figure class="videoThumbMain" style="margin-top: 42% !important;">
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher" style="border:2px solid red;">
-                                <video autoplay id="broadcaster"></video>
                             </div>
                         </figure>
                     </div>
@@ -63,7 +95,7 @@
             <div class="row" class="d-flex justify-content-center">
                 <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger align-items-center">
+                    <button type="submit" class="btn btn-danger align-items-center endbtn">
                         <i class="fas fa-phone">End Call</i>
                     </button>
                 </form>
@@ -129,24 +161,6 @@
             console.log("session_book_user.id" , session_book_user , session_book_user.id)
 
             callingToViewer(session_book_user);
-            // channel.joining((user) => {
-            //     console.log('User Joined', user);
-            //     callingToViewer(user.id);
-            //     toastr.info(user.name + ' has joined the session.');
-            //     let img_req = getUserProfilePicture(user.id);
-            //     $('.lobby_viewers_wrapper')
-            //         .append(`<div id="viewer-id-${user.id}">
-            //                         <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-            //                             <div class="text-center" style="width: 100%;">
-            //                                 <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-            //                                 <br />
-            //                                 <img src="` + img_req.responseText + `" style="background-color: white; max-width: 100px; max-height: 100px;">
-            //                                 <h4 style="color:white;">` + user.name + `</h4>
-            //                                 <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-            //                             </div>
-            //                         </div>
-            //                     </div>`);
-            // });
             channel.leaving((user) => {
                 console.log('User Left', user);
                 // console.log(user.name, "Left");
@@ -170,7 +184,6 @@
                 `admin-streaming-channel.${channel_id}`
             );
 
-
             return channel
         }
 
@@ -178,13 +191,7 @@
             console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
                 const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-                // peer.on('call', (incomingCall) => {
-                //     incomingCall.answer(yourMediaStream); // Answer the call with your own stream
-                //     incomingCall.on('stream', (remoteStream) => {
-                //         // Handle the received remote stream
-                //         showBroadcasterVideo(remoteStream);
-                //     });
-                // });
+
                 call.on('stream', (viewer_streams) => {
                     console.log("in watcher viewer stream", viewer_streams)
                             showBroadcasterVideo(viewer_streams);
@@ -194,18 +201,6 @@
             }
         }
 
-        // const callingToViewer = (user_id) => {
-        //     console.log("in callingToViewer blade to start call", user_id)
-        //     if (peer && broadcaster_stream) {
-        //         peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-        //         let call = peer_calls['peer-course-user-' + user_id]
-        //         call.on('stream', (viewer_stream) => {
-        //             console.log("in watcher viewer stream", viewer_stream)
-        //             viewer_streams['peer-course-user-' + user_id] = viewer_stream
-        //         })
-        //         console.log('call senders', peer_calls)
-        //     }
-        // }
 
         const userMediaPermission = () => {
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -294,7 +289,6 @@
         }
     </script>
 
-
     <script>
         let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
         let session_id = '{{ $session->id }}';
@@ -324,66 +318,6 @@
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
-
-            // on allow screen click
-            // $('body').on('click', '.btn_allow_user_screen', function () {
-            //     //prep data
-            //     var customer_id = $(this).data('user');
-            //
-            //     //hide all buttons
-            //     $('.btn_allow_user_screen').each(function () {
-            //         $(this).prop('hidden', true);
-            //     });
-            //     $('#btn_revert_stream').prop('hidden', false);
-            //     $('#btn_revert_stream').data('user', customer_id);
-            //
-            //     const viewer_stream_c = viewer_streams['peer-batch-user-' + customer_id]
-            //     const [videoTrack] = viewer_stream_c.getVideoTracks();
-            //     const [audioTrack] = viewer_stream_c.getAudioTracks();
-            //     showMyVideo(viewer_stream_c)
-            //     // const broadcaster_stream_c = broadcaster_stream
-            //
-            //     console.log("calls", peer_calls, videoTrack, audioTrack)
-            //
-            //     for (let key in peer_calls) {
-            //         if (videoTrack) {
-            //             const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
-            //             sender_video.replaceTrack(videoTrack);
-            //         }
-            //         if (audioTrack) {
-            //             const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
-            //             sender_audio.replaceTrack(audioTrack);
-            //         }
-            //     }
-            //
-            // });
-            //
-            // //on revert stream click
-            // $('body').on('click', '#btn_revert_stream', function () {
-            //     //prep data
-            //     var customer_id = $(this).data('user');
-            //
-            //     //hide button
-            //     $(this).prop('hidden', true);
-            //
-            //     const [videoTrack] = broadcaster_stream.getVideoTracks();
-            //     const [audioTrack] = broadcaster_stream.getAudioTracks();
-            //     // const broadcaster_stream_c = broadcaster_stream
-            //     showMyVideo(broadcaster_stream)
-            //
-            //     console.log("calls", peer_calls, videoTrack, audioTrack)
-            //
-            //     for (let key in peer_calls) {
-            //         if (videoTrack) {
-            //             const sender_video = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === videoTrack.kind);
-            //             sender_video.replaceTrack(videoTrack);
-            //         }
-            //         if (audioTrack) {
-            //             const sender_audio = peer_calls[key].peerConnection.getSenders().find((s) => s.track.kind === audioTrack.kind);
-            //             sender_audio.replaceTrack(audioTrack);
-            //         }
-            //     }
-            // });
 
         });
     </script>
