@@ -67,7 +67,7 @@
             <div class="col-md-4">
                 <figure class="videoThumbMain">
                     <div id="subscriber" class="subscriber"></div>
-                    <div id="publisher" class="publisher">
+                    <div id="publisher" class="publisher" >
                         <video autoplay id="myCast" style="width: 100%"></video>
                     </div>
                 </figure>
@@ -93,214 +93,240 @@
     {{--        <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
+        let peer_calls = {};
         let broadcaster_stream = null;
+        let broadcaster_stream_original = null;
+        let is_peer_open = false;
+        let viewer_streams = null;
         let session_book_user = '{{$booked_session_user->id}}';
-        let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
-
-        $(document).ready(function() {
-            userMediaPermission()
-                .then(stream => {
-                    broadcaster_stream = stream;
-                    showMyVideo(stream);
-                    peerInit(auth_id).then(newPeer => {
-                        peer = newPeer;
-                        console.log("Admin Peer initialized", peer);
-                        if(peer){
-                            console.log("IN PEER", );
-
-                            startCallToUser();
-                        }
-                    });
-                })
-                .catch(err => {
-                    alert('Error! ' + err.message);
-                });
-        });
 
         const peerInit = (auth_id) => {
+
             return new Promise(resolve => {
                 const peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
                     host: "/",
                     port: "3008",
                 });
-
-                peer.on('open', function(id) {
-                    console.log("Admin Peer ID:", id);
+                //when peer is opened
+                peer.on('open', function (id) {
+                    console.log("session_book_user", session_book_user);
+                    console.log("test id admin", id)
+                    is_peer_open = true;
                     resolve(peer);
-                });
-
-                peer.on('error', function(error) {
-                    console.error('Admin Peer Error:', error);
+                    // alert('Peer connected. My peer ID is: ' + id);
                 });
             });
         }
 
-        const startCallToUser = () => {
-            console.log("in startCallToUser")
-            const call = peer.call(session_book_user, broadcaster_stream);
-            console.log("Admin Call started to user:", session_book_user);
+        const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+            console.log("in blade admin broadcasterInitPresenceChannel", echo, auth_id, channel_id)
 
-            call.on('stream', function(remoteStream) {
-                console.log("Admin Received user stream:", remoteStream);
-                showBroadcasterVideo(remoteStream);
+            if (!echo || !auth_id || !channel_id) return
+
+            console.log("Pass Condition");
+
+            console.log(`streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
+            console.log("channel Created", channel);
+
+            console.log("session_book_user.id", session_book_user, session_book_user.id)
+
+            callingToViewer(session_book_user);
+            channel.leaving((user) => {
+                console.log('User Left', user);
+                // console.log(user.name, "Left");
+                $(`#viewer-id-${user.id}`).remove()
             });
 
-            call.on('close', function() {
-                console.log("Admin Call ended");
-                // Perform any necessary cleanup or display a call ended message
-            });
+            channel.listen('.viewer.raised.hand', (e) => {
+                toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
+                $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
+                $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
+            })
 
-            call.on('error', function(error) {
-                console.error('Admin Call Error:', error);
-            });
+            return channel;
         }
 
-            const userMediaPermission = () => {
-                // Older browsers might not implement mediaDevices at all, so we set an empty object first
-                if (navigator.mediaDevices === undefined) {
-                    navigator.mediaDevices = {};
-                }
+        const customerInitPresenceChannel = ({echo, channel_id}) => {
+            if (!echo || !channel_id) return
 
-                // Some browsers partially implement media devices. We can't just assign an object
-                // with getUserMedia as it would overwrite existing properties.
-                // Here, we will just add the getUserMedia property if it's missing.
-                if (navigator.mediaDevices.getUserMedia === undefined) {
-                    navigator.mediaDevices.getUserMedia = function (constraints) {
-                        // First get ahold of the legacy getUserMedia, if present
-                        const getUserMedia =
-                            navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            console.log(`customerInitPresenceChannel admin-streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
 
-                        // Some browsers just don't implement it - return a rejected promise with an error
-                        // to keep a consistent interface
-                        if (!getUserMedia) {
-                            return Promise.reject(
-                                new Error("getUserMedia is not implemented in this browser")
-                            );
-                        }
+            return channel
+        }
 
-                        // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-                        return new Promise((resolve, reject) => {
-                            getUserMedia.call(navigator, constraints, resolve, reject);
-                        });
-                    };
-                }
-                navigator.mediaDevices.getUserMedia =
-                    navigator.mediaDevices.getUserMedia ||
-                    navigator.webkitGetUserMedia ||
-                    navigator.mozGetUserMedia;
+        const callingToViewer = (user_id) => {
+            console.log("in callingToViewer blade to start call", user_id)
+            if (peer && broadcaster_stream) {
+                const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
 
-                return new Promise((resolve, reject) => {
-                    navigator.mediaDevices
-                        .getUserMedia({video: true, audio: true})
-                        .then(stream => {
-                            resolve(stream);
-                        })
-                        .catch(err => {
-                            reject(err);
-                            //   throw new Error(`Unable to fetch stream ${err}`);
-                        });
+                call.on('stream', (viewer_streams) => {
+                    console.log("in watcher viewer stream", viewer_streams)
+                    showBroadcasterVideo(viewer_streams);
+
+                })
+                console.log('call senders', call)
+
+                const endCallButton = document.getElementById('end-call-button');
+                console.log("IN END CALL SCRIPT")
+                endCallButton.addEventListener('click', () => {
+                    // End the call by calling the close() method on the call object
+                    if (call) {
+                        call.close();
+
+                        console.log("CALL CLOSED");
+                        // Additional cleanup or actions can be performed here if needed
+                    }
                 });
+
+            }
+        }
+
+
+        const userMediaPermission = () => {
+            // Older browsers might not implement mediaDevices at all, so we set an empty object first
+            if (navigator.mediaDevices === undefined) {
+                navigator.mediaDevices = {};
             }
 
-            const showMyVideo = (stream) => {
-                console.log("in showMyVideo admin blade to start call", stream)
+            // Some browsers partially implement media devices. We can't just assign an object
+            // with getUserMedia as it would overwrite existing properties.
+            // Here, we will just add the getUserMedia property if it's missing.
+            if (navigator.mediaDevices.getUserMedia === undefined) {
+                navigator.mediaDevices.getUserMedia = function (constraints) {
+                    // First get ahold of the legacy getUserMedia, if present
+                    const getUserMedia =
+                        navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-                const myCast = document.getElementById('myCast')
-                if (myCast) {
-                    myCast.srcObject = stream
-                    myCast.muted = true
-                    myCast.addEventListener("loadedmetadata", () => {
-                        // myCast.value.controls = true
-                        myCast.play();
+                    // Some browsers just don't implement it - return a rejected promise with an error
+                    // to keep a consistent interface
+                    if (!getUserMedia) {
+                        return Promise.reject(
+                            new Error("getUserMedia is not implemented in this browser")
+                        );
+                    }
+
+                    // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+                    return new Promise((resolve, reject) => {
+                        getUserMedia.call(navigator, constraints, resolve, reject);
+                    });
+                };
+            }
+            navigator.mediaDevices.getUserMedia =
+                navigator.mediaDevices.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia;
+
+            return new Promise((resolve, reject) => {
+                navigator.mediaDevices
+                    .getUserMedia({video: true, audio: true})
+                    .then(stream => {
+                        resolve(stream);
                     })
-                }
-            }
-
-            const showBroadcasterVideo = (stream) => {
-                console.log("in showBroadcasterVideo admin blade to start call", stream)
-
-                const broadcaster = document.getElementById('broadcaster')
-                if (broadcaster) {
-                    broadcaster.srcObject = stream
-                    broadcaster.addEventListener("loadedmetadata", () => {
-                        // broadcaster.value.controls = true
-                        broadcaster.play();
-                    })
-                }
-            }
-
-        function handleCallClose() {
-            // Perform any necessary cleanup or display a call ended message
-            alert('Call ended');
+                    .catch(err => {
+                        reject(err);
+                        //   throw new Error(`Unable to fetch stream ${err}`);
+                    });
+            });
         }
 
-        {{--</script>--}}
+        const showMyVideo = (stream) => {
+            console.log("in showMyVideo admin blade to start call", stream)
 
-        {{--<script>--}}
-        {{--    let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';--}}
-        {{--    let session_id = '{{ $session->id }}';--}}
-        {{--    let avatar_image_url = '{{asset('images/avatar.png')}}';--}}
+            const myCast = document.getElementById('myCast')
+            if (myCast) {
+                myCast.srcObject = stream
+                myCast.muted = true
+                myCast.addEventListener("loadedmetadata", () => {
+                    // myCast.value.controls = true
+                    myCast.play();
+                })
+            }
+        }
 
-        {{--    $(document).ready(function () {--}}
-        {{--        //establish session_id, session_id, token--}}
+        const showBroadcasterVideo = (stream) => {
+            console.log("in showBroadcasterVideo admin blade to start call", stream)
 
-        {{--        userMediaPermission()--}}
-        {{--            .then(stream => {--}}
-        {{--                broadcaster_stream = stream;--}}
-        {{--                broadcaster_stream_original = stream;--}}
-        {{--                showMyVideo(stream)--}}
-        {{--                peerInit(auth_id).then((newPeer) => {--}}
-        {{--                    console.log("newPeer in admin", newPeer)--}}
-        {{--                    peer = newPeer;--}}
+            const broadcaster = document.getElementById('broadcaster')
+            if (broadcaster) {
+                broadcaster.srcObject = stream
+                broadcaster.addEventListener("loadedmetadata", () => {
+                    // broadcaster.value.controls = true
+                    broadcaster.play();
+                })
+            }
+        }
 
-        {{--                    console.log("Echo", window.Echo);--}}
+        const getUserProfilePicture = (user_id) => {
+            return $.ajax({
+                type: 'POST',
+                url: '{{route("getUserProfilePicture")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    user_id: user_id
+                },
 
-        {{--                    // FOR CALLING OTHERS--}}
-        {{--                    broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});--}}
+            });
+        }
+    </script>
 
-        {{--                    console.log("is stream", stream);--}}
-        {{--                });--}}
+    <script>
+        let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
+        let session_id = '{{ $session->id }}';
+        let avatar_image_url = '{{asset('images/avatar.png')}}';
 
-        {{--            })--}}
-        {{--            .catch(err => {--}}
-        {{--                alert('Error! ' + err.message)--}}
-        {{--            })--}}
+        $(document).ready(function () {
+            //establish session_id, session_id, token
 
-        {{--    });--}}
+            userMediaPermission()
+                .then(stream => {
+                    broadcaster_stream = stream;
+                    broadcaster_stream_original = stream;
+                    showMyVideo(stream)
+                    peerInit(auth_id).then((newPeer) => {
+                        console.log("newPeer in admin", newPeer)
+                        peer = newPeer;
 
-        {{--    // Handle errors--}}
-        {{--    localPeer.on('error', handleError);--}}
+                        console.log("Echo", window.Echo);
 
-        {{--    // Function to handle incoming calls--}}
-        {{--    function handleIncomingCall(call) {--}}
-        {{--        // Answer the incoming call--}}
-        {{--        call.answer(null); // You can pass a stream as the parameter--}}
+                        // FOR CALLING OTHERS
+                        broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-        {{--        // Handle the call events--}}
-        {{--        call.on('stream', handleRemoteStream); // Handle the remote stream once it's received--}}
-        {{--        call.on('close', handleCallClose); // Handle the call closure--}}
-        {{--    }--}}
+                        console.log("is stream", stream);
+                    });
 
-        {{--    // Function to handle the remote stream--}}
-        {{--    function handleRemoteStream(stream) {--}}
-        {{--        // Display the remote stream (e.g., play it in a video element)--}}
-        {{--        const videoElement = document.getElementById('remoteVideo');--}}
-        {{--        videoElement.srcObject = stream;--}}
-        {{--    }--}}
+                })
+                .catch(err => {
+                    alert('Error! ' + err.message)
+                })
 
-        {{--    // Function to handle call closure--}}
-        {{--    function handleCallClose() {--}}
-        {{--        // Perform any necessary cleanup or display a call ended message--}}
-        {{--        console.log('Call ended');--}}
-        {{--    }--}}
+        });
+    </script>
 
-        {{--    // Function to handle errors--}}
-        {{--    function handleError(error) {--}}
-        {{--        // Handle any errors that occur during the call--}}
-        {{--        console.error('Error:', error);--}}
-        {{--    }--}}
+    <script>
+        // ... Your existing code ...
 
+        // Add event listener to the "End Call" button
+        // const endCallButton = document.getElementById('end-call-button');
+        // console.log("IN END CALL SCRIPT")
+        // endCallButton.addEventListener('click', () => {
+        //     // End the call by calling the close() method on the call object
+        //     if (call) {
+        //         call.close();
+        //
+        //         console.log("CALL CLOSED");
+        //
+        //         // Additional cleanup or actions can be performed here if needed
+        //     }
+        // });
+
+        // ... The rest of your code ...
     </script>
 
 
