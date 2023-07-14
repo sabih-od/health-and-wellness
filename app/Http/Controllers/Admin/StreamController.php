@@ -45,7 +45,7 @@ class StreamController extends Controller
         $session_id->is_streaming = false;
         $session_id->save();
         event(new StopStreaming($session_id));
-        return redirect()->route('admin.add-session')->with('error' , 'Call Ended');
+        return redirect()->route('session')->with('error' , 'Call Ended');
     }
 
 //    public function getUserProfilePicture (Request $request)
