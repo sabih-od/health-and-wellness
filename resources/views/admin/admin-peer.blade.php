@@ -91,7 +91,7 @@
         let broadcaster_stream = null;
         let broadcaster_stream_original = null;
         let is_peer_open = false;
-        let viewer_streams = [];
+        let viewer_streams = null;
         let session_book_user = '{{$booked_session_user->id}}';
 
         const peerInit = (auth_id) => {
@@ -178,10 +178,18 @@
             console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
                 const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-                // call.on('stream', (viewer_stream) => {
-                //     console.log("in watcher viewer stream", viewer_stream)
-                //     viewer_streams['peer-course-user-' + user_id] = viewer_stream
-                // })
+                // peer.on('call', (incomingCall) => {
+                //     incomingCall.answer(yourMediaStream); // Answer the call with your own stream
+                //     incomingCall.on('stream', (remoteStream) => {
+                //         // Handle the received remote stream
+                //         showBroadcasterVideo(remoteStream);
+                //     });
+                // });
+                call.on('stream', (viewer_streams) => {
+                    console.log("in watcher viewer stream", viewer_streams)
+                            showBroadcasterVideo(viewer_streams);
+
+                })
                 console.log('call senders', call)
             }
         }
@@ -303,14 +311,6 @@
                     peerInit(auth_id).then((newPeer) => {
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
-
-                        peer.on('call', (incomingCall) => {
-                            incomingCall.answer(yourMediaStream); // Answer the call with your own stream
-                            incomingCall.on('stream', (remoteStream) => {
-                                // Handle the received remote stream
-                                showBroadcasterVideo(remoteStream);
-                            });
-                        });
 
                         console.log("Echo", window.Echo);
 
