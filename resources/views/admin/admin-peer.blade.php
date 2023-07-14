@@ -176,6 +176,20 @@
 
                 })
                 console.log('call senders', call)
+
+                const endCallButton = document.getElementById('end-call-button');
+                console.log("IN END CALL SCRIPT")
+                endCallButton.addEventListener('click', () => {
+                    // End the call by calling the close() method on the call object
+                    if (call) {
+                        call.close();
+
+                        console.log("CALL CLOSED");
+
+                        // Additional cleanup or actions can be performed here if needed
+                    }
+                });
+
             }
         }
 
@@ -304,18 +318,18 @@
         // ... Your existing code ...
 
         // Add event listener to the "End Call" button
-        const endCallButton = document.getElementById('end-call-button');
-        console.log("IN END CALL SCRIPT")
-        endCallButton.addEventListener('click', () => {
-            // End the call by calling the close() method on the call object
-            if (call) {
-                call.close();
-
-                console.log("CALL CLOSED");
-
-                // Additional cleanup or actions can be performed here if needed
-            }
-        });
+        // const endCallButton = document.getElementById('end-call-button');
+        // console.log("IN END CALL SCRIPT")
+        // endCallButton.addEventListener('click', () => {
+        //     // End the call by calling the close() method on the call object
+        //     if (call) {
+        //         call.close();
+        //
+        //         console.log("CALL CLOSED");
+        //
+        //         // Additional cleanup or actions can be performed here if needed
+        //     }
+        // });
 
         // ... The rest of your code ...
     </script>
