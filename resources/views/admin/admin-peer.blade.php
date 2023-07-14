@@ -156,7 +156,7 @@
                     console.log("test id admin", id)
 
                     // Start the call to the specified user ID
-                    const call = peer.call(session_book_user, stream); // You can pass a stream as the second parameter
+                    const call = peer.call(session_book_user, broadcaster_stream); // You can pass a stream as the second parameter
 
                     call.on("stream", (broadcaster_stream) => {
                         console.log("in watcher broadcaster_stream", broadcaster_stream)
