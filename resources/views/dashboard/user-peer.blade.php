@@ -315,7 +315,6 @@
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
                             peer.disconnect();
-
                             alert("The Call Has Been Closed");
                             // Close video/audio streams
                             // yourVideoStream.getTracks().forEach(track => track.stop());

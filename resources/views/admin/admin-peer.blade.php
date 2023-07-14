@@ -16,70 +16,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{{asset('admin/stream/style.css')}}"/>
-{{--    <style>--}}
-{{--        .publisher{--}}
-{{--            /*width: 100%;*/--}}
-{{--            border:2px solid green--}}
-{{--        }--}}
-{{--.wrapper{--}}
-{{--    height:100vh;--}}
-{{--    min--}}
-{{--}--}}
-{{--    </style>--}}
+    {{--    <style>--}}
+    {{--        .publisher{--}}
+    {{--            /*width: 100%;*/--}}
+    {{--            border:2px solid green--}}
+    {{--        }--}}
+    {{--.wrapper{--}}
+    {{--    height:100vh;--}}
+    {{--    min--}}
+    {{--}--}}
+    {{--    </style>--}}
 @endsection
 @section('section')
 
 
     <style>
-        header, footer, .main-sidebar {
+        .main-header, footer, .main-sidebar {
             display: none;
         }
     </style>
 
-    <section class="chattingSec">
-        <div class="container-fluid">
+{{--    <section class="chattingSec">--}}
+        <div class="container">
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <div class="videoBox" style="width: 100%">
-{{--                        <div class="headingCont">--}}
-{{--                            <h3></h3>--}}
-{{--                        </div>--}}
-                        <div class="videoControllers" style="z-index: 1;">
-                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-undo"></i></a>
+                <div class="col-md-10">
+                    <div class="col-md-10">
+                        <div class="videoBox" style="width: 100%">
+                            <figure class="videoThumbMain">
+                                <div id="subscriber" class="subscriber"></div>
+                                <div id="publisher" class="publisher">
+                                    <video autoplay id="broadcaster" style="width: 100%"></video>
+                                </div>
+                            </figure>
                         </div>
-                        <figure class="videoThumbMain">
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher" style="border:2px solid blue;">
-                                <video autoplay id="myCast"></video>
-                            </div>
-                        </figure>
-
-                        <figure class="videoThumbMain" style="margin-top: 41%;">
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher" >
-                                <video autoplay id="broadcaster"></video>
-                            </div>
-                        </figure>
                     </div>
 
+                   <div class="col-md-2">
+                       <div class="row" class="d-flex justify-content-center">
+                           <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                               @csrf
+                               <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
+                                   <i class="fas fa-phone">End Call</i>
+                               </button>
+                           </form>
+                       </div>
+                   </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="video-thumbs lobby_viewers_wrapper">
-
+            </div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                <figure class="videoThumbMain">
+                    <div id="subscriber" class="subscriber"></div>
+                    <div id="publisher" class="publisher" >
+                        <video autoplay id="myCast" style="width: 100%"></video>
                     </div>
+                </figure>
                 </div>
             </div>
-            <div class="row" class="d-flex justify-content-center">
-                <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                    @csrf
-                    <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
-                        <i class="fas fa-phone">End Call</i>
-                    </button>
-                </form>
-            </div>
+
         </div>
-    </section>
+{{--    </section>--}}
 @endsection
 
 @section('script')
@@ -114,7 +112,7 @@
                 });
                 //when peer is opened
                 peer.on('open', function (id) {
-                    console.log("session_book_user" , session_book_user);
+                    console.log("session_book_user", session_book_user);
                     console.log("test id admin", id)
                     is_peer_open = true;
                     resolve(peer);
@@ -136,7 +134,7 @@
             );
             console.log("channel Created", channel);
 
-            console.log("session_book_user.id" , session_book_user , session_book_user.id)
+            console.log("session_book_user.id", session_book_user, session_book_user.id)
 
             callingToViewer(session_book_user);
             channel.leaving((user) => {
@@ -172,7 +170,7 @@
 
                 call.on('stream', (viewer_streams) => {
                     console.log("in watcher viewer stream", viewer_streams)
-                            showBroadcasterVideo(viewer_streams);
+                    showBroadcasterVideo(viewer_streams);
 
                 })
                 console.log('call senders', call)
@@ -185,7 +183,6 @@
                         call.close();
 
                         console.log("CALL CLOSED");
-
                         // Additional cleanup or actions can be performed here if needed
                     }
                 });
@@ -256,7 +253,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo admin blade to start call" , stream)
+            console.log("in showBroadcasterVideo admin blade to start call", stream)
 
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
@@ -303,7 +300,7 @@
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-                        console.log("is stream" , stream);
+                        console.log("is stream", stream);
                     });
 
                 })
