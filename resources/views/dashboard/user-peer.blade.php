@@ -107,60 +107,94 @@
     {{--    <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
-        let viewer_stream = null;
-        let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
-
-        $(document).ready(function() {
-            userMediaPermission()
-                .then(stream => {
-                    viewer_stream = stream;
-                    showMyVideo(stream);
-                    peerInit(auth_id).then(newPeer => {
-                        peer = newPeer;
-                        console.log("User Peer initialized", peer);
-                    });
-                })
-                .catch(err => {
-                    alert('Error! ' + err.message);
-                });
-        });
+        let peer_calls = {};
+        let broadcaster_stream = null;
+        let broadcaster_stream_original = null;
+        let is_peer_open = false;
+        let viewer_streams = [];
 
         const peerInit = (auth_id) => {
+
             return new Promise(resolve => {
                 const peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
                     host: "/",
                     port: "3008",
                 });
-
-                peer.on('open', function(id) {
-                    console.log("User Peer ID:", id);
+                //when peer is opened
+                peer.on('open', function (id) {
+                    console.log("test id in blade", id)
+                    is_peer_open = true;
                     resolve(peer);
-                });
-
-                peer.on('error', function(error) {
-                    console.error('User Peer Error:', error);
-                });
-
-                peer.on('call', function(call) {
-                    console.log("User Incoming call from admin:", call);
-                    call.answer(viewer_stream);
-
-                    call.on('stream', function(remoteStream) {
-                        console.log("User Received admin stream:", remoteStream);
-                        showBroadcasterVideo(remoteStream);
-                    });
-
-                    call.on('close', function() {
-                        console.log("User Call ended");
-                        // Perform any necessary cleanup or display a call ended message
-                    });
-
-                    call.on('error', function(error) {
-                        console.error('User Call Error:', error);
-                    });
+                    // alert('Peer connected. My peer ID is: ' + id);
                 });
             });
+        }
+
+        const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
+            console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
+            if (!echo || !auth_id || !channel_id) return
+
+
+            console.log(`streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
+
+            callingToViewer(2);
+
+            channel.joining((user) => {
+                console.log('User Joined', user);
+                callingToViewer(user.id);
+                toastr.info(user.name + ' has joined the session.');
+                let img_req = getUserProfilePicture(user.id);
+                $('.lobby_viewers_wrapper')
+                    .append(`<div id="viewer-id-${user.id}">
+                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
+                                        <div class="text-center" style="width: 100%;">
+                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
+                                            <br />
+                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
+                                            <h4 style="color:white;">` + user.name + `</h4>
+                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
+                                        </div>
+                                    </div>
+                                </div>`);
+            });
+            channel.leaving((user) => {
+                console.log('User Left', user);
+                // console.log(user.name, "Left");
+                $(`#viewer-id-${user.id}`).remove()
+            });
+
+            return channel;
+        }
+
+        const customerInitPresenceChannel = ({echo, channel_id}) => {
+            console.log("in customerInitPresenceChannel user", echo, channel_id)
+            if (!echo || !channel_id) return
+
+            console.log(`streaming-channel.${channel_id}`)
+            const channel = echo.join(
+                `streaming-channel.${channel_id}`
+            );
+
+
+            return channel
+        }
+
+        const callingToViewer = (user_id) => {
+            console.log("in callingToViewer user" , user_id)
+
+            if (peer && broadcaster_stream) {
+                peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
+                let call = peer_calls['peer-course-user-' + user_id]
+                call.on('stream', (viewer_stream) => {
+                    console.log("in watcher viewer stream", viewer_stream)
+                    viewer_streams['peer-course-user-' + user_id] = viewer_stream
+                })
+                console.log('call senders', peer_calls)
+            }
         }
 
         const userMediaPermission = () => {
@@ -211,7 +245,7 @@
         }
 
         const showMyVideo = (stream) => {
-            console.log("in showMyVideo admin blade to start call", stream)
+            console.log("in showMyVideo user", stream)
 
             const myCast = document.getElementById('myCast')
             if (myCast) {
@@ -225,8 +259,7 @@
         }
 
         const showBroadcasterVideo = (stream) => {
-            console.log("in showBroadcasterVideo admin blade to start call", stream)
-
+            console.log("in showBroadcasterVideo user", stream)
             const broadcaster = document.getElementById('broadcaster')
             if (broadcaster) {
                 broadcaster.srcObject = stream
@@ -237,11 +270,65 @@
             }
         }
 
-        function handleCallClose() {
-            // Perform any necessary cleanup or display a call ended message
-            alert('Call ended');
+        const getUserProfilePicture = (user_id) => {
+            return $.ajax({
+                type: 'POST',
+                url: '{{route("getUserProfilePicture")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    user_id: user_id
+                },
+                // success:function(data) {
+                //     return data;
+                // }
+            });
         }
+    </script>
+    <script>
+        let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
+        let session_id = '{{ $session->id }}';
+        let avatar_image_url = '{{asset('images/avatar.png')}}';
 
+        $(document).ready(function () {
 
+            userMediaPermission()
+                .then(stream => {
+                    console.log("In User", stream)
+                    broadcaster_stream = stream;
+                    showMyVideo(stream)
+                    peerInit(auth_id).then((newPeer) => {
+                        console.log("auth_id", auth_id)
+                        console.log("newPeer", newPeer)
+                        peer = newPeer;
+                        console.log("is stream", stream);
+
+                        peer.on("call", (call) => {
+                            console.log("onCall", call.peer)
+                            call.answer(stream);
+                            // // const video = document.createElement("audio");
+                            call.on("stream", (broadcaster_stream) => {
+                                console.log("in watcher broadcaster_stream", broadcaster_stream)
+                                showBroadcasterVideo(broadcaster_stream)
+                                // addVideoStream(video, userVideoStream, call.peer);
+                            });
+                        });
+                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        channel.listen('StopStreaming', () => {
+                            peer.disconnect();
+                            console.log("IN STOP STREAM @")
+                            alert("The Call Has Been Closed");
+                            // Close video/audio streams
+                            // yourVideoStream.getTracks().forEach(track => track.stop());
+                            // Disconnect from the signaling server
+                            // window.close();
+                        });
+                    });
+
+                })
+                .catch(err => {
+                    alert('Error! ' + err.message)
+                })
+
+        });
     </script>
 @endsection
