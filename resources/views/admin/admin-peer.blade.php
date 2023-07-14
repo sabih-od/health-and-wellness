@@ -73,7 +73,7 @@
             <div class="row" class="d-flex justify-content-center">
                 <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger align-items-center">
+                    <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
                         <i class="fas fa-phone">End Call</i>
                     </button>
                 </form>
@@ -130,9 +130,9 @@
 
             console.log("Pass Condition");
 
-            console.log(`admin-streaming-channel.${channel_id}`)
+            console.log(`streaming-channel.${channel_id}`)
             const channel = echo.join(
-                `admin-streaming-channel.${channel_id}`
+                `streaming-channel.${channel_id}`
             );
             console.log("channel Created", channel);
 
@@ -159,7 +159,7 @@
 
             console.log(`customerInitPresenceChannel admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
-                `admin-streaming-channel.${channel_id}`
+                `streaming-channel.${channel_id}`
             );
 
             return channel
@@ -299,5 +299,26 @@
 
         });
     </script>
+
+    <script>
+        // ... Your existing code ...
+
+        // Add event listener to the "End Call" button
+        const endCallButton = document.getElementById('end-call-button');
+        console.log("IN END CALL SCRIPT")
+        endCallButton.addEventListener('click', () => {
+            // End the call by calling the close() method on the call object
+            if (call) {
+                call.close();
+
+                console.log("CALL CLOSED");
+
+                // Additional cleanup or actions can be performed here if needed
+            }
+        });
+
+        // ... The rest of your code ...
+    </script>
+
 
 @endsection
