@@ -112,7 +112,7 @@
         let broadcaster_stream_original = null;
         let is_peer_open = false;
         let viewer_streams = null;
-        let session_book_user = '{{$booked_session_user->id}}';
+        {{--let session_book_user = '{{$booked_session_user->id}}';--}}
         let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
         let session_id = '{{ $session->id }}';
         let avatar_image_url = '{{asset('images/avatar.png')}}';
