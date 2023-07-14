@@ -39,13 +39,13 @@ class StreamController extends Controller
 //        return event(new ViewerToggleBack($batch_id, $customer_id));
 //    }
 //
-    public function stop(Request $request, Batch $session_id) {
+    public function stop(Request $request, $session_id) {
         $session_id = Sessions::find($session_id);
 
         $session_id->is_streaming = false;
         $session_id->save();
         event(new StopStreaming($session_id));
-        return view('blank');
+        return redirect()->back();
     }
 
 //    public function getUserProfilePicture (Request $request)
