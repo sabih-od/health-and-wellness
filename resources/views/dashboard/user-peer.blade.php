@@ -183,19 +183,19 @@
             return channel
         }
 
-        // const callingToViewer = (user_id) => {
-        //     console.log("in callingToViewer user" , user_id)
-        //
-        //     if (peer && broadcaster_stream) {
-        //         peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-        //         let call = peer_calls['peer-course-user-' + user_id]
-        //         call.on('stream', (viewer_stream) => {
-        //             console.log("in watcher viewer stream", viewer_stream)
-        //             viewer_streams['peer-course-user-' + user_id] = viewer_stream
-        //         })
-        //         console.log('call senders', peer_calls)
-        //     }
-        // }
+        const callingToViewer = (user_id) => {
+            console.log("in callingToViewer user" , user_id)
+
+            if (peer && broadcaster_stream) {
+                peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
+                let call = peer_calls['peer-course-user-' + user_id]
+                call.on('stream', (viewer_stream) => {
+                    console.log("in watcher viewer stream", viewer_stream)
+                    viewer_streams['peer-course-user-' + user_id] = viewer_stream
+                })
+                console.log('call senders', peer_calls)
+            }
+        }
 
         const userMediaPermission = () => {
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
