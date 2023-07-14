@@ -93,43 +93,26 @@
     {{--        <script src="{{asset('js/video-streaming-utils.js')}}"></script>--}}
     <script>
         let peer = null;
-        let peer_calls = {};
         let broadcaster_stream = null;
-        let broadcaster_stream_original = null;
-        let is_peer_open = false;
-        let viewer_streams = null;
         let session_book_user = '{{$booked_session_user->id}}';
         let auth_id = '{{\Illuminate\Support\Facades\Auth::id()}}';
-        let session_id = '{{ $session->id }}';
-        let avatar_image_url = '{{asset('images/avatar.png')}}';
 
-        $(document).ready(function () {
-            //establish session_id, session_id, token
-
+        $(document).ready(function() {
             userMediaPermission()
                 .then(stream => {
                     broadcaster_stream = stream;
-                    broadcaster_stream_original = stream;
-                    showMyVideo(stream)
-                    peerInit(auth_id).then((newPeer) => {
-                        console.log("newPeer in admin", newPeer)
+                    showMyVideo(stream);
+                    peerInit(auth_id).then(newPeer => {
                         peer = newPeer;
-
-                        console.log("Echo", window.Echo);
-
-                        console.log("is stream", stream);
+                        console.log("Admin Peer initialized", peer);
                     });
-
                 })
                 .catch(err => {
-                    alert('Error! ' + err.message)
-                })
-
+                    alert('Error! ' + err.message);
+                });
         });
 
-
         const peerInit = (auth_id) => {
-
             return new Promise(resolve => {
                 const peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
@@ -137,36 +120,33 @@
                     port: "3008",
                 });
 
-                // Handle incoming calls
-                peer.on("call", (call) => {
-                    console.log("onCall", call.peer)
-                    call.answer(stream);
-                    // // const video = document.createElement("audio");
-                    call.on("stream", (broadcaster_stream) => {
-                        console.log("in watcher broadcaster_stream", broadcaster_stream)
-                        showBroadcasterVideo(broadcaster_stream)
-                    });
-                    call.on('close', handleCallClose); // Handle the call closure
-                });
-
-
-                //when peer is opened
-                peer.on('open', function (id) {
-                    console.log("session_book_user", session_book_user);
-                    console.log("test id admin", id)
-
-                    // Start the call to the specified user ID
-                    const call = peer.call(session_book_user, broadcaster_stream); // You can pass a stream as the second parameter
-
-                    call.on("stream", (broadcaster_stream) => {
-                        console.log("in watcher broadcaster_stream", broadcaster_stream)
-                        showBroadcasterVideo(broadcaster_stream)
-                    });
-
-                    is_peer_open = true;
+                peer.on('open', function(id) {
+                    console.log("Admin Peer ID:", id);
                     resolve(peer);
-                    // alert('Peer connected. My peer ID is: ' + id);
                 });
+
+                peer.on('error', function(error) {
+                    console.error('Admin Peer Error:', error);
+                });
+            });
+        }
+
+        const startCallToUser = () => {
+            const call = peer.call(session_book_user, broadcaster_stream);
+            console.log("Admin Call started to user:", session_book_user);
+
+            call.on('stream', function(remoteStream) {
+                console.log("Admin Received user stream:", remoteStream);
+                showBroadcasterVideo(remoteStream);
+            });
+
+            call.on('close', function() {
+                console.log("Admin Call ended");
+                // Perform any necessary cleanup or display a call ended message
+            });
+
+            call.on('error', function(error) {
+                console.error('Admin Call Error:', error);
             });
         }
 
