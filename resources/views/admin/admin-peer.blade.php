@@ -105,6 +105,11 @@
                     peerInit(auth_id).then(newPeer => {
                         peer = newPeer;
                         console.log("Admin Peer initialized", peer);
+                        if(peer){
+                            console.log("IN PEER", );
+
+                            startCallToUser();
+                        }
                     });
                 })
                 .catch(err => {
