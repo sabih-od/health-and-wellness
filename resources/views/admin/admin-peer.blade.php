@@ -132,7 +132,7 @@
             );
             console.log("channel Created", channel);
 
-            console.log("session_book_user.id", session_book_user, session_book_user.id)
+            console.log("session_book_user.id", session_book_user)
 
             callingToViewer(session_book_user);
             channel.leaving((user) => {
@@ -173,17 +173,17 @@
                 })
                 console.log('call senders', call)
 
-                const endCallButton = document.getElementById('end-call-button');
-                console.log("IN END CALL SCRIPT")
-                endCallButton.addEventListener('click', () => {
-                    // End the call by calling the close() method on the call object
-                    if (call) {
-                        call.close();
-
-                        console.log("CALL CLOSED");
-                        // Additional cleanup or actions can be performed here if needed
-                    }
-                });
+                // const endCallButton = document.getElementById('end-call-button');
+                // console.log("IN END CALL SCRIPT")
+                // endCallButton.addEventListener('click', () => {
+                //     // End the call by calling the close() method on the call object
+                //     if (call) {
+                //         call.close();
+                //
+                //         console.log("CALL CLOSED");
+                //         // Additional cleanup or actions can be performed here if needed
+                //     }
+                // });
 
             }
         }
@@ -297,17 +297,28 @@
 
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
-                        const endCallButton = document.getElementById('end-call-button');
-                        console.log("IN END CALL SCRIPT")
-                        endCallButton.addEventListener('click', () => {
-                            if (peer) {
-                                peer.close();
 
-                                console.log("CALL CLOSED");
-
-                                // Additional cleanup or actions can be performed here if needed
-                            }
+                        peer.on("call", (call) => {
+                            console.log("onCall", call.peer)
+                            call.answer(stream);
+                            // // const video = document.createElement("audio");
+                            call.on("stream", (broadcaster_stream) => {
+                                console.log("in watcher broadcaster_stream", broadcaster_stream)
+                                // showBroadcasterVideo(broadcaster_stream)
+                                // addVideoStream(video, userVideoStream, call.peer);
+                            });
                         });
+
+                        // const endCallButton = document.getElementById('end-call-button');
+                        // console.log("IN END CALL SCRIPT")
+                        // endCallButton.addEventListener('click', () => {
+                        //     if (peer) {
+                        //         peer.close();
+                        //         console.log("CALL CLOSED");
+                        //
+                        //         // Additional cleanup or actions can be performed here if needed
+                        //     }
+                        // });
                         console.log("is stream", stream);
                     });
 
