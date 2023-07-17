@@ -347,24 +347,14 @@
     </script>
 
     <script>
-        // ... Your existing code ...
-
-        // Add event listener to the "End Call" button
-        // const endCallButton = document.getElementById('end-call-button');
-        // console.log("IN END CALL SCRIPT")
-        // endCallButton.addEventListener('click', () => {
-        //     // End the call by calling the close() method on the call object
-        //     if (call) {
-        //         call.close();
-        //
-        //         console.log("CALL CLOSED");
-        //
-        //         // Additional cleanup or actions can be performed here if needed
-        //     }
-        // });
-
-        // ... The rest of your code ...
+        // Listen for the "StopStreaming" event on the user side
+        window.Echo.private(`streaming-channel.${auth_id}`)
+            .listenForWhisper('StopStreaming', (data) => {
+                toastr.success(data.message);
+                // Optionally, you can redirect the user to another page or perform any other necessary actions.
+            });
     </script>
+
 
 
 @endsection

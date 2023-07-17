@@ -315,8 +315,40 @@
                     alert('Error! ' + err.message)
                 })
 
+
+            // Event listener for "End Call" button
+            $('#end-call-button').click(function (e) {
+                e.preventDefault();
+                endCall();
+            });
+
+            // Function to end the call
+            function endCall() {
+                // Close the peer connection
+                if (peer) {
+                    peer.disconnect();
+                }
+
+                // Stop the broadcaster stream
+                if (broadcaster_stream) {
+                    broadcaster_stream.getTracks().forEach(track => track.stop());
+                }
+
+                // Show "Call ended" alert
+                toastr.success('Call ended');
+
+                if (window.Echo && session_book_user) {
+                    window.Echo.private(`streaming-channel.${session_book_user}`)
+                        .whisper('StopStreaming', { message: 'Call ended' });
+                }
+                // Optionally, you can redirect the user to another page or perform any other necessary actions.
+            }
+
         });
     </script>
+
+
+
 @endsection
 
 
