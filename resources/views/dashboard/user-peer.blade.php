@@ -80,14 +80,6 @@
                     </div>
                 </div>
                 <div class="col-md-1"></div>
-
-                {{--                <div class="col-md-2">--}}
-                {{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
-                {{--                        <main class="container py-4">--}}
-                {{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
-                {{--                        </main>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
             </div>
         </div>
     </section>
@@ -143,30 +135,6 @@
 
             callingToViewer(2);
 
-            channel.joining((user) => {
-                console.log('User Joined', user);
-                callingToViewer(user.id);
-                toastr.info(user.name + ' has joined the session.');
-                let img_req = getUserProfilePicture(user.id);
-                $('.lobby_viewers_wrapper')
-                    .append(`<div id="viewer-id-${user.id}">
-                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-                                        <div class="text-center" style="width: 100%;">
-                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-                                            <br />
-                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
-                                            <h4 style="color:white;">` + user.name + `</h4>
-                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-                                        </div>
-                                    </div>
-                                </div>`);
-            });
-            channel.leaving((user) => {
-                console.log('User Left', user);
-                // console.log(user.name, "Left");
-                $(`#viewer-id-${user.id}`).remove()
-            });
-
             return channel;
         }
 
@@ -178,8 +146,6 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-
-
             return channel
         }
 
@@ -290,7 +256,7 @@
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
         $(document).ready(function () {
-
+            console.log("First Run??")
             userMediaPermission()
                 .then(stream => {
                     console.log("In User", stream)
@@ -314,9 +280,9 @@
                         });
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
-                            peer.disconnect();
                             console.log("IN STOP STREAM @")
                             alert("The Call Has Been Closed");
+                            peer.disconnect();
                             // Close video/audio streams
                             // yourVideoStream.getTracks().forEach(track => track.stop());
                             // Disconnect from the signaling server

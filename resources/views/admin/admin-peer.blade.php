@@ -132,20 +132,20 @@
             );
             console.log("channel Created", channel);
 
-            console.log("session_book_user.id", session_book_user, session_book_user.id)
+            console.log("session_book_user.id", session_book_user)
 
             callingToViewer(session_book_user);
-            channel.leaving((user) => {
-                console.log('User Left', user);
-                // console.log(user.name, "Left");
-                $(`#viewer-id-${user.id}`).remove()
-            });
-
-            channel.listen('.viewer.raised.hand', (e) => {
-                toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
-                $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
-                $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
-            })
+            // channel.leaving((user) => {
+            //     console.log('User Left', user);
+            //     // console.log(user.name, "Left");
+            //     $(`#viewer-id-${user.id}`).remove()
+            // });
+            //
+            // channel.listen('.viewer.raised.hand', (e) => {
+            //     toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
+            //     $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
+            //     $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
+            // })
 
             return channel;
         }
@@ -164,27 +164,13 @@
         const callingToViewer = (user_id) => {
             console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
-                const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-
-                call.on('stream', (viewer_streams) => {
-                    console.log("in watcher viewer stream", viewer_streams)
-                    showBroadcasterVideo(viewer_streams);
-
+                peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
+                let call = peer_calls['peer-course-user-' + user_id]
+                call.on('stream', (viewer_stream) => {
+                    console.log("in watcher viewer stream", viewer_stream)
+                    viewer_streams['peer-course-user-' + user_id] = viewer_stream
                 })
-                console.log('call senders', call)
-
-                const endCallButton = document.getElementById('end-call-button');
-                console.log("IN END CALL SCRIPT")
-                endCallButton.addEventListener('click', () => {
-                    // End the call by calling the close() method on the call object
-                    if (call) {
-                        call.close();
-
-                        console.log("CALL CLOSED");
-                        // Additional cleanup or actions can be performed here if needed
-                    }
-                });
-
+                console.log('call senders', peer_calls)
             }
         }
 
@@ -244,7 +230,7 @@
                 myCast.srcObject = stream
                 myCast.muted = true
                 myCast.addEventListener("loadedmetadata", () => {
-                    // myCast.value.controls = true
+                    // myCast.value.controls = truebalence
                     myCast.play();
                 })
             }
@@ -283,7 +269,7 @@
 
         $(document).ready(function () {
             //establish session_id, session_id, token
-
+            console.log("First Run Admin Side??")
             userMediaPermission()
                 .then(stream => {
                     broadcaster_stream = stream;
@@ -292,12 +278,21 @@
                     peerInit(auth_id).then((newPeer) => {
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
-
-                        console.log("Echo", window.Echo);
-
+                        console.log("Echo", window.Echo , auth_id , session_id);
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
+                        const endCallButton = document.getElementById('end-call-button');
+                        endCallButton.addEventListener('click', () => {
+                            console.log("IN END CALL SCRIPT")
 
+                            // End the call by calling the close() method on the call object
+                            if (peer) {
+                                peer.close();
+                                console.log("CALL CLOSED");
+
+                                // Additional cleanup or actions can be performed here if needed
+                            }
+                        });
                         console.log("is stream", stream);
                     });
 
