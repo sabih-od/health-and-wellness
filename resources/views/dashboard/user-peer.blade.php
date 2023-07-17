@@ -151,17 +151,6 @@
             // console.log("session_book_user.id", session_book_user)
 
             callingToViewer(2);
-            channel.leaving((user) => {
-                console.log('User Left', user);
-                // console.log(user.name, "Left");
-                $(`#viewer-id-${user.id}`).remove()
-            });
-
-            channel.listen('.viewer.raised.hand', (e) => {
-                toastr.warning('<i class="fa fa-hand-paper-o"></i>' + e.data.customer.name + ' has raised hand.');
-                $('#raised_hand_' + e.data.customer.id).prop('hidden', false);
-                $('#btn_allow_user_screen_' + e.data.customer.id).prop('hidden', false);
-            })
 
             return channel;
         }
@@ -314,27 +303,23 @@
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-                        peer.on("call", (call) => {
-                            console.log("onCall", call.peer)
-                            call.answer(stream);
-                            // // const video = document.createElement("audio");
-                            call.on("stream", (broadcaster_stream) => {
-                                console.log("in watcher broadcaster_stream", broadcaster_stream)
-                                // showBroadcasterVideo(broadcaster_stream)
-                                // addVideoStream(video, userVideoStream, call.peer);
-                            });
+                        // peer.on("call", (call) => {
+                        //     console.log("onCall", call.peer)
+                        //     call.answer(stream);
+                        //     // // const video = document.createElement("audio");
+                        //     call.on("stream", (broadcaster_stream) => {
+                        //         console.log("in watcher broadcaster_stream", broadcaster_stream)
+                        //         // showBroadcasterVideo(broadcaster_stream)
+                        //         // addVideoStream(video, userVideoStream, call.peer);
+                        //     });
+                        // });
+                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        channel.listen('StopStreaming', () => {
+                            peer.disconnect();
+                            console.log("IN STOP STREAM @")
+
                         });
 
-                        // const endCallButton = document.getElementById('end-call-button');
-                        // console.log("IN END CALL SCRIPT")
-                        // endCallButton.addEventListener('click', () => {
-                        //     if (peer) {
-                        //         peer.close();
-                        //         console.log("CALL CLOSED");
-                        //
-                        //         // Additional cleanup or actions can be performed here if needed
-                        //     }
-                        // });
                         console.log("is stream", stream);
                     });
 
