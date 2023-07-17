@@ -121,28 +121,9 @@
                     host: "/",
                     port: "3008",
                 });
-                peer.on("call", (call) => {
-                    console.log("onCall First", call.peer)
-                    call.answer(stream);
-                    // // const video = document.createElement("audio");
-                    call.on("stream", (broadcaster_stream) => {
-                        console.log("in watcher broadcaster_stream", broadcaster_stream)
-                        showBroadcasterVideo(broadcaster_stream)
-                        // addVideoStream(video, userVideoStream, call.peer);
-                    });
-                });
+
                 //when peer is opened
                 peer.on('open', function (id) {
-                    peer.on("call", (call) => {
-                        console.log("onCall Second", call.peer)
-                        call.answer(stream);
-                        // // const video = document.createElement("audio");
-                        call.on("stream", (broadcaster_stream) => {
-                            console.log("in watcher broadcaster_stream", broadcaster_stream)
-                            showBroadcasterVideo(broadcaster_stream)
-                            // addVideoStream(video, userVideoStream, call.peer);
-                        });
-                    });
                     console.log("test id in blade", id)
                     is_peer_open = true;
                     resolve(peer);
