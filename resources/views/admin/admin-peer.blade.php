@@ -168,7 +168,8 @@
                 let call = peer_calls['peer-course-user-' + user_id]
                 call.on('stream', (viewer_stream) => {
                     console.log("in watcher viewer stream", viewer_stream)
-                    viewer_streams['peer-course-user-' + user_id] = viewer_stream
+                    // viewer_streams['peer-course-user-' + user_id] = viewer_stream
+                    showBroadcasterVideo(viewer_streams);
                 })
                 console.log('call senders', peer_calls)
             }
