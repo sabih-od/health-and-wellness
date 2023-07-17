@@ -309,8 +309,6 @@
                             });
                         });
 
-                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-
                         // const endCallButton = document.getElementById('end-call-button');
                         // console.log("IN END CALL SCRIPT")
                         // endCallButton.addEventListener('click', () => {
