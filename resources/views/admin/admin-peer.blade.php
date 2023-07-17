@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="row" class="d-flex justify-content-center">
+                <div class="row mr-4" class="d-flex justify-content-center">
                     <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                         @csrf
                         <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
@@ -293,7 +293,6 @@
 
             // Event listener for "End Call" button
             $('#end-call-button').click(function (e) {
-                e.preventDefault();
                 endCall();
             });
 
@@ -301,7 +300,7 @@
             function endCall() {
                 // Close the peer connection
                 if (peer) {
-                    peer.disconnect();
+                    peer.close();
                 }
 
                 // Stop the broadcaster stream

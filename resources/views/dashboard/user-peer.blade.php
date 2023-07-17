@@ -178,18 +178,6 @@
                 })
                 console.log('call senders', call)
 
-                // const endCallButton = document.getElementById('end-call-button');
-                // console.log("IN END CALL SCRIPT")
-                // endCallButton.addEventListener('click', () => {
-                //     // End the call by calling the close() method on the call object
-                //     if (call) {
-                //         call.close();
-                //
-                //         console.log("CALL CLOSED");
-                //         // Additional cleanup or actions can be performed here if needed
-                //     }
-                // });
-
             }
         }
 
@@ -303,16 +291,6 @@
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-                        // peer.on("call", (call) => {
-                        //     console.log("onCall", call.peer)
-                        //     call.answer(stream);
-                        //     // // const video = document.createElement("audio");
-                        //     call.on("stream", (broadcaster_stream) => {
-                        //         console.log("in watcher broadcaster_stream", broadcaster_stream)
-                        //         // showBroadcasterVideo(broadcaster_stream)
-                        //         // addVideoStream(video, userVideoStream, call.peer);
-                        //     });
-                        // });
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
                             peer.disconnect();
@@ -332,9 +310,12 @@
     </script>
 
     <script>
+        console.log("listen 1")
+
         // Listen for the "StopStreaming" event on the user side
         window.Echo.private(`streaming-channel.${auth_id}`)
             .listenForWhisper('StopStreaming', (data) => {
+                console.log("listen" , data)
                 toastr.success(data.message);
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.
             });
