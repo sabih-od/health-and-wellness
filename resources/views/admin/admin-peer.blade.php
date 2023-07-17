@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="row ml-5" class="d-flex justify-content-center">
+                <div class="row" class="d-flex justify-content-center">
                     <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
                         @csrf
                         <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
@@ -128,30 +128,6 @@
             );
 
             callingToViewer(session_book_user);
-
-            channel.joining((user) => {
-                console.log('User Joined', user);
-                callingToViewer(user.id);
-                toastr.info(user.name + ' has joined the session.');
-                let img_req = getUserProfilePicture(user.id);
-                $('.lobby_viewers_wrapper')
-                    .append(`<div id="viewer-id-${user.id}">
-                                    <div class="thumbBox d-flex align-items-center" style="min-width: 286px; min-height: 250px;">
-                                        <div class="text-center" style="width: 100%;">
-                                            <i class="fa fa-hand-paper-o text-warning" id="raised_hand_` + user.id + `" hidden></i>
-                                            <br />
-                                            <img src="`+img_req.responseText+`" style="background-color: white; max-width: 100px; max-height: 100px;">
-                                            <h4 style="color:white;">` + user.name + `</h4>
-                                            <button class="btn btn-primary btn-sm btn_allow_user_screen" id="btn_allow_user_screen_` + user.id + `" data-user="` + user.id + `" hidden>Allow screen share</button>
-                                        </div>
-                                    </div>
-                                </div>`);
-            });
-            channel.leaving((user) => {
-                console.log('User Left', user);
-                // console.log(user.name, "Left");
-                $(`#viewer-id-${user.id}`).remove()
-            });
 
             return channel;
         }
@@ -298,16 +274,15 @@
                                 // addVideoStream(video, userVideoStream, call.peer);
                             });
                         });
-                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        channel.listen('StopStreaming', () => {
-                            peer.disconnect();
-                            console.log("IN STOP STREAM @")
-                            alert("The Call Has Been Closed");
-                            // Close video/audio streams
-                            // yourVideoStream.getTracks().forEach(track => track.stop());
-                            // Disconnect from the signaling server
-                            // window.close();
-                        });
+                        // let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        // channel.listen('StopStreaming', () => {
+                        //     peer.disconnect();
+                        //     console.log("IN STOP STREAM @")
+                        //     // Close video/audio streams
+                        //     // yourVideoStream.getTracks().forEach(track => track.stop());
+                        //     // Disconnect from the signaling server
+                        //     // window.close();
+                        // });
                     });
 
                 })
@@ -339,7 +314,7 @@
 
                 if (window.Echo && session_book_user) {
                     window.Echo.private(`streaming-channel.${session_book_user}`)
-                        .whisper('StopStreaming', { message: 'Call ended' });
+                        .whisper('StopStreaming', { message: 'Call successfully ended' });
                 }
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.
             }
