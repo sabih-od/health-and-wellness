@@ -114,7 +114,7 @@
         let broadcaster_stream_original = null;
         let is_peer_open = false;
         let viewer_streams = null;
-        let session_book_user = '{{$booked_session_user->id}}';
+        {{--let session_book_user = '{{$booked_session_user->id}}';--}}
 
         const peerInit = (auth_id) => {
 
@@ -126,7 +126,7 @@
                 });
                 //when peer is opened
                 peer.on('open', function (id) {
-                    console.log("session_book_user", session_book_user);
+                    // console.log("session_book_user", session_book_user);
                     console.log("test id admin", id)
                     is_peer_open = true;
                     resolve(peer);
@@ -148,7 +148,7 @@
             );
             console.log("channel Created", channel);
 
-            console.log("session_book_user.id", session_book_user)
+            // console.log("session_book_user.id", session_book_user)
 
             callingToViewer(2);
             channel.leaving((user) => {
