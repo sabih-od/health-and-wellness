@@ -272,6 +272,11 @@
                                 // addVideoStream(video, userVideoStream, call.peer);
                             });
                         });
+                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                        channel.listen('StopStreaming', () => {
+                            console.log("STOP STREAM");
+                            alert("STOP STREAM");
+                        });
                     });
 
                 })
