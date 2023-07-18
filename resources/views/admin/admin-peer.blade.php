@@ -49,10 +49,11 @@
         <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
             @csrf
             <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
-                <i class="fas fa-phone ml-2">End Call</i>
+                <i class="fas fa-phone-alt"></i>
+                End Call
             </button>
         </form>
-        <figure class="videoThumbMain">
+        <figure class="videoThumbMain myCast">
             <div id="subscriber" class="subscriber"></div>
             <div id="publisher" class="publisher" >
                 <video autoplay id="myCast"></video>
