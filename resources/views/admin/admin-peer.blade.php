@@ -36,32 +36,32 @@
         }
     </style>
 
-    {{--    <section class="chattingSec">--}}
-    <div class="container">
-        <div class="videoBox">
-            <figure class="videoThumbMain">
+    <section class="chattingSec">
+        <div class="container">
+            <div class="videoBox">
+                <figure class="videoThumbMain">
+                    <div id="subscriber" class="subscriber"></div>
+                    <div id="publisher" class="publisher">
+                        <video autoplay id="broadcaster" style="width: 100%"></video>
+                    </div>
+                </figure>
+            </div>
+            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                @csrf
+                <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
+                    <i class="fas fa-phone-alt"></i>
+                    End Call
+                </button>
+            </form>
+            <figure class="videoThumbMain myCast">
                 <div id="subscriber" class="subscriber"></div>
                 <div id="publisher" class="publisher">
-                    <video autoplay id="broadcaster" style="width: 100%"></video>
+                    <video autoplay id="myCast"></video>
                 </div>
             </figure>
-        </div>
-        <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-            @csrf
-            <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
-                <i class="fas fa-phone-alt"></i>
-                End Call
-            </button>
-        </form>
-        <figure class="videoThumbMain myCast">
-            <div id="subscriber" class="subscriber"></div>
-            <div id="publisher" class="publisher" >
-                <video autoplay id="myCast"></video>
-            </div>
-        </figure>
 
-    </div>
-    {{--    </section>--}}
+        </div>
+    </section>
 @endsection
 
 @section('script')
@@ -105,7 +105,7 @@
         }
 
         const broadcasterInitPresenceChannel = ({echo, auth_id, channel_id}) => {
-            console.log("in broadcasterInitPresenceChannel" , echo, auth_id, channel_id)
+            console.log("in broadcasterInitPresenceChannel", echo, auth_id, channel_id)
             if (!echo || !auth_id || !channel_id) return
 
 
@@ -126,13 +126,13 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            console.log("channel Joined Admin" , channel);
+            console.log("channel Joined Admin", channel);
 
             return channel
         }
 
         const callingToViewer = (user_id) => {
-            console.log("in callingToViewer user" , user_id)
+            console.log("in callingToViewer user", user_id)
 
             if (peer && broadcaster_stream) {
                 peer_calls['peer-course-user-' + user_id] = peer.call('peer-course-user-' + user_id, broadcaster_stream)
@@ -296,7 +296,7 @@
 
                 if (window.Echo && session_id) {
                     window.Echo.private(`streaming-channel.${session_id}`)
-                        .whisper('StopStreaming', { message: 'Call successfully ended' });
+                        .whisper('StopStreaming', {message: 'Call successfully ended'});
                 }
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.
             }
