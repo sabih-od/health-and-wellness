@@ -41,10 +41,9 @@ class SessionController extends Controller
                         return $data->session->service->name ?? '';
                     })
                     ->editColumn('status', function ($data) {
-                        return $data->session->status == 1 ? '<button title="Activate" type="button" name="activate" id="' . $data->id . '" class="activate btn btn-success btn-sm">Activate</button>' : '<button title="Deactivate" type="button" name="deactivate" id="' . $data->id . '" class="deactivate btn btn-warning btn-sm">Deactivate</button>';
+                        return $data->session->status == 1 ? '<button title="Activate" type="button" name="activate" id="' . $data->session->id . '" class="activate btn btn-success btn-sm">Activate</button>' : '<button title="Deactivate" type="button" name="deactivate" id="' . $data->session->id . '" class="deactivate btn btn-warning btn-sm">Deactivate</button>';
                     })
                     ->addColumn('action', function ($data) {
-
                         $firstTime = substr($data->session_time, 0, 5);
 
                         $secondTime = substr($data->session_time, 8, 10);
@@ -55,9 +54,12 @@ class SessionController extends Controller
 
                         $joinCallButton = '';
 //                        if ($givenDateTime <= $currentDateTime && $givenDateSecondTime >= $currentDateTime) {
-                            $joinCallButton = '<a href="admin-stream/'.$data->id.'" title="Start Call" type="button" name="join_call" id="' . $data->id . '" class="joincall btn btn-success btn-sm">Start Call</button>&nbsp;';
-                            return $joinCallButton . '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
-//                        }
+                        if ($data->session->status == 1) {
+                            $joinCallButton = '<a href="admin-stream/' . $data->id . '" title="Start Call" type="button" name="join_call" id="' . $data->id . '" class="joincall btn btn-success btn-sm mr-1">Start Call</button>&nbsp;';
+                        }
+                        return $joinCallButton . '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+
+                        //                        }
 //                        return '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
 
                     })->rawColumns(['action', 'status'])->make(true);
@@ -167,25 +169,25 @@ class SessionController extends Controller
             $service->service_id = $request->input('service_id');
             $service->date = $request->input('session_date');
 
-          if(isset($request->session_start_time_cloned) && isset($request->session_end_time_cloned)){
+            if (isset($request->session_start_time_cloned) && isset($request->session_end_time_cloned)) {
 
-              if (count($request->session_start_time_cloned) > 0) {
+                if (count($request->session_start_time_cloned) > 0) {
 
-                  for ($i = 0; $i < count($request->session_start_time_cloned); $i++) {
-                      $sessionTimings = SessionTiming::create([
-                          'session_id' => $service->id,
-                          'session_time' => $request->session_start_time_cloned[$i] . " - " . $request->session_end_time_cloned[$i],
-                          'is_booked' => 0,
-                      ]);
+                    for ($i = 0; $i < count($request->session_start_time_cloned); $i++) {
+                        $sessionTimings = SessionTiming::create([
+                            'session_id' => $service->id,
+                            'session_time' => $request->session_start_time_cloned[$i] . " - " . $request->session_end_time_cloned[$i],
+                            'is_booked' => 0,
+                        ]);
 
-                      $sessionTimings->save();
+                        $sessionTimings->save();
 
-                  }
+                    }
 
 
-              }
+                }
 
-          }
+            }
 
 //            $service->session_time = $request->input('session_start_time') . " - " . $request->input('session_end_time');
 
@@ -328,17 +330,18 @@ class SessionController extends Controller
     }
 
 
-    public function sessionView($id){
+    public function sessionView($id)
+    {
 
-        $session = Sessions::where('id' , $id)->with('service' , 'bookSession' , 'sessionTimings')->first();
+        $session = Sessions::where('id', $id)->with('service', 'bookSession', 'sessionTimings')->first();
 
-        return view('admin.session.view'  , compact('session'));
+        return view('admin.session.view', compact('session'));
 
     }
 
     public function bookedSession(Request $request)
     {
-            return view('admin.booked-session.list');
+        return view('admin.booked-session.list');
 
     }
 
@@ -347,7 +350,7 @@ class SessionController extends Controller
         if (request()->ajax()) {
             try {
 
-                return datatables()->of(BookSession::with('session','session.service' , 'sessionTiming' , 'user')->get())
+                return datatables()->of(BookSession::with('session', 'session.service', 'sessionTiming', 'user')->get())
                     ->addIndexColumn()
                     ->addColumn('session_name', function ($data) {
                         return $data->session->name;
@@ -356,6 +359,11 @@ class SessionController extends Controller
                         return $data->name;
                     })
                     ->addColumn('session_time', function ($data) {
+
+                        if(!isset($data->sessionTiming)){
+                            return "";
+                        }
+
                         return $data->sessionTiming->session_time;
                     })
                     ->addColumn('date', function ($data) {
@@ -369,7 +377,7 @@ class SessionController extends Controller
                     })
                     ->addColumn('action', function ($data) {
                         return
-                                '<a title="View" href="view-booked-sessions/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                            '<a title="View" href="view-booked-sessions/' . $data->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                     })
                     ->rawColumns(['action', 'time_remaining'])->make(true);
             } catch (\Exception $ex) {
@@ -383,15 +391,16 @@ class SessionController extends Controller
 
     public function bookSessionDestroy($id)
     {
-        $content=BookSession::find($id);
-        $content->delete();        echo 1;
+        $content = BookSession::find($id);
+        $content->delete();
+        echo 1;
     }
 
     public function viewBookedSession($id)
     {
-        $bookSession = BookSession::where('id' , $id)->with('session','session.service' , 'sessionTiming' , 'user')->first();
+        $bookSession = BookSession::where('id', $id)->with('session', 'session.service', 'sessionTiming', 'user')->first();
 
-        return view('admin.booked-session.view' , compact('bookSession'));
+        return view('admin.booked-session.view', compact('bookSession'));
     }
 
 }

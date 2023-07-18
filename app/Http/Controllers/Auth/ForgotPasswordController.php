@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\User;
+use App\Traits\PHPCustomMail;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails , PHPCustomMail;
 
     public function showForgetPasswordForm()
     {
@@ -125,6 +126,27 @@ class ForgotPasswordController extends Controller
         if (Hash::check($input['current_password'], $user->password)) {
 
             $user->update(['password' => Hash::make($input['password'])]);
+
+            if ($user->id && $user->email) {
+
+                event(new \App\Events\NotificationEvent($user->id, "Password Updated successful"));
+
+                $noti = new Notification([
+                    'notify_id' => $user->id,
+                    'notification' => "Password Updated successfully",
+                ]);
+                $noti->save();
+
+                $to = $user->email;
+                $from = "noreplay@health-and-wellness.com";
+                $subject = "Mail Submitted";
+                $message = "Login successful";
+
+                $this->customMail($from, $to, $subject, $message);
+
+                return redirect()->route('user.dashboard');
+
+            }
 
             return back()->with('success' , 'Your password has been edited!');
 

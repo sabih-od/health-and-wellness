@@ -37,42 +37,27 @@
     </style>
 
     {{--    <section class="chattingSec">--}}
-    <div class="container mt-5" style="height:100vh !important;">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-10">
-                <div class="col-md-10">
-                    <div class="videoBox" style="width: 100%">
-                        <figure class="videoThumbMain">
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher">
-                                <video autoplay id="broadcaster" style="width: 100%"></video>
-                            </div>
-                        </figure>
-                    </div>
+    <div class="container">
+        <div class="videoBox">
+            <figure class="videoThumbMain">
+                <div id="subscriber" class="subscriber"></div>
+                <div id="publisher" class="publisher">
+                    <video autoplay id="broadcaster" style="width: 100%"></video>
                 </div>
-
-                <div class="row mr-4" class="d-flex justify-content-center">
-                    <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                        @csrf
-                        <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
-                            <i class="fas fa-phone ml-2">End Call</i>
-                        </button>
-                    </form>
-                </div>
-            </div>
+            </figure>
         </div>
-        <div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-4">
-                <figure class="videoThumbMain">
-                    <div id="subscriber" class="subscriber"></div>
-                    <div id="publisher" class="publisher" >
-                        <video autoplay id="myCast" style="width: 100%"></video>
-                    </div>
-                </figure>
+        <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+            @csrf
+            <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
+                <i class="fas fa-phone ml-2">End Call</i>
+            </button>
+        </form>
+        <figure class="videoThumbMain">
+            <div id="subscriber" class="subscriber"></div>
+            <div id="publisher" class="publisher" >
+                <video autoplay id="myCast"></video>
             </div>
-        </div>
+        </figure>
 
     </div>
     {{--    </section>--}}

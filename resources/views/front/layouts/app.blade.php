@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
+    <link rel="icon" type="image/x-icon"
+          href="{{ asset('/uploads/settings/'.$setting->logo ?? 'front/images/logo.png') }}">
     <title>@yield('title')
         | {{(isset($setting) && !is_null($setting['site_title'])) ? $setting['site_title'] : 'Health and wellness education corporation'}}</title>
     <meta name="description" content="@yield('description')">
@@ -33,7 +34,8 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg p-0">
             <a class="navbar-brand" href="{{route('front.home')}}">
-                <img src="{{asset('images/logo.webp')}}" alt="img">
+                <img              src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}"
+                                  alt="img">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,9 +97,9 @@
                     <img src="{{asset('images/footLogo.webp')}}" class="img-fluid" alt="">
                 </a>
                 <ul class="socialLinks">
-                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                    <li><a href=""><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="{{$setting->facebook ?? ''}}"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="{{$setting->tweeter ?? ''}}"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="{{$setting->instagram ?? ''}}"><i class="fab fa-instagram"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">

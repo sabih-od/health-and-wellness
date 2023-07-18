@@ -33,63 +33,54 @@
     </style>
 
     <section class="chattingSec">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="videoBox" style="width: 100%">
-                        {{--                        <div class="headingCont">--}}
-                        {{--                            <h3></h3>--}}
-                        {{--                        </div>--}}
-                        {{--                        <div class="videoControllers" style="z-index: 1;">--}}
-                        {{--                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>--}}
-                        {{--                        </div>--}}
-                        <figure class="videoThumbMain">
-                            <div class="class_ended_wrapper"
-                                 style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
-                                <h1 class="text-center"
-                                    style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
-                                    Class Ended
-                                </h1>
-                            </div>
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher">
-                                <video autoplay id="broadcaster"></video>
-                            </div>
-                        </figure>
+        <div class="videoBox">
+            {{--                        <div class="headingCont">--}}
+            {{--                            <h3></h3>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="videoControllers" style="z-index: 1;">--}}
+            {{--                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>--}}
+            {{--                        </div>--}}
+            <figure class="videoThumbMain">
+                <div class="class_ended_wrapper">
 
-                        <figure class="videoThumbMain">
-                            <div class="class_ended_wrapper"
-                                 style="width: 100%; height: 100%; position: absolute; background-color: black;" hidden>
-                                <h1 class="text-center"
-                                    style="right: 50%; bottom: 50%; transform: translate(50%,50%); position: absolute; color:white;">
-                                    Class Ended
-                                </h1>
-                            </div>
-                            <div id="subscriber" class="subscriber"></div>
-                            <div id="publisher" class="publisher" style="border:2px solid red !important;">
-                                <video autoplay id="myCast"></video>
-                            </div>
-                        </figure>
-                        <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-phone">End Call</i>
-                            </button>
-                        </form>
-                    </div>
                 </div>
-                <div class="col-md-1"></div>
+                <div id="subscriber" class="subscriber"></div>
+                <div id="publisher" class="publisher">
+                    <video autoplay id="broadcaster"></video>
+                </div>
+            </figure>
 
-                {{--                <div class="col-md-2">--}}
-                {{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
-                {{--                        <main class="container py-4">--}}
-                {{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
-                {{--                        </main>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-            </div>
+            <figure class="videoThumbMain">
+                <div class="class_ended_wrapper">
+
+                </div>
+                <div id="subscriber" class="subscriber"></div>
+                <div id="publisher" class="publisher">
+                    <video autoplay id="myCast"></video>
+                </div>
+            </figure>
+            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-phone">End Call</i>
+                </button>
+            </form>
         </div>
+        {{--        <div class="container-fluid">--}}
+        {{--            <div class="row">--}}
+        {{--                <div class="col-12">--}}
+        {{--                    --}}
+        {{--                </div>--}}
+
+        {{--                <div class="col-md-2">--}}
+        {{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
+        {{--                        <main class="container py-4">--}}
+        {{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
+        {{--                        </main>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
     </section>
 
 @endsection
@@ -169,7 +160,7 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            console.log("channel Joined User" , channel)
+            console.log("channel Joined User", channel)
 
             channel.listen('StopStreaming', () => {
                 console.log("IN STOP STREAM customerInitPresenceChannel");
@@ -184,7 +175,7 @@
             console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
                 const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
-                console.log("call" , call);
+                console.log("call", call);
 
                 peer.on('close', () => {
                     // Perform actions when the peer connection is closed
