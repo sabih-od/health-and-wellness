@@ -178,6 +178,13 @@
                 })
                 console.log('call senders', call)
 
+                call.on('close', () => {
+                    // Call has been closed by the other user
+                    console.log('Call closed CTV');
+                    // Perform any desired actions here
+                });
+
+
             }
         }
 
