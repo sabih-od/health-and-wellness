@@ -322,7 +322,7 @@
         console.log("listen 1")
 
         // Listen for the "StopStreaming" event on the user side
-        window.Echo.private(`streaming-channel.${auth_id}`)
+        window.Echo.private(`streaming-channel.${session_id}`)
             .listenForWhisper('StopStreaming', (data) => {
                 console.log("listen" , data)
                 toastr.success(data.message);
