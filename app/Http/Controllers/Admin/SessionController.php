@@ -54,9 +54,9 @@ class SessionController extends Controller
 
                         $joinCallButton = '';
 //                        if ($givenDateTime <= $currentDateTime && $givenDateSecondTime >= $currentDateTime) {
-                        if ($data->session->status == 1) {
+//                        if ($data->session->status == 1) {
                             $joinCallButton = '<a href="admin-stream/' . $data->id . '" title="Start Call" type="button" name="join_call" id="' . $data->id . '" class="joincall btn btn-success btn-sm mr-1">Start Call</button>&nbsp;';
-                        }
+//                        }
                         return $joinCallButton . '<a title="View" href="session-view/' . $data->session->id . '" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></a>&nbsp;<a title="edit" href="session-edit/' . $data->session->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
 
                         //                        }
