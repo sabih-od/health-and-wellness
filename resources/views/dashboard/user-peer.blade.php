@@ -291,6 +291,17 @@
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
+                        peer.on('call', (call) => {
+                            // Handle incoming call
+
+                            call.on('close', () => {
+                                // Call has been closed by the other user
+                                console.log('Call closed');
+                                // Perform any desired actions here
+                            });
+                        });
+
+
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
                             peer.disconnect();
