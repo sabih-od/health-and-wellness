@@ -275,6 +275,12 @@
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
         $(document).ready(function () {
+
+            const pusher = new Pusher('9bc664b0ccbe734af34c', {
+                cluster: '284cdeb99fbcfe976912',
+                // Additional options if required
+            });
+
             //establish session_id, session_id, token
             console.log("THIS IS SESSION ID", session_id)
             userMediaPermission()
@@ -286,16 +292,15 @@
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
 
-                        peer.on('call', (call) => {
-                            console.log("IN CALL", session_id)
-                            // Listen for the 'StopStreaming' event
-                            const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
-                            presenceChannel.listenForWhisper('StopStreaming', (data) => {
-                                console.log('Call closed');
-                                alert(data.message)
-                                // Perform any desired actions here
-                            });
+                        // Subscribe to the call channel
+                        const channel1 = pusher.subscribe('call-channel');
+
+// Listen for the custom event indicating call closure
+                        channel1.bind('admin-call-closed', function(data) {
+                            // Show an alert or perform any desired action
+                            alert(data.message);
                         });
+
                         console.log("Echo", window.Echo);
 
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});

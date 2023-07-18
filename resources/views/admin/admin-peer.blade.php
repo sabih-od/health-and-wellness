@@ -81,6 +81,7 @@
 @section('script')
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
     {{--additional js--}}
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -251,6 +252,11 @@
 
         $(document).ready(function () {
 
+            const pusher = new Pusher('9bc664b0ccbe734af34c', {
+                cluster: '284cdeb99fbcfe976912',
+                // Additional options if required
+            });
+
             userMediaPermission()
                 .then(stream => {
                     console.log("In User", stream)
@@ -304,6 +310,9 @@
 
                 // Show "Call ended" alert
                 toastr.success('Call ended');
+
+                // Trigger a custom event to notify the other user
+                pusher.trigger('call-channel', 'admin-call-closed', { message: 'The admin has closed the call.' });
 
                 if (window.Echo && session_id) {
                     window.Echo.private(`streaming-channel.${session_id}`)
