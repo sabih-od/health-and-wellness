@@ -132,6 +132,14 @@
                     resolve(peer);
                     // alert('Peer connected. My peer ID is: ' + id);
                 });
+                peer.on('close', () => {
+                    // Perform actions when the peer connection is closed
+                    alert('Peer connection closed');
+                    console.log('Peer connection User 3');
+
+                    // Add your custom code here
+                });
+
             });
         }
 
@@ -176,6 +184,16 @@
             console.log("in callingToViewer blade to start call", user_id)
             if (peer && broadcaster_stream) {
                 const call = peer.call('peer-course-user-' + user_id, broadcaster_stream)
+                console.log("call" , call);
+
+                peer.on('close', () => {
+                    // Perform actions when the peer connection is closed
+                    alert('Peer connection closed');
+                    console.log('Peer connection User 2');
+
+                    // Add your custom code here
+                });
+
 
                 call.on('stream', (viewer_streams) => {
                     console.log("in watcher viewer stream", viewer_streams)
@@ -291,7 +309,12 @@
                     peerInit(auth_id).then((newPeer) => {
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
-
+                        peer.on('close', () => {
+                            // Perform actions when the peer connection is closed
+                            alert('Peer connection closed');
+                            console.log('Peer connection User 1');
+                            // Add your custom code here
+                        });
                         console.log("Echo", window.Echo);
 
                         // FOR CALLING OTHERS
