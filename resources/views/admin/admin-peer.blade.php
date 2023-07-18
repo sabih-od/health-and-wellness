@@ -137,10 +137,11 @@
             console.log("in customerInitPresenceChannel user", echo, channel_id)
             if (!echo || !channel_id) return
 
-            console.log(`streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
+            console.log("channel Joined Admin" , channel);
+
             return channel
         }
 
@@ -252,11 +253,6 @@
 
         $(document).ready(function () {
 
-            const pusher = new Pusher('9bc664b0ccbe734af34c', {
-                cluster: '284cdeb99fbcfe976912',
-                // Additional options if required
-            });
-
             userMediaPermission()
                 .then(stream => {
                     console.log("In User", stream)
@@ -309,10 +305,8 @@
                 }
 
                 // Show "Call ended" alert
-                toastr.success('Call ended');
+                toastr.success('Call Successfully Ended');
 
-                // Trigger a custom event to notify the other user
-                pusher.trigger('call-channel', 'admin-call-closed', { message: 'The admin has closed the call.' });
 
                 if (window.Echo && session_id) {
                     window.Echo.private(`streaming-channel.${session_id}`)

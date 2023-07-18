@@ -158,10 +158,16 @@
         const customerInitPresenceChannel = ({echo, channel_id}) => {
             if (!echo || !channel_id) return
 
-            console.log(`customerInitPresenceChannel admin-streaming-channel.${channel_id}`)
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
+            console.log("channel Joined User" , channel)
+
+            channel.listen('StopStreaming', () => {
+                console.log("IN STOP STREAM customerInitPresenceChannel");
+                peer.disconnect();
+                alert("IN STOP STREAM customerInitPresenceChannel");
+            });
 
             return channel
         }
@@ -275,12 +281,6 @@
         let avatar_image_url = '{{asset('images/avatar.png')}}';
 
         $(document).ready(function () {
-
-            const pusher = new Pusher('9bc664b0ccbe734af34c', {
-                cluster: '284cdeb99fbcfe976912',
-                // Additional options if required
-            });
-
             //establish session_id, session_id, token
             console.log("THIS IS SESSION ID", session_id)
             userMediaPermission()
@@ -292,28 +292,18 @@
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
 
-                        // Subscribe to the call channel
-                        const channel1 = pusher.subscribe('call-channel');
-
-// Listen for the custom event indicating call closure
-                        channel1.bind('admin-call-closed', function(data) {
-                            // Show an alert or perform any desired action
-                            alert(data.message);
-                        });
-
                         console.log("Echo", window.Echo);
-
-                        let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        channel.listen('StopStreaming', () => {
-                            peer.disconnect();
-                            console.log("IN STOP STREAM @")
-
-                        });
 
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
                         console.log("is stream", stream);
+                    });
+                    let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                    channel.listen('StopStreaming', () => {
+                        console.log("IN STOP STREAM @");
+                        peer.disconnect();
+                        alert("IN STOP STREAM @");
                     });
 
                 })
