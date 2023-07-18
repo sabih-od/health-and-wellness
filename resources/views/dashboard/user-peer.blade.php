@@ -276,7 +276,7 @@
 
         $(document).ready(function () {
             //establish session_id, session_id, token
-
+            console.log("THIS IS SESSION ID" , session_id)
             userMediaPermission()
                 .then(stream => {
                     broadcaster_stream = stream;
@@ -287,32 +287,18 @@
                         peer = newPeer;
 
                         peer.on('call', (call) => {
-                            // Handle incoming call
-
-                            // Attach close event listener to the call
-                            call.on('close', () => {
+                            console.log("IN CALL" , session_id)
+                            // Listen for the 'StopStreaming' event
+                            window.Echo.private(`streaming-channel.${session_id}`).listenForWhisper('StopStreaming', (data) => {
                                 console.log('Call closed');
                                 alert('Call closed');
                                 // Perform any desired actions here
                             });
-
-                            // Answer the call or perform any other necessary actions
-                            // ...
                         });
                         console.log("Echo", window.Echo);
 
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
-
-                        // peer.on('call', (call) => {
-                        //     // Handle incoming call
-                        //
-                        //     call.on('close', () => {
-                        //         // Call has been closed by the other user
-                        //         console.log('Call closed');
-                        //         // Perform any desired actions here
-                        //     });
-                        // });
 
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
