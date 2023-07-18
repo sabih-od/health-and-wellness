@@ -276,7 +276,7 @@
 
         $(document).ready(function () {
             //establish session_id, session_id, token
-            console.log("THIS IS SESSION ID" , session_id)
+            console.log("THIS IS SESSION ID", session_id)
             userMediaPermission()
                 .then(stream => {
                     broadcaster_stream = stream;
@@ -287,7 +287,7 @@
                         peer = newPeer;
 
                         peer.on('call', (call) => {
-                            console.log("IN CALL" , session_id)
+                            console.log("IN CALL", session_id)
                             // Listen for the 'StopStreaming' event
                             const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
                             presenceChannel.listenForWhisper('StopStreaming', (data) => {
@@ -298,15 +298,15 @@
                         });
                         console.log("Echo", window.Echo);
 
-                        // FOR CALLING OTHERS
-                        broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
-
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
                             peer.disconnect();
                             console.log("IN STOP STREAM @")
 
                         });
+
+                        // FOR CALLING OTHERS
+                        broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
                         console.log("is stream", stream);
                     });
