@@ -274,15 +274,6 @@
                                 // addVideoStream(video, userVideoStream, call.peer);
                             });
                         });
-                        // let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        // channel.listen('StopStreaming', () => {
-                        //     peer.disconnect();
-                        //     console.log("IN STOP STREAM @")
-                        //     // Close video/audio streams
-                        //     // yourVideoStream.getTracks().forEach(track => track.stop());
-                        //     // Disconnect from the signaling server
-                        //     // window.close();
-                        // });
                     });
 
                 })
