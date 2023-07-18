@@ -26,14 +26,22 @@ class ServiceController extends Controller
                         // Create a new instance of the HtmlString class with the HTML string
                         $html = new HtmlString($htmlString);
 
-                        // Extract the link and text
-                        $link = Str::of($html->toHtml())->between('<a href="', '">');
-                        $text = Str::of($html->toHtml())->between('">', '</a>');
+                        // Find all anchor tags in the HTML string
+                        preg_match_all('/<a\s[^>]*href="([^"]*)"[^>]*>([^<]*)<\/a>/', $htmlString, $matches, PREG_SET_ORDER);
 
-                        // Combine the link and text
-                        $formattedString = $text . ': ' . $link;
+                        // Replace anchor tags with formatted clickable links
+                        foreach ($matches as $match) {
+                            $formattedLink = $match[2] . ': <a href="' . $match[1] . '">' . $match[1] . '</a>';
+                            $html = Str::of($html)->replace($match[0], $formattedLink);
+                        }
 
-                        return $formattedString;
+                        // Replace &nbsp; entities with regular spaces
+                        $decodedHtml = str_replace('&nbsp;', ' ', $html);
+
+                        // Strip HTML tags from the resulting string
+                        $plainText = strip_tags($decodedHtml);
+
+                        return $plainText;
                     })
                     ->addColumn('action', function ($data) {
                         return '<a title="edit" href="service-edit/' . $data->id . '" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>&nbsp;<button title="Delete" type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';

@@ -19,7 +19,6 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content-header -->
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -69,8 +68,11 @@
                                             <option selected disabled hidden> Select service</option>
                                             @foreach($services as $service)
                                                 <option value="{{$service->id}}"
-                                                        @if( $service->id == isset($content->service_id)) selected @endif>{{ $service->name ?? '' }}</option>
+                                                        @if($service->id == (isset($content->service_id) ? $content->service_id : 1)) selected @endif>
+                                                    {{ $service->name ?? '' }}
+                                                </option>
                                             @endforeach
+
                                         </select>
                                         @error('service_id')
                                         <span class="invalid-feedback"
@@ -216,7 +218,7 @@
 
                                         <div class="img-upload full-width-img">
                                             <div id="image-preview" class="img-preview">
-                                                <img id="preview-image" src="{{ $content->get_session_picture() ? $content->get_session_picture() :  asset('images/user1.webp') }}"
+                                                <img id="preview-image" src="{{ isset($content) ? $content->get_session_picture() :  asset('images/user1.webp') }}"
                                                      width="150" alt="Image Preview">
                                             </div>
                                             <input type="file" name="image" class="img-upload" id="image-upload">

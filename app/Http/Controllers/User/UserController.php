@@ -128,7 +128,10 @@ class UserController extends Controller
 
     public function notifications()
     {
-        $notifications = Notification::where('notify_id', Auth::id())->get();
+        $notifications = Notification::where('notify_id', Auth::id())
+            ->orderBy('id', 'desc')
+            ->get();
+
         return view('dashboard.notification', compact('notifications'));
     }
 

@@ -194,9 +194,9 @@
 
                 //activate button text compute
                 var activate_bool = $(this).data('activate');
-                action = activate_bool == 0 ? 'Activate' : 'Inactivate';
-                verb = activate_bool == 0 ? 'Activating' : 'Inactivating';
-                color = activate_bool == 0 ? 'limegreen' : 'red';
+                action = activate_bool == 1 ? 'Activate' : 'Inactivate';
+                verb = activate_bool == 1 ? 'Activating' : 'Inactivating';
+                color = activate_bool == 1 ? 'limegreen' : 'red';
                 $('#ok_activate').text(action);
                 $('#ok_activate').css('background-color', color);
                 $('#ok_activate').css('border', color);

@@ -66,7 +66,8 @@
                         <ul>
                             <li>
                                 <a href="{{ route('front.home') }}" class="logo"><img
-                                        src="{{asset('dashboard/images/logo1.png')}}" class="img-fluid"
+                                        src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}"
+                                        class="img-fluid"
                                         alt="img"></a>
                             </li>
                             <li>

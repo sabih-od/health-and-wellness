@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\Settings;
 use App\Providers\RouteServiceProvider;
 use App\Traits\PHPCustomMail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -47,12 +48,18 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
         if ($user->role_id == 1) {// do your magic here
             return redirect()->route('dashboard');
         }
 
         if ($user->role_id == 2) {// do your magic here
 
+            if($user->is_active == 0){
+                $adminEmail = Settings::latest()->first();
+                Auth::logout();
+                return redirect()->route('front.login')->with('error' , "You are deactivated by a admin.Please contact on " . $adminEmail->email);
+            }
             if ($user->id && $user->email) {
 
                 event(new \App\Events\NotificationEvent($user->id, "Login successful"));

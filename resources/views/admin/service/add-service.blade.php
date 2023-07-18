@@ -55,7 +55,7 @@
 
                                             <div class="img-upload full-width-img">
                                                 <div id="image-preview" class="img-preview">
-                                                    <img id="preview-image" src="{{ $content->get_service_picture() ? $content->get_service_picture() :  asset('images/user1.webp') }}"
+                                                    <img id="preview-image" src="{{ isset($content) ? $content->get_service_picture() :  asset('images/user1.webp') }}"
                                                          width="150" alt="Image Preview">
                                                 </div>
                                                 <input type="file" name="image" class="img-upload" id="image-upload">
