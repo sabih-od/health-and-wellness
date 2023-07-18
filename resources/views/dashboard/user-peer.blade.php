@@ -289,9 +289,10 @@
                         peer.on('call', (call) => {
                             console.log("IN CALL" , session_id)
                             // Listen for the 'StopStreaming' event
-                            window.Echo.private(`streaming-channel.${session_id}`).listenForWhisper('StopStreaming', (data) => {
+                            const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
+                            presenceChannel.listenForWhisper('StopStreaming', (data) => {
                                 console.log('Call closed');
-                                alert('Call closed');
+                                alert(data.message)
                                 // Perform any desired actions here
                             });
                         });
@@ -322,12 +323,12 @@
         console.log("listen 1")
 
         // Listen for the "StopStreaming" event on the user side
-        window.Echo.private(`streaming-channel.${session_id}`)
-            .listenForWhisper('StopStreaming', (data) => {
-                console.log("listen" , data)
-                toastr.success(data.message);
-                // Optionally, you can redirect the user to another page or perform any other necessary actions.
-            });
+        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
+        presenceChannel.listenForWhisper('StopStreaming', (data) => {
+            console.log('Call closed');
+            alert(data.message)
+            // Perform any desired actions here
+        });
     </script>
 
 

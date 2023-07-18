@@ -140,8 +140,6 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-
-
             return channel
         }
 
@@ -302,8 +300,8 @@
                 // Show "Call ended" alert
                 toastr.success('Call ended');
 
-                if (window.Echo && session_book_user) {
-                    window.Echo.private(`streaming-channel.${session_book_user}`)
+                if (window.Echo && session_id) {
+                    window.Echo.private(`streaming-channel.${session_id}`)
                         .whisper('StopStreaming', { message: 'Call successfully ended' });
                 }
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.

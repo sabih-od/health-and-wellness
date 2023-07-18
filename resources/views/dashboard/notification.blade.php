@@ -16,7 +16,7 @@
                             <h1>Notifications</h1>
                         </div>
                         <div>
-                            <button class="btn themeBtn">Dismiss All</button>
+{{--                            <button class="btn themeBtn">Dismiss All</button>--}}
                         </div>
                     </div>
 
@@ -43,11 +43,11 @@
                                         <span>{{$formattedDateTime ?? ''}}</span>
                                     </h2>
                                 </div>
-                                <div class="content d-flex justify-content-end">
-                                    {{--                                <p>It is a long established fact that a reader will be distracted by the readable--}}
-                                    {{--                                    content of a page when looking at its layout.</p>--}}
-                                    <a href="" class="more"><i class="fas fa-arrow-right"></i></a>
-                                </div>
+{{--                                <div class="content d-flex justify-content-end">--}}
+{{--                                    --}}{{--                                <p>It is a long established fact that a reader will be distracted by the readable--}}
+{{--                                    --}}{{--                                    content of a page when looking at its layout.</p>--}}
+{{--                                    <a href="" class="more"><i class="fas fa-arrow-right"></i></a>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     @endforeach
