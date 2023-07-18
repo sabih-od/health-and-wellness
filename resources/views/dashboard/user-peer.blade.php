@@ -178,13 +178,6 @@
                 })
                 console.log('call senders', call)
 
-                call.on('close', () => {
-                    // Call has been closed by the other user
-                    console.log('Call closed CTV');
-                    // Perform any desired actions here
-                });
-
-
             }
         }
 
@@ -293,21 +286,33 @@
                         console.log("newPeer in admin", newPeer)
                         peer = newPeer;
 
+                        peer.on('call', (call) => {
+                            // Handle incoming call
+
+                            // Attach close event listener to the call
+                            call.on('close', () => {
+                                console.log('Call closed');
+                                alert('Call closed');
+                                // Perform any desired actions here
+                            });
+
+                            // Answer the call or perform any other necessary actions
+                            // ...
+                        });
                         console.log("Echo", window.Echo);
 
                         // FOR CALLING OTHERS
                         broadcasterInitPresenceChannel({echo: window.Echo, auth_id, channel_id: session_id});
 
-                        peer.on('call', (call) => {
-                            // Handle incoming call
-
-                            call.on('close', () => {
-                                // Call has been closed by the other user
-                                console.log('Call closed');
-                                // Perform any desired actions here
-                            });
-                        });
-
+                        // peer.on('call', (call) => {
+                        //     // Handle incoming call
+                        //
+                        //     call.on('close', () => {
+                        //         // Call has been closed by the other user
+                        //         console.log('Call closed');
+                        //         // Perform any desired actions here
+                        //     });
+                        // });
 
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
                         channel.listen('StopStreaming', () => {
