@@ -50,7 +50,7 @@
                 </div>
             </figure>
 
-            <figure class="videoThumbMain">
+            <figure class="videoThumbMain myCast">
                 <div class="class_ended_wrapper">
 
                 </div>
@@ -59,12 +59,13 @@
                     <video autoplay id="myCast"></video>
                 </div>
             </figure>
-            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-phone">End Call</i>
-                </button>
-            </form>
+{{--            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">--}}
+{{--                @csrf--}}
+{{--                <button type="submit" class="btn btn-danger">--}}
+{{--                    <i class="fas fa-phone-alt"></i>--}}
+{{--                    End Call--}}
+{{--                </button>--}}
+{{--            </form>--}}
         </div>
         {{--        <div class="container-fluid">--}}
         {{--            <div class="row">--}}

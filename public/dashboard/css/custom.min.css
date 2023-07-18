@@ -2149,3 +2149,45 @@ section.accountAccesSec p {
 .recentTable tbody tr td:nth-child(2) {
     text-align: left;
 }
+
+.chattingSec {
+    width: 100%;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.chattingSec video {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myCast video {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 300px !important;
+    height: 200px !important;
+    background: #1c1c1c;
+    border-radius: 10px;
+}
+
+.chattingSec form {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.chattingSec form button {
+    display: flex;
+    padding: 0.5rem 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
