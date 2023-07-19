@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Broadcast;
 */
 
 
-Broadcast::channel('streaming-channel.{id}', function ($user, $session_id) {
+Broadcast::channel('streaming-channel.{id}', function ($user, $id) {
     //
 //    return ($user->role_id == 1) ? $user : (\App\Models\Sessions::where([
 //        ['id', $id],
 ////        ['user_id', $user->id],
 //    ])->exists() ? $user: null);
 
-    return \App\Models\Sessions::where('id' , $session_id)->first();
+    return \App\Models\Sessions::where('id' , $id)->first();
 });
 
 Broadcast::channel('notifications.{userId}', function ($user, $userId) {
