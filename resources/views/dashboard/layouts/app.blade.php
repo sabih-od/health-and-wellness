@@ -355,7 +355,7 @@
     window.Pusher = Pusher;
     window.Echo = new Echo({
         broadcaster: 'pusher',
-        key: '9bc664b0ccbe734af34c',
+        key: '904ef0b44a29801830a8',
         cluster: 'ap2',
         encrypted: true,
     });
