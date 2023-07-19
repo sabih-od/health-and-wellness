@@ -77,11 +77,11 @@ class LoginController extends Controller
 
                 $this->customMail($from, $to, $subject, $message);
 
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.dashboard')->with('success' , 'Login Successful');
 
             }
 
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.dashboard')->with('success' , 'Login Successful');
         }
 
         return redirect('/home');
