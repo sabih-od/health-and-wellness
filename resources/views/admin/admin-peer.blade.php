@@ -88,7 +88,7 @@
         const peerInit = (auth_id) => {
 
             return new Promise(resolve => {
-                const peer = new Peer('peer-course-user-' + auth_id, {
+                peer = new Peer('peer-course-user-' + auth_id, {
                     path: "/peerjs",
                     host: "/",
                     port: "3008",
