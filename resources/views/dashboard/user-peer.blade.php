@@ -59,13 +59,13 @@
                     <video autoplay id="myCast"></video>
                 </div>
             </figure>
-{{--            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">--}}
-{{--                @csrf--}}
-{{--                <button type="submit" class="btn btn-danger">--}}
-{{--                    <i class="fas fa-phone-alt"></i>--}}
-{{--                    End Call--}}
-{{--                </button>--}}
-{{--            </form>--}}
+            {{--            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">--}}
+            {{--                @csrf--}}
+            {{--                <button type="submit" class="btn btn-danger">--}}
+            {{--                    <i class="fas fa-phone-alt"></i>--}}
+            {{--                    End Call--}}
+            {{--                </button>--}}
+            {{--            </form>--}}
         </div>
         {{--        <div class="container-fluid">--}}
         {{--            <div class="row">--}}
@@ -309,19 +309,22 @@
                         console.log("is stream", stream);
                     });
                     let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                   window.Echo.join('streaming-channel.' + auth_id)
-                        .listen('.stop-streaming', (e) => {
-                            // Handle the received notification data
-                            alert("Stop In Listen");
-                            toastr.success(e.message);
-                            console.log("eee" , e)
 
-                        })
 
                 })
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
+
+            window.Echo.join('streaming-channel.' + session_id)
+                .listen('.stop-streaming', (e) => {
+                    // Handle the received notification data
+                    alert("Stop In Listen");
+                    toastr.success(e.message);
+                    console.log("eee", e)
+
+                })
+
 
         });
     </script>
