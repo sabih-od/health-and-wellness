@@ -315,8 +315,10 @@
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
+            alert("session_id" , session_id  , "NOt Joined")
 
             window.Echo.join('streaming-channel.' + session_id)
+        alert("session_id" , session_id  , "Joined")
                 .listen('StopStreaming', (e) => {
                     // Handle the received notification data
                     alert("Stop In Listen");
