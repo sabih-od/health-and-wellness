@@ -30,7 +30,7 @@ var pusherCluster = "284cdeb99fbcfe976912";
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '904ef0b44a29801830a8',
+    key: '9bc664b0ccbe734af34c',
     cluster: 'ap2',
     // encrypted: true,
     forceTLS: true

@@ -129,7 +129,7 @@ class ForgotPasswordController extends Controller
 
             if ($user->id && $user->email) {
 
-                event(new \App\Events\NotificationEvent($user->id, "Password Updated successful"));
+//                event(new \App\Events\NotificationEvent($user->id, "Password Updated successful"));
 
                 $noti = new Notification([
                     'notify_id' => $user->id,
@@ -144,7 +144,7 @@ class ForgotPasswordController extends Controller
 
                 $this->customMail($from, $to, $subject, $message);
 
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.dashboard')->with("success" , "Password Updated Successfully");
 
             }
 
