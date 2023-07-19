@@ -46,7 +46,7 @@
                     </div>
                 </figure>
             </div>
-            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">
+            <form action="{{route('admin.stopStream', $session->id)}}" method="POST" style="z-index: 9999 !important;cursor: pointer">
                 @csrf
                 <button id="end-call-button" type="submit" class="btn btn-danger align-items-center">
                     <i class="fas fa-phone-alt"></i>
