@@ -31,6 +31,7 @@ var pusherCluster = "284cdeb99fbcfe976912";
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '9bc664b0ccbe734af34c',
+    authEndpoint: process.env.APP_URL + "/broadcasting/auth",
     cluster: 'ap2',
     // encrypted: true,
     forceTLS: true
