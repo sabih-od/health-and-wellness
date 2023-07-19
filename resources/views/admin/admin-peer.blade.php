@@ -282,6 +282,7 @@
             function endCall() {
                 // Close the peer connection
                 if (peer) {
+                    console.log("IN END CALL FUNCTIon")
                     peer.close();
                 }
 
