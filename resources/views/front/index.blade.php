@@ -239,25 +239,26 @@
             <div class="row">
                 <div class="col-md-12" data-aos="fade-up" data-aos-duration="2000">
                     <div id="accordion">
-                        @foreach($data['faqs'] as $faq)
-                        <div class="card">
-                            <div id="headingOne">
-                                <h5 class="mb-0 ">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="false" aria-controls="collapseOne">{{ $faq->question ?? '' }}
-                                        <i class="fas fa-sort-up"></i>
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                 data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>{{ $faq->answer ?? '' }}</p>
+                        @foreach($data['faqs'] as $index => $faq)
+                            <div class="card">
+                                <div id="heading{{ $index }}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $index }}"
+                                                aria-expanded="false" aria-controls="collapse{{ $index }}">{{ $faq->question ?? '' }}
+                                            <i class="fas fa-sort-up"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse{{ $index }}" class="collapse" aria-labelledby="heading{{ $index }}"
+                                     data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>{{ $faq->answer ?? '' }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
-{{--                        <div class="card ">--}}
+
+                        {{--                        <div class="card ">--}}
 {{--                            <div id="headingTwo ">--}}
 {{--                                <h5 class="mb-0">--}}
 {{--                                    <button class="btn btn-link collapsed" data-toggle="collapse"--}}

@@ -34,7 +34,8 @@ class StopStreaming implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('streaming-channel.' . $this->session_id);
+        return new PrivateChannel('streaming-channel.'.$this->session_id);
+
     }
 
     public function broadcastAs()
