@@ -21,7 +21,8 @@ Broadcast::channel('streaming-channel.{id}', function ($user, $id) {
 ////        ['user_id', $user->id],
 //    ])->exists() ? $user: null);
 
-    return $session = \App\Models\Sessions::where('id' , $id)->first();
+//    return $session = \App\Models\Sessions::where('id' , $id)->first();
+return true;
 });
 
 Broadcast::channel('notifications.{userId}', function ($user, $userId) {
