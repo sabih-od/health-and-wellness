@@ -315,11 +315,15 @@
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
-            alert("session_id" , session_id  , "NOt Joined")
 
             window.Echo.join(`streaming-channel.${session_id}`)
+                .leaving('.StopStreaming', (e) => {
+                    alert("leaving In Listen");
+                    toastr.success(e.message);
+                    console.log("eee", e)
+
+                })
                 .listen('.StopStreaming', (e) => {
-                    // Handle the received notification data
                     alert("Stop In Listen");
                     toastr.success(e.message);
                     console.log("eee", e)
