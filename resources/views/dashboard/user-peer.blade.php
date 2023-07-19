@@ -317,7 +317,7 @@
                 })
 
             window.Echo.join('streaming-channel.' + session_id)
-                .listen('.stop-streaming', (e) => {
+                .listen('StopStreaming', (e) => {
                     // Handle the received notification data
                     alert("Stop In Listen");
                     toastr.success(e.message);
