@@ -72,6 +72,13 @@ return [
             'driver' => 'null',
         ],
 
+        'auth' => [
+            'guards' => [
+                'web',
+                'api',
+            ],
+        ],
+
     ],
 
 ];

@@ -161,13 +161,7 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            console.log("channel Joined User", channel)
 
-            channel.listen('StopStreaming', () => {
-                console.log("IN STOP STREAM customerInitPresenceChannel");
-                peer.disconnect();
-                alert("IN STOP STREAM customerInitPresenceChannel");
-            });
 
             return channel
         }
@@ -315,11 +309,14 @@
                         console.log("is stream", stream);
                     });
                     let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                    channel.listen('StopStreaming', () => {
-                        console.log("IN STOP STREAM @");
-                        peer.disconnect();
-                        alert("IN STOP STREAM @");
-                    });
+                   window.Echo.join('streaming-channel.' + auth_id)
+                        .listen('.stop-streaming', (e) => {
+                            // Handle the received notification data
+                            alert("Stop In Listen");
+                            toastr.success(e.message);
+                            console.log("eee" , e)
+
+                        })
 
                 })
                 .catch(err => {

@@ -36,4 +36,10 @@ class StopStreaming implements ShouldBroadcast
     {
         return new PresenceChannel('streaming-channel.' . $this->session_id);
     }
+
+    public function broadcastAs()
+    {
+        return 'stop-streaming';
+
+    }
 }

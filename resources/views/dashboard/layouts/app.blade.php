@@ -76,10 +76,10 @@
                                     <button class="btn btnsearch"><i class="far fa-search"></i></button>
                                 </div>
                             </li>
-{{--                            <li>--}}
-{{--                                <a href="{{ route('sendNotification') }}" action="GET" type="submit"--}}
-{{--                                   class="btn btn-danger">Send Noti</a>--}}
-{{--                            </li>--}}
+                            {{--                            <li>--}}
+                            {{--                                <a href="{{ route('sendNotification') }}" action="GET" type="submit"--}}
+                            {{--                                   class="btn btn-danger">Send Noti</a>--}}
+                            {{--                            </li>--}}
                             <li>
                                 <div class="heloMain">
                                     {{--                                            <div class="user">--}}
@@ -88,7 +88,7 @@
                                     <div class="heloContent">
                                         <div class="dropdown">
                                             <a href="{{ route('user.notifications') }}" class="btn usernotify">
-{{--                                                <i class="fas fa-bell"></i>--}}
+                                                {{--                                                <i class="fas fa-bell"></i>--}}
                                                 <i class="bi bi-bell"></i>
                                                 <span class="notifycount" id="notificationCount"></span>
                                             </a>
@@ -355,23 +355,23 @@
     window.Pusher = Pusher;
     window.Echo = new Echo({
         broadcaster: 'pusher',
-        key: '904ef0b44a29801830a8',
+        key: '9bc664b0ccbe734af34c',
         cluster: 'ap2',
         encrypted: true,
     });
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         console.log("sssn");
         // AJAX request
         $.ajax({
             url: 'get-notifications', // Replace with your API endpoint
             type: 'GET', // or 'POST', 'PUT', etc. depending on your API
 
-            success: function(data) {
+            success: function (data) {
                 // Handle the API response
-                console.log("notifications" , data);
+                console.log("notifications", data);
 
                 $('#notificationCount').text(data.data.length);
 
@@ -384,7 +384,7 @@
                 // You can perform any further actions with the response here
             },
 
-            error: function(error) {
+            error: function (error) {
                 // Handle any errors that occurred during the AJAX request
                 console.error('Error:', error);
             }
@@ -394,18 +394,25 @@
 
 <script>
 
-    setTimeout(function () {
+    // setTimeout(function () {
+
+    $(document).ready(function () {
+
 
         var auth_id = "{{\Illuminate\Support\Facades\Auth::id()}}";
 
-        console.log("WOrking" , auth_id);
+        console.log("WOrking", auth_id, window.Echo);
         window.Echo.private('notifications.' + auth_id)
-            .listen('notification-event', (e) => {
+            .listen('.notification-event', (e) => {
                 // Handle the received notification data
-                console.log("DONE", e)
-            });
+                toastr.success(e.message);
+                console.log("eee" , e)
 
-    }, 5000);
+            })
+
+    });
+
+    // }, 5000);
 
 
 
