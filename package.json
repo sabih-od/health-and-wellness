@@ -1,7 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite",
+        "dev": "npm run development",
+        "development": "mix",
         "build": "vite build"
     },
     "devDependencies": {
