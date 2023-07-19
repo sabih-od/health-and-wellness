@@ -39,7 +39,7 @@ class StopStreaming implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'stop-streaming';
+        return 'StopStreaming';
 
     }
 }
