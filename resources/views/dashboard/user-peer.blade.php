@@ -315,9 +315,8 @@
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
-            alert("session_id" , session_id  , "NOt Joined")
 
-            window.Echo.join(`streaming-channel.${session_id}`)
+            Echo.join(`streaming-channel.${session_id}`)
                 .listen('.StopStreaming', (e) => {
                     // Handle the received notification data
                     alert("Stop In Listen");
@@ -330,17 +329,17 @@
         });
     </script>
 
-    <script>
-        console.log("listen 1")
+{{--    <script>--}}
+{{--        console.log("listen 1")--}}
 
-        // Listen for the "StopStreaming" event on the user side
-        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
-        presenceChannel.listenForWhisper('StopStreaming', (data) => {
-            console.log('Call closed');
-            alert(data.message)
-            // Perform any desired actions here
-        });
-    </script>
+{{--        // Listen for the "StopStreaming" event on the user side--}}
+{{--        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);--}}
+{{--        presenceChannel.listenForWhisper('StopStreaming', (data) => {--}}
+{{--            console.log('Call closed');--}}
+{{--            alert(data.message)--}}
+{{--            // Perform any desired actions here--}}
+{{--        });--}}
+{{--    </script>--}}
 
 
 
