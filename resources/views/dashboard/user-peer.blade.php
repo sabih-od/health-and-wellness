@@ -316,7 +316,7 @@
                     alert('Error! ' + err.message)
                 })
 
-            Echo.join(`streaming-channel.${session_id}`)
+            window.Echo.join(`streaming-channel.${session_id}`)
                 .listen('.StopStreaming', (e) => {
                     // Handle the received notification data
                     alert("Stop In Listen");
