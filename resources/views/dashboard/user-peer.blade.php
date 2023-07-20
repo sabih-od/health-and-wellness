@@ -337,7 +337,7 @@
 
         // Listen for the "StopStreaming" event on the user side
         const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
-        presenceChannel.listen('StopStreaming', (data) => {
+        presenceChannel.listen('.StopStreaming', (data) => {
             console.log('Call closed BY PRESENCE');
             alert("popop")
             // alert(data.message)
@@ -346,7 +346,7 @@
         console.log('Call closed');
 
         const privateChannel = window.Echo.private(`streaming-channel.${session_id}`);
-        privateChannel.listen('StopStreaming', (data) => {
+        privateChannel.listen('.StopStreaming', (data) => {
             console.log('Call closed BY PRIVATE');
             alert("popop")
             // alert(data.message)
