@@ -2208,7 +2208,7 @@ section.accountAccesSec p {
 
 /* Styles for the content inside the overlay */
 .content {
-    background-color: #fff;
+    /*background-color: #fff;*/
     padding: 20px;
     text-align: center;
 }

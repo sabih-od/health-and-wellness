@@ -92,17 +92,17 @@ class DashboardController extends Controller
 
                         $givenDateSecondTime = Carbon::parse($data->session->date . $secondTime);
 
-//                        if ($currentDateTime < $givenDateTime) {
-//                            return '<button id="action_btn_' . $data->session->id . '" class="themeBtn remain">Take A Session</button>';
+                        if ($currentDateTime < $givenDateTime) {
+                            return '<button id="action_btn_' . $data->session->id . '" class="themeBtn remain">Take A Session</button>';
 //
-//                        } elseif ($currentDateTime < $givenDateSecondTime) {
+                        } elseif ($currentDateTime < $givenDateSecondTime) {
 
                             return '<a href="stream/'.$data->session->id.'" id="action_btn_' . $data->session->id . '" class="themeBtn">Take A Session</a>';
 
-//                        } else {
-//                            return '<a id="action_btn_' . $data->session->id . '" href="service-detail/ ' . $data->id . '" class="themeBtn completed">View Detail</a>';
-//
-//                        }
+                        } else {
+                            return '<a id="action_btn_' . $data->session->id . '" href="service-detail/ ' . $data->id . '" class="themeBtn completed">View Detail</a>';
+
+                        }
 
                     })
                     ->rawColumns(['action', 'time_remaining'])->make(true);
