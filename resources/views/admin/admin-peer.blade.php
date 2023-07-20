@@ -110,7 +110,7 @@
 
 
             console.log(`streaming-channel.${channel_id}`)
-            const channel = echo.join(
+            const channel = echo.private(
                 `streaming-channel.${channel_id}`
             );
 
@@ -123,7 +123,7 @@
             console.log("in customerInitPresenceChannel user", echo, channel_id)
             if (!echo || !channel_id) return
 
-            const channel = echo.join(
+            const channel = echo.private(
                 `streaming-channel.${channel_id}`
             );
             console.log("channel Joined Admin", channel);
