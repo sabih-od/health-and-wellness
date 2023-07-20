@@ -330,15 +330,24 @@
     </script>
 
     <script>
-// If not subscibe channel remove documnet ready
-//         $(document).ready(function () {
+        // If not subscibe channel remove documnet ready
+        //         $(document).ready(function () {
 
-            console.log("listen 1")
+        console.log("listen 1")
 
         // Listen for the "StopStreaming" event on the user side
         const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
         presenceChannel.listen('StopStreaming', (data) => {
-            console.log('Call closed');
+            console.log('Call closed BY PRESENCE');
+            alert("popop")
+            // alert(data.message)
+            // Perform any desired actions here
+        });
+        console.log('Call closed');
+
+        const presenceChannel = window.Echo.private(`streaming-channel.${session_id}`);
+        presenceChannel.listen('StopStreaming', (data) => {
+            console.log('Call closed BY PRIVATE');
             alert("popop")
             // alert(data.message)
             // Perform any desired actions here
