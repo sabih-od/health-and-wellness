@@ -44,7 +44,7 @@ class StreamController extends Controller
 
         $session->is_streaming = false;
         $session->save();
-        event(new StopStreaming($session->id));
+        event(new StopStreaming($session->id , "Stream Closed"));
         return redirect()->route('session')->with('success' , 'Call Ended');
     }
 

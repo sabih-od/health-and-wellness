@@ -330,20 +330,19 @@
     </script>
 
     <script>
+// If not subscibe channel remove documnet ready
         $(document).ready(function () {
 
             console.log("listen 1")
 
-            // Listen for the "StopStreaming" event on the user side
-            const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
-            console.log("presenceChannel" , presenceChannel)
-            presenceChannel.listen('StopStreaming', (data) => {
-                console.log('Call closed');
-                toastr.success("LISTEN");
-                alert("sdasdas");
-                // Perform any desired actions here
-            });
-
+        // Listen for the "StopStreaming" event on the user side
+        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
+        presenceChannel.listen('StopStreaming', (data) => {
+            console.log('Call closed');
+            alert("popop")
+            // alert(data.message)
+            // Perform any desired actions here
+        });
         });
 
     </script>
