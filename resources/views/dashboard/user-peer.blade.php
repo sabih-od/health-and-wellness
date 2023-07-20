@@ -333,7 +333,7 @@
                     alert('Error! ' + err.message)
                 })
 
-            Echo.join(`streaming-channel.${session_id}`)
+            window.Echo.join(`streaming-channel.${session_id}`)
                 .listen('.StopStreaming', (e) => {
                     alert("Stop In Listen");
                     toastr.success(e.message);
