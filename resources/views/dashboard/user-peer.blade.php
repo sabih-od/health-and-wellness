@@ -147,7 +147,7 @@
                 `streaming-channel.${channel_id}`
             );
             channel.listen('.StopStreaming', (e) => {
-                alert("Stop In Listen BroadCast");
+                alert("Stop In Listen 2");
                 toastr.success(e.message);
                 console.log("eee", e)
 
@@ -167,6 +167,12 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
+            channel.listen('.StopStreaming', (e) => {
+                alert("Stop In Listen 3");
+                toastr.success(e.message);
+                console.log("eee", e)
+
+            })
 
 
             return channel
@@ -314,13 +320,13 @@
 
                         console.log("is stream", stream);
                     });
-                    // let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                    // channel.listen('.StopStreaming', (e) => {
-                    //     alert("Stop In Listen 1");
-                    //     toastr.success(e.message);
-                    //     console.log("eee", e)
-                    //
-                    // })
+                    let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
+                    channel.listen('.StopStreaming', (e) => {
+                        alert("Stop In Listen 1");
+                        toastr.success(e.message);
+                        console.log("eee", e)
+
+                    })
 
                 })
                 .catch(err => {
