@@ -146,12 +146,6 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            channel.listen('.StopStreaming', (e) => {
-                alert("Stop In Listen 2");
-                toastr.success(e.message);
-                console.log("eee", e)
-
-            })
             console.log("channel Created", channel);
 
             // console.log("session_book_user.id", session_book_user)
@@ -167,12 +161,6 @@
             const channel = echo.join(
                 `streaming-channel.${channel_id}`
             );
-            channel.listen('.StopStreaming', (e) => {
-                alert("Stop In Listen 3");
-                toastr.success(e.message);
-                console.log("eee", e)
-
-            })
 
 
             return channel
@@ -321,20 +309,17 @@
                         console.log("is stream", stream);
                     });
                     let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                    channel.listen('.StopStreaming', (e) => {
-                        alert("Stop In Listen 1");
-                        toastr.success(e.message);
-                        console.log("eee", e)
 
-                    })
 
                 })
                 .catch(err => {
                     alert('Error! ' + err.message)
                 })
+            alert("session_id" , session_id  , "NOt Joined")
 
             window.Echo.join(`streaming-channel.${session_id}`)
                 .listen('.StopStreaming', (e) => {
+                    // Handle the received notification data
                     alert("Stop In Listen");
                     toastr.success(e.message);
                     console.log("eee", e)
@@ -345,17 +330,17 @@
         });
     </script>
 
-{{--    <script>--}}
-{{--        console.log("listen 1")--}}
+    <script>
+        console.log("listen 1")
 
-{{--        // Listen for the "StopStreaming" event on the user side--}}
-{{--        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);--}}
-{{--        presenceChannel.listenForWhisper('StopStreaming', (data) => {--}}
-{{--            console.log('Call closed');--}}
-{{--            alert(data.message)--}}
-{{--            // Perform any desired actions here--}}
-{{--        });--}}
-{{--    </script>--}}
+        // Listen for the "StopStreaming" event on the user side
+        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
+        presenceChannel.listenForWhisper('StopStreaming', (data) => {
+            console.log('Call closed');
+            alert(data.message)
+            // Perform any desired actions here
+        });
+    </script>
 
 
 
