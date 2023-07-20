@@ -32,14 +32,8 @@
         }
     </style>
 
-    <section class="chattingSec">
+    <section class="chattingSec" id="parentSection">
         <div class="videoBox">
-            {{--                        <div class="headingCont">--}}
-            {{--                            <h3></h3>--}}
-            {{--                        </div>--}}
-            {{--                        <div class="videoControllers" style="z-index: 1;">--}}
-            {{--                            <a href="#" id="btn_revert_stream" data-user="" hidden><i class="fas fa-phone"></i></a>--}}
-            {{--                        </div>--}}
             <figure class="videoThumbMain">
                 <div class="class_ended_wrapper">
 
@@ -59,29 +53,7 @@
                     <video autoplay id="myCast"></video>
                 </div>
             </figure>
-            {{--            <form action="{{route('admin.stopStream', $session->id)}}" method="POST">--}}
-            {{--                @csrf--}}
-            {{--                <button type="submit" class="btn btn-danger">--}}
-            {{--                    <i class="fas fa-phone-alt"></i>--}}
-            {{--                    End Call--}}
-            {{--                </button>--}}
-            {{--            </form>--}}
         </div>
-        {{--        <div class="container-fluid">--}}
-        {{--            <div class="row">--}}
-        {{--                <div class="col-12">--}}
-        {{--                    --}}
-        {{--                </div>--}}
-
-        {{--                <div class="col-md-2">--}}
-        {{--                    <div class="video-thumbs lobby_viewers_wrapper">--}}
-        {{--                        <main class="container py-4">--}}
-        {{--                            <button class="btn btn-primary btn-block" id="btn_raise_hand"><i class="fa fa-hand-paper-o"></i></button>--}}
-        {{--                        </main>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
     </section>
 
 @endsection
@@ -339,20 +311,28 @@
         const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
         presenceChannel.listen('.StopStreaming', (data) => {
             console.log('Call closed BY PRESENCE');
-            alert("popop")
-            // alert(data.message)
-            // Perform any desired actions here
+
+            // Your new HTML content to be appended
+            var newHTML = `
+              <div id="overlay">
+                  <div class="content">
+                    <h2>Admin Ended The Streaming</h2>
+                    <a href="{{ route('user.dashboard') }}">Go Back</a>
+                  </div>
+               </div>
+            `;
+
+            // Identify the target element by its ID
+            var targetElement = $("#parentSection");
+
+            // Empty the current content of the target element
+            targetElement.empty();
+
+            // Append the new HTML content to the target element
+            targetElement.append(newHTML);
         });
         console.log('Call closed');
-        //
-        // const privateChannel = window.Echo.private(`streaming-channel.${session_id}`);
-        // privateChannel.listen('.StopStreaming', (data) => {
-        //     console.log('Call closed BY PRIVATE');
-        //     alert("popop")
-        //     // alert(data.message)
-        //     // Perform any desired actions here
-        // });
-        // });
+
 
     </script>
 
