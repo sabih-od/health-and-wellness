@@ -18,7 +18,7 @@
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="icon" type="image/x-icon"
-          href="{{ asset('/uploads/settings/'.$setting->logo ?? 'front/images/logo.png') }}">
+          href="{{ asset('/uploads/settings/'.$setting->favicon ?? 'front/images/logo.png') }}">
     <title>@yield('title')
         | {{(isset($setting) && !is_null($setting['site_title'])) ? $setting['site_title'] : 'Health and wellness education corporation'}}</title>
     <meta name="description" content="@yield('description')">
@@ -97,9 +97,23 @@
                     <img src="{{asset('images/footLogo.webp')}}" class="img-fluid" alt="">
                 </a>
                 <ul class="socialLinks">
-                    <li><a href="{{$setting->facebook ?? ''}}"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="{{$setting->tweeter ?? ''}}"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="{{$setting->instagram ?? ''}}"><i class="fab fa-instagram"></i></a></li>
+
+                    @if ($setting->facebook)
+                        <li><a href="{{$setting->facebook ?? ''}}"><i class="fab fa-facebook-f"></i></a></li>
+
+                    @endif
+
+                    @if ($setting->twitter)
+                        <li><a href="{{$setting->tweeter ?? ''}}"><i class="fab fa-twitter"></i></a></li>
+
+                    @endif
+
+                    @if ($setting->instagram)
+                            <li><a href="{{$setting->instagram ?? ''}}"><i class="fab fa-instagram"></i></a></li>
+
+                        @endif
+
+
                 </ul>
             </div>
             <div class="col-md-4">

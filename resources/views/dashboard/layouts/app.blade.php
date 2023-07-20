@@ -19,7 +19,8 @@
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     {{--    Evo Calender Css--}}
-
+    <link rel="icon" type="image/x-icon"
+          href="{{ asset('/uploads/settings/'.$setting->favicon ?? 'front/images/logo.png') }}">
     <title>@yield('title')
         | {{(isset($setting) && !is_null($setting['site_title'])) ? $setting['site_title'] : 'Health And Wellness Education Corporation Portal Design'}}</title>
     <meta name="description" content="@yield('description')">

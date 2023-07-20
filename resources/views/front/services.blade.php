@@ -32,11 +32,11 @@
                     @endif
                     <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                         <div class="servicesContents">
-                            <h3 class="subHeading">{{$service->name}}</h3>
+                            <h3 class="subHeading">{{$service->name ?? ''}}</h3>
                             <p>
-                                {{$service->description}}
+                                {!! $service->description ?? '' !!}
                             </p>
-                            <h4>{{$service->pricing_detail}}</h4>
+                            <h4>{{$service->pricing_detail ?? ''}}</h4>
                             <a href="" class="themeBtn themeBtn2">BOok Now</a>
                         </div>
                     </div>
