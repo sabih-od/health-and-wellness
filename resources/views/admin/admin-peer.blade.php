@@ -261,7 +261,7 @@
                             });
                         });
                         let channel = customerInitPresenceChannel({echo: window.Echo, channel_id: session_id});
-                        channel.listen('StopStreaming', () => {
+                        channel.listen('.StopStreaming', () => {
                             console.log("STOP STREAM");
                             alert("STOP STREAM");
                         });
@@ -297,7 +297,7 @@
 
                 if (window.Echo && session_id) {
                     window.Echo.join(`streaming-channel.${session_id}`)
-                        .whisper('StopStreaming', {message: 'Call successfully ended'});
+                        .listen('.StopStreaming', {message: 'Call successfully ended'});
                 }
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.
             }
