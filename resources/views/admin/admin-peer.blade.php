@@ -296,7 +296,7 @@
 
 
                 if (window.Echo && session_id) {
-                    window.Echo.private(`streaming-channel.${session_id}`)
+                    window.Echo.join(`streaming-channel.${session_id}`)
                         .whisper('StopStreaming', {message: 'Call successfully ended'});
                 }
                 // Optionally, you can redirect the user to another page or perform any other necessary actions.
