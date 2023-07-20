@@ -317,7 +317,7 @@
               <div id="overlay">
                   <div class="content">
                     <h2>Admin Ended The Streaming</h2>
-                    <button id="goBackButton">Go Back</button>
+                    <a href="{{ route('user.dashboard') }}">Go Back</a>
                   </div>
                </div>
             `;
