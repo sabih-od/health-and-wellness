@@ -335,7 +335,7 @@
             console.log("listen 1")
 
             // Listen for the "StopStreaming" event on the user side
-            const presenceChannel = Echo.join(`streaming-channel.${session_id}`);
+            const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
             console.log("presenceChannel" , presenceChannel)
             presenceChannel.listen('StopStreaming', (data) => {
                 console.log('Call closed');
