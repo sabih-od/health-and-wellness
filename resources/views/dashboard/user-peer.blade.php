@@ -331,7 +331,7 @@
 
     <script>
 // If not subscibe channel remove documnet ready
-        $(document).ready(function () {
+//         $(document).ready(function () {
 
             console.log("listen 1")
 
@@ -343,7 +343,7 @@
             // alert(data.message)
             // Perform any desired actions here
         });
-        });
+        // });
 
     </script>
 
