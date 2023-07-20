@@ -59,7 +59,7 @@ class DashboardController extends Controller
                         $secondTime = substr($data->sessionTiming->session_time, 8, 10);
 
                         $currentDateTime = Carbon::now();
-
+//dd($currentDateTime);
                         $givenDateTime = Carbon::parse($data->session->date . $firstTime);
 
                         $givenDateSecondTime = Carbon::parse($data->session->date . $secondTime);

@@ -242,7 +242,7 @@
 
         function renderSession(event) {
             var serviceId = event.target.value; // Get the selected service ID
-
+            console.log("serv Id" , serviceId);
             // Make an AJAX request to fetch the sessions based on the selected service ID
             // Assuming you have a route in your Laravel application to handle this request
 

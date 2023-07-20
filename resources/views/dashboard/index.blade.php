@@ -330,10 +330,9 @@
             function countdown(days, hours, minutes, elementId) {
                 console.log("in");
                 const justId = elementId.replace('count_down_', '');
-
+                console.log("Time Info" , days , hours , minutes);
                 // Calculate the target time in milliseconds
                 var targetTime = Date.now() + (days * 24 * 60 * 60 * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
-
                 // Immediately update the countdown after the page loads
                 updateCountdown(targetTime, elementId);
 
@@ -345,6 +344,9 @@
 
             function updateCountdown(targetTime, elementId) {
                 // Calculate the remaining time in milliseconds
+                console.log("targetTime" , targetTime);
+                console.log("Date.now()" , Date.now());
+
                 var remainingTime = targetTime - Date.now();
                 console.log("remainingTime" , remainingTime)
                 // Check if the countdown has finished

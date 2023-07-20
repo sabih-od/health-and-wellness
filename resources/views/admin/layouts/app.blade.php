@@ -7,7 +7,7 @@
     <title>@yield('title')
         | {{(isset($setting) && !is_null($setting['site_title'])) ? $setting['site_title'] : 'Health and wellness education corporation'}}</title>
     <link rel="icon" type="image/x-icon"
-          href="{{ asset('/uploads/settings/'.$setting->logo ?? 'front/images/logo.png') }}">
+          href="{{ asset('/uploads/settings/'.$setting->favicon ?? 'front/images/logo.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

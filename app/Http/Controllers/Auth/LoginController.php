@@ -55,7 +55,7 @@ class LoginController extends Controller
 
         if ($user->role_id == 2) {// do your magic here
 
-            if($user->is_active == 0){
+            if($user->is_active == 1){
                 $adminEmail = Settings::latest()->first();
                 Auth::logout();
                 return redirect()->route('front.login')->with('error' , "You are deactivated by a admin.Please contact on " . $adminEmail->email);

@@ -30,6 +30,14 @@ class SettingController extends Controller
                     $content->logo = $imageName ?? '';
                 }
 
+                if ($request->file('favicon')) {
+                    $image = time() . '.' . $request->file('favicon')->extension();
+                    //$path = $request->file('favicon')->storeAs('upload/settings', $image);
+                    $request->file('favicon')->move(public_path() . '/uploads/settings/', $image);
+                    $imageName = $image;
+                    $content->favicon = $imageName ?? '';
+                }
+
                 $content->site_title = $request->site_title;
                 $content->company_name = $request->company_name;
                 $content->shipping_rate = $request->shipping_rate;

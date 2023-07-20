@@ -25,7 +25,7 @@
                 <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                     <div class="servicesContents">
                         <h3 class="subHeading">Service : {{$service->name ?? ''}}</h3>
-                        <p>Service Description : {!! $service->description !!}</p>
+                        <p>Service Description : {!! $service->description ?? '' !!}</p>
 {{--                        <h4>Pricing detail : {{$service->pricing_detail ?? ''}}</h4>--}}
 
 {{--                        <p>--}}
