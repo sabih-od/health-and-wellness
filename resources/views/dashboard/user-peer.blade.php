@@ -330,15 +330,22 @@
     </script>
 
     <script>
-        console.log("listen 1")
+        $(document).ready(function () {
 
-        // Listen for the "StopStreaming" event on the user side
-        const presenceChannel = Echo.channel(`streaming-channel.${session_id}`);
-        presenceChannel.listen('StopStreaming', (data) => {
-            console.log('Call closed');
-            alert("sdasdas");
-            // Perform any desired actions here
+            console.log("listen 1")
+
+            // Listen for the "StopStreaming" event on the user side
+            const presenceChannel = Echo.join(`streaming-channel.${session_id}`);
+            console.log("presenceChannel" , presenceChannel)
+            presenceChannel.listen('StopStreaming', (data) => {
+                console.log('Call closed');
+                toastr.success("LISTEN");
+                alert("sdasdas");
+                // Perform any desired actions here
+            });
+
         });
+
     </script>
 
 
