@@ -345,8 +345,8 @@
         });
         console.log('Call closed');
 
-        const presenceChannel = window.Echo.private(`streaming-channel.${session_id}`);
-        presenceChannel.listen('StopStreaming', (data) => {
+        const privateChannel = window.Echo.private(`streaming-channel.${session_id}`);
+        privateChannel.listen('StopStreaming', (data) => {
             console.log('Call closed BY PRIVATE');
             alert("popop")
             // alert(data.message)
