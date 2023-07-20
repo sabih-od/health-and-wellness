@@ -316,30 +316,30 @@
                     alert('Error! ' + err.message)
                 })
 
-            window.Echo.join(`streaming-channel.${session_id}`)
-                .listen('.StopStreaming', (e) => {
-                    // Handle the received notification data
-                    alert("Stop In Listen");
-                    toastr.success(e.message);
-                    console.log("eee", e)
-
-                })
+            // window.Echo.join(`streaming-channel.${session_id}`)
+            //     .listen('.StopStreaming', (e) => {
+            //         // Handle the received notification data
+            //         alert("Stop In Listen");
+            //         toastr.success(e.message);
+            //         console.log("eee", e)
+            //
+            //     })
 
 
         });
     </script>
 
-{{--    <script>--}}
-{{--        console.log("listen 1")--}}
+    <script>
+        console.log("listen 1")
 
-{{--        // Listen for the "StopStreaming" event on the user side--}}
-{{--        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);--}}
-{{--        presenceChannel.listenForWhisper('StopStreaming', (data) => {--}}
-{{--            console.log('Call closed');--}}
-{{--            alert(data.message)--}}
-{{--            // Perform any desired actions here--}}
-{{--        });--}}
-{{--    </script>--}}
+        // Listen for the "StopStreaming" event on the user side
+        const presenceChannel = window.Echo.join(`streaming-channel.${session_id}`);
+        presenceChannel.listen('StopStreaming', (data) => {
+            console.log('Call closed');
+            alert(data.message)
+            // Perform any desired actions here
+        });
+    </script>
 
 
 
