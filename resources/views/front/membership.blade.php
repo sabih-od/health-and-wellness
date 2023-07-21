@@ -59,9 +59,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-center mt-5">
-                    <a href="" class="themeBtn themeBtn2">Sign Up Now</a>
-                </div>
+                @if(!\Illuminate\Support\Facades\Auth::check())
+                    <div class="col-md-4 text-center mt-5">
+                        <a href="{{route('front.signup')}}" class="themeBtn themeBtn2">Sign Up Now</a>
+                    </div>
+                @endif
             </div>
         </div>
     </section>

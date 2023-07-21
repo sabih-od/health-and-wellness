@@ -34,9 +34,9 @@
 
                         <div class="reviewBox">
                             <div class="reviewContent">
-                                <div class="close-icon">
-                                    <a href="#"><i class="fas fa-times text-danger-c"></i></a>
-                                </div>
+{{--                                <div class="close-icon">--}}
+{{--                                    <a href="#"><i class="fas fa-times text-danger-c"></i></a>--}}
+{{--                                </div>--}}
                                 <div>
                                     <h2>
                                         {{ $noti->notification ?? '' }}

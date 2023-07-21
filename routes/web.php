@@ -302,9 +302,7 @@ Route::get('/about', function () {
     return view('front.about');
 })->name('front.about');
 
-Route::get('/contact', function () {
-    return view('front.contact');
-})->name('front.contact');
+Route::get('/contact', [FrontController::class, 'frontContact'])->name('front.contact');
 
 Route::get('/health', function () {
     return view('front.health');

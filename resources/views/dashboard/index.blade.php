@@ -350,7 +350,7 @@
                 var remainingTime = targetTime - Date.now();
                 console.log("remainingTime" , remainingTime)
                 // Check if the countdown has finished
-                if (remainingTime <= 60000) {
+                if (remainingTime <= 10000) {
                     console.log("elementId" , elementId)
                     const justId = elementId.replace('count_down_', '');
                     $('#take_session_button_' + justId).prop('hidden', false);

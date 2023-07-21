@@ -7,6 +7,7 @@ use App\Models\BookSession;
 use App\Models\Faqs;
 use App\Models\Service;
 use App\Models\Sessions;
+use App\Models\Settings;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,12 @@ class FrontController extends Controller
         $faqs = Faqs::all();
 
         return view('front.faq' , compact('faqs'));
+    }
+
+    public function frontContact(Request $request){
+            $setting = Settings::latest()->first();
+
+            return view('front.contact' , compact('setting'));
     }
 
 }

@@ -18,6 +18,10 @@ class StreamController extends Controller
     {
         $session = Sessions::find($session_id);
 
+        if($session->is_streaming == false){
+            return redirect()->back()->with('error' , "Admin didn't Start The Stream Yet!!!");
+        }
+
         event(new UserJoined(Auth::user(), $session_id));
         return view('dashboard.user-peer', compact('session'));
     }
