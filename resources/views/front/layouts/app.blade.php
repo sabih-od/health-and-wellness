@@ -34,8 +34,9 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg p-0">
             <a class="navbar-brand" href="{{route('front.home')}}">
-                <img              src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}"
-                                  alt="img">
+                <img
+                    src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}"
+                    alt="img">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,9 +110,9 @@
                     @endif
 
                     @if ($setting->instagram)
-                            <li><a href="{{$setting->instagram ?? ''}}"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="{{$setting->instagram ?? ''}}"><i class="fab fa-instagram"></i></a></li>
 
-                        @endif
+                    @endif
 
 
                 </ul>
@@ -131,14 +132,22 @@
             <div class="col-md-4">
                 <h4>Contact Us</h4>
                 <ul class="contactLinks">
-                    <li><a href="tel:1234567890"><img src="{{asset('images/call.webp')}}" class="img-fluid"
-                                                      alt="">{{$setting->phone_no_1 ?? ''}}</a>
-                    </li>
-                    <li><a href="mailto:info@youremailhere.com"><img src="{{asset('images/email.webp')}}"
-                                                                     class="img-fluid"
-                                                                     alt="">{{$setting->email ?? ''}}</a></li>
-                    <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-fluid"
-                                        alt="">{{$setting->address ?? ''}}</a></li>
+                    @if($setting->phone_no_1)
+                        <li><a href="tel:{{$setting->phone_no_1 ?? ''}}"><img src="{{asset('images/call.webp')}}" class="img-fluid"
+                                                          alt="">{{$setting->phone_no_1 ?? ''}}</a>
+                        </li>
+                    @endif
+
+                    @if($setting->email)
+                        <li><a href="mailto:{{$setting->email ?? ''}}"><img src="{{asset('images/email.webp')}}"
+                                                                         class="img-fluid"
+                                                                         alt="">{{$setting->email ?? ''}}</a></li>
+                    @endif
+
+                    @if($setting->address)
+                        <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-fluid"
+                                            alt="">{{$setting->address ?? ''}}</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

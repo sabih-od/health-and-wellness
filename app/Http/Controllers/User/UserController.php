@@ -249,13 +249,13 @@ class UserController extends Controller
             $sessionTiming->save();
 
             $authUser = Auth::user();
-            event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
-
-            $noti = new Notification([
-                'notify_id' => $authUser->id,
-                'notification' => "Session book successfully",
-            ]);
-            $noti->save();
+//            event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
+//
+//            $noti = new Notification([
+//                'notify_id' => $authUser->id,
+//                'notification' => "Session book successfully",
+//            ]);
+//            $noti->save();
 
             $to = $authUser->email;
             $from = "noreplay@health-and-wellness.com";
@@ -280,7 +280,6 @@ class UserController extends Controller
         $data = $request->all();
 
         $adminEmail = Settings::latest()->first();
-
         $to = $adminEmail->email;
         $from = $data['email'];
         $subject = $data['subject'];

@@ -18,40 +18,48 @@
             </div>
         </div>
     </div>
-
     <section class="contctPAge">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-10">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="listCntct" data-aos="fade-right">
-                                <figure>
-                                    <img src="{{asset('images/pin1.webp')}}" class="img-fluid" alt="">
-                                </figure>
-                                <h4>Address</h4>
-                                <a href="#">123 W. 7th St. Suite 456 San <br> Pedro, CA 7890
-                                </a>
+                        @if($setting->address)
+                            <div class="col-md-4">
+                                <div class="listCntct" data-aos="fade-right">
+                                    <figure>
+                                        <img src="{{asset('images/pin1.webp')}}" class="img-fluid" alt="">
+                                    </figure>
+                                    <h4>Address</h4>
+                                    <a href="#">
+                                        {{ $setting->address ?? '' }}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="listCntct" data-aos="fade-down">
-                                <figure>
-                                    <img src="{{asset('images/call1.webp')}}" class="img-fluid" alt="">
-                                </figure>
-                                <h4>Phone</h4>
-                                <a href="tel:1234567890">(123) 456 7890</a>
+                        @endif
+
+                        @if($setting->phone_no_1 || $setting->phone_no_2)
+                            <div class="col-md-4">
+                                <div class="listCntct" data-aos="fade-down">
+                                    <figure>
+                                        <img src="{{asset('images/call1.webp')}}" class="img-fluid" alt="">
+                                    </figure>
+                                    <h4>Phone</h4>
+                                    <a href="tel:{{$setting->phone_no_1 != null ? $setting->phone_no_1 : $setting->phone_no_2}}">{{$setting->phone_no_1 != null ? $setting->phone_no_1 : $setting->phone_no_2}}</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="listCntct" data-aos="fade-left">
-                                <figure>
-                                    <img src="{{asset('images/mail1.webp')}}" class="img-fluid" alt="">
-                                </figure>
-                                <h4>Email</h4>
-                                <a href="mailto:healthandwellnessed@gmail.com">healthandwellnessed@gmail.com</a>
+                        @endif
+
+                        @if($setting->email)
+                            <div class="col-md-4">
+                                <div class="listCntct" data-aos="fade-left">
+                                    <figure>
+                                        <img src="{{asset('images/mail1.webp')}}" class="img-fluid" alt="">
+                                    </figure>
+                                    <h4>Email</h4>
+                                    <a href="mailto:{{$setting->email ?? ''}}">{{$setting->email ?? ''}}</a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -77,19 +85,22 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                                        <input type="text" name="name" class="form-control"
+                                               placeholder="Enter your name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" name="email" class="form-control" placeholder="Enter your email" required>
+                                        <input type="text" name="email" class="form-control"
+                                               placeholder="Enter your email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Subject</label>
-                                        <input type="text" name="subject" class="form-control" placeholder="Type the subject" required>
+                                        <input type="text" name="subject" class="form-control"
+                                               placeholder="Type the subject" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

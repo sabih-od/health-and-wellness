@@ -76,7 +76,7 @@ class DashboardController extends Controller
                             return '<span>Completed</span>';
                         }
 
-                        return '<div style="display: flex ; flex-direction: column"><span style="font-size: 14px; font-weight: 400" id="renaming_time_' . $data->session->id . '">Remaining Time</span><span style="font-size:22px; font-weight: 500" data-days="' . $diffInDays . '" data-hours="' . $diffInHours . '" data-minutes="' . $diffInMinutes . '" data-id="' . $data->session->id . '" class="countDown" id="count_down_' . $data->session->id . '"> </span><span style="font-size: 14px; font-weight: 400;" id="days_hrs_' . $data->session->id . '">Days Hrs Mins </span></div>';
+                        return '<div style="display: flex ; flex-direction: column"><span style="font-size: 14px; font-weight: 400" id="renaming_time_' . $data->session->id . '">Remaining Time</span><span style="font-size:22px; font-weight: 500" data-days="' . $diffInDays . '" data-hours="' . $diffInHours . '" data-minutes="' . $diffInMinutes+2 . '" data-id="' . $data->session->id . '" class="countDown" id="count_down_' . $data->session->id . '"> </span><span style="font-size: 14px; font-weight: 400;" id="days_hrs_' . $data->session->id . '">Days Hrs Mins </span></div>';
 
                     })
                     ->addColumn('action', function ($data) use ($startSession, $remaingBtn) {
@@ -89,14 +89,11 @@ class DashboardController extends Controller
                         $currentDateTime = Carbon::now();
 
                         $givenDateTime = Carbon::parse($data->session->date . $firstTime);
-
                         $givenDateSecondTime = Carbon::parse($data->session->date . $secondTime);
-
                         if ($currentDateTime < $givenDateTime) {
                             return '<button id="action_btn_' . $data->session->id . '" class="themeBtn remain">Take A Session</button>';
 //
                         } elseif ($currentDateTime < $givenDateSecondTime) {
-
                             return '<a href="stream/'.$data->session->id.'" id="action_btn_' . $data->session->id . '" class="themeBtn">Take A Session</a>';
 
                         } else {

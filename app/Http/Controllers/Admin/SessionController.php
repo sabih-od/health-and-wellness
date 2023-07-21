@@ -51,7 +51,6 @@ class SessionController extends Controller
                         $currentDateTime = Carbon::now();
                         $givenDateTime = Carbon::parse($data->session->date . $firstTime);
                         $givenDateSecondTime = Carbon::parse($data->session->date . $secondTime);
-
                         $joinCallButton = '';
                         if ($givenDateTime <= $currentDateTime && $givenDateSecondTime >= $currentDateTime) {
                             if ($data->session->status == 1) {
@@ -275,7 +274,12 @@ class SessionController extends Controller
 
         $date = Carbon::createFromFormat('m/d/Y', $request->date);
         $formattedDate = $date->format('Y-m-d');
-        $sessions = Sessions::where('date', $formattedDate)->with('service')->get();
+//        $sessions = Sessions::where('date', $formattedDate)->with('service','sessionTimings')->get();
+
+        $sessions = SessionTiming::wherehas('session' , function ($q) use ($formattedDate) {
+            $q->where('date', $formattedDate);
+        })->with('session.service')->get();
+
 
 
         return response()->json($sessions);

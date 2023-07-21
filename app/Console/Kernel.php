@@ -57,33 +57,33 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             try {
                 $pendingSessions = BookSession::where('status', '=', 'pending')->with('sessionTiming', 'session')->get();
+
                 if (count($pendingSessions) == 0) {
                     return;
                 } else {
                     foreach ($pendingSessions as $session) {
                         $sessionstartTime = substr($session->sessionTiming->session_time, 0, 5);
-
                         $sessionDateTime = Carbon::parse($session->session->date . $sessionstartTime);
 
                         $currentDateTime = Carbon::now();
+                        if ($currentDateTime > $sessionDateTime) {
+                            $user = Auth::user();
+                            echo "IN NOTIFICATION First";
 
-                        if ($currentDateTime < $sessionDateTime) {
-
-                            $authUser = Auth::user();
-                            event(new \App\Events\NotificationEvent($authUser->id, "Session book successfully"));
-
-                            $noti = new Notification([
-                                'notify_id' => $authUser->id,
-                                'notification' => "Session book successfully",
-                            ]);
-                            $noti->save();
-
-                            $to = $authUser->email;
-                            $from = "noreplay@health-and-wellness.com";
-                            $subject = "Mail Submitted";
-                            $message = "Session book successfully";
-
-                            $this->customMail($from, $to, $subject, $message);
+                            event(new \App\Events\NotificationEvent($user->id, "Your Session Timing Has Been Start!!"));
+                            echo "IN NOTIFICATION";
+//                            $noti = new Notification([
+//                                'notify_id' => $user->id,
+//                                'notification' => "Your Session Timing Has Been Start!!",
+//                            ]);
+//                            $noti->save();
+//
+//                            $to = $user->email;
+//                            $from = "noreplay@health-and-wellness.com";
+//                            $subject = "Info";
+//                            $message = "Your Session Timing Has Been Start!!";
+//
+//                            $this->customMail($from, $to, $subject, $message);
 
                         }
                     }

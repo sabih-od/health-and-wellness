@@ -211,13 +211,13 @@
                             var item = data[i];
 
                             console.log("item", item)
-                            var htmlCode = '<div class="wellnesstag" data-name="'+ item.service.name +'" onclick="goToBooking()">' +
+                            var htmlCode = '<div class="wellnesstag" data-name="'+ item.session.service.name +'" onclick="goToBooking()">' +
                                 '<figure>' +
-                                '<img src="' + item.media[0].original_url + '" alt="">' +
+                                '<img src="' + item.session.media[0].original_url + '" alt="">' +
                                 '</figure>' +
                                 '<div>' +
-                                '<h5 class="mb-0">' + item.name + '</h5>' +
-                                '<span>' + item.date + ' | ' + item.session_time + '</span>' +
+                                '<h5 class="mb-0">' + item.session.name + '</h5>' +
+                                '<span>' + item.session.date + ' | ' + item.session_time + '</span>' +
                                 '</div>' +
                                 '</div>';
 
