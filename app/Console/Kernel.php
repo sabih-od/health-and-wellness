@@ -68,10 +68,8 @@ class Kernel extends ConsoleKernel
                         $currentDateTime = Carbon::now();
                         if ($currentDateTime > $sessionDateTime) {
                             $user = Auth::user();
-                            echo "IN NOTIFICATION First";
 
                             event(new \App\Events\NotificationEvent($user->id, "Your Session Timing Has Been Start!!"));
-                            echo "IN NOTIFICATION";
 //                            $noti = new Notification([
 //                                'notify_id' => $user->id,
 //                                'notification' => "Your Session Timing Has Been Start!!",

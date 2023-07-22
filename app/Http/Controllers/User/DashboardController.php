@@ -76,7 +76,7 @@ class DashboardController extends Controller
                             return '<span>Completed</span>';
                         }
 
-                        return '<div style="display: flex ; flex-direction: column"><span style="font-size: 14px; font-weight: 400" id="renaming_time_' . $data->session->id . '">Remaining Time</span><span style="font-size:22px; font-weight: 500" data-days="' . $diffInDays . '" data-hours="' . $diffInHours . '" data-minutes="' . $diffInMinutes+2 . '" data-id="' . $data->session->id . '" class="countDown" id="count_down_' . $data->session->id . '"> </span><span style="font-size: 14px; font-weight: 400;" id="days_hrs_' . $data->session->id . '">Days Hrs Mins </span></div>';
+                        return '<div style="display: flex ; flex-direction: column"><span style="font-size: 14px; font-weight: 400" id="renaming_time_' . $data->session->id . '">Remaining Time</span><span style="font-size:22px; font-weight: 500" data-days="' . $diffInDays . '" data-hours="' . $diffInHours . '" data-minutes="' . $diffInMinutes+1 . '" data-id="' . $data->session->id . '" class="countDown" id="count_down_' . $data->session->id . '"> </span><span style="font-size: 14px; font-weight: 400;" id="days_hrs_' . $data->session->id . '">Days Hrs Mins </span></div>';
 
                     })
                     ->addColumn('action', function ($data) use ($startSession, $remaingBtn) {
@@ -100,7 +100,6 @@ class DashboardController extends Controller
                             return '<a id="action_btn_' . $data->session->id . '" href="service-detail/ ' . $data->id . '" class="themeBtn completed">View Detail</a>';
 
                         }
-
                     })
                     ->rawColumns(['action', 'time_remaining'])->make(true);
             } catch (\Exception $ex) {

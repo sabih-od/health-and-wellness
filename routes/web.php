@@ -191,7 +191,7 @@ Route::prefix('/user')->middleware('user')->group(function () {
 
     Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
 
-    Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact-via-mail')->withoutMiddleware('user');
+    Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact.via.mail')->withoutMiddleware('user');
     Route::get('send/notification', [UserController::class,'sendNotification'])->name('sendNotification');
 
     route::get('/stream/{session_id}', [SC::class, 'stream'])->name('user.stream');
