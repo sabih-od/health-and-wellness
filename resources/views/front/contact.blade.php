@@ -79,7 +79,7 @@
                         <h2 class="secHeading">Contact Us</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                             been the industry's standard dummy text ever since the 1500s.</p>
-                        <form action="{{ route('contact-via-mail') }}" method="POST" class="contctForm">
+                        <form action="{{ route('contact.via.mail') }}" method="POST" class="contctForm">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">

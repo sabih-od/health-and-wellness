@@ -279,8 +279,9 @@ class UserController extends Controller
     {
         $data = $request->all();
 
+        // Email Send To Admin
         $adminEmail = Settings::latest()->first();
-        $to = $adminEmail->email;
+        $to = $adminEmail['email'];
         $from = $data['email'];
         $subject = $data['subject'];
         $message = "Message Sender : " . $data['name'] . "</br>";
@@ -288,6 +289,7 @@ class UserController extends Controller
 
         $this->customMail($from, $to, $subject, $message);
 
+        // Email Send To User
         $to = $data['email'];
         $from = "noreplay@health-and-wellness.com";
         $subject = "Mail Submitted";
