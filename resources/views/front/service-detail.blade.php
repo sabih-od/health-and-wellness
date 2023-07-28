@@ -42,6 +42,7 @@
                         <p>
                             Session Time : {{$session->sessionTiming->session_time ?? ''}}
                         </p>
+                        <a href="{{route('front.login')}}" class="themeBtn">Book Now</a>
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">

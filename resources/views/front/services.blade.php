@@ -37,7 +37,7 @@
                                 {!! $service->description ?? '' !!}
                             </p>
                             <h4>{{$service->pricing_detail ?? ''}}</h4>
-                            <a href="" class="themeBtn themeBtn2">BOok Now</a>
+                            <a href="" class="themeBtn themeBtn2">Read More</a>
                         </div>
                     </div>
                     @if ($key % 2 != 0)

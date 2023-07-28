@@ -31,7 +31,8 @@
 <!-- Begin: Header -->
 
 <header>
-    <div class="container">
+    <div class="container-fluid">
+        <div class="col-lg-11 mx-auto">
         <nav class="navbar navbar-expand-lg p-0">
             <a class="navbar-brand" href="{{route('front.home')}}">
                 <img
@@ -73,7 +74,7 @@
                     </li>
                 </ul>
                 <div class="form-inline">
-                    <a href="{{route('front.membership')}}" class="themeBtn">Contact us</a>
+                    <a href="{{route('front.contact')}}" class="themeBtn">Contact us</a>
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <a href="{{route('front.login')}}"
                            class="loginLink"> <img src="{{ Auth::user()->get_profile_picture() }}"> </a>
@@ -84,6 +85,7 @@
                 </div>
             </div>
         </nav>
+        </div>
     </div>
 </header>
 
@@ -92,7 +94,7 @@
 <!-- Begin: Footer -->
 <footer>
     <div class="container">
-        <div class="row justify-content-between align-items-center">
+        <div class="row justify-content-between align-items-start">
             <div class="col-md-4">
                 <a href="" class="footLogo">
                     <img src="{{asset('images/footLogo.webp')}}" class="img-fluid" alt="">
@@ -117,7 +119,7 @@
 
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h4>Quick Links</h4>
                 <ul class="links">
                     <li><a href="{{route('front.home')}}">Home</a></li>

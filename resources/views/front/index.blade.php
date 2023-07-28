@@ -25,7 +25,7 @@
                                             to relationship dynamics let’s create and activate your plan- see my bio for
                                             reference.
                                         </p>
-                                        <a href="#" class="themeBtn">Contact us</a>
+                                        <a href="{{route('front.contact')}}" class="themeBtn">Contact us</a>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                             to relationship dynamics let’s create and activate your plan- see my bio for
                                             reference.
                                         </p>
-                                        <a href="#" class="themeBtn">Contact us</a>
+                                        <a href="{{route('front.contact')}}" class="themeBtn">Contact us</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +61,11 @@
             <div class="swiper-button-prev"></div> -->
         </div>
         <div class="scroll">
-            <a href=""><img src="{{asset('images/mouse.webp')}}" class="img-fluid" alt=""><span>Scroll Down</span></a>
+            <a href="#aboutSec"><img src="{{asset('images/mouse.webp')}}" class="img-fluid" alt=""><span>Scroll Down</span></a>
         </div>
     </section>
 
-    <section class="aboutSec">
+    <section class="aboutSec" id="aboutSec">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -82,7 +82,7 @@
                             all ages with spiritual and life counseling as well as mentorship. As I entered my 30s, the
                             medical field called out to me, hence receiving my second bachelor’s degree in the field of
                             Nursing. As a nurse I worked with various age groups in various settings. </p>
-                        <a href="" class="themeBtn themeBtn2">Contact us</a>
+                        <a href="{{route('front.about')}}" class="themeBtn themeBtn2">Read More</a>
                     </div>
                 </div>
                 <div class="col-md-6 circle" data-aos="fade-left" data-aos-duration="2000">
@@ -114,7 +114,7 @@
                                 <p>
                                     State-certified Medication Administration program
                                 </p>
-                                <a href="" class="themeBtn">Book Know</a>
+                                <a href="{{route('front.login')}}" class="themeBtn">Book Know</a>
                             </div>
                         </div>
                         <div class="segmentCard">
@@ -124,7 +124,7 @@
                                 <p>
                                     Work with a Spiritual Guide for wholeness
                                 </p>
-                                <a href="" class="themeBtn">Book Know</a>
+                                <a href="{{route('front.login')}}" class="themeBtn">Book Know</a>
                             </div>
                         </div>
                         <div class="segmentCard">
@@ -134,7 +134,7 @@
                                 <p>
                                     Work with a registered nurse as your personal health coach for your medical concerns
                                 </p>
-                                <a href="" class="themeBtn">Book Know</a>
+                                <a href="{{route('front.login')}}" class="themeBtn">Book Know</a>
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                 <div class="col-md-12 text-center">
                     <div class="callusContent">
                         <h2 class="secHeading">Need Help Contact Us Any Time!</h2>
-                        <a href="" class="themeBtn">Contact us</a>
+                        <a href="{{route('front.contact')}}" class="themeBtn">Contact us</a>
                     </div>
                 </div>
             </div>
