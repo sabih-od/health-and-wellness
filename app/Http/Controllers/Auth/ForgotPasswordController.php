@@ -94,15 +94,15 @@ class ForgotPasswordController extends Controller
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
         $authUser = Auth::user();
-        event(new \App\Events\NotificationEvent($authUser->id, "Your password has been changed!"));
+        event(new \App\Events\NotificationEvent($user->id, "Your password has been changed!"));
 
         $noti = new Notification([
-            'notify_id' => $authUser->id,
+            'notify_id' => $user->id,
             'notification' => "Your password has been changed!",
         ]);
         $noti->save();
 
-        $to = $authUser->email;
+        $to = $user->email;
         $from = "noreplay@health-and-wellness.com";
         $subject = "Mail Submitted";
         $message = "Your password has been changed!";
