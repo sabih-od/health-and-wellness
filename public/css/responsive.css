@@ -75,7 +75,18 @@
         width: 8.75rem;
         height: 8.75rem;
     }
-
+    .accountAccesSec h2 {
+        font-size: 2rem;
+    }
+    .accountAccesSec h2 span{
+        font-size: 2.5rem;
+    }
+    .accountAccesSec .formStyle .form-control {
+        padding: 24px 20px;
+    }
+    .accountAccesSec .whitebg{
+        padding: 1.875rem;
+    }
     /*.listCntct figure img{*/
     /*    max-width:10vw;*/
     /*    max-height: 10vw;*/
@@ -907,6 +918,17 @@
     .membershipInner
     {
         padding-bottom: 3rem !important;
+    }
+    .accountAccesSec .formStyle .forgetPass{
+        border: 0;
+        margin: auto 0 0 auto;
+    }
+    .accountAccesSec p a{
+        font-size: 13px;
+    }
+    .accountAccesSec {
+        min-height: auto;
+        padding: 8rem 0 3rem;
     }
 }
 @media (max-width: 320.98px) {
