@@ -24,7 +24,7 @@
                 <div class="col-md-10">
                     <div class="row">
                         @if($setting->address)
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="listCntct" data-aos="fade-right">
                                     <figure>
                                         <img src="{{asset('images/pin1.webp')}}" class="img-fluid" alt="">
@@ -38,7 +38,7 @@
                         @endif
 
                         @if($setting->phone_no_1 || $setting->phone_no_2)
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="listCntct" data-aos="fade-down">
                                     <figure>
                                         <img src="{{asset('images/call1.webp')}}" class="img-fluid" alt="">
@@ -50,7 +50,7 @@
                         @endif
 
                         @if($setting->email)
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="listCntct" data-aos="fade-left">
                                     <figure>
                                         <img src="{{asset('images/mail1.webp')}}" class="img-fluid" alt="">
