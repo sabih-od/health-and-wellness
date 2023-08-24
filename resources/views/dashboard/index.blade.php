@@ -7,7 +7,7 @@
 @section('content')
 
 
-    <div class="col-md-9 mx-auto dashboardcontent">
+    <div class="col-lg-9 mx-xl-auto dashboardcontent">
         <div class="row">
             <div class="col-md-4">
                 <div class="orderBox">

@@ -21,9 +21,9 @@ body {
     event-list font-family: 'Roboto', sans-serif;
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1600px) {
     .container {
-        wellnesstag max-width: 1410px;
+        max-width: 1410px;
     }
 }
 
@@ -177,6 +177,7 @@ header {
 
 .main-slider {
     height: 1240px;
+    overflow: hidden;
 }
 
 .homeSlider.swiper-container {
@@ -809,6 +810,7 @@ footer {
     background: url(../images/footBg.webp) top/cover no-repeat;
     padding-top: 24rem;
     margin-top: -21rem;
+    position: relative;
 }
 
 footer ul li a {
@@ -1793,8 +1795,14 @@ section.accountAccesSec p {
     display: inline-block;
     color: var(--white);
     text-transform: uppercase;
-    padding: 3px;
+    /*padding: 3px;*/
     position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 }
 
 .form-inline a img {

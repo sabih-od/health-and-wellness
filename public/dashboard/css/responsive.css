@@ -19,9 +19,9 @@
 	.deliveryList ul li .logo img {
 		width: 150px;
 	}
-	.deliveryList ul li:nth-child(3) {
-		width: 40%;
-	}
+	/*.deliveryList ul li:nth-child(3) {*/
+	/*	width: 40%;*/
+	/*}*/
 	.sideNAvigation .navbar-nav .nav-item .nav-link{
 		font-size: 1.125rem;
 	}
@@ -38,6 +38,10 @@
 		text-align: left;
 		font-size: 1rem;
 	}
+    .sideNAvigation {
+        width: 280px;
+        left: 0;
+    }
 
 }
 
@@ -64,6 +68,9 @@
 	.recentTable.memberAces .themeBtn {
 		font-size: 1.125rem;
 	}
+    .sideNAvigation {
+        width: 260px;
+    }
 
 }
 
@@ -92,6 +99,18 @@
 	.orderDetail{
 		padding: 2rem;
 	}
+    .sideNAvigation {
+        width: 224px;
+    }
+    .deliveryList ul{
+        gap: 2rem;
+    }
+    .deliveryList ul li:nth-child(2){
+        flex: 1;
+    }
+    .search{
+        width: 100%;
+    }
 }
 
 @media (max-width: 1199.98px) {
@@ -151,8 +170,25 @@
 	.invoicRes .orderDetail {
 		padding: 1rem;
 	}
+    .dashboardcontent{
+        margin-left: auto;
+    }
+    .userprofile img {
+        width: 48px;
+        height: 48px;
+    }
+    .usernotify i {
+        font-size: 1.75rem;
+    }
+    .usernotify .notifycount{
+        font-size: 10px;
+    }
+    .heloMain{
+        gap: 0;
+    }
 }
 @media (max-width: 991.98px) {
+
 	.topBar {
 		padding: 0.5rem 0;
 	}
@@ -170,10 +206,10 @@
 	.editForm input {
 		height: 48px;
 	}
-	.deliveryList ul li:nth-child(3) {
-		    width: 85%;
+	/*.deliveryList ul li:nth-child(3) {*/
+	/*	    width: 85%;*/
 
-	}
+	/*}*/
 	.acountInfo .vendorEmail,
 	.acountInfo .waletBox div{
 		padding: 1rem;
@@ -193,9 +229,9 @@
 		width: 50%;
 		display: block;
 	}
-	a.logo{
-		display: none;
-	}
+	/*a.logo{*/
+	/*	display: none;*/
+	/*}*/
 	.navbar-nav .nav-item .nav-link,
 	.alldrop button{
 		color: #000;
@@ -207,9 +243,9 @@
 		margin: 0;
 	}
 	.heloMain{
-		align-items: flex-start;
+		align-items:center;
 		gap: 1rem;
-		flex-flow: column;
+		/*flex-flow: column;*/
 	}
 	.heloContent a.heloSign {
 		font-size: 1.125rem;
@@ -371,6 +407,27 @@
 	.reviewContent div a {
 		padding-left: 11px;
 	}
+    .sideNAvigation {
+       width: 100%;
+        display: none;
+        z-index: 2;
+    }
+    .userprofile img {
+        width: 40px;
+        height: 40px;
+    }
+    .userprofile.dropdown-toggle::after{
+        margin-left: 0.875rem;
+    }
+    .deliveryList ul {
+        gap: 1rem;
+    }
+    .deliveryList ul li:nth-child(1){
+        margin-right: 1rem;
+    }
+    .deliveryList ul li .logo img {
+        width: 80px;
+    }
 }
 @media (max-width: 767.98px) {
 	html {
@@ -559,6 +616,12 @@
 	.editRes.recentTable.editProfile label{
 		text-align: left;
 	}
+    .userprofile img {
+       display: none;
+    }
+    .heloMain{
+        gap: 0;
+    }
 }
 @media (max-width: 575.98px) {
 	.custmrContent img{
@@ -668,22 +731,35 @@
 
 }
 @media (max-width: 480.98px) {
+    .deliveryList ul li .logo img {
+        width: 70px;
+    }
 	.deliveryList ul {
 		gap: 0px;
-		justify-content: center;
+		justify-content: space-between;
+        flex-wrap: wrap;
 	}
 	.deliveryList ul li span {
 		margin-left: 0;
 	}
+    .deliveryList ul li:nth-child(2){
+        order: 3;
+        width: 100%;
+        flex: auto;
+        margin-top: 1rem;
+    }
+    .deliveryList ul li:nth-child(3){
+        /*width: 70%;*/
+    }
 	a.navbar-brand img {
 		width: 35%;
 	}
 	.deliveryList ul li:nth-child(3){
-		width: 100%;
+		/*width: 100%;*/
 	}
 	.deliveryList ul,
 	.deliveryList ul li span{
-		display: block;
+		/*display: block;*/
 	}
 	.deliveryList ul li:nth-child(2){
 		text-align: center;
