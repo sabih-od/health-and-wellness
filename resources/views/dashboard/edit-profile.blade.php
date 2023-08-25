@@ -6,12 +6,12 @@
 
 @section('content')
 
-    <div class="col-md-9 mx-auto dashboardcontent editprof booking">
+    <div class="col-lg-9 mx-xl-auto dashboardcontent editprof booking">
         <div class="row">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row justify-content-center">
-                        <div class="col-lg-10">
+                        <div class="col-xl-10 col-lg-11 mr-xl-0 mr-lg-5">
                             <div class="accountAccesSec">
                                 <div class="whitebg">
                                     <h2><span>Edit Profile</span></h2>

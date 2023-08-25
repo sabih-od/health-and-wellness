@@ -12,7 +12,7 @@
 
     @endphp
 
-    <div class="col-md-9 mx-auto dashboardcontent book">
+    <div class="col-lg-9 mx-xl-auto dashboardcontent book">
         <div class="row">
 
             @foreach($services as $service)
@@ -58,8 +58,8 @@
 
         <div class="row">
 
-            <div class="col-md-12 all-order flemember mt-4">
-                <div class="recentTable addProdct px-5">
+            <div class="col-md-12 all-order flemember mt-md-4">
+                <div class="recentTable addProdct px-lg-5">
                     <div class="showOne border-0">
                         <div>
                             <h1>Book Sessions</h1>

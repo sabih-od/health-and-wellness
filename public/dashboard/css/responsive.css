@@ -42,7 +42,46 @@
         width: 280px;
         left: 0;
     }
+    .orderBox div + div {
+        width:8.5rem;
+        height: 8.5rem;
+    }
 
+    .orderBox div + div img{
+        max-width: 100%;
+    }
+
+    .recentTable {
+        padding: 2rem 1.25rem;
+    }
+    .booking .editForm {
+        padding-inline: 1rem;
+        margin-top: 1rem;
+    }
+    .recentTable.editProfile .editForm label{
+        font-size: 1.125rem !important;
+    }
+
+    .booking .editForm .row .col-md-3,
+    .booking .editForm .row .col-md-1{
+        padding: 0;
+    }
+    .book .orderBox img{
+        width: auto;
+        height: auto;
+    }
+
+    .calendar-inner {
+        padding: 40px 20px;
+        max-width: calc(100% - 540px);
+    }
+    .calendar-events {
+        width: 340px;
+        padding: 40px 20px 36px 20px;
+    }
+    .calendar-events > .event-header > p {
+        font-size: 1.75rem;
+    }
 }
 
 @media only screen and (max-width: 1445px) {
@@ -71,7 +110,34 @@
     .sideNAvigation {
         width: 260px;
     }
-
+    .orderBox {
+        padding: 1.25rem 1rem;
+    }
+    .orderBox div + div {
+        width: 6rem;
+        height: 6rem;
+        padding: 1.25rem;
+    }
+    .orderBox h3 {
+        font-size: 1.25rem;
+    }
+    .orderBox h2 {
+        font-size: 3.25rem;
+    }
+    .editForm input, .editForm select{
+        height: 3.5rem;
+    }
+    .calendar-inner {
+        padding: 2.5rem 1rem;
+        max-width: calc(100% - 475px);
+    }
+    .calendar-events {
+        width: 280px;
+        padding: 2.25rem 1rem 2rem 1rem;
+    }
+    .acountInfo .waletBox h4 {
+        font-size: 3rem;
+    }
 }
 
 @media only screen and (max-width: 1366px) {
@@ -82,14 +148,14 @@
 		width: 117px;
 	}
 	.orderBox h2{
-		font-size: 1rem;
+		font-size: 2rem;
 	}
 	.orderBox div + div {
 		width: 92px;
 	}
-	.orderBox {
-		padding: 22px 0 22px 13px;
-	}
+	/*.orderBox {*/
+	/*	padding: 22px 0 22px 13px;*/
+	/*}*/
 	.orderBox div + div i {
 		font-size: 2rem;
 	}
@@ -105,13 +171,62 @@
     .deliveryList ul{
         gap: 2rem;
     }
-    .deliveryList ul li:nth-child(2){
+    .deliveryList ul li:nth-child(3){
         flex: 1;
     }
     .search{
         width: 100%;
     }
+    .dashboardcontent{
+        padding-top: 2rem;
+    }
+    .orderContent h2 {
+        font-size: 2.5rem;
+    }
+    .orderContent.listNon {
+        margin-bottom: 1rem;
+    }
+    .book .orderBox div + div{
+        padding: 0;
+    }
+    .book .orderBox h2 {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+    .book .orderBox h3 {
+        font-size: 1.125rem;
+        margin-bottom: 8px;
+    }
+    .calendar-sidebar{
+    }
+    .calendar-inner {
+        /*padding: 50px 20px 32px 20px;*/
+        max-width: calc(100% - 440px);
+        overflow: scroll;
+    }
+    .calendar-events {
+        width: 250px;
+        /*padding: 50px 20px 20px 20px;*/
+    }
+    .calendar-inner .calendar-table{
+        font-size: 17px;
+    }
+    tr.calendar-body .calendar-day .day{
+        width: 50px;
+        height: 50px;
+    }
+    .evo-calendar{
+        min-height: 560px;
+    }
+    .acountInfo .waletBox h4 {
+        font-size: 2.75rem;
+    }
+
+    .recentTable .showOne div h1{
+        font-size:2.25rem
+    }
 }
+
 
 @media (max-width: 1199.98px) {
 	html {
@@ -124,17 +239,18 @@
 		width: 82px;
 	}
 	.orderBox {
-		padding: 22px 0 39px 13px;
+		/*padding: 22px 0 39px 13px;*/
 		margin-bottom: 1rem;
+        gap:8px;
 	}
 	.orderBox h2{
-		font-size: 1.125rem;
+		font-size: 1.75rem;
 	}
 	.deliveryList ul li .logo img{
 		width: 100px;
 	}
 	.dashboard{
-		padding: 2rem 1rem;
+        padding: 0rem 1rem 0 0rem;
 	}
 	.recentTable tbody tr td {
 		padding: 10px 0px;
@@ -186,6 +302,53 @@
     .heloMain{
         gap: 0;
     }
+
+    .orderBox div + div {
+        width: 5rem;
+        height: 5rem;
+    }
+    .overallBox .col-md-4{
+        padding:0 8px;
+    }
+    .orderContent h2 {
+        font-size: 2.25rem;
+    }
+    .calendar-sidebar {
+        width: 155px;
+    }
+
+    .calendar-inner {
+        max-width: calc(100% - 360px);
+        margin-left: 144px;
+    }
+
+    tr.calendar-body .calendar-day .day {width: 30px;height: 30px;font-size: 14px;display: flex;align-items: center;justify-content: center;}
+
+    .calendar-events {
+        width: 210px;
+    }
+
+    th[colspan="7"] {
+        font-size: 23px;
+    }
+
+    .calendar-events > .event-header > p {
+        font-size: 1.45rem;
+    }
+
+    .calendar-sidebar > .calendar-year > p {
+        font-size: 22px;
+    }
+    .accountAccesSec .formStyle label {
+        font-size: 1rem;
+        margin: 0.5rem;
+    }
+    .accountAccesSec h2 span{
+        font-size: 2.25rem;
+    }
+    .accountAccesSec h2{
+        margin-bottom: 1.5rem;
+    }
 }
 @media (max-width: 991.98px) {
 
@@ -203,7 +366,8 @@
 		justify-content: space-between;
 	}
 	.search input.form-control,
-	.editForm input {
+	.editForm input,
+    .formStyle .form-control{
 		height: 48px;
 	}
 	/*.deliveryList ul li:nth-child(3) {*/
@@ -236,9 +400,9 @@
 	.alldrop button{
 		color: #000;
 	}
-	.deliveryList ul li:nth-child(4), .deliveryList ul li:nth-child(5), .deliveryList ul li:nth-child(6) {
-		display: none;
-	}
+	/*.deliveryList ul li:nth-child(4), .deliveryList ul li:nth-child(5), .deliveryList ul li:nth-child(6) {*/
+	/*	display: none;*/
+	/*}*/
 	.heloContent a{
 		margin: 0;
 	}
@@ -279,7 +443,9 @@
 	.cart a span {
 		color: #000;
 	}
-
+    .accountAccesSec .whitebg{
+        padding: 1.25rem;
+    }
 
 	.orderBox {
 		padding: 10px 0 10px 13px;
@@ -296,7 +462,7 @@
 		font-size: 1rem;
 	}
 	.showOne{
-		display: block;
+		/*display: block;*/
 		margin: 0 auto;
 		padding: 0;
 	}
@@ -407,10 +573,22 @@
 	.reviewContent div a {
 		padding-left: 11px;
 	}
+    header{
+        z-index: 3;
+    }
     .sideNAvigation {
        width: 100%;
-        display: none;
+        left: -100%;
+        padding-top: 12rem;
+        transition: 0.5s ease;
         z-index: 2;
+    }
+    .sideNAvigation .logout{
+        margin-top: -55px !important;
+    }
+    .sideNAvigation.hide{
+        left: 0%;
+
     }
     .userprofile img {
         width: 40px;
@@ -422,11 +600,58 @@
     .deliveryList ul {
         gap: 1rem;
     }
-    .deliveryList ul li:nth-child(1){
+    .deliveryList ul li:nth-child(2){
         margin-right: 1rem;
     }
     .deliveryList ul li .logo img {
         width: 80px;
+    }
+    .deliveryList ul li:first-child {
+        display: block;
+
+    }
+    .overallBox .col-md-4{
+        padding:0 15px;
+    }
+    .orderBox {
+        padding: 1.5rem 1rem !important;
+        gap: 1rem;
+    }
+    .dashboard {
+        padding: 0rem 1rem;
+    }
+    .editForm .row + .row {
+        margin-top: 1.5rem;
+    }
+    .book .orderBox {
+        height: 100%;
+        margin-bottom: 0;
+    }
+    .calendar-inner{
+        max-width: calc(100% - 360px);
+        /*overflow: hidden;*/
+        padding: 50px 12px 32px 12px;
+    }
+    tr.calendar-body .calendar-day .day {
+        width: 40px;
+        height: 40px;
+    }
+    .acountInfo .waletBox h3{
+        font-size: 1.5rem;
+    }
+    .acountInfo .waletBox h4 {
+        font-size: 2.5rem;
+    }
+    .reviewBox{
+        padding: 1.75rem;
+    }
+    .reviewContent div h2
+    {
+        font-size: 1.75rem;
+    }
+
+    .recentTable .showOne div h1{
+        font-size:2rem
     }
 }
 @media (max-width: 767.98px) {
@@ -449,9 +674,29 @@
 		margin-top: 0rem;
 		padding: 1rem;
 	}
+    .reviewBox{
+        padding: 1.5rem;
+    }
+    .reviewContent div h2
+    {
+        font-size: 1.5rem;
+        flex-wrap: wrap;
+    }
 
+    .editForm .row + .row {
+        margin-top: 1rem;
+    }
+    .editForm .row {
+        gap: 1rem;
+    }
 
-
+    .booking .editForm .row .col-md-3,
+    .booking .editForm .row .col-md-1{
+        padding: 0 15px;
+    }
+    .booking .editForm {
+        padding-inline: 0rem;
+    }
 	.sideNAvigation{
 		margin-bottom: 1rem;
 	}
@@ -479,19 +724,19 @@
 	.copyRight a {
 		margin: 0.5rem auto 0;
 	}
-	.orderBox {
-		padding: 30px 13px;
-	}
-
+	/*.orderBox {*/
+	/*	padding: 30px 13px;*/
+	/*}*/
+    .orderBox {
+        padding: 1.75rem 2rem !important;
+    }
 	.orderBox h2{
-		font-size: 1.375rem;
+		font-size: 1.5rem;
 	}
 	.orderBox:before {
 		width: 120px;
 	}
-	.orderBox div + div {
-		width: 62px;
-	}
+
 
 	.orderContent ul li a{
 		font-size: 1.25rem;
@@ -569,7 +814,7 @@
 	}
 	.recentTable.memberAces .showOne,
 	.recentTable.addProdct .showOne {
-		margin: 0 0.6rem 1.5rem;
+		margin: 0 0.5rem 1rem;
 	}
 	.recentTable.memberAces tbody tr td input,
 	.chkOne input{
@@ -592,6 +837,13 @@
 	.acountInfo{
 		padding: 1rem 0;
 	}
+    .acountInfo.buyerProfile{
+        height: auto;
+        margin-bottom: 1rem;
+    }
+    .acountInfo h2 img {
+        width: 48px;
+    }
 	.acountInfo .waletBox h3{
 		margin: 0 0 5px;
 		font-size: 1.25rem;
@@ -600,7 +852,7 @@
 		font-size: 1.125rem;
 	}
 	.acountInfo h2{
-		padding: 0rem 2rem 0.5rem
+		padding: 0rem 1rem 0.5rem
 	}
 
 	.feturUpload .themeBtn{
@@ -622,11 +874,43 @@
     .heloMain{
         gap: 0;
     }
+    .deliveryList ul li:first-child {
+        order:3;
+    }
+
+    .book .orderBox {
+        height: fit-content;
+        margin-bottom: 1rem;
+    }
+    .evo-calendar {
+        min-height: auto;
+    }
+    .calendar-events {
+        width: 41%;
+    }
+
+    .reviewContent div h2 span {
+        font-size: 1.125rem;
+    }
+    .recentTable .showOne div h1{
+        font-size:1.75rem
+    }
 }
 @media (max-width: 575.98px) {
 	.custmrContent img{
 		display: none;
 	}
+    .reviewContent div h2 span {
+        font-size: 1rem;
+    }
+
+    .reviewBox{
+        padding: 1.25rem;
+    }
+    .reviewContent div h2
+    {
+        font-size: 1.25rem;
+    }
 	.customerList ul{
 		display: unset;
 	}
@@ -728,6 +1012,9 @@
 	.paymentInfo ul li{
 		font-size: 1rem;
 	}
+    .book .showOne.border-0 h1 {
+        font-size: 1.75rem;
+    }
 
 }
 @media (max-width: 480.98px) {
@@ -742,11 +1029,15 @@
 	.deliveryList ul li span {
 		margin-left: 0;
 	}
-    .deliveryList ul li:nth-child(2){
+    .deliveryList ul li:nth-child(3){
         order: 3;
         width: 100%;
         flex: auto;
         margin-top: 1rem;
+    }
+
+    .deliveryList ul li:nth-child(4) {
+        margin-left:auto;
     }
     .deliveryList ul li:nth-child(3){
         /*width: 70%;*/
@@ -761,7 +1052,7 @@
 	.deliveryList ul li span{
 		/*display: block;*/
 	}
-	.deliveryList ul li:nth-child(2){
+	.deliveryList ul li:nth-child(3){
 		text-align: center;
 	}
 	.recentTable .thead-dark tr th {
@@ -769,7 +1060,7 @@
 		padding: 1.5rem 5px;
 	}
 	.orderContent h2{
-		font-size: 1.25rem;
+		font-size: 1.75rem;
 	}
 	.orderContent ul li a{
 		font-size: 1rem;
@@ -797,7 +1088,39 @@
 
 }
 
-@media (max-width: 414.98px) {
+
+
+
+@media (max-width: 425.98px) {
+    .calendar-sidebar {
+        width: 100%;
+    }
+    .calendar-sidebar > .calendar-year{
+        padding: 0px 20px;
+    }
+    .sidebar-hide .calendar-inner, .event-hide .calendar-inner {
+       padding: 0;
+        padding-top: 5rem;
+    }
+    th[colspan="7"] {
+        font-size: 20px;
+    }
+    tr.calendar-body .calendar-day .day {
+        width: 32px;
+        height: 32px;
+    }
+    .calendar-events {
+        width: 100%;
+    }
+    .evo-calendar{
+        margin: 0 -12px;
+        width: auto;
+    }
+    .sidebar-hide .calendar-inner {
+      overflow: scroll;
+    }
+}
+    @media (max-width: 414.98px) {
 
 	.radioList ul {
 		flex-wrap: wrap;

@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="col-md-9 mx-auto dashboardcontent editprof">
+    <div class="col-lg-9 mx-xl-auto dashboardcontent editprof">
         <div class="row">
             <div class="col-md-12">
                 <div class="orderContent listNon">

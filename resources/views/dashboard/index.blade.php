@@ -8,7 +8,7 @@
 
 
     <div class="col-lg-9 mx-xl-auto dashboardcontent">
-        <div class="row">
+        <div class="row overallBox">
             <div class="col-md-4">
                 <div class="orderBox">
                     <div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-md-12 all-order flemember">
-                <div class="recentTable addProdct">
+                <div class="recentTable addProdct table-responsive">
                     {{--                    <div class="showOne">--}}
                     {{--                        <div>--}}
                     {{--                            <label>Show</label>--}}
@@ -73,7 +73,7 @@
                     {{--                        </div>--}}
                     {{--                    </div>--}}
 
-                    <table id="example1" class="table table-responsive-lg">
+                    <table id="example1" class="table ">
                         <thead class="thead-dark">
                         <tr>
                             <th style="width: 0% !important;"></th>

@@ -66,6 +66,12 @@
                     <div class="deliveryList">
                         <ul>
                             <li>
+                                <button class="btn" id="sideBarNAv">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('front.home') }}" class="logo"><img
                                         src="{{isset($setting->logo) ? URL::asset('uploads/settings/'.$setting->logo) : URL::asset('admin/dist/img/AdminLTELogo.png')}}"
                                         class="img-fluid"
@@ -120,6 +126,7 @@
 
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -414,6 +421,11 @@
     });
 
     // }, 5000);
+
+        //Sidebar Toggle
+        document.querySelector("#sideBarNAv").addEventListener("click",function (){
+        document.querySelector('.sideNAvigation').classList.toggle("hide")
+    })
 
 
 

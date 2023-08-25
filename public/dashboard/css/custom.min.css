@@ -258,6 +258,12 @@ a.themeBtn.themeBtn1 {
     display: table;
     margin-left: auto;
 }
+.deliveryList ul li:first-child {
+    display: none;
+}
+.deliveryList ul li:first-child button{
+    font-size: 1.5rem;
+}
 
 .search {
     position: relative;
@@ -835,6 +841,13 @@ footer {
     border-spacing: 0 15px;
     border-collapse: separate;
 }
+
+/*@media (min-width:992px) {*/
+
+/*    .recentTable table {*/
+/*        min-width: 100%;*/
+/*    }*/
+/*}*/
 
 .recentTable .thead-dark tr th {
     background: var(--brown);
