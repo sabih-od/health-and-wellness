@@ -40,7 +40,7 @@
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="fas fa-bars"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -92,7 +92,7 @@
 <!-- Begin: Footer -->
 <footer>
     <div class="container">
-        <div class="row justify-content-between align-items-center">
+        <div class="row justify-content-between align-items-lg-center">
             <div class="col-md-4">
                 <a href="" class="footLogo">
                     <img src="{{asset('images/footLogo.webp')}}" class="img-fluid" alt="">

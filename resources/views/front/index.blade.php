@@ -205,12 +205,12 @@
         <div class="container">
             <h2 class="secHeading text-center">Everything You Need From Booking</h2>
             <div class="row">
-                <div class="col-md-7" data-aos="fade-right" data-aos-duration="2000">
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="2000">
                     <figure>
                         <img src="{{asset('images/bookImg.webp')}}" class="img-fluid" alt="">
                     </figure>
                 </div>
-                <div class="col-md-5" data-aos="fade-up" data-aos-duration="2000">
+                <div class="col-lg-5" data-aos="fade-up" data-aos-duration="2000">
                     <div class="bookingWrap">
                         <div class="scheduleBox">
                             <img src="{{asset('images/icon1.webp')}}" class="img-fluid" alt="">

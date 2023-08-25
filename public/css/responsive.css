@@ -1,31 +1,941 @@
 @media only screen and (max-width: 1600px) {
+    .navbar-nav {
+        gap: 1rem;
+    }
+
+    .navbar-brand img {
+        width: 9.375vw;
+        height: auto;
+    }
+
+    .secHeading {
+        font-size: 3.65vw;
+    }
+
+    .main-slider {
+        height: 1150px;
+    }
+
+    section {
+        overflow: hidden;
+    }
+
+    .abt2 {
+        max-width: 300px;
+        left: -2rem;
+        bottom: 0;
+    }
+
+    .aboutImg:before {
+        bottom: 0;
+    }
+
+    .dreamContent h4 {
+        font-size: 1.375rem;
+    }
+
+    .dreamContent p {
+        font-size: 1.275rem;
+    }
+
+    .callusSec {
+        padding: 6rem 0;
+    }
+
+    .bookingSec {
+        padding: 4.75rem 0;
+    }
+
+    .faq {
+        padding: 5rem 0 3.5rem 0
+    }
+
+    .testimonials{
+        padding: 4.5rem 0 15rem 0;
+    }
+    .footLogo img {
+        max-width: 20vw;
+    }
+    .socialLinks li a{
+        width: 4.375rem;
+        height: 4.375rem;
+    }
+    .amountForm select,
+    .amountForm .form-group .form-control,
+    .contctForm .form-group .form-control{
+        height: 4rem;
+    }
+    .listCntct figure{
+        width: 15rem;
+        height: 15rem;
+        padding: 2rem;
+    }
+
+    .memberBox h2{
+        width: 8.75rem;
+        height: 8.75rem;
+    }
+    .accountAccesSec h2 {
+        font-size: 2rem;
+    }
+    .accountAccesSec h2 span{
+        font-size: 2.5rem;
+    }
+    .accountAccesSec .formStyle .form-control {
+        padding: 24px 20px;
+    }
+    .accountAccesSec .whitebg{
+        padding: 1.875rem;
+    }
+    /*.listCntct figure img{*/
+    /*    max-width:10vw;*/
+    /*    max-height: 10vw;*/
+    /*    object-fit: contain;*/
+    /*}*/
 }
 
 @media only screen and (max-width: 1445px) {
+    .navbar-brand img {
+        width: 9.5vw;
+    min-width: 90px;
+    }
+    .navbar-nav{
+        gap: 1rem;
+    }
+    .navbar-nav .nav-item .nav-link{
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .main-slider {
+        height: 1100px;
+    }
+    .scroll {
+        left: 3rem;
+    }
+
+    .dreamContent h4 {
+        font-size: 1.275rem;
+    }
+
+    .dreamContent p {
+        font-size: 1.25rem;
+    }
+    .aboutSec {
+        padding-top: 1.5rem;
+    }
+    .homeSlider .slide-inner{
+        background-position: left bottom;
+    }
+
+    .travelSegmentSec{
+        padding-top: 13rem;
+    }
+
+    .callusSec {
+        padding: 5.5rem 0;
+    }
+
+    .bookingSec {
+        padding: 4.5rem 0;
+    }
+
+    .faq {
+        padding: 4.5rem 0 3rem 0
+    }
+
+    .testimonials{
+        padding: 5rem 0 12rem 0;
+    }
+
+
+    .segmentCard .content h3 {
+        font-size: 3rem;
+    }
+
+    .faqInner .row + .row {
+        padding-top: 2.5rem;
+    }
+
+    .subHeading {
+        font-size:3rem;
+    }
+
+    .listCntct figure{
+        width: 12rem;
+        height: 12rem;
+    }
 }
 
 @media only screen and (max-width: 1366px) {
 	html {
 		font-size: 15px;
 	}
+    .main-slider {
+        height: 1040px;
+    }
+    .scroll {
+        left: auto;
+        right: 2rem;
+    }
+
+    .aboutContent p{
+        line-height: 1.6;
+    }
+    .aboutSec {
+        padding-top: 1rem;
+    }
+
+    .travelSegmentSec{
+        padding-top:12rem;
+    }
+
+    .callusSec {
+        padding: 5rem 0;
+    }
+
+    .bookingSec {
+        padding: 4.25rem 0;
+    }
+
+    .faq {
+        padding: 4rem 0 2.5rem 0
+    }
+
+    .testimonials{
+        padding: 4.25rem 0 12rem 0;
+    }
+
+    .segmentCard .content h3 {
+        font-size: 2.75rem;
+    }
+
+    .faqsContents h3 {
+        font-size: 2rem;
+    }
+
+    .faqInner .row + .row {
+        padding-top: 2rem;
+    }
+
+    .subHeading {
+        font-size: 2.75rem;
+    }
+
+    .listCntct figure{
+        width: 10rem;
+        height: 10rem;
+    }
+    .listCntct figure img{
+        max-height: 72px;
+        object-fit: contain;
+    }
+
+    .memberBox h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    .memberBox {
+        border-radius: 24px;
+        padding: 5rem 0 5rem 0;
+        min-height: 450px;
+    }
 }
+
 
 @media (max-width: 1199.98px) {
 	html {
 		font-size: 14px;
 	}
+    .main-slider {
+        height: 950px;
+    }
+    .abt2{
+        max-width: 200px;
+        /*left: -2rem;*/
+    }
+
+    .testimonials .mySwiper1 .swiper-slide img {
+        width: 110px;
+        height: 110px;
+    }
+    .testimonials .swiper-button-prev,
+    .testimonials .swiper-button-next{
+        width: 50px;
+        height: 50px;
+    }
+    .bookingSec h2 {
+        margin-bottom: 3.5rem;
+    }
+    .aboutSec {
+        padding-top: 0rem;
+    }
+
+    .travelSegmentSec{
+        padding-top: 10rem;
+    }
+    .dreamSec{
+        padding: 7rem 0 4.5rem 0;
+    }
+
+    .dreamContent {
+        margin-top: 2.25rem;
+    }
+
+    .callusSec {
+        padding: 4.5rem 0;
+    }
+
+    .bookingSec {
+        padding: 4rem 0;
+    }
+
+    .faq {
+        padding: 3.5rem 0 2rem 0
+    }
+
+
+    .testimonials{
+        padding: 4rem 0 9rem 0;
+    }
+
+    .segmentCard .content h3 {
+        font-size: 2.5rem;
+    }
+
+    .faqHeadings h4 {
+        font-size: 1.75rem;
+    }
+
+    .faqInner .row + .row {
+        padding-top: 1.5rem;
+    }
+
+    .subHeading {
+        font-size: 2.5rem;
+    }
+
+    .listCntct figure{
+        width: 8rem;
+        height: 8rem;
+        }
+        .listCntct figure img{
+            max-height: 65px;
+        }
+    button.navbar-toggler {
+        color: var(--white);
+    }
+    .memberBox {
+        padding: 4.5rem 0 3rem 0;
+        min-height: 410px;
+    }
+    .memberBox h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
 }
 @media (max-width: 991.98px) {
 	html {
 		font-size: 13px;
 	}
+    .main-slider {
+        height: 850px;
+    }
+    .scroll {
+        right: 0rem;
+    }
+    .scroll span:before{
+        border-width: 1px;
+    }
+
+    .aboutContent p{
+        line-height: 1.5;
+    }
+    .abt2{
+        max-width: 175px;
+        /*left: -2rem;*/
+    }
+    .dreamContent p{
+        width: 100%;
+        line-height:1.4;
+    }
+
+    .faq #accordion .card .btn-link{
+        font-size: 1.75rem;
+    }
+    .faq #accordion .card .card-body p {
+        font-size: 1.25rem;
+    }
+    .testi-wrp p {
+        font-size: 1.5rem;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide h3 {
+        font-size: 1.5rem;
+    }
+    .testimonials .mySwiper1 .swiper-slide h3 span {
+        font-size: 14px;
+    }
+    .testi-wrp img{
+        width: 25%;
+    }
+
+    .testimonials .mySwiper1 {
+        margin-top: 0rem;
+    }
+
+    .testimonials .swiper-button-prev,
+    .testimonials .swiper-button-next{
+        width: 45px;
+        height: 45px;
+    }
+    .bookingSec h2 {
+        margin-bottom:3rem;
+    }
+
+    .travelSegmentSec{
+        padding-top: 8rem;
+    }
+    .dreamSec{
+        padding: 6rem 0 4rem 0;
+    }
+
+    .dreamContent {
+        margin-top: 2rem;
+    }
+
+    .callusSec {
+        padding: 4rem 0;
+    }
+
+    .bookingSec {
+        padding: 3.5rem 0;
+    }
+
+    .faq {
+        padding: 3rem 0 1.5rem 0
+    }
+
+    .faq #accordion .card{
+        padding: 1rem 0;
+    }
+
+    .testimonials{
+        padding: 3.5rem 0 6rem 0;
+    }
+    .footLogo img {
+        max-width: 180px;
+    }
+    .links{
+        max-height: fit-content;
+        gap: 1rem;
+    }
+    footer h4 {
+        font-size: 1.75rem;
+    }
+    .socialLinks li a {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+
+    .segmentCard .content h3 {
+        font-size: 2.25rem;
+    }
+
+    .segmentCard.slick-slide.slick-current.slick-active.slick-center .content {
+        padding: 3rem;
+    }
+    .segmentCard .content{
+        background-size: cover;
+        opacity: 0.75;
+        align-items: center;
+        justify-content: center;
+    }
+    .segmentCard img{
+        min-height: 220px;
+    }
+    .navbar-collapse{
+        background: rgba(255,255,255,0.85);
+        padding: 1rem;
+    }
+    .form-inline{
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    .aboutInner {
+        padding-bottom: 15rem;
+    }
+    footer {
+        padding-top: 15rem;
+        margin-top: -12rem;
+        background-position: left top;
+    }
+    .faqHeadings p {
+        font-size: 1.25rem;
+    }
+
+    .faqsContents h3 {
+        font-size: 1.75rem;
+    }
+
+    .faqInner .row + .row {
+        padding-top: 1rem;
+    }
+
+    .subHeading {
+        font-size: 2.25rem;
+    }
+    .servicesContents p{
+        width:100%;
+        line-height: 1.5;
+    }
+
+    .servicesContents h4 {
+        font-size: 2rem;
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+    .serviceInner .row + .row {
+        padding-top: 2.5rem;
+    }
+    .giftTabs .nav-tabs .nav-link{
+        width:100%;
+        font-size: 1rem;
+        padding: 10px 1.25rem;
+    }
+    .giftTabs .nav-tabs{
+        gap: 1rem;
+    }
+    .memberBox h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .memberBox {
+        padding: 3rem 0 2rem 0;
+        min-height: 320px;
+    }
+    .memberBox p {
+        font-size: 1.125rem;
+        line-height: 1.5;
+        width: 95%;
+    }
+    .points p strong {
+        font-size: 1.25rem;
+    }
+    .memberBox h2 {
+        width: 7rem;
+        height: 7rem;
+    }
+    .points {
+        margin-bottom: 6px;
+    }
+    .accountAccesSec{
+        padding-bottom: 15rem;
+    }
 }
 @media (max-width: 767.98px) {
 	html {
 		font-size: 12px;
 	}
+    .main-slider {
+        height: 750px;
+    }
+    .secHeading {
+        font-size: 4vw;
+    }
+    .scroll {
+       display: none;
+    }
+    .flower {
+        top: 0rem;
+        right: 1rem;
+        width: 70px;
+    }
+    .aboutSec .row{
+        gap:2rem;
+
+    }
+    .dreamWrap{
+        margin: 0 auto 3rem;
+        width: 80%;
+    }
+    .dreamWrap img{
+        max-width: 120px;
+    }
+
+    .scheduleBox {
+        gap: 1.25rem;
+        border-width: 2px;
+        padding: 1.75rem;
+    }
+
+    .faq #accordion .card .btn-link{
+        font-size: 1.5rem;
+    }
+    .testi-wrp p {
+        font-size: 1.375rem;
+        line-height: 1.6;
+        margin-top: -3.5rem;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide h3 {
+        font-size: 1.25rem;
+    }
+    .testimonials .mySwiper1 .swiper-slide h3 span {
+        font-size: 12px;
+    }
+    .testimonials .swiper-button-prev,
+    .testimonials .swiper-button-next {
+        display: none;
+    }
+
+    .testimonials .mySwiper1 {
+        margin-top: -1rem;
+    }
+    .bookingSec h2 {
+        margin-bottom: 2.5rem;
+    }
+
+    .travelSegmentSec{
+        padding-top: 6rem;
+    }
+
+    .dreamSec{
+        padding: 4.5rem 0 3.5rem 0;
+    }
+
+    .dreamContent {
+        margin-top: 1.75rem;
+    }
+
+    .callusSec {
+        padding: 3.5rem 0;
+    }
+
+    .bookingSec {
+        padding: 3rem 0;
+    }
+
+    .faq {
+        padding: 2.5rem 0 1rem 0
+    }
+
+    .faq #accordion .card{
+        padding: 0.85rem 0;
+    }
+
+    .testimonials{
+        padding: 3.25rem 0 3rem 0;
+    }
+
+    .links{
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .contactLinks li + li {
+        padding-top: 1rem;
+    }
+
+    .contactLinks li img{
+        max-width: 20px;
+        max-height: 20px;
+    }
+    .socialLinks{
+        margin: 1rem 0;
+        justify-content: start;
+    }
+    .themeBtn:before{
+        display: none;
+    }
+
+    .segmentCard .content h3 {
+        font-size: 2rem;
+    }
+
+    .segmentCard.slick-slide.slick-current.slick-active.slick-center .content {
+        padding: 2.5rem;
+    }
+    .aboutInner {
+        padding-bottom: 10rem;
+    }
+    footer {
+        padding-top: 10rem;
+        /*margin-top: -16rem*/
+    }
+    .innerBanner img{
+        min-height: 220px;
+        object-fit: cover;
+    }
+
+    .faqHeadings h4 {
+        font-size: 1.5rem;
+    }
+    .faqInner .row + .row {
+        padding-top: 0.5rem;
+    }
+    .subHeading {
+        font-size: 2rem;
+    }
+
+    .servicesContents h4 {
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    .serviceInner .row + .row {
+        padding-top: 2rem;
+    }
+
+    .serviceInner .row{
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .serviceInner .row:nth-child(2){
+        flex-direction: column-reverse;
+    }
+    .listCntct figure img{
+        max-height: 45px;
+    }
+    .listCntct{
+    margin-top: 1rem;
+     }
+    .getForm{
+        width:90%;
+    margin:3rem auto;
+    }
+    .contctForm .form-group label {
+        font-size: 1.25rem;
+    }
+
+    .innerBanner .overlay p {
+        font-size: 1.25rem;
+        margin: 0;
+    }
+
+    .memberBox h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+
+    .memberBox {
+        /*padding: 4.5rem 0 2rem 0;*/
+        min-height: auto;
+    }
+    .membershipInner
+    {
+        padding-bottom: 10rem !important;
+    }
+    .membershipInner .row .col-md-4+.col-md-4{
+        margin-top: 6rem;
+    }
+    .accountAccesSec{
+        padding-bottom: 12rem;
+    }
 }
 @media (max-width: 575.98px) {
+    .secHeading {
+        font-size: 1.85rem;
+    }
+
+    .main-slider {
+        height: 580px;
+    }
+
+    .bookingSec h2 {
+        margin-bottom: 2rem;
+    }
+
+    .aboutContent p {
+        line-height: 1.4;
+    }
+
+    .flower {
+        right: -10px;
+        width: 50px;
+    }
+
+    .abt2 {
+        bottom: 0rem;
+        left: 0rem;
+        border: 5px solid var(--white);
+        width: 150px;
+    }
+
+    .aboutImg:before {
+        width: 100px;
+        height: 100px;
+        right: 0rem;
+        bottom: 0rem;
+    }
+
+    .dreamWrap {
+        margin-bottom: 2rem;
+        width: 90%;
+    }
+
+    .dreamWrap img {
+        max-width: 95px;
+    }
+
+    .scheduleBox img {
+        max-width: 40px;
+    }
+
+    .scheduleBox {
+        gap: 1rem;
+        border-width: 1px;
+        padding: 1.5rem;
+    }
+
+    .faq #accordion .card .btn-link {
+        font-size: 1.275rem;
+    }
+
+    .testi-wrp p {
+        font-size: 1.25rem;
+        line-height: 1.5;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide h3 {
+        font-size: 1rem;
+    }
+
+    .testimonials .mySwiper1 .swiper-slide h3 span {
+        font-size: 10px;
+    }
+
+    .testimonials .secHeading.mb-5 {
+        margin-bottom: 0 !important;
+    }
+
+    .testimonials .mySwiper1 {
+        margin-top: -2rem;
+    }
+
+    .testi-wrp img {
+        width: 25%;
+    }
+
+    .travelSegmentSec {
+        padding-top: 4rem;
+    }
+
+    .dreamSec {
+        padding: 3rem 0 1rem 0;
+    }
+
+    .dreamContent {
+        margin-top: 1.5rem;
+    }
+
+    .callusSec {
+        padding: 3rem 0;
+    }
+
+    .faq {
+        padding: 2rem 0 0rem 0
+    }
+
+    .faq #accordion .card {
+        padding: 0.7rem 0;
+    }
+
+    .testimonials {
+        padding: 3rem 0 0rem 0;
+    }
+
+    .footLogo img {
+        max-width: 140px;
+    }
+
+    footer h4 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+
+    footer {
+        background-position: bottom left;
+        padding-top: 10rem;
+        margin-top: -8rem;
+        text-align: center;
+    }
+
+    .socialLinks{
+        justify-content: center;
+    }
+    .segmentCard .content h3 {
+        font-size: 1.75rem;
+    }
+    .segmentCard.slick-slide.slick-current.slick-active.slick-center .content {
+        padding: 2rem;
+    }
+    .aboutInner {
+        padding-bottom: 0rem;
+    }
+    .faqsContents h3 {
+        font-size: 1.5rem;
+    }
+    .faqInner .row + .row {
+        padding-top: 0rem;
+    }
+    .subHeading {
+        font-size: 1.75rem;
+    }
+    .servicesContents h4 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .amountForm {
+        margin-bottom: 2rem;
+    }
+    .amountForm button{
+        margin-top: 0;
+    }
+    .contctForm .form-group label {
+        font-size: 1.125rem;
+    }
+    .getForm {
+        margin: 2rem auto;
+    }
+    .innerBanner .overlay .secHeading{
+        margin: 0;
+    }
+    .innerBanner .overlay p {
+        font-size: 1rem;
+        margin: 0;
+    }
+    .membershipInner
+    {
+        padding-bottom: 3rem !important;
+    }
+    .accountAccesSec .formStyle .forgetPass{
+        border: 0;
+        margin: auto 0 0 auto;
+    }
+    .accountAccesSec p a{
+        font-size: 13px;
+    }
+    .accountAccesSec {
+        min-height: auto;
+        padding: 8rem 0 3rem;
+    }
 }
 @media (max-width: 320.98px) {
 }
