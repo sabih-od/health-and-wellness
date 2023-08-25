@@ -472,7 +472,7 @@
     }
     footer {
         padding-top: 15rem;
-        margin-top: -18rem;
+        margin-top: -12rem;
         background-position: left top;
     }
     .faqHeadings p {
@@ -534,6 +534,9 @@
     }
     .points {
         margin-bottom: 6px;
+    }
+    .accountAccesSec{
+        padding-bottom: 15rem;
     }
 }
 @media (max-width: 767.98px) {
@@ -668,7 +671,7 @@
     }
     footer {
         padding-top: 10rem;
-        margin-top: -16rem
+        /*margin-top: -16rem*/
     }
     .innerBanner img{
         min-height: 220px;
@@ -736,6 +739,9 @@
     }
     .membershipInner .row .col-md-4+.col-md-4{
         margin-top: 6rem;
+    }
+    .accountAccesSec{
+        padding-bottom: 12rem;
     }
 }
 @media (max-width: 575.98px) {
