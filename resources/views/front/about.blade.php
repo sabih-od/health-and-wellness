@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                     <div class="aboutImgs">
-                        <img src="{{asset('images/abt1.webp')}}" class="img-fluid" alt="">
+                        <img src="{{asset('images/abt1.webp')}}" class="img-fluid aboutInner-img" alt="">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -60,7 +60,7 @@
             <div class="row align-items-center mt-3">
                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                     <figure>
-                        <img src="{{asset('images/abt22.webp')}}" class="img-fluid" alt="">
+                        <img src="{{asset('images/abt22.webp')}}" class="img-fluid aboutInner-img" alt="">
                     </figure>
                 </div>
                 <div class="col-md-6">

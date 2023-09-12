@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
                     <figure>
-                        <img src="{{asset('images/service8.webp')}}" class="img-fluid" alt="">
+                        <img src="{{asset('images/service8.webp')}}" class="img-fluid serviceInner-img" alt="">
                     </figure>
                 </div>
             </div>

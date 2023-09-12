@@ -14,12 +14,16 @@ html {
 }
 
 body {
+    height: 100%;
     position: relative;
     background: #fff;
     overflow-x: hidden;
-    height: 100%;
-    event-list font-family: 'Roboto', sans-serif;
 }
+
+element.style {
+    text-align: left;
+}
+
 
 @media (min-width: 1600px) {
     .container {
@@ -71,6 +75,11 @@ a:hover,
 button:hover {
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+}
+
+button {
+    border: none;
+    outline: none !important;
 }
 
 ul {
@@ -177,8 +186,7 @@ header {
 /* slider css */
 
 .main-slider {
-    height: 1240px;
-    overflow: hidden;
+    height: 1240px;    
 }
 
 .homeSlider.swiper-container {
@@ -710,9 +718,6 @@ header {
     margin-top: 2rem;
 }
 
-.testimonials .mySwiper1 .swiper-slide {
-}
-
 .testimonials .mySwiper1 .swiper-wrapper {
     justify-content: center;
 }
@@ -809,8 +814,8 @@ header {
 
 footer {
     background: url(../images/footBg.webp) top/cover no-repeat;
-    padding-top: 24rem;
-    margin-top: -21rem;
+    padding-top: 18rem;
+    margin-top: -14rem;
     position: relative;
 }
 
@@ -859,7 +864,7 @@ footer h4 {
 
 .socialLinks {
     display: flex;
-    justify-content: center;
+    justify-content: start;    
     gap: 1.2rem;
     margin-top: 2.5rem;
 }
@@ -943,19 +948,27 @@ footer h4 {
 .faqInner {
     padding-top: 2rem;
 }
+.aboutInner-img,
+.faqInner figure img,
+.serviceInner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 .bordrPath img {
     position: absolute;
 }
 
 .bordrPath .path1 {
-    top: 28%;
+    top: 32%;
     left: 41.4%;
     width: 13.4%;
 }
 
 .bordrPath .path2 {
-    left: 44%;
+    left: 46%;
     top: 54%;
     width: 13%;
 }
@@ -1677,6 +1690,7 @@ footer h4 {
     top: 100%;
     opacity: 1;
     visibility: visible;
+    z-index: 1;
 }
 
 /* Account Page */
@@ -1805,7 +1819,6 @@ section.accountAccesSec p {
     align-items: center;
     justify-content: center;
 }
-}
 
 .form-inline a img {
     width: 40px;
@@ -1837,9 +1850,4 @@ section.accountAccesSec p {
     background: #ddd;
     border-radius: 100%;
     box-shadow: 0 0 15px #0009;
-}
-
-
-element.style {
-    text-align: left;
 }

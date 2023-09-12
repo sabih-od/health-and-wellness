@@ -26,7 +26,7 @@
                     @if ($key % 2 == 0)
                         <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                             <figure>
-                                <img src="{{$service->getImageUrl()}}" class="img-fluid" alt="">
+                                <img src="{{$service->getImageUrl()}}" class="img-fluid serviceInner-img" alt="">                                
                             </figure>
                         </div>
                     @endif
@@ -43,7 +43,7 @@
                     @if ($key % 2 != 0)
                         <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                             <figure>
-                                <img src="{{$service->getImageUrl()}}" class="img-fluid" alt="">
+                                <img src="{{$service->getImageUrl()}}" class="img-fluid serviceInner-img" alt="">                                
                             </figure>
                         </div>
                     @endif

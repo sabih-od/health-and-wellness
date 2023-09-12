@@ -67,7 +67,7 @@
                                 @enderror
                             </div>
                             <div class="input-group justify-content-md-end">
-                                <button class="themeBtn rounded">Sign Up</button>
+                                <button class="themeBtn">Sign Up</button>
                             </div>
                         </form>
                         <div class="or"><span>or</span></div>

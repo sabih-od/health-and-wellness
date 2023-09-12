@@ -47,7 +47,7 @@
 {{--                                        <input type="text" class="form-control" placeholder="At least 6 characters">--}}
 {{--                                    </div>--}}
                                     <div class="input-group justify-content-md-end">
-                                        <button class="themeBtn rounded">Send Reset Link</button>
+                                        <button class="themeBtn">Send Reset Link</button>
                                     </div>
                                 </form>
                             </div>
