@@ -44,8 +44,8 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-left" data-aos-duration="2000">
                         <figure>
-                            <!-- <img src="{{ $faq->get_faq_picture() }}" class="img-fluid" alt=""> -->
-                            <img src="{{asset('images/img1.webp')}}" class="img-fluid" alt="">
+                            <img src="{{ $faq->get_faq_picture() }}" class="img-fluid" alt="">
+{{--                            <img src="{{asset('images/img1.webp')}}" class="img-fluid" alt="">--}}
                         </figure>
                     </div>
 
