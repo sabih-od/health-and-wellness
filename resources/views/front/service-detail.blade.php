@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
                     <figure>
-                        <img src="{{$session->session->get_session_picture()}}" class="img-fluid" alt="">
+                        <img src="{{$session->session->get_session_picture()}}" class="img-fluid serviceInner-img" alt="">
                     </figure>
                 </div>
             </div>

@@ -87,11 +87,9 @@
     .accountAccesSec .whitebg{
         padding: 1.875rem;
     }
-    /*.listCntct figure img{*/
-    /*    max-width:10vw;*/
-    /*    max-height: 10vw;*/
-    /*    object-fit: contain;*/
-    /*}*/
+    .scroll {
+        left: 2rem;
+    }
 }
 
 @media only screen and (max-width: 1445px) {
@@ -108,9 +106,6 @@
     }
     .main-slider {
         height: 1100px;
-    }
-    .scroll {
-        left: 3rem;
     }
 
     .dreamContent h4 {
@@ -163,6 +158,10 @@
     .listCntct figure{
         width: 12rem;
         height: 12rem;
+    }
+    .bordrPath .path2 {
+        left: 42%;
+        top: 57%;        
     }
 }
 
@@ -239,6 +238,10 @@
         padding: 5rem 0 5rem 0;
         min-height: 450px;
     }
+    .bordrPath .path2 {
+        left: 43%;
+        top: 56%;        
+    }
 }
 
 
@@ -247,11 +250,15 @@
 		font-size: 14px;
 	}
     .main-slider {
-        height: 950px;
+        height: 100%;
     }
     .abt2{
-        max-width: 200px;
-        /*left: -2rem;*/
+        max-width: 200px;        
+    }
+
+    .bordrPath .path2 {  
+        left: 42%;      
+        top: 55.5%;
     }
 
     .testimonials .mySwiper1 .swiper-slide img {
@@ -317,11 +324,13 @@
     .listCntct figure{
         width: 8rem;
         height: 8rem;
-        }
-        .listCntct figure img{
-            max-height: 65px;
-        }
+    }
+    .listCntct figure img{
+        max-height: 65px;
+    }
     button.navbar-toggler {
+        outline: none !important;
+        background-color: #000;
         color: var(--white);
     }
     .memberBox {
@@ -338,7 +347,27 @@
 		font-size: 13px;
 	}
     .main-slider {
-        height: 850px;
+        height: 650px;
+    }
+
+    .bordrPath .path1 {        
+        left: 41.6%;
+        width: 12.4%;
+    }
+    .bordrPath .path2 {
+        left: 42%;
+        top: 57.5%;
+    }
+
+    .main-slider .secHeading {
+        margin: 0;
+    }
+    .main-slider p {        
+        margin-top: 0;
+        white-space: pre-line;
+    }
+    .homeSlider .slide-inner {
+        background-position: center;
     }
     .scroll {
         right: 0rem;
@@ -457,7 +486,8 @@
         justify-content: center;
     }
     .segmentCard img{
-        min-height: 220px;
+        height: 350px;
+        object-position: top;
     }
     .navbar-collapse{
         background: rgba(255,255,255,0.85);
@@ -472,7 +502,7 @@
     }
     footer {
         padding-top: 15rem;
-        margin-top: -12rem;
+        margin-top: -8rem;
         background-position: left top;
     }
     .faqHeadings p {
@@ -481,11 +511,7 @@
 
     .faqsContents h3 {
         font-size: 1.75rem;
-    }
-
-    .faqInner .row + .row {
-        padding-top: 1rem;
-    }
+    }    
 
     .subHeading {
         font-size: 2.25rem;
@@ -522,8 +548,7 @@
     }
     .memberBox p {
         font-size: 1.125rem;
-        line-height: 1.5;
-        width: 95%;
+        line-height: 1.5;        
     }
     .points p strong {
         font-size: 1.25rem;
@@ -544,14 +569,11 @@
 		font-size: 12px;
 	}
     .main-slider {
-        height: 750px;
-    }
+        height: 600px;
+    }    
     .secHeading {
         font-size: 4vw;
-    }
-    .scroll {
-       display: none;
-    }
+    }    
     .flower {
         top: 0rem;
         right: 1rem;
@@ -596,7 +618,8 @@
         font-size: 12px;
     }
     .testimonials .swiper-button-prev,
-    .testimonials .swiper-button-next {
+    .testimonials .swiper-button-next,
+    .bordrPath {
         display: none;
     }
 
@@ -652,8 +675,7 @@
         max-height: 20px;
     }
     .socialLinks{
-        margin: 1rem 0;
-        justify-content: start;
+        margin: 1rem 0;        
     }
     .themeBtn:before{
         display: none;
@@ -670,8 +692,7 @@
         padding-bottom: 10rem;
     }
     footer {
-        padding-top: 10rem;
-        /*margin-top: -16rem*/
+        padding-top: 10rem;        
     }
     .innerBanner img{
         min-height: 220px;
@@ -727,10 +748,7 @@
         font-size: 1.5rem;
         margin-bottom: 10px;
     }
-
-
     .memberBox {
-        /*padding: 4.5rem 0 2rem 0;*/
         min-height: auto;
     }
     .membershipInner
@@ -743,14 +761,34 @@
     .accountAccesSec{
         padding-bottom: 12rem;
     }
+    .aboutInner-img,
+    .faqInner figure img,
+    .serviceInner-img {
+        width: 300px;
+        height: 300px;                
+        display: block;
+        margin: 1rem auto;
+    }
+    .contImg:before {                                
+        width: 70%;            
+        right: 10rem;        
+    }
+    .contImg img {
+        width: 70%;
+        display: block;
+        margin: 1rem auto;
+    }
 }
 @media (max-width: 575.98px) {
     .secHeading {
         font-size: 1.85rem;
+    }    
+    .main-slider p {
+        margin-top: 1rem;
+        white-space: unset;
     }
-
-    .main-slider {
-        height: 580px;
+    .scroll {
+        display: none; 
     }
 
     .bookingSec h2 {
@@ -887,7 +925,7 @@
         padding: 2rem;
     }
     .aboutInner {
-        padding-bottom: 0rem;
+        padding-bottom: 5rem;
     }
     .faqsContents h3 {
         font-size: 1.5rem;
@@ -936,6 +974,25 @@
         min-height: auto;
         padding: 8rem 0 3rem;
     }
+    .aboutSec .row {
+        gap: 0;
+    }   
+    .aboutInner-img,
+    .faqInner figure img,
+    .serviceInner-img {
+        width: 250px;
+        height: 250px;        
+    } 
+    .contImg:before {        
+        right: 5rem;
+        bottom: 0;
+    }
 }
 @media (max-width: 320.98px) {
+    .main-slider {
+        height: 100vh;
+    }
+    .slideOne {
+        margin-bottom: 2rem;
+    }    
 }

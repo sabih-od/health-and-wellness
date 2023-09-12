@@ -26,7 +26,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('login') }}" class="formStyle form-row" method="POST">x
+                        <form action="{{ route('login') }}" class="formStyle form-row" method="POST">
                             @csrf
                             <div class="input-group">
                                 <label>Email or Mobile<em>*</em></label>
@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                             <div class="input-group justify-content-sm-between align-items-sm-center">
-                                <button class="themeBtn rounded" href="#">Sign In</button>
+                                <button class="themeBtn" href="#">Sign In</button>
 {{--                                <a href="forgot-password.php" class="forgetPass">Forgot my password</a>--}}
                                 <a href="{{ route('forget.password.get') }}" class="forgetPass">Forgot my password</a>
                             </div>
