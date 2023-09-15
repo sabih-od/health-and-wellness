@@ -56,6 +56,7 @@ class ServiceController extends Controller
     public function addService(Request $request)
     {
         if ($request->method() == 'POST') {
+
             $this->validate($request, array(
                 'name' => 'required|string|max:50',
                 'description' => 'required',

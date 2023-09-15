@@ -39,7 +39,6 @@
                         </div>
                     </div>
                     <div class="col-md-6" data-aos="fade-right" data-aos-duration="2000">
-
                         <figure>
                             @php
                                 $media = $course->getMedia('course_attachment')->first();
@@ -59,19 +58,11 @@
                                                 class="fas fa-file"></i></a>
 
                                     </div>
-
                                 @endif
                             @else
-
                                 <img src="{{ asset('images/service.webp') }}" class="img-fluid serviceInner-img" alt="">
                             @endif
                         </figure>
-
-
-                        {{--                        <figure>--}}
-
-                        {{--                            <img src="{{ $course->get_course_attachment() }}" class="img-fluid serviceInner-img" alt="">--}}
-                        {{--                        </figure>--}}
                     </div>
                 </div>
             @empty

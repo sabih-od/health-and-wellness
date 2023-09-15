@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StreamController;
 use App\Http\Controllers\User\StreamController as SC;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +51,19 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('/admin')->middleware('ad
     Route::get('delete-session-timing', 'SessionController@deleteSessionTiming')->name('deleteSessionTiming');
     Route::get('update-session-timing', 'SessionController@updateSessionTime')->name('updateSessionTime');
 
-    Route::get( '/booked-session', 'SessionController@bookedSession')->name('book-sessions');
-    Route::get( '/booked-sessions', 'SessionController@bookedSessionDatatables')->name('book-sessions-datatables');
+    Route::get('/booked-session', 'SessionController@bookedSession')->name('book-sessions');
+    Route::get('/booked-sessions', 'SessionController@bookedSessionDatatables')->name('book-sessions-datatables');
     Route::delete('booked-session/destroy/{id}', 'SessionController@bookSessionDestroy');
-    Route::get( '/view-booked-sessions/{id}', 'SessionController@viewBookedSession')->name('viewBookedSession');
+    Route::get('/view-booked-sessions/{id}', 'SessionController@viewBookedSession')->name('viewBookedSession');
 
     route::get('/admin-stream/{session_timing_id}', [StreamController::class, 'stream'])->name('admin.stream');
     route::post('/stream/stop/{session}', [StreamController::class, 'stop'])->name('admin.stopStream');
 
+    //    Courses
+    route::get('/courses', [CourseController::class, 'index'])->name('admin.courses');
+    route::match(['get', 'post'], '/courses/add/course', [CourseController::class, 'addCourse'])->name('admin.add.course');
+    route::match(['get', 'post'], 'course/edit/{id}', [CourseController::class, 'edit'])->name('admin.edit.course');
+    Route::delete('courses/destroy/{id}', [CourseController::class, 'destroy']);
 
 
 //    //category
@@ -185,14 +191,14 @@ Route::prefix('/user')->middleware('user')->group(function () {
     Route::post('/book/sessions', [UserController::class, 'sessionBooking'])->name('user.sessionBooking');
     Route::get('stripe-redirect/{session_booked_id}/{status}', [UserController::class, 'stripeRedirect'])->name('stripe.redirect');
 
-    Route::get('booking/get-sessions-by-service/', [SessionController::class,'getSessionsByService'])->name('getSessionsByService');
-    Route::get('booking/get-sessions-timing-by-session/', [SessionController::class,'getSessionsTimingBySession'])->name('getSessionsTimingBySession');
-    Route::post('/selected-date-session', [SessionController::class,'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
+    Route::get('booking/get-sessions-by-service/', [SessionController::class, 'getSessionsByService'])->name('getSessionsByService');
+    Route::get('booking/get-sessions-timing-by-session/', [SessionController::class, 'getSessionsTimingBySession'])->name('getSessionsTimingBySession');
+    Route::post('/selected-date-session', [SessionController::class, 'fetchDateSessions'])->name('fetchDateSessions')->withoutMiddleware('user');
 
-    Route::get('dashboard-sessions', [DashboardController::class,'datatables'])->name('session.datatables')->withoutMiddleware('user');
+    Route::get('dashboard-sessions', [DashboardController::class, 'datatables'])->name('session.datatables')->withoutMiddleware('user');
 
-    Route::post('contact-via-mail', [UserController::class,'contactViaMail'])->name('contact.via.mail')->withoutMiddleware('user');
-    Route::get('send/notification', [UserController::class,'sendNotification'])->name('sendNotification');
+    Route::post('contact-via-mail', [UserController::class, 'contactViaMail'])->name('contact.via.mail')->withoutMiddleware('user');
+    Route::get('send/notification', [UserController::class, 'sendNotification'])->name('sendNotification');
 
     route::get('/stream/{session_id}', [SC::class, 'stream'])->name('user.stream');
     route::get('/raise-hand/{batch_id}', [SC::class, 'raiseHand'])->name('user.raise_hand');
@@ -304,17 +310,9 @@ Route::get('/about', function () {
 
 Route::get('/contact', [FrontController::class, 'frontContact'])->name('front.contact');
 
-Route::get('/health', function () {
-    return view('front.health');
-})->name('front.health');
-
-Route::get('/education', function () {
-    return view('front.education');
-})->name('front.education');
-
-Route::get('/wellness', function () {
-    return view('front.wellness');
-})->name('front.wellness');
+Route::get('/education', [FrontController::class, 'frontEducation'])->name('front.education');
+Route::get('/health', [FrontController::class, 'frontHealth'])->name('front.health');
+Route::get('/wellness', [FrontController::class, 'frontWellness'])->name('front.wellness');
 
 Route::get('/payment-checkout', function () {
     return view('dashboard.payment');

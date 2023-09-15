@@ -57,7 +57,6 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
-
     <style>
         table.dataTable thead th, table.dataTable thead td {
             border-bottom: 0px;
@@ -162,13 +161,6 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{route('session')}}"
-                           class="nav-link {{ request()->IS('admin/session') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-angle-double-right"></i>
-                            <p>Sessions</p>
-                        </a>
-                    </li>
 
                     <li class="nav-item">
                         <a href="{{route('customer')}}"
@@ -181,12 +173,48 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{route('session')}}"
+                           class="nav-link {{ request()->IS('admin/session') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-book-reader"></i>
+                            <p>Sessions</p>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
                         <a href="{{route('book-sessions')}}"
                            class="nav-link {{ request()->IS('admin/booked-session') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Booked Sessions
                             </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a href="{{ route('admin.courses') }}" class="nav-link {{ request()->IS('admin/courses') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-book-open"></i>
+                            <p>
+                                 Courses
+                            </p>
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{ route('faq') }}"
+                           class="nav-link {{ request()->IS('admin/addFaq') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-edit"></i>
+                            <p>Add Faq's</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('testimonials') }}"
+                           class="nav-link {{ request()->IS('admin/testimonials') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-chalkboard-teacher"></i>
+                            <p>Add Testimonial's</p>
                         </a>
                     </li>
 
@@ -201,118 +229,10 @@
                     </li>
 
 
-
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('business_listing')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/business_listing') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                            <p>Business Directories</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-
-{{--                    <li class="nav-item has-treeview {{ request()->IS('admin/forum-category') || request()->IS('admin/forum-topic') ? 'menu-is-opening menu-open' : '' }}">--}}
-{{--                        <a href="#" class="nav-link ">--}}
-{{--                            <i class="nav-icon fas fa-angle-double-right"></i>--}}
-{{--                            <p>--}}
-{{--                                Forums--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                        <ul class="nav nav-treeview"--}}
-{{--                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{route('forum-category')}}"--}}
-{{--                                   class="nav-link {{ request()->IS('admin/forum-category') ? 'active' : '' }}">--}}
-{{--                                    <i class="nav-icon fas fa-angle-double-right"></i>--}}
-{{--                                    <p>--}}
-{{--                                        Forum Categories--}}
-{{--                                    </p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{route('forum-topic')}}"--}}
-{{--                                   class="nav-link {{ request()->IS('admin/forum-topic') ? 'active' : '' }}">--}}
-{{--                                    <i class="nav-icon fas fa-angle-double-right"></i>--}}
-{{--                                    <p>--}}
-{{--                                        Forum Topics--}}
-{{--                                    </p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-
-{{--                    //CMS--}}
-
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('admin.cms.index')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/cms') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                            <p>CMS</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('site-event')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/site-event') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                            <p>Site Events</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-
-
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{route('category')}}"--}}
-{{--                           class="nav-link {{ request()->IS('admin/category') ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                            <p>Category</p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-
-{{--                    <li class="nav-item has-treeview {{ request()->IS('admin/product') || request()->IS('admin/product_category') ? 'menu-is-opening menu-open' : '' }}">--}}
-{{--                        <a href="#" class="nav-link ">--}}
-{{--                            <i class="nav-icon fas fa-angle-double-right"></i>--}}
-{{--                            <p>--}}
-{{--                                Marketplace--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                        <ul class="nav nav-treeview"--}}
-{{--                            style="{{ request()->IS('admin/emailsetting') || request()->IS('admin/paymentgatway') ? 'display:block;' : '' }}">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{route('product')}}"--}}
-{{--                                   class="nav-link {{ request()->IS('admin/product') ? 'active' : '' }}">--}}
-{{--                                    <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                                    <p>Product</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{route('product_category')}}"--}}
-{{--                                   class="nav-link {{ request()->IS('admin/product_category') ? 'active' : '' }}">--}}
-{{--                                    <i class="nav-icon fa fa-angle-double-right"></i>--}}
-{{--                                    <p>Product Category</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-
-                    <li class="nav-item">
-                        <a href="{{ route('faq') }}"
-                           class="nav-link {{ request()->IS('admin/addFaq') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-comments"></i>
-                            <p>Add Faq's</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('testimonials') }}"
-                           class="nav-link {{ request()->IS('admin/testimonials') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-comments"></i>
-                            <p>Add Testimonial's</p>
-                        </a>
-                    </li>
-
                     <li class="nav-item">
                         <a href="{{url('admin/changePassword')}}"
                            class="nav-link {{ request()->IS('admin/changePassword') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-comments"></i>
+                            <i class="nav-icon fa fa-edit"></i>
                             <p>Change Password</p>
                         </a>
                     </li>
@@ -356,7 +276,6 @@
 
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 {{--@vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
-
 
 
 <script src="{{asset('../resources/js/app.js')}}"></script>

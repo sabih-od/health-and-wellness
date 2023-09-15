@@ -2,11 +2,12 @@
 @section('title', 'Courses')
 @section('page_css')
     <style>
-        .addBtn{
+        .addBtn {
             float: right;
             /*margin-top: 10px;*/
         }
-        td{
+
+        td {
             text-align: center;
         }
     </style>
@@ -38,7 +39,8 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <a class="btn btn-primary pull-right addBtn" href="{{route('admin.add-course')}}">Add Course</a>
+                                <a class="btn btn-primary pull-right addBtn" href="{{route('admin.add.course')}}">Add
+                                    Course</a>
                             </div>
                             <div class="col-md-12">
 
@@ -49,10 +51,10 @@
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Desciption</th>
-                                        <th>Fees</th>
-
+                                        <th>Title</th>
+                                        <th style="width:720px">Desciption</th>
+                                        <th>Time Detail</th>
+                                        <th>Price</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -74,7 +76,7 @@
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header"  style="background-color: #343a40;
+                    <div class="modal-header" style="background-color: #343a40;
             color: #fff;">
                         <h2 class="modal-title">Confirmation</h2>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -96,66 +98,53 @@
         $(document).ready(function () {
             var DataTable = $("#example1").DataTable({
                 dom: "Blfrtip",
-                buttons: [{
-                    extend: "copy",
-                    className: "btn-sm"
-                }, {
-                    extend: "csv",
-                    className: "btn-sm"
-                }, {
-                    extend: "excel",
-                    className: "btn-sm"
-                }, {
-                    extend: "pdfHtml5",
-                    className: "btn-sm"
-                }, {
-                    extend: "print",
-                    className: "btn-sm"
-                }],
                 responsive: true,
                 processing: true,
                 serverSide: true,
                 pageLength: 10,
                 ajax: {
-                    url: `{{route(request()->segment(2))}}`,
+                    url: `{{route('admin.courses')}}`,
                 },
                 columns: [
 
 
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'description', name: 'description'},
-                    {data: 'fees', name: 'fees'},
+                    {data: 'course_title', name: 'title'},
+                    {data: 'course_description', name: 'description'},
+                    {data: 'time_detail', name: 'time_detail'},
+                    {data: 'price', name: 'price'},
+
 
                     {data: 'action', name: 'action', orderable: false}
                 ]
 
             });
+
             var delete_id;
-            $(document,this).on('click','.delete',function(){
+            $(document, this).on('click', '.delete', function () {
                 delete_id = $(this).attr('id');
                 $('#confirmModal').modal('show');
             });
-            $(document).on('click','#ok_delete',function(){
+            $(document).on('click', '#ok_delete', function () {
                 $.ajax({
-                    type:"delete",
-                    url:`{{url('admin/'.request()->segment(2).'/destroy/')}}/${delete_id}`,
+                    type: "delete",
+                    url: `{{url('admin/'.request()->segment(2).'/destroy/')}}/${delete_id}`,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    beforeSend: function(){
+                    beforeSend: function () {
                         $('#ok_delete').text('Deleting...');
-                        $('#ok_delete').attr("disabled",true);
+                        $('#ok_delete').attr("disabled", true);
                     },
                     success: function (data) {
                         DataTable.ajax.reload();
                         $('#ok_delete').text('Delete');
-                        $('#ok_delete').attr("disabled",false);
+                        $('#ok_delete').attr("disabled", false);
                         $('#confirmModal').modal('hide');
-                     //   js_success(data);
-                        if(data==0) {
+                        //   js_success(data);
+                        if (data == 0) {
                             toastr.error('Exception Here ! Delete Firstly Child Category');
-                        }else{
+                        } else {
                             toastr.success('Record Delete Successfully');
                         }
                     }
@@ -165,4 +154,4 @@
     </script>
 
 
-    @endsection
+@endsection

@@ -66,6 +66,15 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{route('front.education')}}">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('front.health')}}">Health</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('front.wellness')}}">Wellness</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{route('front.gift-card')}}">Gift Card</a>
                     </li>
                     <li class="nav-item">
@@ -145,7 +154,7 @@
                     @endif
 
                     @if($setting->address)
-                        <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-fluid"
+                        <li><a href=""><img src="{{asset('images/pin.webp')}}" class="img-flui\d"
                                             alt="">{{$setting->address ?? ''}}</a></li>
                     @endif
                 </ul>

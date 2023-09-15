@@ -1865,3 +1865,18 @@ section.accountAccesSec p {
     border-radius: 100%;
     box-shadow: 0 0 15px #0009;
 }
+.file-outer{
+    width: 500px;
+    background: whitesmoke;
+    height: 500px;
+    border-radius: 50%;
+    position:relative;
+}
+.file{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%, -50%);
+    color:black;
+}

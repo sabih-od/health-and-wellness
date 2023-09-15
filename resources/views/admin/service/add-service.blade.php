@@ -42,7 +42,7 @@
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                name="name" id="name" value="{{$content->name?? old('name')}}"
-                                               placeholder="Service" required>
+                                               placeholder="Service">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -50,24 +50,25 @@
                                         @enderror
                                     </div>
 
-                                        <div class="form-group">
-                                            <label for="name">Service Image</label>
+                                    <div class="form-group">
+                                        <label for="name">Service Image</label>
 
-                                            <div class="img-upload full-width-img">
-                                                <div id="image-preview" class="img-preview">
-                                                    <img id="preview-image" src="{{ isset($content) ? $content->get_service_picture() :  asset('images/user1.webp') }}"
-                                                         width="150" alt="Image Preview">
-                                                </div>
-                                                <input type="file" name="image" class="img-upload" id="image-upload">
+                                        <div class="img-upload full-width-img">
+                                            <div id="image-preview" class="img-preview">
+                                                <img id="preview-image"
+                                                     src="{{ isset($content) ? $content->get_service_picture() :  asset('images/user1.webp') }}"
+                                                     width="150" alt="Image Preview">
                                             </div>
+                                            <input type="file" name="image" class="img-upload" id="image-upload">
+                                        </div>
 
 
-                                            @error('image')
-                                            <span class="invalid-feedback" role="alert">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                            @enderror
-                                        </div>
+                                        @enderror
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="name">Pricing Detail</label>
@@ -84,12 +85,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Description</label>
-                                        {{--                                        <textarea class=" form-control @error('description') is-invalid @enderror" name="description" id="" cols="30" rows="10" required>--}}
-                                        {{--                                            {{$content->description?? old('description')}}--}}
-                                        {{--                                        </textarea>--}}
                                         <textarea id="editor" class="@error('description') is-invalid @enderror"
                                                   name="description" required>  {{$content->description?? old('description')}}
-</textarea>
+                                        </textarea>
 
                                         @error('description')
                                         <span class="invalid-feedback" role="alert">
