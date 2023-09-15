@@ -31,7 +31,7 @@
 <!-- Begin: Header -->
 
 <header>
-    <div class="container">
+    <div class="container-fluid pr-5 pl-5">
         <nav class="navbar navbar-expand-lg p-0">
             <a class="navbar-brand" href="{{route('front.home')}}">
                 <img
