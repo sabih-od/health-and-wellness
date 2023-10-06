@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="segmentCard">
-                        <img src="{{asset('images/srv3.webp')}}" class="img-fluid" alt="">
+                        <img src="{{asset('images/srv3.jpg')}}" class="img-fluid" alt="">
                         <div class="content">
                             <h3>Wellness</h3>
                             <p>
